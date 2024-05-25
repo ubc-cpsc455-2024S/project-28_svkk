@@ -72,8 +72,7 @@ This will help you divide up work among your teammates.**
       
   **Users can add a cover letter**
     - Users will copy and paste the text from the cover letter they want to add to their account into a text area 
-    - The user can then click ‘save’ to save the pasted content, which retrieves the input element associated with the ‘Paste cover letter here’ label in an html form, and stores it in a global ‘cover letter’ 
-      variable. The text content in the ‘cover letter’ variable is then rendered in the text area representing the user’s current cover letter.
+    - The user can click a button that stores the content of the cover letter in a mongodb database corresponding to the user's account for data persistence. The user will be able to use this cover letter anytime they log in as it is saved in their account
 
 
 <b> Finally, draw 2-3 rough sketch prototypes of some key tasks of your app. Sketch these physically on paper and then scan and add to your repo. (If you’d like to use sketch/prototype software because that’s easier somehow, you can, but we’d advise against it as these prototypes should be low-fidelity (i.e. look bad)). </b>
