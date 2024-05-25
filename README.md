@@ -78,16 +78,19 @@ This will help you divide up work among your teammates.**
 
 <b> Finally, draw 2-3 rough sketch prototypes of some key tasks of your app. Sketch these physically on paper and then scan and add to your repo. (If you’d like to use sketch/prototype software because that’s easier somehow, you can, but we’d advise against it as these prototypes should be low-fidelity (i.e. look bad)). </b>
 
-
+<img src ="images/account_creation.png">
+<img src ="images/cover_letter_creation.png" width="50%" height="50%">
+<img src ="images/job_application_dashboard.PNG" width="70%" height="70%">
     
   
   
   ## Team Members
 
-- Silvana: one sentence about you!
-- Vishal: one sentence about you!
-- Kurtis: one sentence about you!
-- Kevin: one sentence about you!
+- Silvana
+- Vishal
+- Kurtis
+- Kevin
+
 
 ## Images
 
