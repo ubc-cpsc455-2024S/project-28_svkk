@@ -2,6 +2,8 @@ import MainDashboard from './components/MainDashboard';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import CoverLetterPage from './components/CoverLetterPage';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { red } from "@mui/material/colors";
 
 
 
@@ -22,10 +24,27 @@ const initialJobPostingList = `[
     }
 ]`;
 
+
+// Create a theme instance.
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#00C3FF",
+    },
+    secondary: {
+      main: "#19857b",
+    },
+    error: {
+      main: red.A400,
+    },
+  },
+});
+
 function App() {
 
   return (
     <>
+    <ThemeProvider theme={theme}>
       <Login/>
       <Signup/>
       <MainDashboard/>
@@ -35,6 +54,7 @@ function App() {
           userCoverLetters={JSON.parse(initialCoverLetterList)}
           userJobPostings={JSON.parse(initialJobPostingList)}/>
       {/*<WhitePageDisplay displayText=''/>*/}
+    </ThemeProvider>
     </>
   )
 }

@@ -321,7 +321,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
 
     return (
 
-        <div>
+        <div className="coverLetterPageContainer">
             <div>
                 <h1 className="largerLetters">Generate Cover Letter</h1>
 

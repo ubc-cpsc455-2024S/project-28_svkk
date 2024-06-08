@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import MainDashboard from './MainDashboard';
+import Signup from './Signup';
 
 const Login = () => {
   return (
@@ -9,15 +12,17 @@ const Login = () => {
             Username:
             <input type="text" name="" id="" placeholder='Username' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
+        {/* add password validation*/}
+        {/* TODO: add remember password */}
         <label className='block ml-[70px]'>
             Password:
-            <input type="text" name="" id="" placeholder='Password' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="password" name="" id="" placeholder='Password' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
       </div>
       <div className='text-center'>
-        <input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md" type="button" value="Log in"/>
+        <Link to="/MainDashboard"><input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white" type="button" value="Log in"/></Link>
       </div>
-        <p className='text-center'>Not already a member? <a className='text-neutral-500 cursor-pointer'>Sign up</a></p>
+        <Link to="/Signup"><p className='text-center'>Not already a member? <a className='text-neutral-500 cursor-pointer'>Sign up</a></p></Link>
     </div>
   )
 }
