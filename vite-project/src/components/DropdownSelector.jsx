@@ -25,7 +25,7 @@ export default function DropdownSelector({ allElements, setSelectedElement }) {
         // if allElements is valid, then display every element's name in a dropdown menu, and
         // set up the onClick callback function.
         return (
-            <select  onChange={handleClickOption}>
+            <select onChange={handleClickOption}>
                 {allElements.map((element) => (
                     <option value={element.name} onClick={() => handleClickOption(element.name)}>
                         {element.name}

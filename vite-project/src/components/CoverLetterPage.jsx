@@ -322,23 +322,33 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     return (
 
         <div>
+            <div>
+                <h1 className="largerLetters">Generate Cover Letter</h1>
+
+            </div>
             {/* Viewing and Deleting Card */}
             <div className="big_card">
-                <h3>View or remove existing Documents</h3>
+                <h3 className="largeLetters">View or Remove Existing Documents</h3>
 
-                <DropdownSelector
-                    allElements={options}
-                    setSelectedElement={setRemoveType}
-                />
-                <DropdownSelector
-                    allElements={selectList()}
-                    setSelectedElement={setSelectedElement}
-                />
-                <br></br>
+                <br></br><br></br>
+
+                <div className="button-holder">
+                    <DropdownSelector
+                        allElements={options}
+                        setSelectedElement={setRemoveType}
+                    />
+                    <DropdownSelector
+                        allElements={selectList()}
+                        setSelectedElement={setSelectedElement}
+                    />
+                </div>
+
+                <br></br><br></br>
 
                 <WhitePageDisplay
                     displayText={findSelectedElement().content}
                 />
+                <br></br><br></br>
 
                 <button
                     className="remove_button"
@@ -350,12 +360,15 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
             {/*Adding Card*/}
 
             <div className="big_card">
-                <h3>Add a document</h3>
+                <h3 className="largeLetters">Add a Document</h3>
+                <br></br><br></br>
+
                 <input
                     className="rounded-textbox"
                     placeholder="Document name"
                     onChange={(eventObject) => setElementTitleBox(eventObject.target.value)}
                 />
+                <br></br>
                 <br></br>
 
                 <textarea
@@ -363,6 +376,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
                     placeholder="Enter your Resume, Cover Letter, or Job Posting here."
                     onChange={(eventObject) => setElementTextBox(eventObject.target.value)}
                 />
+                <br></br>
                 <br></br>
 
                 <DropdownSelector allElements={options} setSelectedElement={setAddType} />
@@ -379,26 +393,30 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
 
             <div className="big_card">
 
-                <h3>Tailor your Cover Letter!</h3>
+                <h3 className="largeLetters">Tailor your Cover Letter!</h3>
+                <br></br><br></br>
 
                 <input
                     className="rounded-textbox"
                     placeholder="Document name"
                     onChange={(eventObject) => setAPITitle(eventObject.target.value)}
                 />
-                <br></br>
+                <br></br><br></br>
 
                 <textarea
                     className="rounded-textbox"
                     placeholder="Please include any additional requests here."
                     onChange={(eventObject) => setAdditionalRequests(eventObject.target.value)}
                 />
-                <br></br>
-
-                <DropdownSelector allElements={[{name: "None", content: "None"},...memory.resumes]} setSelectedElement={setAPIResume} />
-                <DropdownSelector allElements={[{name: "None", content: "None"},...memory.coverLetters]} setSelectedElement={setAPICoverLetter} />
-                <DropdownSelector allElements={[{name: "None", content: "None"},...memory.jobPostings]} setSelectedElement={setAPIJobDescription} />
                 <br></br><br></br>
+
+                <div className="button-holder">
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.resumes]} setSelectedElement={setAPIResume} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.coverLetters]} setSelectedElement={setAPICoverLetter} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.jobPostings]} setSelectedElement={setAPIJobDescription} />
+                </div>
+                <br></br><br></br>
+
 
                 <button className="add_button" onClick={sendFullTailorRequest}>Tailor my Cover Letter!</button>
                 <br></br><br></br>

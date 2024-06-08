@@ -14,7 +14,7 @@ export default function WhitePageDisplay({ displayText }) {
             );
         } else {
             // displayText is a large or small and displayed differently (Can be changed later)
-            if (displayText.length > 200) {
+            if (displayText.length > 50) {
                 return (
                     <pre>
                 {displayText}
