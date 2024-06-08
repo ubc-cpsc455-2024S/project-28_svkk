@@ -13,7 +13,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
         tailoredCoverLetters: []
     });
 
-    // Strings
+    // Strings for use in helpers
     const resumeString = "Resume";
     const coverLetterString = "Cover Letter";
     const jobPostingString = "Job Posting";
