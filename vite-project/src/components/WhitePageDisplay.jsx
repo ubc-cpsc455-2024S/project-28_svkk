@@ -1,3 +1,5 @@
+import '../styles/CoverLetterCreation.css';
+
 export default function WhitePageDisplay({ displayText }) {
 
     // Checking if the displayText is valid

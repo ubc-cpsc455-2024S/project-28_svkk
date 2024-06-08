@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.main-dashboard
+.jobs-container {
+    display: flex;
+    height: 100vh;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .job-list-container {
+    width: 30%;
+    /* width: 300px; */
+    border-right: 1px solid #ccc;
+    overflow-y: scroll;
+    height: 100vh; /*restrict height to trigger scrollbar when content overflows*/
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .job-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .job-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .job-item.selected {
+    background-color: #dcdcdc;
+  }
+  
+  .job-details-container {
+    text-align: left;
+    display: flex;
+    width: 70%;
+    /* flex-grow:1; */
+    padding: 20px;
+    overflow-y: scroll;
+    /* height: 100vh; */
+    height: 100vh;
+  }
+  
+  
+  .sort-by, .job-actions {
+    /* border-radius: 25px; */
+    padding: 0.7em;
+    background: #f0f0f0b0;
+  }
+  
+  /* https://www.w3schools.com/css/css3_borders.asp */
+  .date-applied {
+    border-radius: 25px;
+    background: #0F52BA;
+    color:#f0f0f0;
+    text-align: center;
+    padding: 0.4em;
+    width: 40%;
+  }
+  
+  .job-actions {
+    /* border-radius: 25px; */
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: #f0f0f0b0;
+    margin-top: auto;
+  }
+  
+  .add-job {
+    border-radius: 25px;
+    background: #228B22;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 0.4em;
+    width: 40%;
+    margin-top: auto;
+  }
+  
+  .delete-job {
+    border-radius: 25px;
+    background: #E34234;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 0.4em;
+    width: 40%;
+    margin-top: auto;
+  }
+  
+  .job-field {
+    font-size: 1.17em;
+    margin-bottom: 2em;
+  }

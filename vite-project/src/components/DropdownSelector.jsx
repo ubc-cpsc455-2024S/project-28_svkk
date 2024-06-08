@@ -1,3 +1,5 @@
+import '../styles/CoverLetterCreation.css';
+
 export default function DropdownSelector({ allElements, setSelectedElement }) {
 
     // If the element has a .target property, then it is an event, we need .target.value.

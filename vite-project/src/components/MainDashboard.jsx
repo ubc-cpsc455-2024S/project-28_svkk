@@ -1,9 +1,12 @@
+import JobsContainer from "./JobsContainer";
+import Navbar from "./Navbar";
+
 export default function MainDashboard() {
     return(
-        <>
-        <Navbar />
-        <JobList />
-        <Job />
-        </>
-    )
+        <div className="main-dashboard">
+            <Navbar />
+            <JobsContainer />
+        </div>
+        
+    );
 }
