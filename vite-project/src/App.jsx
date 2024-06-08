@@ -2,8 +2,7 @@ import MainDashboard from './components/MainDashboard';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import CoverLetterPage from './components/CoverLetterPage';
-import DropdownSelector from './components/DropdownSelector';
-import WhitePageDisplay from './components/WhitePageDisplay';
+
 
 
 const initialCoverLetterList = `[
