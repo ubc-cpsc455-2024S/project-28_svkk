@@ -47,6 +47,7 @@ The goal of this application is to help match students to their internships base
   4. Job categorization - allows users to organize the jobs they’ve applied to into different categories
         - Users can select jobs they’ve applied to and place them into an appropriate folder (e.g., frontend, backend) OR
         - Users can filter jobs by tags
+  5. Users can search for jobs they’ve applied to by name and/or job title
 
   
      
