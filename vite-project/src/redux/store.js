@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import jobListReducer from './jobs/jobListSlice';
+import jobsReducer from './jobs/jobsReducer';
 
 export default configureStore({
     reducer: {
-        jobList: jobListReducer
-    }
+        jobList: jobsReducer
+    },
+    devTools: true
 })

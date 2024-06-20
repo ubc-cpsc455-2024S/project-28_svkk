@@ -1,14 +1,21 @@
-import React from "react";
-import { useSelector } from 'react-redux'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
+import { getJobsAsync } from "../redux/jobs/thunks";
 
 export default function JobList({ onSelectJob }) {
     const jobs = useSelector(state => state.jobList.jobs);
+    const dispatch = useDispatch();
     const [selectedJobId, setSelectedJobId] = useState(null);
     const handleJobClick = (job) => {
         setSelectedJobId(job.id);
         onSelectJob(job);
     }
+
+    useEffect(() => {
+        dispatch(getJobsAsync());
+    }, []);
+
   
     return(
         <div className="job-list-container">

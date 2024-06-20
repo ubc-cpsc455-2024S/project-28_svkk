@@ -22,10 +22,9 @@ export default function Job({job}) {
             <div className="job-field">
                 <b>Duration: </b> {job.duration}
             </div>
-           
-            <b><div className="job-field" a>Click <a onClick = {() => {
-                window.open(job.link)
-            }}><u>here</u></a> for link to job posting</div></b>
+
+            <b><div className="job-field"> Click <a href={job.link} target="_blank"><u>here</u></a> for link to job posting</div></b>
+
 
             <div className="job-field"><b>Cover Letter Used:</b> {job.coverLetterUsed}</div>
         </div>
