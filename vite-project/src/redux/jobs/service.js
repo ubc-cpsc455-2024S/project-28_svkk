@@ -47,10 +47,20 @@ const addJob = async({title, company, type, location, date, duration, link, cv})
     return new_jobs
 }
 
+const deleteJob = async(id) => {
+    const response = await fetch(`http://localhost:3000/jobs/delete/${id}`, {
+        method: 'GET',
+    });
+
+    const new_jobs = await response.json()
+    return new_jobs
+}
+
 
 
 export default {
     getJobs,
     updateJob,
-    addJob
+    addJob,
+    deleteJob
 }

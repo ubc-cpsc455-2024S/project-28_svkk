@@ -74,6 +74,12 @@ router.post('/addJob', function(req, res, next) {
   res.send(jobs);
 });
 
+router.get('/delete/:id', function(req, res, next) {
+  const toDelete = jobs.find((job) => {job.id == req.params.id})
+  jobs.splice(jobs.indexOf(toDelete), 1)
+  res.send(jobs);
+});
+
 router.put('/:jobId', function (req, res, next) {
   const jIndex = jobs.findIndex(j => j.id == req.params.jobId);
 
