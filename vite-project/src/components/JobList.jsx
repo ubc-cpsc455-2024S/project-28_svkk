@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
 import { getJobsAsync } from "../redux/jobs/thunks";
 
-export default function JobList({ onSelectJob }) {
+export default function JobList({ onSelectJob, selectForm, setSelectForm, setSelectedJob }) {
     const jobs = useSelector(state => state.jobList.jobs);
     const dispatch = useDispatch();
     const [selectedJobId, setSelectedJobId] = useState(null);
@@ -31,8 +31,8 @@ export default function JobList({ onSelectJob }) {
             ))  
         }
         <div className="job-actions">
-            <span className="add-job">Add Job</span>
-            <span className="delete-job">Delete Job</span>
+            <span className="add-job" onClick={() => {setSelectForm(true); setSelectedJob(null)}}>Add Job</span>
+            <span className="delete-job" onClick={() => {dispatch(deleteJob(onSelectJob)); setSelectForm(false); setSelectedJob(null)}}>Delete Job</span>
         </div>
 
         </div>

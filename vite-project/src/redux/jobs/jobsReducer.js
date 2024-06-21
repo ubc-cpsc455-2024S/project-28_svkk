@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { REQUEST_STATE } from "../utils";
-import { getJobsAsync, updateJobAsync } from "./thunks";
+import { addJobAsync, getJobsAsync, updateJobAsync } from "./thunks";
 
 
 const INITIAL_STATE = {
@@ -39,6 +39,9 @@ export const jobListSlice = createSlice({
         .addCase(updateJobAsync.rejected, (state, action) => {
             state.updateJob = REQUEST_STATE.REJECTED;
             state.error = action.error;
+        })
+        .addCase(addJobAsync.fulfilled, (state, action) => {
+            state.jobs = action.payload;
         })
     }
 })

@@ -16,3 +16,17 @@ export const updateJobAsync = createAsyncThunk(
         return await JobsService.updateJob({id, fields});
     }
 )
+
+export const addJobAsync = createAsyncThunk(
+    actionTypes.ADD_JOB,
+    async({title, company, type, location, date, duration, link, cv}) => {
+        return await JobsService.addJob({title, company, type, location, date, duration, link, cv});
+    }
+)
+
+export const deleteJobAsync = createAsyncThunk(
+    actionTypes.ADD_JOB,
+    async({title, company, type, location, date, duration, link, cv}) => {
+        return await JobsService.deleteJob({title, company, type, location, date, duration, link, cv});
+    }
+)

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 
-const jobs = [
+let jobs = [
 
       {
           id: uuidv4(),
@@ -13,7 +13,7 @@ const jobs = [
           dateApplied: "2024-06-01",
           duration: "Aug. 2024 - Dec. 2024",
           link: "https://shorturl.at/D3MlH",
-          coverLetterUsed: "",
+          coverLetterUsed: ""
       },
       {
           id: uuidv4(),
@@ -25,7 +25,7 @@ const jobs = [
           duration: "Sept. 2024 - Dec. 2024",
           link: "https://shorturl.at/xnIf6",
           coverLetterUsed: "",
-      }, 
+      },
       {
           id: uuidv4(),
           jobTitle: "Software Development Engineer Intern",
@@ -43,7 +43,35 @@ const jobs = [
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  return res.send(jobs);
+  console.log(jobs)
+  res.send(jobs);
+});
+
+router.post('/addJob', function(req, res, next) {
+  let jobTitle = req.body.jobTitle
+  let company = req.body.company
+  let jobType = req.body.jobType
+  let location = req.body.location
+  let dateApplied = req.body.dateApplied
+  let duration = req.body.duration
+  let link = req.body.link
+  let coverLetterUsed = req.body.coverLetterUsed
+
+  let newJob = {
+                    id: uuidv4(),
+                    jobTitle: jobTitle,
+                    company: company,
+                    jobType: jobType,
+                    location: location,
+                    dateApplied: dateApplied,
+                    duration: duration,
+                    link: link,
+                    coverLetterUsed: coverLetterUsed
+                }
+  
+  console.log(newJob)
+  jobs.push(newJob)
+  res.send(jobs);
 });
 
 router.put('/:jobId', function (req, res, next) {
