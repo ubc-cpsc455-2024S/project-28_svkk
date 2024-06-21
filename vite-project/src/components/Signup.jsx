@@ -9,23 +9,23 @@ const Signup = () => {
       <form className='my-[10px]'>
         <label className='block ml-[70px]'>
             First name:
-            <input type="text" name="" id="" placeholder='First name' className='m-4 ml-[63px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="text" name="" placeholder='First name' className='m-4 ml-[63px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
         <label className='block ml-[70px]'>
             Last name:
-            <input type="text" name="" id="" placeholder='Second name' className='m-4 ml-[64px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="text" name="" placeholder='Second name' className='m-4 ml-[64px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
         <label className='block ml-[70px]'>
             Username:
-            <input type="text" name="" id="" placeholder='Username' className='m-4 ml-[65px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="text" name="" placeholder='Username' className='m-4 ml-[65px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
         <label className='block ml-[70px]'>
             Password:
-            <input type="password" name="" id="" placeholder='Password' className='m-4 ml-[69px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="password" name="" placeholder='Password' className='m-4 ml-[69px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
         <label className='block ml-[70px]'>
             Confirm Password:
-            <input type="password" name="" id="" placeholder='Confirm Password' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="password" name="" placeholder='Confirm Password' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
       </form>
       <div className='text-center'>

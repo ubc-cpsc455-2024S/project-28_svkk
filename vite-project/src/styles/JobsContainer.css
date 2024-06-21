@@ -45,10 +45,12 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
     text-align: left;
     display: flex;
     width: 70%;
+    flex-direction: column;
     flex-grow:1;
     padding: 20px;
     /* overflow-y: scroll; */
     height: 85vh;
+    justify-content: space-between;
   }
   
   

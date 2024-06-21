@@ -1,0 +1,57 @@
+.auto-width-input {
+    width: fit-content;
+}
+
+.coverletter-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.coverletter-field label {
+    font-size: 1.17em;
+    padding-bottom: 0.5em;
+}
+.coverletter-field textarea {
+    /* width: 100%; */
+    max-width: 800px;
+    min-width: 500px;
+    border: 0.1em solid #000;
+    padding: 1em;
+    border-radius: 1em;
+    resize: vertical;
+}
+
+.options {
+    /* border-radius: 25px; */
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    margin-top: auto;
+  }
+  
+  .update, .cancel {
+    border-radius: 25px;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 0.4em;
+    /* width: 40%; */
+    min-width: 20%;
+    margin-top: auto;
+  }
+  .update {
+    background: #228B22;
+    margin-left: 1em;
+  }
+
+  .update:hover {
+    background-color: #177717;
+  }
+  
+  .cancel {
+    background: #E34234;
+  }
+
+  .cancel:hover {
+    background-color: #cf2222;
+  }

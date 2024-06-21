@@ -5,7 +5,7 @@ var logger = require('morgan');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/jobs');
+var jobsRouter = require('./routes/jobs');
 
 var app = express();
 app.use(cors());
@@ -17,6 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/jobs', jobsRouter);
 
 module.exports = app;

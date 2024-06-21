@@ -10,13 +10,13 @@ const Login = () => {
       <div className='flex flex-col h-[200px] justify-center'>
         <label className='block ml-[70px]'>
             Username:
-            <input type="text" name="" id="" placeholder='Username' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="text" name="" placeholder='Username' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
         {/* add password validation*/}
         {/* TODO: add remember password */}
         <label className='block ml-[70px]'>
             Password:
-            <input type="password" name="" id="" placeholder='Password' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="password" name=""  placeholder='Password' className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
       </div>
       <div className='text-center'>

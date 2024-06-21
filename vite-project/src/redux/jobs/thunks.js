@@ -9,3 +9,10 @@ export const getJobsAsync = createAsyncThunk(
       return await JobsService.getJobs();
     }
 );
+
+export const updateJobAsync = createAsyncThunk(
+    actionTypes.UPDATE_JOBS,
+    async({id, fields}) => {
+        return await JobsService.updateJob({id, fields});
+    }
+)
