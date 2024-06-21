@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
@@ -8,8 +8,14 @@ import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';
 import CoverLetterPage from "./CoverLetterPage";
 import Login from "./Login";
+import { useDispatch } from "react-redux";
+import { searchJobsAsync } from "../redux/jobs/thunks";
 
-export default function Navbar() {
+export default function Navbar(props) {
+
+    const dispatch = useDispatch()
+
+    const [filter, setfilter] = useState('')
 
     const SearchIconWrapper = styled('div')(({ theme }) => ({
         padding: theme.spacing(0, 5),
@@ -39,8 +45,13 @@ export default function Navbar() {
                     <SearchIconWrapper>
                         <SearchIcon className="searchIcon"/>
                     </SearchIconWrapper>
-                    <input type={"text"} className={"searchBar"} placeholder={"Search"}></input>
-    
+                    <input type={"text"} className={"searchBar"} placeholder={"Search"} value={filter} onChange={(e) => {
+                                                                                                                            setfilter(e.target.value)
+                                                                                                                            if (e.target.value == '') {
+                                                                                                                                dispatch(searchJobsAsync(e.target.value))
+                                                                                                                            }
+                                                                                                                        }}></input>
+                    <input type="button" className="navBar-Button ml-[20px]" value="Search" onClick={() => {props.setSelectedJob(null); dispatch(searchJobsAsync(filter))}}/>
                 </div>
             </div>
         </nav>

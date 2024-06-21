@@ -56,11 +56,21 @@ const deleteJob = async(id) => {
     return new_jobs
 }
 
+const searchJobs = async(filter) => {
+    const response = await fetch(`http://localhost:3000/jobs/search/${filter}`, {
+        method: 'GET',
+    });
+
+    const new_jobs = await response.json()
+    return new_jobs
+}
+
 
 
 export default {
     getJobs,
     updateJob,
     addJob,
-    deleteJob
+    deleteJob,
+    searchJobs
 }

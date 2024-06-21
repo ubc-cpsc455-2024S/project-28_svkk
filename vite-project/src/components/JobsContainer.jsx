@@ -13,8 +13,8 @@ prompt 3: "thanks! how do I make it so that both the job-list-container and job-
 prompt 4: "how do I make job-item also stay gray when it is selected?" */
 
 
-export default function JobsContainer() {
-    const [selectedJob, setSelectedJob] = useState(null);
+export default function JobsContainer({selectedJob, setSelectedJob}) {
+    
     const [selectForm, setSelectForm] = useState(false)
 
     return(

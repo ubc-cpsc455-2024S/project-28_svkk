@@ -30,3 +30,10 @@ export const deleteJobAsync = createAsyncThunk(
         return await JobsService.deleteJob(id);
     }
 )
+
+export const searchJobsAsync = createAsyncThunk(
+    actionTypes.SEARCH_JOBS,
+    async(filter) => {
+        return await JobsService.searchJobs(filter);
+    }
+)

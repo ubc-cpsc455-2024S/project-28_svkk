@@ -80,6 +80,20 @@ router.get('/delete/:id', function(req, res, next) {
   res.send(jobs);
 });
 
+router.get('/search/', function(req, res, next) {
+  res.send(jobs);
+});
+
+router.get('/search/:filter', function(req, res, next) {
+  const new_jobs = jobs.filter((job) => {
+    // console.log(job.jobTitle)
+    // console.log(req.params.filter)
+    return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
+  })
+  console.log(new_jobs)
+  res.send(new_jobs);
+});
+
 router.put('/:jobId', function (req, res, next) {
   const jIndex = jobs.findIndex(j => j.id == req.params.jobId);
 
