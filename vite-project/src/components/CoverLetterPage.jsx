@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
 import '../styles/CoverLetterCreation.css';
+import coverLetterTemplate from '../assets/coverLetterTemplate.json';
 
 export default function CoverLetterPage({ userResumes, userCoverLetters, userJobPostings }) {
 
@@ -10,7 +11,8 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
         resumes: userResumes,
         coverLetters: userCoverLetters,
         jobPostings: userJobPostings,
-        tailoredCoverLetters: []
+        tailoredCoverLetters: [],
+        coverLetterTemplate: coverLetterTemplate.templates
     });
 
     // Strings for use in helpers
@@ -18,6 +20,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     const coverLetterString = "Cover Letter";
     const jobPostingString = "Job Posting";
     const tailoredCoverLetterString = "Tailored Cover Letter";
+    const coverLetterTemplateString = "Cover Letter Template"
 
     const [addType, setAddType] = useState(resumeString);
     const [removeType, setRemoveType] = useState(resumeString);
@@ -25,9 +28,20 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     const [elementTextBox, setElementTextBox] = useState("");
     const [response, setResponse] = useState("Welcome! This is the confirmation box.");
     const [selectedElement, setSelectedElement] = useState(null);
+    const [templateIndex, setTemplateIndex] = useState(0);
 
     const options = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString },
         {name: tailoredCoverLetterString}];
+
+    const optionsAdd = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString },
+        {name: tailoredCoverLetterString}, {name: coverLetterTemplateString}];
+
+    useEffect(() => {
+        // setting template based on index
+        if (addType === coverLetterTemplateString && memory.coverLetterTemplate.length >= 0) {
+            setElementTextBox(memory.coverLetterTemplate[templateIndex].content);
+        }
+    }, [addType, memory.coverLetterTemplate, templateIndex]);
 
     // For sending the request (Should be HTTP request but just sending locally for now
     const [apiResume, setAPIResume] = useState("");
@@ -127,49 +141,68 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
             content: elementTextBox
         };
 
+        let typeToAdd = addType;
 
-        if (addType === resumeString) {
+        if (addType === coverLetterTemplateString) {
+            typeToAdd = coverLetterString;
+            setAddType(coverLetterString);
+        }
+
+
+        // console.log(addType);
+        if (typeToAdd === resumeString) {
             if (uniqueName(memory.resumes, elementTitleBox)) {
                 setMemory(prevMemory => ({
                     ...prevMemory,
                     resumes: [...prevMemory.resumes, elementObject]
                 }));
-                setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
+                setResponse(`${typeToAdd} ${elementTitleBox} has been successfully added!`);
             } else {
-                setResponse(`A ${addType} with name ${elementTitleBox} already exists! Please use another name!`);
+                setResponse(`A ${typeToAdd} with name ${elementTitleBox} already exists! Please use another name!`);
             }
-        } else if (addType === coverLetterString) {
+        } else if (typeToAdd === coverLetterString) {
             if (uniqueName(memory.coverLetters, elementTitleBox)) {
                 setMemory(prevMemory => ({
                     ...prevMemory,
                     coverLetters: [...prevMemory.coverLetters, elementObject]
                 }));
-                setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
+                setResponse(`${typeToAdd} ${elementTitleBox} has been successfully added!`);
             } else {
-                setResponse(`A ${addType} with name ${elementTitleBox} already exists! Please use another name!`);
+                setResponse(`A ${typeToAdd} with name ${elementTitleBox} already exists! Please use another name!`);
             }
-        } else if (addType === jobPostingString) {
+        } else if (typeToAdd === jobPostingString) {
             if (uniqueName(memory.jobPostings, elementTitleBox)) {
                 setMemory(prevMemory => ({
                     ...prevMemory,
                     jobPostings: [...prevMemory.jobPostings, elementObject]
                 }));
-                setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
+                setResponse(`${typeToAdd} ${elementTitleBox} has been successfully added!`);
             } else {
-                setResponse(`A ${addType} with name ${elementTitleBox} already exists! Please use another name!`);
+                setResponse(`A ${typeToAdd} with name ${elementTitleBox} already exists! Please use another name!`);
             }
 
-        } else if (addType === tailoredCoverLetterString) {
+        } else if (typeToAdd === tailoredCoverLetterString) {
             if (uniqueName(memory.jobPostings, elementTitleBox)) {
                 setMemory(prevMemory => ({
                     ...prevMemory,
                     tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
                 }));
-                setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
+                setResponse(`${typeToAdd} ${elementTitleBox} has been successfully added!`);
             } else {
-                setResponse(`A ${addType} with name ${elementTitleBox} already exists! Please use another name!`);
+                setResponse(`A ${typeToAdd} with name ${elementTitleBox} already exists! Please use another name!`);
             }
-
+        // treating template as regular cover letter type
+        } else if (typeToAdd === coverLetterTemplateString) {
+            setAddType(coverLetterString);
+            if (uniqueName(memory.coverLetters, elementTitleBox)) {
+                setMemory(prevMemory => ({
+                    ...prevMemory,
+                    coverLetters: [...prevMemory.coverLetters, elementObject]
+                }));
+                setResponse(`${typeToAdd} ${elementTitleBox} has been successfully added!`);
+            } else {
+                setResponse(`A ${typeToAdd} with name ${elementTitleBox} already exists! Please use another name!`);
+            }
         }
         printState();
     }
@@ -208,6 +241,10 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     }
 
     function findElement(array, name) {
+
+        // if (!name || name.trim().length === 0) return -1;
+        // console.log(name)
+
         for (let i = 0; i < array.length; i++) {
             if (array[i].name === name) {
                 return array[i];
@@ -236,6 +273,14 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
             selectedElement: selectedElement
         }
         console.log(state);
+    }
+
+    function prevTemplate() {
+        setTemplateIndex((prevIndex) => (prevIndex - 1 + memory.coverLetterTemplate.length) % memory.coverLetterTemplate.length);
+    }
+
+    function nextTemplate() {
+        setTemplateIndex((prevIndex) => (prevIndex + 1 + memory.coverLetterTemplate.length) % memory.coverLetterTemplate.length);
     }
 
     // ===== API Call (To be replaced by HTTP request to backend =====
@@ -326,6 +371,47 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
                 <h1 className="largerLetters">Generate Cover Letter</h1>
 
             </div>
+
+            {/*Adding Card*/}
+
+            <div className="big_card">
+                <h3 className="largeLetters">Add a Document</h3>
+                <br></br><br></br>
+
+                <input
+                    className="rounded-textbox"
+                    placeholder="Document name"
+                    onChange={(eventObject) => setElementTitleBox(eventObject.target.value)}
+                />
+                <br></br>
+                <br></br>
+
+                <textarea
+                    className="big-rounded-textbox"
+                    placeholder="Enter your Resume, Cover Letter, or Job Posting here."
+                    onChange={(eventObject) => setElementTextBox(eventObject.target.value)}
+                    value={elementTextBox}
+                />
+                {addType == coverLetterTemplateString && (
+                    <div className="template-navigation">
+                        <button className="template-button" onClick={prevTemplate}>Previous Template</button>
+                        {templateIndex + 1}
+                        <button className="template-button" onClick={nextTemplate}>Next Template</button>
+                    </div>
+                )}
+
+                <br></br>
+                <br></br>
+
+                <DropdownSelector allElements={optionsAdd} setSelectedElement={setAddType} />
+                <br></br><br></br>
+                <WhitePageDisplay displayText={response} />
+                <br></br><br></br>
+
+                <button className="add_button" onClick={addElement}>Add Document</button>
+
+            </div>
+
             {/* Viewing and Deleting Card */}
             <div className="big_card">
                 <h3 className="largeLetters">View or Remove Existing Documents</h3>
@@ -355,37 +441,6 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
                     onClick={removeElement}>
                     Remove Document
                 </button>
-            </div>
-
-            {/*Adding Card*/}
-
-            <div className="big_card">
-                <h3 className="largeLetters">Add a Document</h3>
-                <br></br><br></br>
-
-                <input
-                    className="rounded-textbox"
-                    placeholder="Document name"
-                    onChange={(eventObject) => setElementTitleBox(eventObject.target.value)}
-                />
-                <br></br>
-                <br></br>
-
-                <textarea
-                    className="big-rounded-textbox"
-                    placeholder="Enter your Resume, Cover Letter, or Job Posting here."
-                    onChange={(eventObject) => setElementTextBox(eventObject.target.value)}
-                />
-                <br></br>
-                <br></br>
-
-                <DropdownSelector allElements={options} setSelectedElement={setAddType} />
-                <br></br><br></br>
-                <WhitePageDisplay displayText={response} />
-                <br></br><br></br>
-
-                <button className="add_button" onClick={addElement}>Add Document</button>
-
             </div>
 
 
