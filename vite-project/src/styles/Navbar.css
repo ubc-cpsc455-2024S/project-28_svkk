@@ -45,6 +45,9 @@
     background: #0F52BA;
     color:#f0f0f0;
 }
+.navBar-Button:hover {
+    background-color: #4851AC;
+}
 
 .searchBar-wrapper {
     position: relative;
@@ -67,3 +70,9 @@
     border-radius: 20px;
     background-color: white;
 }
+
+.navBar-Button {
+    background: #0F52BA;
+    color:#f0f0f0;
+}
+

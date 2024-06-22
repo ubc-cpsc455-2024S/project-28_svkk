@@ -107,3 +107,11 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
     font-size: 1.17em;
     margin-bottom: 2em;
   }
+
+  .add-job:hover {
+    background-color: #177717;
+  }
+
+  .delete-job:hover {
+    background-color: #cf2222;
+  }

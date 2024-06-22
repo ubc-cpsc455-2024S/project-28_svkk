@@ -25,7 +25,7 @@ export default function Navbar(props) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-      }));
+    }));
       
 
     return(
@@ -51,7 +51,7 @@ export default function Navbar(props) {
                                                                                                                                 dispatch(searchJobsAsync(e.target.value))
                                                                                                                             }
                                                                                                                         }}></input>
-                    <input type="button" className="navBar-Button ml-[20px]" value="Search" onClick={() => {props.setSelectedJob(null); dispatch(searchJobsAsync(filter))}}/>
+                    <input type="button" className="navBar-Button ml-[20px]" value="Search" onClick={() => {props.setSelectedJob(null); dispatch(searchJobsAsync(filter)); setfilter('')}}/>
                 </div>
             </div>
         </nav>
