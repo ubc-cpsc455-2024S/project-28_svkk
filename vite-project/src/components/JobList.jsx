@@ -37,7 +37,6 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
                                                                 dispatch(deleteJobAsync(onSelectJob)); 
                                                                 setSelectForm(false); 
                                                                 onSelectJob(null);
-                                                                console.log(selectedJob)
                                                             } else {
                                                                 console.log("No job selected")
                                                             }
