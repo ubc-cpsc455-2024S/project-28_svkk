@@ -1,0 +1,21 @@
+export const actionTypes = {
+    GET_USER: 'user/getUser',
+    POST_USER: 'user/postUser',
+    PATCH_USER: 'user/patchUser',
+    DELETE_USER: 'user/deleteUser',
+    POST_LOGIN_USER: 'user/login',
+    POST_LOGOUT_USER: 'user/logout',
+    POST_RESUME: 'resume/postResume',
+    PATCH_RESUME: 'resume/patchResume',
+    DELETE_RESUME: 'resume/deleteResume',
+    POST_COVER_LETTER: 'coverLetter/postCoverLetter',
+    PATCH_COVER_LETTER: 'coverLetter/patchCoverLetter',
+    DELETE_COVER_LETTER: 'coverLetter/deleteCoverLetter',
+    POST_JOB_POSTING: 'jobPosting/postJobPosting',
+    PATCH_JOB_POSTING: 'jobPosting/patchJobPosting',
+    DELETE_JOB_POSTING: 'jobPosting/deleteJobPosting',
+    POST_TAILORED_COVER_LETTER: 'tailoredCoverLetter/postTailoredCoverLetter',
+    PATCH_TAILORED_COVER_LETTER: 'tailoredCoverLetter/patchTailoredCoverLetter',
+    DELETE_TAILORED_COVER_LETTER: 'tailoredCoverLetter/deleteTailoredCoverLetter',
+    SEND_TAILOR_REQUEST: 'tailorRequest/sendTailorRequest'
+};

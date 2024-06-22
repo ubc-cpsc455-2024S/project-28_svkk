@@ -1,17 +1,34 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
 import '../styles/CoverLetterCreation.css';
+import {useDispatch, useSelector} from "react-redux";
+import {getUserAsync} from "../redux/jobs/thunks.js";
+import {
+    addCoverLetterAsync, addJobPostingAsync,
+    addResumeAsync, addTailoredCoverLetterAsync,
+    deleteCoverLetterAsync,
+    deleteJobPostingAsync,
+    deleteResumeAsync, deleteTailoredCoverLetterAsync,
+    loginUserAsync
+} from "../redux/users/thunks.js";
 
 export default function CoverLetterPage({ userResumes, userCoverLetters, userJobPostings }) {
 
     // Main Storage to be replaced with redux
-    const [memory, setMemory] = useState({
-        resumes: userResumes,
-        coverLetters: userCoverLetters,
-        jobPostings: userJobPostings,
-        tailoredCoverLetters: []
-    });
+    // const [ setMemory] = useState({
+    //     resumes: userResumes,
+    //     coverLetters: userCoverLetters,
+    //     jobPostings: userJobPostings,
+    //     tailoredCoverLetters: []
+    // });
+    const userToken = useSelector(state => state.userList.token);
+    const user = useSelector(state => state.userList.user);
+    
+    const resumes = useSelector(state => state.userList.user.resumes);
+    const coverLetters = useSelector(state => state.userList.user.coverLetters);
+    const jobPostings = useSelector(state => state.userList.user.jobPostings);
+    const tailoredCoverLetters = useSelector(state => state.userList.user.tailoredCoverLetters);
 
     // Strings for use in helpers
     const resumeString = "Resume";
@@ -37,46 +54,55 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     const [apiResponse, setAPIResponse] = useState("");
     const [apiTitle, setAPITitle] = useState("");
     const [apiSaveResponse, setAPISaveResponse] = useState("");
+    const dispatch = useDispatch();
 
+    // Just cause out of time right now
+    useEffect(() => {
+        dispatch(loginUserAsync({username: "Kevin123", password: "password"}));
+    }, []);
 
     // ===== Viewing and Removing =====
     function findSelectedElement() {
+        // console.log(resumes);
+        // console.log(coverLetters);
+        // console.log(jobPostings);
+        // console.log(tailoredCoverLetters);
         if (removeType === resumeString) {
-            let result = findElement(memory.resumes,selectedElement);
+            let result = findElement(resumes,selectedElement);
             if (result === -1) {
-                if (memory.resumes.length > 0) {
-                    setSelectedElement(memory.resumes[0].name);
-                    return memory.resumes[0];
+                if (resumes.length > 0) {
+                    setSelectedElement(resumes[0].name);
+                    return resumes[0];
                 }
             } else {
                 return result;
             }
         } else if (removeType === coverLetterString) {
-            let result = findElement(memory.coverLetters,selectedElement);
+            let result = findElement(coverLetters,selectedElement);
             if (result === -1) {
-                if (memory.coverLetters.length > 0) {
-                    setSelectedElement(memory.coverLetters[0].name);
-                    return memory.coverLetters[0];
+                if (coverLetters.length > 0) {
+                    setSelectedElement(coverLetters[0].name);
+                    return coverLetters[0];
                 }
             } else {
                 return result;
             }
         } else if (removeType === jobPostingString) {
-            let result = findElement(memory.jobPostings,selectedElement);
+            let result = findElement(jobPostings,selectedElement);
             if (result === -1) {
-                if (memory.jobPostings.length > 0) {
-                    setSelectedElement(memory.jobPostings[0].name);
-                    return memory.jobPostings[0];
+                if (jobPostings.length > 0) {
+                    setSelectedElement(jobPostings[0].name);
+                    return jobPostings[0];
                 }
             } else {
                 return result;
             }
         } else if (removeType === tailoredCoverLetterString) {
-            let result = findElement(memory.tailoredCoverLetters,selectedElement);
+            let result = findElement(tailoredCoverLetters,selectedElement);
             if (result === -1) {
-                if (memory.tailoredCoverLetters.length > 0) {
-                    setSelectedElement(memory.tailoredCoverLetters[0].name);
-                    return memory.tailoredCoverLetters[0];
+                if (tailoredCoverLetters.length > 0) {
+                    setSelectedElement(tailoredCoverLetters[0].name);
+                    return tailoredCoverLetters[0];
                 }
             } else {
                 return result;
@@ -86,14 +112,40 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
         return {name:"Not found", content: "Please pick a document to view!"}
     }
 
+    function bandaid (array, name) {
+        console.log("======= Bandaid ==========");
+        console.log("array");
+        console.log(array);
+        console.log("name");
+        console.log(name);
+
+        for (const element of array) {
+            console.log("Comparing " + element.name + " with " + name);
+            console.log("Is they equal? " + (name === element.name));
+            if (name === element.name) {
+                return element;
+            }
+        }
+    }
+
     function removeElement() {
         if (removeType === resumeString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                resumes: prevMemory.resumes.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+            // setMemory(prevMemory => ({
+            //     ...prevMemory,
+            //     resumes: prevMemory.resumes.filter(
+            //         element => element.name !== selectedElement
+            //     )
+            // }));
+            console.log("RemoveElement3");
+            console.log(selectedElement);
+            let selectedElementObject = (bandaid(resumes, selectedElement));
+            dispatch(deleteResumeAsync({
+                uuid: user.uuid,
+                token: userToken,
+                resumeUUID: selectedElementObject.uuid
+            }))
+
+
         } else if (removeType === coverLetterString) {
             setMemory(prevMemory => ({
                 ...prevMemory,
@@ -102,19 +154,31 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
                 )
             }));
         } else if (removeType === jobPostingString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                jobPostings: prevMemory.jobPostings.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+            // setMemory(prevMemory => ({
+            //     ...prevMemory,
+            //     jobPostings: prevMemory.jobPostings.filter(
+            //         element => element.name !== selectedElement
+            //     )
+            // }));
+            dispatch(deleteJobPostingAsync( {
+                uuid: user.uuid,
+                token: userToken,
+                jobPostingUUID: (bandaid(jobPostings, selectedElement)).uuid
+            }))
+
         } else if (removeType === tailoredCoverLetterString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                tailoredCoverLetters: prevMemory.tailoredCoverLetters.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+
+            // setMemory(prevMemory => ({
+            //     ...prevMemory,
+            //     tailoredCoverLetters: prevMemory.tailoredCoverLetters.filter(
+            //         element => element.name !== selectedElement
+            //     )
+            // }));
+            dispatch(deleteTailoredCoverLetterAsync( {
+                uuid: user.uuid,
+                token: userToken,
+                coverLetterUUID: (bandaid(tailoredCoverLetters, selectedElement)).uuid
+            }))
         }
         printState();
     }
@@ -129,30 +193,56 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
 
 
         if (addType === resumeString) {
-            if (uniqueName(memory.resumes, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    resumes: [...prevMemory.resumes, elementObject]
+            if (uniqueName(resumes, elementTitleBox)) {
+                // setMemory(prevMemory => ({
+                //     ...prevMemory,
+                //     resumes: [...prevMemory.resumes, elementObject]
+                // }));
+
+                console.log("Element");
+                console.log(elementTextBox.value);
+                dispatch(addResumeAsync( {
+                    uuid: user.uuid,
+                    token: userToken,
+                    name: elementTitleBox,
+                    resumeString: elementTextBox
                 }));
                 setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
             } else {
                 setResponse(`A ${addType} with name ${elementTitleBox} already exists! Please use another name!`);
             }
         } else if (addType === coverLetterString) {
-            if (uniqueName(memory.coverLetters, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    coverLetters: [...prevMemory.coverLetters, elementObject]
+            if (uniqueName(coverLetters, elementTitleBox)) {
+                // setMemory(prevMemory => ({
+                //     ...prevMemory,
+                //     coverLetters: [...prevMemory.coverLetters, elementObject]
+                // }));
+                console.log(user.uuid);
+                console.log(userToken);
+                console.log(elementTitleBox);
+                console.log(elementTextBox);
+
+                dispatch(addCoverLetterAsync( {
+                    uuid: user.uuid,
+                    token: userToken,
+                    name: elementTitleBox,
+                    coverLetterString: elementTextBox
                 }));
                 setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
             } else {
                 setResponse(`A ${addType} with name ${elementTitleBox} already exists! Please use another name!`);
             }
         } else if (addType === jobPostingString) {
-            if (uniqueName(memory.jobPostings, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    jobPostings: [...prevMemory.jobPostings, elementObject]
+            if (uniqueName(jobPostings, elementTitleBox)) {
+                // setMemory(prevMemory => ({
+                //     ...prevMemory,
+                //     jobPostings: [...prevMemory.jobPostings, elementObject]
+                // }));
+                dispatch(addJobPostingAsync( {
+                    uuid: user.uuid,
+                    token: userToken,
+                    name: elementTitleBox,
+                    jobPostingString: elementTextBox
                 }));
                 setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
             } else {
@@ -160,10 +250,16 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
             }
 
         } else if (addType === tailoredCoverLetterString) {
-            if (uniqueName(memory.jobPostings, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
+            if (uniqueName(jobPostings, elementTitleBox)) {
+                // setMemory(prevMemory => ({
+                //     ...prevMemory,
+                //     tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
+                // }));
+                dispatch(addTailoredCoverLetterAsync( {
+                    uuid: user.uuid,
+                    token: userToken,
+                    name: elementTitleBox,
+                    coverLetterString: elementTextBox
                 }));
                 setResponse(`${addType} ${elementTitleBox} has been successfully added!`);
             } else {
@@ -181,11 +277,22 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
             name: apiTitle,
             content: apiResponse
         };
-        if (uniqueName(memory.tailoredCoverLetters,apiTitle)) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
-            }));
+        if (uniqueName(tailoredCoverLetters,apiTitle)) {
+            // setMemory(prevMemory => ({
+            //     ...prevMemory,
+            //     tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
+            // }));
+
+            console.log("HERE");
+            console.log(apiSaveResponse);
+            console.log(apiResponse);
+            dispatch(addTailoredCoverLetterAsync({
+                uuid: user.uuid,
+                token: userToken,
+                name: apiTitle,
+                coverLetterString: apiResponse
+            }))
+
             setAPISaveResponse(`Tailored Cover Letter ${elementTitleBox} has been successfully added!`);
         } else {
             setAPISaveResponse(`A Tailored Cover Letter with name ${elementTitleBox} already exists! Please use another name!`);
@@ -193,16 +300,17 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
         printState();
     }
 
+
     // ===== Helpers =====
     function selectList() {
         if (removeType === resumeString) {
-            return memory.resumes;
+            return resumes;
         } else if (removeType === coverLetterString) {
-            return memory.coverLetters;
+            return coverLetters;
         } else if (removeType === jobPostingString) {
-            return memory.jobPostings;
+            return jobPostings;
         } else if (removeType === tailoredCoverLetterString) {
-            return memory.tailoredCoverLetters;
+            return tailoredCoverLetters;
         }
         return [];
     }
@@ -227,7 +335,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
 
     function printState() {
         let state = {
-            memory: memory,
+             
             addType: addType,
             removeType: removeType,
             elementTitleBox: elementTitleBox,
@@ -241,9 +349,9 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     // ===== API Call (To be replaced by HTTP request to backend =====
 
     function sendFullTailorRequest() {
-        let resume = findElement(memory.resumes, apiResume).content;
-        let cover_letter = findElement(memory.coverLetters, apiCoverLetter).content;
-        let job_posting = findElement(memory.jobPostings, apiJobDescription).content;
+        let resume = findElement(resumes, apiResume).content;
+        let cover_letter = findElement(coverLetters, apiCoverLetter).content;
+        let job_posting = findElement(jobPostings, apiJobDescription).content;
         let additional_requests = additionalRequests;
 
         console.log(generateGPTRequestString(resume,cover_letter,job_posting, additional_requests));
@@ -322,7 +430,9 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     return (
 
         <div className="coverLetterPageContainer">
+            <br></br>
             <div>
+                <br></br>
                 <h1 className="largerLetters">Generate Cover Letter</h1>
 
             </div>
@@ -372,7 +482,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
                 <br></br>
 
                 <textarea
-                    className="big-rounded-textbox"
+                    className="rounded-textbox"
                     placeholder="Enter your Resume, Cover Letter, or Job Posting here."
                     onChange={(eventObject) => setElementTextBox(eventObject.target.value)}
                 />
@@ -411,9 +521,9 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
                 <br></br><br></br>
 
                 <div className="button-holder">
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.resumes]} setSelectedElement={setAPIResume} />
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.coverLetters]} setSelectedElement={setAPICoverLetter} />
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.jobPostings]} setSelectedElement={setAPIJobDescription} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...resumes]} setSelectedElement={setAPIResume} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...coverLetters]} setSelectedElement={setAPICoverLetter} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...jobPostings]} setSelectedElement={setAPIJobDescription} />
                 </div>
                 <br></br><br></br>
 
