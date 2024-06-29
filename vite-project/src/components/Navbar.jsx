@@ -4,10 +4,6 @@ import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
-import Button from '@mui/material/Button';
-import CoverLetterPage from "./CoverLetterPage";
-import Login from "./Login";
 import { useDispatch } from "react-redux";
 import { searchJobsAsync } from "../redux/jobs/thunks";
 

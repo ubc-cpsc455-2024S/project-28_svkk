@@ -1,7 +1,7 @@
 import MainDashboard from './components/MainDashboard';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import CoverLetterPage from './components/CoverLetterPage';
+import CoverLetterPage from './components/CoverLetterCreationComponents/CoverLetterPage';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { red } from "@mui/material/colors";
 

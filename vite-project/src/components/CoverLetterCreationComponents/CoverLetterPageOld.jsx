@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
-import '../styles/CoverLetterCreation.css';
-import coverLetterTemplate from '../assets/coverLetterTemplate.json';
+import '../../styles/CoverLetterCreation.css';
+import coverLetterTemplate from '../../assets/coverLetterTemplate.json';
+import AddDocument from './AddDocument.jsx';
 
 export default function CoverLetterPage({ userResumes, userCoverLetters, userJobPostings }) {
 

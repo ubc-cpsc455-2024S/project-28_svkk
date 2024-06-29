@@ -1,4 +1,4 @@
-import '../styles/CoverLetterCreation.css';
+import '../../styles/CoverLetterCreation.css';
 
 export default function WhitePageDisplay({ displayText }) {
 

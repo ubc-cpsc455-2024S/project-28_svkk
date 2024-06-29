@@ -1,7 +1,5 @@
 import JobsContainer from "./JobsContainer";
 import Navbar from "./Navbar";
-import CoverLetterPage from "./CoverLetterPage";
-import Login from "./Login";
 import { useState } from "react";
 
 export default function MainDashboard() {
