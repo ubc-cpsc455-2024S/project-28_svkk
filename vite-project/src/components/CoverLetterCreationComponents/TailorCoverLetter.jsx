@@ -3,7 +3,7 @@ import '../../styles/CoverLetterCreation.css';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
 
-export default function TailorCoverLetter({ memory, setMemory }) {
+export default function TailorCoverLetter({ memory, setMemory, jobPostings, coverLetters }) {
 
     const [elementTitleBox, setElementTitleBox] = useState("");
     const [elementTextBox, setElementTextBox] = useState("");
@@ -41,8 +41,8 @@ export default function TailorCoverLetter({ memory, setMemory }) {
 
     function sendFullTailorRequest() {
         let resume = findElement(memory.resumes, apiResume).content;
-        let cover_letter = findElement(memory.coverLetters, apiCoverLetter).content;
-        let job_posting = findElement(memory.jobPostings, apiJobDescription).content;
+        let cover_letter = findElement(coverLetters, apiCoverLetter).content;
+        let job_posting = findElement(jobPostings, apiJobDescription).content;
         let additional_requests = additionalRequests;
 
         console.log(generateGPTRequestString(resume,cover_letter,job_posting, additional_requests));
@@ -177,8 +177,8 @@ export default function TailorCoverLetter({ memory, setMemory }) {
 
                 <div className="button-holder">
                     <DropdownSelector allElements={[{name: "None", content: "None"},...memory.resumes]} setSelectedElement={setAPIResume} />
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.coverLetters]} setSelectedElement={setAPICoverLetter} />
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.jobPostings]} setSelectedElement={setAPIJobDescription} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...coverLetters]} setSelectedElement={setAPICoverLetter} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...jobPostings]} setSelectedElement={setAPIJobDescription} />
                 </div>
                 <br></br><br></br>
 

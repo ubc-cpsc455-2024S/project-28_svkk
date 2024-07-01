@@ -61,8 +61,7 @@ const router = createBrowserRouter([
     path: "/CoverLetterPage",
     element: <CoverLetterPage
                 userResumes={[]}
-                userCoverLetters={JSON.parse(initialCoverLetterList)}
-                userJobPostings={JSON.parse(initialJobPostingList)}/>,
+                userCoverLetters={JSON.parse(initialCoverLetterList)}/>,
     errorElement: <ErrorPage />
   }
 ]);

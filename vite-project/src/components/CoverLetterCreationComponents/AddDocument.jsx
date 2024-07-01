@@ -2,15 +2,18 @@ import React, {useEffect, useState} from 'react';
 import '../../styles/CoverLetterCreation.css';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
-import coverLetterTemplate from '../../assets/coverLetterTemplate.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { addJobPostingAsync } from '../../redux/jobPostings/thunk.js';
+import { addCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function AddDocument({ setMemory, memory }) {
+export default function AddDocument({ setMemory, memory, jobPostings, coverLetters, coverLetterTemplates }) {
+    const dispatch = useDispatch();
 
     // Strings for use in helpers
     const resumeString = "Resume";
     const coverLetterString = "Cover Letter";
     const jobPostingString = "Job Posting";
-    const tailoredCoverLetterString = "Tailored Cover Letter";
     const coverLetterTemplateString = "Cover Letter Template";
 
     const [addType, setAddType] = useState(resumeString);
@@ -19,21 +22,21 @@ export default function AddDocument({ setMemory, memory }) {
     const [templateIndex, setTemplateIndex] = useState(0);
     const [response, setResponse] = useState("Welcome! This is the confirmation box.");
 
-    const optionsAdd = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString },
-        {name: tailoredCoverLetterString}, {name: coverLetterTemplateString}];
+    const optionsAdd = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString }, {name: coverLetterTemplateString}];
 
     useEffect(() => {
         // setting template based on index
-        if (addType === coverLetterTemplateString && memory.coverLetterTemplate.length >= 0) {
-            setElementTextBox(memory.coverLetterTemplate[templateIndex].content);
+        if (addType === coverLetterTemplateString && coverLetterTemplates.length >= 0) {
+            setElementTextBox(coverLetterTemplates[templateIndex].content);
         }
-    }, [addType, memory.coverLetterTemplate, templateIndex]);
+    }, [addType, coverLetterTemplates, templateIndex]);
 
 
     // ===== Add Element Section =====
     function addElement() {
 
         const elementObject = {
+            uuid: uuidv4(),
             name: elementTitleBox,
             content: elementTextBox
         };
@@ -58,47 +61,57 @@ export default function AddDocument({ setMemory, memory }) {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
         } else if (typeToAdd === coverLetterString) {
-            if (uniqueName(memory.coverLetters, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    coverLetters: [...prevMemory.coverLetters, elementObject]
-                }));
+            if (uniqueName(coverLetters, elementTitleBox)) {
+                // setMemory(prevMemory => ({
+                //     ...prevMemory,
+                //     coverLetters: [...prevMemory.coverLetters, elementObject]
+                // }));
+                console.log("dispatching add cover letter request");
+                dispatch(addCoverLetterAsync(elementObject));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
         } else if (typeToAdd === jobPostingString) {
-            if (uniqueName(memory.jobPostings, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    jobPostings: [...prevMemory.jobPostings, elementObject]
-                }));
+            if (uniqueName(jobPostings, elementTitleBox)) {
+                // setMemory(prevMemory => ({
+                //     ...prevMemory,
+                //     jobPostings: [...prevMemory.jobPostings, elementObject]
+                // }));
+                dispatch(addJobPostingAsync(elementObject));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
+        }
+        
 
-        } else if (typeToAdd === tailoredCoverLetterString) {
-            if (uniqueName(memory.jobPostings, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
-                }));
-                setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
-            } else {
-                setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
-            }
+         
+            // else if (typeToAdd === tailoredCoverLetterString) {
+            //     if (uniqueName(memory.jobPostings, elementTitleBox)) {
+            //         setMemory(prevMemory => ({
+            //             ...prevMemory,
+            //             tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
+            //         }));
+            //         setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
+            //     } else {
+            //         setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
+            //     }
+            // }
+
         // treating template as regular cover letter type
-        } else if (typeToAdd === coverLetterTemplateString) {
+        else if (typeToAdd === coverLetterTemplateString) {
             setAddType(coverLetterString);
             console.log(`elementTitleBox value is ${elementTitleBox}`); // this isn't printing to the console,
             // can still add a document without a title :(
             if (elementTitleBox !== "") {
-                if (uniqueName(memory.coverLetters, elementTitleBox)) {
-                    setMemory(prevMemory => ({
-                        ...prevMemory,
-                        coverLetters: [...prevMemory.coverLetters, elementObject]
-                    }));
+                if (uniqueName(coverLetters, elementTitleBox)) {
+                    // setMemory(prevMemory => ({
+                    //     ...prevMemory,
+                    //     coverLetters: [...prevMemory.coverLetters, elementObject]
+                    // }));
+                    console.log("dispatching add cover letter from template request");
+                    dispatch(addCoverLetterAsync(elementObject));
                     setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
                     
                 } else {
@@ -108,18 +121,18 @@ export default function AddDocument({ setMemory, memory }) {
                 setResponse(`Please enter a name for your new ${typeToAdd}`);
             }
         }
-        printState();
+        // printState();
 
     }
 
 
     // ====== Helpers ======
     function prevTemplate() {
-        setTemplateIndex((prevIndex) => (prevIndex - 1 + memory.coverLetterTemplate.length) % memory.coverLetterTemplate.length);
+        setTemplateIndex((prevIndex) => (prevIndex - 1 + coverLetterTemplates.length) % coverLetterTemplates.length);
     }
 
     function nextTemplate() {
-        setTemplateIndex((prevIndex) => (prevIndex + 1 + memory.coverLetterTemplate.length) % memory.coverLetterTemplate.length);
+        setTemplateIndex((prevIndex) => (prevIndex + 1 + coverLetterTemplates.length) % coverLetterTemplates.length);
     }
 
     function uniqueName(array, name) {

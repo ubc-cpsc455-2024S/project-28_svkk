@@ -2,8 +2,12 @@ import React, {useEffect, useState} from 'react';
 import '../../styles/CoverLetterCreation.css';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
+import { useDispatch } from 'react-redux';
+import { deleteJobPostingAsync } from '../../redux/jobPostings/thunk.js';
+import { deleteCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
 
-export default function ViewRemoveDocument({ setMemory, memory }) {
+export default function ViewRemoveDocument({ setMemory, memory, jobPostings, coverLetters}) {
+    const dispatch = useDispatch();
 
     // Strings for use in helpers
     const resumeString = "Resume";
@@ -15,7 +19,7 @@ export default function ViewRemoveDocument({ setMemory, memory }) {
     const [selectedElement, setSelectedElement] = useState(null);
 
     const options = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString },
-        {name: tailoredCoverLetterString}];
+        { name: tailoredCoverLetterString }];
 
     // ===== Viewing and Removing =====
     function findSelectedElement() {
@@ -30,21 +34,23 @@ export default function ViewRemoveDocument({ setMemory, memory }) {
                 return result;
             }
         } else if (removeType === coverLetterString) {
-            let result = findElement(memory.coverLetters,selectedElement);
+            let result = findElement(coverLetters,selectedElement);
             if (result === -1) {
-                if (memory.coverLetters.length > 0) {
-                    setSelectedElement(memory.coverLetters[0].name);
-                    return memory.coverLetters[0];
+                if (coverLetters.length > 0) {
+                    setSelectedElement(coverLetters[0].name);
+                    return coverLetters[0];
                 }
             } else {
                 return result;
             }
         } else if (removeType === jobPostingString) {
-            let result = findElement(memory.jobPostings,selectedElement);
+            console.log("initial job postings list in viewremove documents component:");
+            console.log(jobPostings);
+            let result = findElement(jobPostings,selectedElement);
             if (result === -1) {
-                if (memory.jobPostings.length > 0) {
-                    setSelectedElement(memory.jobPostings[0].name);
-                    return memory.jobPostings[0];
+                if (jobPostings.length > 0) {
+                    setSelectedElement(jobPostings[0].name);
+                    return jobPostings[0];
                 }
             } else {
                 return result;
@@ -73,19 +79,13 @@ export default function ViewRemoveDocument({ setMemory, memory }) {
                 )
             }));
         } else if (removeType === coverLetterString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                coverLetters: prevMemory.coverLetters.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+            console.log("dispatching delete coverletter request");
+            dispatch(deleteCoverLetterAsync(selectedElement));
+
         } else if (removeType === jobPostingString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                jobPostings: prevMemory.jobPostings.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+
+            dispatch(deleteJobPostingAsync(selectedElement));
+
         } else if (removeType === tailoredCoverLetterString) {
             setMemory(prevMemory => ({
                 ...prevMemory,
@@ -94,7 +94,7 @@ export default function ViewRemoveDocument({ setMemory, memory }) {
                 )
             }));
         }
-        printState();
+        // printState();
 
     }
 
@@ -103,9 +103,9 @@ export default function ViewRemoveDocument({ setMemory, memory }) {
             if (removeType === resumeString) {
                 return memory.resumes;
             } else if (removeType === coverLetterString) {
-                return memory.coverLetters;
+                return coverLetters;
             } else if (removeType === jobPostingString) {
-                return memory.jobPostings;
+                return jobPostings;
             } else if (removeType === tailoredCoverLetterString) {
                 return memory.tailoredCoverLetters;
             }
@@ -123,15 +123,6 @@ export default function ViewRemoveDocument({ setMemory, memory }) {
                 }
             }
             return -1;
-        }
-
-        function uniqueName(array, name) {
-            for (let i = 0; i < array.length; i++) {
-                if (array[i].name === name) {
-                    return false;
-                }
-            }
-            return true;
         }
 
         function printState() {
