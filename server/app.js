@@ -6,6 +6,8 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var jobsRouter = require('./routes/jobs');
+var jobPostingsRouter = require('./routes/jobPostings');
+var coverLettersRouter = require('./routes/coverLetters');
 
 var app = express();
 app.use(cors());
@@ -18,5 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/jobs', jobsRouter);
+app.use('/jobPostings', jobPostingsRouter);
+app.use('/coverLetters', coverLettersRouter);
 
 module.exports = app;
