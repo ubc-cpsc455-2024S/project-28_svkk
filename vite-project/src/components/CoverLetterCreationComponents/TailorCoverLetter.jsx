@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import '../../styles/CoverLetterCreation.css';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
+import {addTailoredCoverLettersAsync} from "../../redux/tailoredCoverLetters/thunk.js";
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function TailorCoverLetter({ memory, setMemory, jobPostings, coverLetters }) {
 
@@ -19,20 +21,24 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
     const [apiTitle, setAPITitle] = useState("");
     const [apiSaveResponse, setAPISaveResponse] = useState("");
 
+    const dispatch = useDispatch();
+
     // ===== Tailoring Cover Letter Portion =====
     function saveTailoredCoverLetter() {
         const elementObject = {
             name: apiTitle,
             content: apiResponse
         };
-        if (uniqueName(memory.tailoredCoverLetters,apiTitle)) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
-            }));
-            setAPISaveResponse(`Tailored Cover Letter "${elementTitleBox}" has been successfully added!`);
+        if (uniqueName(coverLetters,apiTitle)) {
+            // setMemory(prevMemory => ({
+            //     ...prevMemory,
+            //     tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
+            // }));
+            setAPISaveResponse(`Tailored Cover Letter "${apiTitle}" has been successfully added!`);
+            console.log("letter: ", elementObject.name);
+            dispatch(addTailoredCoverLettersAsync(elementObject));
         } else {
-            setAPISaveResponse(`A Tailored Cover Letter with name "${elementTitleBox}" already exists, please use another name!`);
+            setAPISaveResponse(`A Tailored Cover Letter with name "${apiTitle}" already exists, please use another name!`);
         }
         printState();
     }
@@ -141,7 +147,7 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
     function printState() {
         let state = {
             memory: memory,
-            addType: addType,
+            addType: "Tailored Cover Letter",
             // removeType: removeType,
             elementTitleBox: elementTitleBox,
             elementTextBox: elementTextBox,

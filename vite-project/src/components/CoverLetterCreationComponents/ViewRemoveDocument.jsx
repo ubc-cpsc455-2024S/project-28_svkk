@@ -5,8 +5,9 @@ import DropdownSelector from "./DropdownSelector.jsx";
 import { useDispatch } from 'react-redux';
 import { deleteJobPostingAsync } from '../../redux/jobPostings/thunk.js';
 import { deleteCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
+import {deleteTailoredCoverLetterAsync} from "../../redux/tailoredCoverLetters/thunk.js";
 
-export default function ViewRemoveDocument({ setMemory, memory, jobPostings, coverLetters}) {
+export default function ViewRemoveDocument({ setMemory, memory, jobPostings, coverLetters, tailoredCoverLetters}) {
     const dispatch = useDispatch();
 
     // Strings for use in helpers
@@ -44,8 +45,8 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
                 return result;
             }
         } else if (removeType === jobPostingString) {
-            console.log("initial job postings list in viewremove documents component:");
-            console.log(jobPostings);
+            // console.log("initial job postings list in viewremove documents component:");
+            // console.log(jobPostings);
             let result = findElement(jobPostings,selectedElement);
             if (result === -1) {
                 if (jobPostings.length > 0) {
@@ -56,11 +57,12 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
                 return result;
             }
         } else if (removeType === tailoredCoverLetterString) {
-            let result = findElement(memory.tailoredCoverLetters,selectedElement);
+            let result = findElement(tailoredCoverLetters,selectedElement);
+            console.log("the name is: ", selectedElement);
             if (result === -1) {
-                if (memory.tailoredCoverLetters.length > 0) {
-                    setSelectedElement(memory.tailoredCoverLetters[0].name);
-                    return memory.tailoredCoverLetters[0];
+                if (tailoredCoverLetters.length > 0) {
+                    setSelectedElement(tailoredCoverLetters[0].name);
+                    return tailoredCoverLetters[0];
                 }
             } else {
                 return result;
@@ -79,7 +81,7 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
                 )
             }));
         } else if (removeType === coverLetterString) {
-            console.log("dispatching delete coverletter request");
+            // console.log("dispatching delete coverletter request");
             dispatch(deleteCoverLetterAsync(selectedElement));
 
         } else if (removeType === jobPostingString) {
@@ -87,12 +89,13 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
             dispatch(deleteJobPostingAsync(selectedElement));
 
         } else if (removeType === tailoredCoverLetterString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                tailoredCoverLetters: prevMemory.tailoredCoverLetters.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+            // setMemory(prevMemory => ({
+            //     ...prevMemory,
+            //     tailoredCoverLetters: prevMemory.tailoredCoverLetters.filter(
+            //         element => element.name !== selectedElement
+            //     )
+            // }));
+            dispatch(deleteTailoredCoverLetterAsync(selectedElement));
         }
         // printState();
 
@@ -107,7 +110,8 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
             } else if (removeType === jobPostingString) {
                 return jobPostings;
             } else if (removeType === tailoredCoverLetterString) {
-                return memory.tailoredCoverLetters;
+                console.log("remove type: ", removeType);
+                return tailoredCoverLetters;
             }
             return [];
         }
@@ -115,7 +119,7 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
         function findElement(array, name) {
 
             // if (!name || name.trim().length === 0) return -1;
-            // console.log(name)
+            console.log(name)
 
             for (let i = 0; i < array.length; i++) {
                 if (array[i].name === name) {
