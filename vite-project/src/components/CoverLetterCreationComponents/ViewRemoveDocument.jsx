@@ -58,7 +58,7 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
             }
         } else if (removeType === tailoredCoverLetterString) {
             let result = findElement(tailoredCoverLetters,selectedElement);
-            console.log("the name is: ", selectedElement);
+            // console.log("the name is: ", selectedElement);
             if (result === -1) {
                 if (tailoredCoverLetters.length > 0) {
                     setSelectedElement(tailoredCoverLetters[0].name);
@@ -110,7 +110,7 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
             } else if (removeType === jobPostingString) {
                 return jobPostings;
             } else if (removeType === tailoredCoverLetterString) {
-                console.log("remove type: ", removeType);
+                // console.log("remove type: ", removeType);
                 return tailoredCoverLetters;
             }
             return [];
@@ -119,7 +119,8 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
         function findElement(array, name) {
 
             // if (!name || name.trim().length === 0) return -1;
-            console.log(name)
+            // console.log(name);
+            // console.log(array)
 
             for (let i = 0; i < array.length; i++) {
                 if (array[i].name === name) {

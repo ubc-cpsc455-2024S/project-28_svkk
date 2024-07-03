@@ -30,13 +30,12 @@ export default function CoverLetterPage({ userResumes }) {
         dispatch(getCoverLetterTemplatesAsync());
         dispatch(getCoverLettersAsync());
         dispatch(getTailoredCoverLettersAsync());
-    }, [dispatch]);
+    }, []);
 
     // console.log("job postings:" + jobPostings);
     // console.log("initial cover letters: " + coverLetters);
     // console.log("cover letter templates: " + coverLetterTemplates);
 
-    // console.log(tailoredCoverLetters);
 
 
     return(

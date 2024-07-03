@@ -24,7 +24,6 @@ export const deleteTailoredCoverLetterAsync = createAsyncThunk(
 export const addTailoredCoverLettersAsync = createAsyncThunk (
     actionTypes.ADD_TAILORED_COVER_LETTER,
     async (coverLetter) => {
-        console.log("addCoverLetterAsync");
-        await coverLetterService.addTailoredCoverLetter(coverLetter)
+        return await coverLetterService.addTailoredCoverLetter(coverLetter)
     }
 )

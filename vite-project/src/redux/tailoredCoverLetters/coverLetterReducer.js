@@ -6,6 +6,7 @@ const INITIAL_STATE = {
     tailoredCoverLetters: [],
     getTailoredCoverLetters: REQUEST_STATE.IDLE,
     deleteTailoredCoverLetter: REQUEST_STATE.IDLE,
+    addTailoredCoverLetter: REQUEST_STATE.IDLE,
     error: null
 }
 
@@ -21,7 +22,6 @@ export const tailoredCoverLetterSlice = createSlice( {
         })
         .addCase(getTailoredCoverLettersAsync.fulfilled, (state,action) => {
             state.getTailoredCoverLetters = REQUEST_STATE.FULFILLED;
-            state.error = null;
             state.tailoredCoverLetters = action.payload;
         })
         .addCase(getTailoredCoverLettersAsync.rejected, (state,action) => {
@@ -30,6 +30,7 @@ export const tailoredCoverLetterSlice = createSlice( {
         })
         .addCase(deleteTailoredCoverLetterAsync.pending, (state) => {
             state.deleteTailoredCoverLetter = REQUEST_STATE.PENDING;
+            state.error = null;
         })
         .addCase(deleteTailoredCoverLetterAsync.fulfilled, (state, action) => {
             state.deleteTailoredCoverLetter = REQUEST_STATE.FULFILLED;
@@ -40,15 +41,16 @@ export const tailoredCoverLetterSlice = createSlice( {
             state.deleteTailoredCoverLetter = REQUEST_STATE.REJECTED;
         })
         .addCase(addTailoredCoverLettersAsync.pending, (state) => {
-            state.deleteTailoredCoverLetter = REQUEST_STATE.PENDING;
+            state.addTailoredCoverLetter = REQUEST_STATE.PENDING;
+            state.error = null;
         })
         .addCase(addTailoredCoverLettersAsync.fulfilled, (state, action) => {
-            state.deleteTailoredCoverLetter = REQUEST_STATE.FULFILLED;
-            state.tailoredCoverLetters.push(action.payload)
+            state.addTailoredCoverLetter = REQUEST_STATE.FULFILLED;
+            state.tailoredCoverLetters.push(action.payload);
         })
         .addCase(addTailoredCoverLettersAsync.rejected, (state,action) => {
             state.error = action.error;
-            state.deleteTailoredCoverLetter = REQUEST_STATE.REJECTED;
+            state.addTailoredCoverLetter = REQUEST_STATE.REJECTED;
         })
 }
 })

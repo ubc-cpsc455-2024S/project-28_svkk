@@ -35,7 +35,7 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
             //     tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
             // }));
             setAPISaveResponse(`Tailored Cover Letter "${apiTitle}" has been successfully added!`);
-            console.log("letter: ", elementObject.name);
+
             dispatch(addTailoredCoverLettersAsync(elementObject));
         } else {
             setAPISaveResponse(`A Tailored Cover Letter with name "${apiTitle}" already exists, please use another name!`);

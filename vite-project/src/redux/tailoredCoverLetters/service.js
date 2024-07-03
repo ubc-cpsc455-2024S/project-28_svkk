@@ -21,7 +21,6 @@ const addTailoredCoverLetter = async(coverLetter) => {
         },
         body: JSON.stringify(coverLetter)
     });
-    console.log("addCoverLetter successful");
 
 
     const newCoverLetter = await response.json();
@@ -30,7 +29,6 @@ const addTailoredCoverLetter = async(coverLetter) => {
         throw new Error(errorMsg)
     }
 
-    console.log("this is the cover letter that was added: ", coverLetter);
     return newCoverLetter;
 }
 
