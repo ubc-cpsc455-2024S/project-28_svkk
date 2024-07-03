@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var jobsRouter = require('./routes/jobs');
 var jobPostingsRouter = require('./routes/jobPostings');
 var coverLettersRouter = require('./routes/coverLetters');
+var tailoredCoverLettersRouter = require('./routes/tailoredCoverLetters');
+var resumeRouter = require('./routes/resume');
 
 var app = express();
 app.use(cors());
@@ -22,5 +24,7 @@ app.use('/', indexRouter);
 app.use('/jobs', jobsRouter);
 app.use('/jobPostings', jobPostingsRouter);
 app.use('/coverLetters', coverLettersRouter);
+app.use('/tailoredCoverLetters', tailoredCoverLettersRouter);
+app.use('/resumes', resumeRouter);
 
 module.exports = app;

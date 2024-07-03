@@ -12,7 +12,6 @@ import Login from './components/Login.jsx';
 import ErrorPage from './error-page.jsx';
 import MainDashboard from './components/MainDashboard.jsx';
 import Signup from './components/Signup.jsx';
-import CoverLetterPageOld from './components/CoverLetterCreationComponents/CoverLetterPageOld.jsx';
 import CoverLetterPage from './components/CoverLetterCreationComponents/CoverLetterPage.jsx';
 
 // code for implementation of react router for linking pages: 
@@ -59,9 +58,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/CoverLetterPage",
-    element: <CoverLetterPage
-                userResumes={[]}
-                userCoverLetters={JSON.parse(initialCoverLetterList)}/>,
+    element: <CoverLetterPage/>,
     errorElement: <ErrorPage />
   }
 ]);

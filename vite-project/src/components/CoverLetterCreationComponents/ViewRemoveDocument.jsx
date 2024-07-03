@@ -5,8 +5,10 @@ import DropdownSelector from "./DropdownSelector.jsx";
 import { useDispatch } from 'react-redux';
 import { deleteJobPostingAsync } from '../../redux/jobPostings/thunk.js';
 import { deleteCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
+import {deleteTailoredCoverLetterAsync} from "../../redux/tailoredCoverLetters/thunk.js";
+import {deleteResumesAsync} from "../../redux/resumes/thunk.js";
 
-export default function ViewRemoveDocument({ setMemory, memory, jobPostings, coverLetters}) {
+export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters, tailoredCoverLetters}) {
     const dispatch = useDispatch();
 
     // Strings for use in helpers
@@ -24,11 +26,11 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
     // ===== Viewing and Removing =====
     function findSelectedElement() {
         if (removeType === resumeString) {
-            let result = findElement(memory.resumes,selectedElement);
+            let result = findElement(resumes,selectedElement);
             if (result === -1) {
-                if (memory.resumes.length > 0) {
-                    setSelectedElement(memory.resumes[0].name);
-                    return memory.resumes[0];
+                if (resumes.length > 0) {
+                    setSelectedElement(resumes[0].name);
+                    return resumes[0];
                 }
             } else {
                 return result;
@@ -44,8 +46,8 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
                 return result;
             }
         } else if (removeType === jobPostingString) {
-            console.log("initial job postings list in viewremove documents component:");
-            console.log(jobPostings);
+            // console.log("initial job postings list in viewremove documents component:");
+            // console.log(jobPostings);
             let result = findElement(jobPostings,selectedElement);
             if (result === -1) {
                 if (jobPostings.length > 0) {
@@ -56,11 +58,12 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
                 return result;
             }
         } else if (removeType === tailoredCoverLetterString) {
-            let result = findElement(memory.tailoredCoverLetters,selectedElement);
+            let result = findElement(tailoredCoverLetters,selectedElement);
+            // console.log("the name is: ", selectedElement);
             if (result === -1) {
-                if (memory.tailoredCoverLetters.length > 0) {
-                    setSelectedElement(memory.tailoredCoverLetters[0].name);
-                    return memory.tailoredCoverLetters[0];
+                if (tailoredCoverLetters.length > 0) {
+                    setSelectedElement(tailoredCoverLetters[0].name);
+                    return tailoredCoverLetters[0];
                 }
             } else {
                 return result;
@@ -72,70 +75,53 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
 
     function removeElement() {
         if (removeType === resumeString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                resumes: prevMemory.resumes.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+            dispatch(deleteResumesAsync(selectedElement))
         } else if (removeType === coverLetterString) {
-            console.log("dispatching delete coverletter request");
             dispatch(deleteCoverLetterAsync(selectedElement));
-
         } else if (removeType === jobPostingString) {
-
             dispatch(deleteJobPostingAsync(selectedElement));
-
         } else if (removeType === tailoredCoverLetterString) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                tailoredCoverLetters: prevMemory.tailoredCoverLetters.filter(
-                    element => element.name !== selectedElement
-                )
-            }));
+            dispatch(deleteTailoredCoverLetterAsync(selectedElement));
         }
         // printState();
 
     }
 
     // ===== Helpers =====
-        function selectList() {
-            if (removeType === resumeString) {
-                return memory.resumes;
-            } else if (removeType === coverLetterString) {
-                return coverLetters;
-            } else if (removeType === jobPostingString) {
-                return jobPostings;
-            } else if (removeType === tailoredCoverLetterString) {
-                return memory.tailoredCoverLetters;
-            }
-            return [];
+    function selectList() {
+        if (removeType === resumeString) {
+            return resumes;
+        } else if (removeType === coverLetterString) {
+            return coverLetters;
+        } else if (removeType === jobPostingString) {
+            return jobPostings;
+        } else if (removeType === tailoredCoverLetterString) {
+            // console.log("remove type: ", removeType);
+            return tailoredCoverLetters;
         }
+        return [];
+    }
 
-        function findElement(array, name) {
+    function findElement(array, name) {
 
-            // if (!name || name.trim().length === 0) return -1;
-            // console.log(name)
-
-            for (let i = 0; i < array.length; i++) {
-                if (array[i].name === name) {
-                    return array[i];
-                }
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].name === name) {
+                return array[i];
             }
-            return -1;
         }
+        return -1;
+    }
 
-        function printState() {
-            let state = {
-                memory: memory,
-                removeType: removeType,
-                elementTitleBox: elementTitleBox,
-                elementTextBox: elementTextBox,
-                response: response,
-                selectedElement: selectedElement
-            }
-            console.log(state);
+    function printState() {
+        let state = {
+            removeType: removeType,
+            elementTitleBox: elementTitleBox,
+            elementTextBox: elementTextBox,
+            response: response,
+            selectedElement: selectedElement
         }
+        console.log(state);
+    }
 
 
     // ====== Display ======
@@ -143,33 +129,33 @@ export default function ViewRemoveDocument({ setMemory, memory, jobPostings, cov
         <>
             {/* Viewing and Deleting Card */}
             <div className="big_card">
-            <h3 className="largeLetters">View or Remove Existing Documents</h3>
+                <h3 className="largeLetters">View or Remove Existing Documents</h3>
 
-            <br></br><br></br>
+                <br></br><br></br>
 
-            <div className="button-holder">
-                <DropdownSelector
-                    allElements={options}
-                    setSelectedElement={setRemoveType}
+                <div className="button-holder">
+                    <DropdownSelector
+                        allElements={options}
+                        setSelectedElement={setRemoveType}
+                    />
+                    <DropdownSelector
+                        allElements={selectList()}
+                        setSelectedElement={setSelectedElement}
+                    />
+                </div>
+
+                <br></br><br></br>
+
+                <WhitePageDisplay
+                    displayText={findSelectedElement().content}
                 />
-                <DropdownSelector
-                    allElements={selectList()}
-                    setSelectedElement={setSelectedElement}
-                />
-            </div>
+                <br></br><br></br>
 
-            <br></br><br></br>
-
-            <WhitePageDisplay
-                displayText={findSelectedElement().content}
-            />
-            <br></br><br></br>
-
-            <button
-                className="remove_button"
-                onClick={removeElement}>
-                Remove Document
-            </button>
+                <button
+                    className="remove_button"
+                    onClick={removeElement}>
+                    Remove Document
+                </button>
             </div>
         </>
     );

@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import '../../styles/CoverLetterCreation.css';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
+import {addTailoredCoverLettersAsync} from "../../redux/tailoredCoverLetters/thunk.js";
+import { useDispatch } from 'react-redux';
 
-export default function TailorCoverLetter({ memory, setMemory, jobPostings, coverLetters }) {
+export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }) {
 
     const [elementTitleBox, setElementTitleBox] = useState("");
     const [elementTextBox, setElementTextBox] = useState("");
@@ -19,20 +21,19 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
     const [apiTitle, setAPITitle] = useState("");
     const [apiSaveResponse, setAPISaveResponse] = useState("");
 
+    const dispatch = useDispatch();
+
     // ===== Tailoring Cover Letter Portion =====
     function saveTailoredCoverLetter() {
         const elementObject = {
             name: apiTitle,
             content: apiResponse
         };
-        if (uniqueName(memory.tailoredCoverLetters,apiTitle)) {
-            setMemory(prevMemory => ({
-                ...prevMemory,
-                tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
-            }));
-            setAPISaveResponse(`Tailored Cover Letter "${elementTitleBox}" has been successfully added!`);
+        if (uniqueName(coverLetters,apiTitle)) {
+            dispatch(addTailoredCoverLettersAsync(elementObject));
+            setAPISaveResponse(`Tailored Cover Letter "${apiTitle}" has been successfully added!`);
         } else {
-            setAPISaveResponse(`A Tailored Cover Letter with name "${elementTitleBox}" already exists, please use another name!`);
+            setAPISaveResponse(`A Tailored Cover Letter with name "${apiTitle}" already exists, please use another name!`);
         }
         printState();
     }
@@ -40,7 +41,7 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
     // ===== API Call (To be replaced by HTTP request to backend =====
 
     function sendFullTailorRequest() {
-        let resume = findElement(memory.resumes, apiResume).content;
+        let resume = findElement(resumes, apiResume).content;
         let cover_letter = findElement(coverLetters, apiCoverLetter).content;
         let job_posting = findElement(jobPostings, apiJobDescription).content;
         let additional_requests = additionalRequests;
@@ -140,8 +141,7 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
 
     function printState() {
         let state = {
-            memory: memory,
-            addType: addType,
+            addType: "Tailored Cover Letter",
             // removeType: removeType,
             elementTitleBox: elementTitleBox,
             elementTextBox: elementTextBox,
@@ -150,8 +150,8 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
         }
         console.log(state);
     }
-    
-    
+
+
     // ====== Display ======
     return (
         <>
@@ -176,7 +176,7 @@ export default function TailorCoverLetter({ memory, setMemory, jobPostings, cove
                 <br></br><br></br>
 
                 <div className="button-holder">
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...memory.resumes]} setSelectedElement={setAPIResume} />
+                    <DropdownSelector allElements={[{name: "None", content: "None"},...resumes]} setSelectedElement={setAPIResume} />
                     <DropdownSelector allElements={[{name: "None", content: "None"},...coverLetters]} setSelectedElement={setAPICoverLetter} />
                     <DropdownSelector allElements={[{name: "None", content: "None"},...jobPostings]} setSelectedElement={setAPIJobDescription} />
                 </div>

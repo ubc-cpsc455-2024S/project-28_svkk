@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addJobPostingAsync } from '../../redux/jobPostings/thunk.js';
 import { addCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
 import { v4 as uuidv4 } from 'uuid';
+import {addResumeAsync} from "../../redux/resumes/thunk.js";
 
-export default function AddDocument({ setMemory, memory, jobPostings, coverLetters, coverLetterTemplates }) {
+export default function AddDocument({ resumes, jobPostings, coverLetters, coverLetterTemplates }) {
     const dispatch = useDispatch();
 
     // Strings for use in helpers
@@ -51,21 +52,16 @@ export default function AddDocument({ setMemory, memory, jobPostings, coverLette
 
         // console.log(addType);
         if (typeToAdd === resumeString) {
-            if (uniqueName(memory.resumes, elementTitleBox)) {
-                setMemory(prevMemory => ({
-                    ...prevMemory,
-                    resumes: [...prevMemory.resumes, elementObject]
-                }));
+            if (uniqueName(resumes, elementTitleBox)) {
+                console.log("dispatching add resume request");
+                dispatch(addResumeAsync(elementObject));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
+
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
         } else if (typeToAdd === coverLetterString) {
             if (uniqueName(coverLetters, elementTitleBox)) {
-                // setMemory(prevMemory => ({
-                //     ...prevMemory,
-                //     coverLetters: [...prevMemory.coverLetters, elementObject]
-                // }));
                 console.log("dispatching add cover letter request");
                 dispatch(addCoverLetterAsync(elementObject));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
@@ -74,30 +70,13 @@ export default function AddDocument({ setMemory, memory, jobPostings, coverLette
             }
         } else if (typeToAdd === jobPostingString) {
             if (uniqueName(jobPostings, elementTitleBox)) {
-                // setMemory(prevMemory => ({
-                //     ...prevMemory,
-                //     jobPostings: [...prevMemory.jobPostings, elementObject]
-                // }));
                 dispatch(addJobPostingAsync(elementObject));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
         }
-        
 
-         
-            // else if (typeToAdd === tailoredCoverLetterString) {
-            //     if (uniqueName(memory.jobPostings, elementTitleBox)) {
-            //         setMemory(prevMemory => ({
-            //             ...prevMemory,
-            //             tailoredCoverLetters: [...prevMemory.tailoredCoverLetters, elementObject]
-            //         }));
-            //         setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
-            //     } else {
-            //         setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
-            //     }
-            // }
 
         // treating template as regular cover letter type
         else if (typeToAdd === coverLetterTemplateString) {
@@ -106,10 +85,6 @@ export default function AddDocument({ setMemory, memory, jobPostings, coverLette
             // can still add a document without a title :(
             if (elementTitleBox !== "") {
                 if (uniqueName(coverLetters, elementTitleBox)) {
-                    // setMemory(prevMemory => ({
-                    //     ...prevMemory,
-                    //     coverLetters: [...prevMemory.coverLetters, elementObject]
-                    // }));
                     console.log("dispatching add cover letter from template request");
                     dispatch(addCoverLetterAsync(elementObject));
                     setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
@@ -146,7 +121,6 @@ export default function AddDocument({ setMemory, memory, jobPostings, coverLette
 
     function printState() {
         let state = {
-            memory: memory,
             addType: addType,
             elementTitleBox: elementTitleBox,
             elementTextBox: elementTextBox,
