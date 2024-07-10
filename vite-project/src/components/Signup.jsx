@@ -17,7 +17,7 @@ const Signup = () => {
         </label>
         <label className='block ml-[70px]'>
             Username:
-            <input type="text" name="" placeholder='Username' className='m-4 ml-[65px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+            <input type="text" name="" placeholder='Email' className='m-4 ml-[65px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
         </label>
         <label className='block ml-[70px]'>
             Password:
