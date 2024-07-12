@@ -39,7 +39,9 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
             <span className="add-job" onClick={() => {setSelectForm(true); onSelectJob(null)}}>Add Job</span>
             <span className="delete-job" onClick={() => {   
                                                             if (selectedJob) {
-                                                                dispatch(deleteJobAsync(onSelectJob._id)); 
+                                                                console.log("dispatching delete with email: " + userEmail)
+                                                                let id = selectedJob._id
+                                                                dispatch(deleteJobAsync({id, userEmail})); 
                                                                 setSelectForm(false); 
                                                                 onSelectJob(null);
                                                             } else {

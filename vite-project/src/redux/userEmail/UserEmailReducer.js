@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { REQUEST_STATE } from "../utils";
 
 const INITIAL_STATE = {
-    userEmail: null,
+    userEmail: "nothing",
     getUserEmail: REQUEST_STATE.IDLE,
 }
 

@@ -49,9 +49,14 @@ const addJob = async({title, company, type, location, date, duration, link, cv, 
     return new_job
 }
 
-const deleteJob = async(id) => {
-    const response = await fetch(`http://localhost:3000/jobs/delete/${id}`, {
-        method: 'GET',
+const deleteJob = async(data) => {
+    console.log("called delete on email: " + data.userEmail)
+    const response = await fetch(`http://localhost:3000/jobs/delete/${data.id}`, {
+        method: 'POST',
+        headers: {
+         "content-type": "application/json" 
+        },
+        body: JSON.stringify({"email": data.userEmail})
     });
 
     const new_jobs = await response.json()

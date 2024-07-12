@@ -6,7 +6,6 @@ const Job = require('../model/job');
 let jobs = [
 
       {
-          id: uuidv4(),
           jobTitle: "Software Engineering Intern",
           company: "Microsoft",
           jobType: "Onsite",
@@ -14,10 +13,10 @@ let jobs = [
           dateApplied: "2024-06-01",
           duration: "Aug. 2024 - Dec. 2024",
           link: "https://shorturl.at/D3MlH",
-          coverLetterUsed: ""
+          coverLetterUsed: "",
+          userEmail: "silvanahuang23@gmail.com"
       },
       {
-          id: uuidv4(),
           jobTitle: "Software Engineering Intern - Fullstack (Product)",
           company: "Super.com",
           jobType: "Remote",
@@ -26,9 +25,9 @@ let jobs = [
           duration: "Sept. 2024 - Dec. 2024",
           link: "https://shorturl.at/xnIf6",
           coverLetterUsed: "",
+          userEmail: "silvanahuang23@gmail.com"
       },
       {
-          id: uuidv4(),
           jobTitle: "Software Development Engineer Intern",
           company: "Amazon",
           jobType: "Onsite",
@@ -37,13 +36,20 @@ let jobs = [
           duration: "Sept. 2024 - Dec. 2024",
           link: "https://shorturl.at/QvKB0",
           coverLetterUsed: "",
+          userEmail: "silvanahuang23@gmail.com"
       }
 
 ]
 
+// jobs.forEach(async (job) => {
+//   j = new Job(job)
+//   await j.save()
+// })
+
 
 router.get('/:userEmail', async(req, res) => {
   try {
+    console.log("getting jobs...")
     const jobs = await Job.find({ userEmail: req.params.userEmail});
     //console.log("all jobs of the user: ", jobs);
     return res.send(jobs);
@@ -84,9 +90,13 @@ router.post('/addJob', async(req, res) => {
   return res.send(newJob);
 });
 
-router.get('/delete/:id', function(req, res, next) {
-  const toDelete = jobs.find((job) => {job.id == req.params.id})
-  jobs.splice(jobs.indexOf(toDelete), 1)
+router.post('/delete/:id', async function(req, res, next) {
+  // const toDelete = jobs.find((job) => {job.id == req.params.id})
+  // jobs.splice(jobs.indexOf(toDelete), 1)
+  console.log("called delete")
+  await Job.findByIdAndDelete(req.params.id)
+  console.log("email: " + req.body.email)
+  const jobs = await Job.find({ userEmail: req.body.email});
   res.send(jobs);
 });
 
@@ -94,14 +104,23 @@ router.get('/search/', function(req, res, next) {
   res.send(jobs);
 });
 
-router.get('/search/:filter', function(req, res, next) {
-  const new_jobs = jobs.filter((job) => {
-    // console.log(job.jobTitle)
-    // console.log(req.params.filter)
-    return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
+router.get('/search/:filter', async function(req, res, next) {
+  // const new_jobs = jobs.filter((job) => {
+  //   // console.log(job.jobTitle)
+  //   // console.log(req.params.filter)
+  //   return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
+  // })
+  let jobs_set = []
+  let filters = req.params.filter.split(' ')
+  filters.forEach(async (filter) => {
+    const new_jobs_title = await Job.find({"jobTitle": { "$regex": filter, "$options": "i" }})
+    const new_jobs_company = await Job.find({"company": { "$regex": filter, "$options": "i" }})
+
+    jobs_set = new Set(new_jobs_company, new_jobs_title)
   })
-  console.log(new_jobs)
-  res.send(new_jobs);
+
+  console.log(jobs_set)
+  res.send(jobs_set);
 });
 
 router.put('/:jobId', async (req, res) => {

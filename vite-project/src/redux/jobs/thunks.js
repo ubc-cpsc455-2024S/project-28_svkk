@@ -27,8 +27,9 @@ export const addJobAsync = createAsyncThunk(
 
 export const deleteJobAsync = createAsyncThunk(
     actionTypes.DELETE_JOB,
-    async(id) => {
-        return await JobsService.deleteJob(id);
+    async(data) => {
+        console.log(data)
+        return await JobsService.deleteJob(data);
     }
 )
 
