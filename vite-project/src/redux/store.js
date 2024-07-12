@@ -4,6 +4,7 @@ import jobPostingReducer from "./jobPostings/jobPostingsReducer";
 import coverLetterReducer from "./coverLetters/coverLetterReducer";
 import tailoredCoverLetterReducer from "./tailoredCoverLetters/tailoredCoverLetterReducer.js";
 import resumeReducer from "./resumes/resumeReducer.js";
+import UserEmailReducer from "./userEmail/UserEmailReducer.js";
 
 export default configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export default configureStore({
         jobPostingList: jobPostingReducer,
         coverLetterList: coverLetterReducer,
         tailoredCoverLetterList: tailoredCoverLetterReducer,
-        resumeList: resumeReducer
+        resumeList: resumeReducer,
+        userEmail: UserEmailReducer
     },
     devTools: true
 })

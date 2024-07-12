@@ -2,8 +2,14 @@ import React, {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 import MainDashboard from './MainDashboard';
 import Signup from './Signup';
+import { useDispatch, useSelector } from 'react-redux';
+import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 
 const Login = () => {
+
+    const dispatch = useDispatch();
+    const userEmail = useSelector(state => state.userEmail.userEmail)
+
     const [userData, setUserData] = useState({
         email: '',
         password: ''
@@ -26,6 +32,7 @@ const Login = () => {
             const data = await response.json();
             // successful
             if (response.status === 200) {
+                dispatch(setUserEmail(data.email))
                 navigate('/MainDashboard')
             } else {
                 alert(data.msg)
