@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { REQUEST_STATE } from "../utils";
 import {addTailoredCoverLettersAsync, deleteTailoredCoverLetterAsync, getTailoredCoverLettersAsync} from "./thunk.js";
+import {resumeSlice} from "../resumes/resumeReducer.js";
 
 const INITIAL_STATE = {
     tailoredCoverLetters: [],
@@ -13,7 +14,11 @@ const INITIAL_STATE = {
 export const tailoredCoverLetterSlice = createSlice( {
     name: 'tailoredCoverLetterList',
     initialState: INITIAL_STATE,
-    reducers: {},
+    reducers: {
+        setTailoredCoverLetters: function(state, action) {
+            state.tailoredCoverLetters = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getTailoredCoverLettersAsync.pending, (state) => {
@@ -54,5 +59,5 @@ export const tailoredCoverLetterSlice = createSlice( {
             })
     }
 })
-
+export const { setTailoredCoverLetters } = tailoredCoverLetterSlice.actions;
 export default tailoredCoverLetterSlice.reducer;

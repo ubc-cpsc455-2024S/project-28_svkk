@@ -4,26 +4,23 @@ import resumeService from "./service";
 
 export const getResumesAsync = createAsyncThunk(
     actionTypes.GET_RESUME,
-    async() => {
+    async({email}) => {
         console.log("waiting on request to get Resumes");
-        return await resumeService.getResume();
+        return await resumeService.getResume({email});
     }
 )
-
-
-export const deleteResumesAsync = createAsyncThunk(
-    actionTypes.DELETE_RESUME,
-    async(name) => {
-        console.log("deleteResumeAsync");
-        await resumeService.deleteResume(name);
-        return { name }
-    }
-)
-
 
 export const addResumeAsync = createAsyncThunk (
     actionTypes.ADD_RESUME,
-    async (resume) => {
-        return await resumeService.addResume(resume)
+    async ({email, resume}) => {
+        return await resumeService.addResume({email,resume})
+    }
+)
+
+export const deleteResumesAsync = createAsyncThunk(
+    actionTypes.DELETE_RESUME,
+    async({email, name}) => {
+        console.log("deleteResumeAsync");
+        return await resumeService.deleteResume({email,name});
     }
 )

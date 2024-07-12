@@ -14,7 +14,11 @@ const INITIAL_STATE = {
 export const resumeSlice = createSlice( {
     name: 'resumeList',
     initialState: INITIAL_STATE,
-    reducers: {},
+    reducers: {
+        setResumes: function(state, action) {
+            state.resumes = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getResumesAsync.pending, (state) => {
@@ -35,6 +39,7 @@ export const resumeSlice = createSlice( {
             })
             .addCase(deleteResumesAsync.fulfilled, (state, action) => {
                 state.deleteResume = REQUEST_STATE.FULFILLED;
+                console.log("Name from reducer " + action.payload.name);
                 state.resumes = state.resumes.filter(c => c.name !== action.payload.name);
             })
             .addCase(deleteResumesAsync.rejected, (state,action) => {
@@ -56,5 +61,5 @@ export const resumeSlice = createSlice( {
 
     }
 })
-
+export const { setResumes } = resumeSlice.actions;
 export default resumeSlice.reducer;

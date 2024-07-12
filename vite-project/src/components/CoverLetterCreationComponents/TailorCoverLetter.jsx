@@ -3,7 +3,9 @@ import '../../styles/CoverLetterCreation.css';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
 import {addTailoredCoverLettersAsync} from "../../redux/tailoredCoverLetters/thunk.js";
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }) {
 
@@ -11,6 +13,7 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
     const [elementTextBox, setElementTextBox] = useState("");
     const [response, setResponse] = useState("Welcome! This is the confirmation box.");
     const [selectedElement, setSelectedElement] = useState(null);
+
 
     // For sending the request (Should be HTTP request but just sending locally for now
     const [apiResume, setAPIResume] = useState("");
@@ -20,17 +23,19 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
     const [apiResponse, setAPIResponse] = useState("");
     const [apiTitle, setAPITitle] = useState("");
     const [apiSaveResponse, setAPISaveResponse] = useState("");
+    const email = useSelector(state => state.userEmail.userEmail);
 
     const dispatch = useDispatch();
 
     // ===== Tailoring Cover Letter Portion =====
     function saveTailoredCoverLetter() {
         const elementObject = {
+            uuid: uuidv4(),
             name: apiTitle,
             content: apiResponse
         };
         if (uniqueName(coverLetters,apiTitle)) {
-            dispatch(addTailoredCoverLettersAsync(elementObject));
+            dispatch(addTailoredCoverLettersAsync({email: email, coverLetter: elementObject}));
             setAPISaveResponse(`Tailored Cover Letter "${apiTitle}" has been successfully added!`);
         } else {
             setAPISaveResponse(`A Tailored Cover Letter with name "${apiTitle}" already exists, please use another name!`);

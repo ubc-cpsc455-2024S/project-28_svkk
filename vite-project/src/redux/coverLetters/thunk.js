@@ -12,25 +12,26 @@ export const getCoverLetterTemplatesAsync = createAsyncThunk(
 
 export const getCoverLettersAsync = createAsyncThunk(
     actionTypes.GET_COVER_LETTERS,
-    async() => {
+    async({email}) => {
         // console.log("waiting on reqest to get cover letters");
-        return await coverLetterService.getCoverLetters();
+        return await coverLetterService.getCoverLetters({email});
     }
 )
 
 export const addCoverLetterAsync = createAsyncThunk(
     actionTypes.ADD_COVER_LETTER,
-    async(coverLetter) => {
-        // console.log("addCoverLetterAsync");
-        return await coverLetterService.addCoverLetter(coverLetter);
+    async({email,coverLetter}) => {
+        console.log("addCoverLetterAsync");
+        // console.log(coverLetter);
+        // console.log(email);
+        return await coverLetterService.addCoverLetter({email,coverLetter});
     }
 )
 
 export const deleteCoverLetterAsync = createAsyncThunk(
     actionTypes.DELETE_COVER_LETTER,
-    async(name) => {
+    async({email, name}) => {
         console.log("deleteCoverLetterAsync");
-        await coverLetterService.deleteCoverLetter(name);
-        return { name }
+        return await coverLetterService.deleteCoverLetter({email, name});
     }
 )

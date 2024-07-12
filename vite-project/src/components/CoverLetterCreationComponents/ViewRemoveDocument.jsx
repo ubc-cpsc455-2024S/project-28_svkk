@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../../styles/CoverLetterCreation.css';
 import WhitePageDisplay from "./WhitePageDisplay.jsx";
 import DropdownSelector from "./DropdownSelector.jsx";
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { deleteJobPostingAsync } from '../../redux/jobPostings/thunk.js';
 import { deleteCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
 import {deleteTailoredCoverLetterAsync} from "../../redux/tailoredCoverLetters/thunk.js";
@@ -19,6 +19,7 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
 
     const [removeType, setRemoveType] = useState(resumeString);
     const [selectedElement, setSelectedElement] = useState(null);
+    const email = useSelector(state => state.userEmail.userEmail);
 
     const options = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString },
         { name: tailoredCoverLetterString }];
@@ -75,13 +76,13 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
 
     function removeElement() {
         if (removeType === resumeString) {
-            dispatch(deleteResumesAsync(selectedElement))
+            dispatch(deleteResumesAsync({email: email, name: selectedElement}))
         } else if (removeType === coverLetterString) {
-            dispatch(deleteCoverLetterAsync(selectedElement));
+            dispatch(deleteCoverLetterAsync({email: email, name:selectedElement}));
         } else if (removeType === jobPostingString) {
-            dispatch(deleteJobPostingAsync(selectedElement));
+            dispatch(deleteJobPostingAsync({email: email, name: selectedElement}));
         } else if (removeType === tailoredCoverLetterString) {
-            dispatch(deleteTailoredCoverLetterAsync(selectedElement));
+            dispatch(deleteTailoredCoverLetterAsync({email:email, name: selectedElement}));
         }
         // printState();
 

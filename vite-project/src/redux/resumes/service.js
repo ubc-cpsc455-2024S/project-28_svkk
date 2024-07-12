@@ -1,23 +1,20 @@
-const getResume = async() => {
+const getResume = async({email}) => {
     const response = await fetch('http://localhost:3000/resumes', {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'email': email
+        }
     });
     console.log("fetched request to get resumes");
     return response.json();
 }
 
-const deleteResume = async (name) => {
-    await fetch(`http://localhost:3000/resumes/${name}`, {
-        method: 'DELETE',
-    })
-    console.log(`Deleted resume titled "${name}" `);
-};
-
-const addResume = async(resume) => {
+const addResume = async({email, resume}) => {
     const response = await fetch('http://localhost:3000/resumes', {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            'email': email
         },
         body: JSON.stringify(resume)
     });
@@ -32,6 +29,18 @@ const addResume = async(resume) => {
     return newResume;
 }
 
+const deleteResume = async ({email, name}) => {
+    const remove_name = await fetch(`http://localhost:3000/resumes/${name}`, {
+        method: 'DELETE',
+        headers: {
+            'email': email
+        }
+    })
+    console.log(`Deleted resume titled "${name}" `);
+    const name1 = await remove_name.json();
+    return name1;
+
+};
 
 
 

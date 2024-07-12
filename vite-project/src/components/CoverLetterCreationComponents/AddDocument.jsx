@@ -23,6 +23,8 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
     const [templateIndex, setTemplateIndex] = useState(0);
     const [response, setResponse] = useState("Welcome! This is the confirmation box.");
 
+    const email = useSelector(state => state.userEmail.userEmail);
+
     const optionsAdd = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString }, {name: coverLetterTemplateString}];
 
     useEffect(() => {
@@ -54,7 +56,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
         if (typeToAdd === resumeString) {
             if (uniqueName(resumes, elementTitleBox)) {
                 console.log("dispatching add resume request");
-                dispatch(addResumeAsync(elementObject));
+                dispatch(addResumeAsync({email: email, resume: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
 
             } else {
@@ -63,14 +65,15 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
         } else if (typeToAdd === coverLetterString) {
             if (uniqueName(coverLetters, elementTitleBox)) {
                 console.log("dispatching add cover letter request");
-                dispatch(addCoverLetterAsync(elementObject));
+                dispatch(addCoverLetterAsync({email: email, coverLetter: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
         } else if (typeToAdd === jobPostingString) {
             if (uniqueName(jobPostings, elementTitleBox)) {
-                dispatch(addJobPostingAsync(elementObject));
+                console.log("Inside adddocument " + elementObject);
+                dispatch(addJobPostingAsync({email: email,jobPosting: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
@@ -86,7 +89,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
             if (elementTitleBox !== "") {
                 if (uniqueName(coverLetters, elementTitleBox)) {
                     console.log("dispatching add cover letter from template request");
-                    dispatch(addCoverLetterAsync(elementObject));
+                    dispatch(addCoverLetterAsync({email: email, coverLetter: elementObject}));
                     setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
                     
                 } else {

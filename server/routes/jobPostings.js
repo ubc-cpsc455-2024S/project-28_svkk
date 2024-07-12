@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
-
+const {mongoose} = require("mongoose");
+const { jobPostingSchema} = require("../model/schema");
+const JobPosting = mongoose.model("JobPosting", jobPostingSchema, "jobPostings");
 
 let initialJobPostingList = [
     {
@@ -127,30 +129,52 @@ let initialJobPostingList = [
     }
 ];
 
-router.get('/', function(req, res, next) {
+router.get('/', async function (req, res, next) {
     //console.log("job postings list from backend");
     //console.log(initialJobPostingList);
-    res.send(initialJobPostingList);
+    const email = req.headers.email;
+    let jobPostings = await JobPosting.find({email: email});
+    console.log(jobPostings);
+    res.status(200).send(jobPostings);
+    // res.send(initialJobPostingList);
 })
 
-router.post('/', function(req, res, next) {
-
-    let newJobPosting = {
-        uuid: req.body.uuid,
-        name: req.body.name,
-        content: req.body.content // This should be a String.
+router.post('/', async function (req, res, next) {
+    const newJobPosting = req.body;
+    const email = req.headers.email;
+    console.log("New job posting")
+    console.log(newJobPosting);
+    let jobPostingObject = JobPosting({
+        email: email,
+        uuid: newJobPosting.uuid,
+        name: newJobPosting.name,
+        content: newJobPosting.content // This should be a String.
+    });
+    const check = await jobPostingObject.save();
+    if (check) {
+        res.status(200).send(newJobPosting);
+    } else {
+        res.status(400).send({message: "Unable to add"});
     }
-
-    initialJobPostingList.push(newJobPosting);
-    res.send(newJobPosting);
-
+    // initialJobPostingList.push(newJobPosting);
+    // res.send(newJobPosting);
 })
 
-router.delete('/:jobPostingName', function(req, res, next) {
-    const toDelete = initialJobPostingList.find(jobPosting => jobPosting.name == req.params.jobPostingName);
-    initialJobPostingList.splice(initialJobPostingList.indexOf(toDelete), 1);
-    console.log("backened: deleted job posting");
-    res.send();
+router.delete('/:name', async function (req, res, next) {
+    // const toDelete = initialJobPostingList.find(jobPosting => jobPosting.name == req.params.jobPostingName);
+    // initialJobPostingList.splice(initialJobPostingList.indexOf(toDelete), 1);
+    // console.log("backened: deleted job posting");
+    const name = req.params.name;
+    const email = req.headers.email;
+    const deletedJobPosting = await JobPosting.findOneAndDelete({email: email, name: name});
+    console.log("Delete");
+    console.log(name);
+    if (deletedJobPosting) {
+        res.status(200).send({name: name});
+    } else {
+        res.status(400).send({message: "unable to delete"});
+    }
+    // res.send();
 })
 
 

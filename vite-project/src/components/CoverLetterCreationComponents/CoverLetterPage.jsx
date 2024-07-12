@@ -17,15 +17,17 @@ export default function CoverLetterPage() {
     const coverLetterTemplates = useSelector(state => state.coverLetterList.coverLetterTemplates);
     const tailoredCoverLetters = useSelector(state => state.tailoredCoverLetterList.tailoredCoverLetters);
     const resumes = useSelector(state => state.resumeList.resumes);
+    const email = useSelector(state => state.userEmail.userEmail);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getJobPostingsAsync());
         dispatch(getCoverLetterTemplatesAsync());
-        dispatch(getCoverLettersAsync());
-        dispatch(getTailoredCoverLettersAsync())
-        dispatch(getResumesAsync());
+        dispatch(getJobPostingsAsync({email: email}));
+        dispatch(getResumesAsync({email: email}));
+        dispatch(getCoverLettersAsync({email: email}));
+        dispatch(getTailoredCoverLettersAsync({email: email}))
+
     }, []);
 
     return(

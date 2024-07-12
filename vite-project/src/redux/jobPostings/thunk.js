@@ -4,24 +4,25 @@ import JobPostingsService from './service';
 
 export const getJobPostingsAsync = createAsyncThunk(
     actionTypes.GET_JOB_POSTINGS,
-    async() => {
+    async({email}) => {
         console.log('wating on response from job postings get request');
-        return await JobPostingsService.getJobPostings();
+        return await JobPostingsService.getJobPostings({email});
     }
 )
 
 export const addJobPostingAsync = createAsyncThunk(
     actionTypes.ADD_JOB_POSTING,
-    async ( jobPosting ) => {
-        return await JobPostingsService.addJobPosting(jobPosting);
+    async ({email, jobPosting}) => {
+        console.log("Inside Thunk jobPosting:", jobPosting);
+        return await JobPostingsService.addJobPosting({email, jobPosting});
     }
-)
+);
 
 export const deleteJobPostingAsync = createAsyncThunk(
     actionTypes.DELETE_JOB_POSTING,
-    async ( name ) => {
+    async ({email, name} ) => {
         console.log(`waiting on request to delete job posting named "${name}"`);
-        await JobPostingsService.deleteJobPosting(name);
-        return { name };
+        return await JobPostingsService.deleteJobPosting({email,name});
     }
 )
+

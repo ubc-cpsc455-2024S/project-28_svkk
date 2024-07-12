@@ -1,23 +1,22 @@
-const getTailoredCoverLetters = async() => {
+const getTailoredCoverLetters = async({email}) => {
     const response = await fetch('http://localhost:3000/tailoredCoverLetters', {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'email': email
+        }
     });
     console.log("fetched request to get tailored cover letters");
     return response.json();
 }
 
-const deleteTailoredCoverLetter = async (name) => {
-    await fetch(`http://localhost:3000/tailoredCoverLetters/${name}`, {
-        method: 'DELETE',
-    })
-    console.log(`Deleted tailored cover letter titled "${name}" `);
-};
-
-const addTailoredCoverLetter = async(coverLetter) => {
+const addTailoredCoverLetter = async({email, coverLetter}) => {
+    console.log("Tailored Cover Letter");
+    console.log(coverLetter);
     const response = await fetch('http://localhost:3000/tailoredCoverLetters', {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            'email' : email
         },
         body: JSON.stringify(coverLetter)
     });
@@ -33,7 +32,17 @@ const addTailoredCoverLetter = async(coverLetter) => {
 }
 
 
-
+const deleteTailoredCoverLetter = async ({email, name}) => {
+    const removed_name = await fetch(`http://localhost:3000/tailoredCoverLetters/${name}`, {
+        method: 'DELETE',
+        headers: {
+            'email' : email
+        }
+    })
+    const name1 = await removed_name.json();
+    console.log(`Deleted tailored cover letter titled "${name}" `);
+    return name1;
+};
 
 export default {
     getTailoredCoverLetters,

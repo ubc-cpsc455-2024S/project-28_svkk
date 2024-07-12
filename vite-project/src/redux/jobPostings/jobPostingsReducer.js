@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { REQUEST_STATE } from "../utils";
 import { addJobPostingAsync, getJobPostingsAsync, deleteJobPostingAsync } from "./thunk";
+import {tailoredCoverLetterSlice} from "../tailoredCoverLetters/tailoredCoverLetterReducer.js";
 
 const INITIAL_STATE = {
     jobPostings: [],
@@ -13,7 +14,11 @@ const INITIAL_STATE = {
 export const jobPostingsSlice = createSlice({
     name: 'jobPostingList',
     initialState: INITIAL_STATE,
-    reducers: {},
+    reducers: {
+        setJobPostings: function(state, action) {
+            state.jobPostings = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(getJobPostingsAsync.pending, (state) => {
@@ -55,5 +60,5 @@ export const jobPostingsSlice = createSlice({
 
     }
 })
-
+export const { setJobPostings } = jobPostingsSlice.actions;
 export default jobPostingsSlice.reducer

@@ -4,26 +4,25 @@ import coverLetterService from "./service";
 
 export const getTailoredCoverLettersAsync = createAsyncThunk(
     actionTypes.GET_TAILORED_COVER_LETTERS,
-    async() => {
+    async({email}) => {
         console.log("waiting on request to get cover letters");
-        return await coverLetterService.getTailoredCoverLetters();
+        return await coverLetterService.getTailoredCoverLetters({email});
+    }
+)
+export const addTailoredCoverLettersAsync = createAsyncThunk (
+    actionTypes.ADD_TAILORED_COVER_LETTER,
+    async ({email,coverLetter}) => {
+        console.log("Thunk");
+        console.log(coverLetter);
+        return await coverLetterService.addTailoredCoverLetter({email,coverLetter})
     }
 )
 
 
 export const deleteTailoredCoverLetterAsync = createAsyncThunk(
     actionTypes.DELETE_TAILORED_COVER_LETTER,
-    async(name) => {
+    async({email, name}) => {
         console.log("deleteCoverLetterAsync");
-        await coverLetterService.deleteTailoredCoverLetter(name);
-        return { name }
-    }
-)
-
-
-export const addTailoredCoverLettersAsync = createAsyncThunk (
-    actionTypes.ADD_TAILORED_COVER_LETTER,
-    async (coverLetter) => {
-        return await coverLetterService.addTailoredCoverLetter(coverLetter)
+        return await coverLetterService.deleteTailoredCoverLetter({email,name});
     }
 )
