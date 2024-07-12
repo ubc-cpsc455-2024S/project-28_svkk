@@ -1,8 +1,8 @@
-const getJobs = async () => {
-    const response = await fetch('http://localhost:3000/jobs', {
+const getJobs = async (userEmail) => {
+    const response = await fetch(`http://localhost:3000/jobs/${userEmail}`, {
       method: 'GET'
     });
-    //console.log('fetched response from get request');
+    console.log('fetched response from jobs get request');
     return response.json();
 };
 

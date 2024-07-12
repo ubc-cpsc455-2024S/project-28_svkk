@@ -183,7 +183,7 @@ export default function Job({job}) {
                 linkInputRef.current.value = job.link;
             }}>Cancel</span>
             <span className="update" onClick={() => {
-                dispatch(updateJobAsync({id: job.id, fields: {jobTitle, company, jobType, location, dateApplied, duration, link}}));
+                dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, dateApplied, duration, link}}));
             }}>Save Changes</span> 
         </div>
         </>

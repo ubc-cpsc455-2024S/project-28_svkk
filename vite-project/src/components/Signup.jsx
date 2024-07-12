@@ -1,8 +1,13 @@
 import React, {useState} from 'react'
 import {useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 
 
 const Signup = () => {
+    const dispatch = useDispatch();
+    const userEmail = useSelector(state => state.userEmail.userEmail)
+
     const [userData, setUserData] = useState({
         firstName: '',
         lastName: '',
@@ -39,7 +44,8 @@ const Signup = () => {
                     navigate('/Login');
                 }
             } else {
-                console.log('Email is available');
+                console.log('Email is available, signup successful');
+                dispatch(setUserEmail(data.email));
                 navigate('/MainDashboard')
             }
         } catch (err) {

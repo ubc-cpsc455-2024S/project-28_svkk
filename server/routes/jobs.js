@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
+const Job = require('../model/job');
 
 let jobs = [
 
@@ -42,10 +43,23 @@ let jobs = [
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  console.log(jobs)
-  res.send(jobs);
+// router.get('/', function(req, res, next) {
+//   console.log(jobs)
+//   res.send(jobs);
+// });
+
+router.get('/:userEmail', async(req, res) => {
+  try {
+    const jobs = await Job.find({ userEmail: req.params.userEmail});
+    console.log("all jobs of the user: ", jobs);
+    return res.send(jobs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('server error');
+  }
+  
 });
+
 
 router.post('/addJob', function(req, res, next) {
   let jobTitle = req.body.jobTitle

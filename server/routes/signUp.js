@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
             password,
         })
         await newUser.save();
-        res.status(200).json({ msg: 'Email is available' });
+        res.status(200).json({ msg: 'Email is available, signup successful', email: email });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

@@ -6,8 +6,6 @@ const uri = 'mongodb+srv://m001-student:m001-mongodb-basics@sandbox.y8liyvy.mong
 const connectDB = async () => {
     try {
         await mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
         });
         console.log('MongoDB connected...');
     } catch (err) {

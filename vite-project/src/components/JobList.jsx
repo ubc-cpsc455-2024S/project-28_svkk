@@ -5,15 +5,20 @@ import { deleteJobAsync, getJobsAsync } from "../redux/jobs/thunks";
 
 export default function JobList({ onSelectJob, selectForm, setSelectForm, selectedJob }) {
     const jobs = useSelector(state => state.jobList.jobs);
+    const userEmail = useSelector(state => state.userEmail.userEmail);
+
     const dispatch = useDispatch();
     const [selectedJobId, setSelectedJobId] = useState(null);
     const handleJobClick = (job) => {
-        setSelectedJobId(job.id);
+        setSelectedJobId(job._id);
         onSelectJob(job);
     }
 
+
+
     useEffect(() => {
-        dispatch(getJobsAsync());
+        console.log('dispatching getjobsasync with useremail: ', userEmail);
+        dispatch(getJobsAsync(userEmail));
     }, []);
 
   
@@ -23,7 +28,7 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
             </div>
         {
             jobs.map((j) => (
-                <section key={j.id} className={`job-item ${selectedJobId === j.id ? 'selected' : ''}`} onClick={() => handleJobClick(j)}>        
+                <section key={j._id} className={`job-item ${selectedJobId === j._id ? 'selected' : ''}`} onClick={() => handleJobClick(j)}>        
                     <div><b>{j.jobTitle}</b></div>
                     <div>{j.company}</div>
                     <div>Date Applied: {j.dateApplied}</div>                   
@@ -34,7 +39,7 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
             <span className="add-job" onClick={() => {setSelectForm(true); onSelectJob(null)}}>Add Job</span>
             <span className="delete-job" onClick={() => {   
                                                             if (selectedJob) {
-                                                                dispatch(deleteJobAsync(onSelectJob.id)); 
+                                                                dispatch(deleteJobAsync(onSelectJob._id)); 
                                                                 setSelectForm(false); 
                                                                 onSelectJob(null);
                                                             } else {

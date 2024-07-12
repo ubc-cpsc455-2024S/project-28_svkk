@@ -4,9 +4,9 @@ import JobsService from './service';
 
 export const getJobsAsync = createAsyncThunk(
     actionTypes.GET_JOBS,
-    async () => {
-        // console.log('waiting on response from get request');
-      return await JobsService.getJobs();
+    async (userEmail) => {
+        console.log('waiting on response from get request, userEmail is: ', userEmail);
+      return await JobsService.getJobs(userEmail);
     }
 );
 
