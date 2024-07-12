@@ -6,6 +6,7 @@ import { addJobAsync, deleteJobAsync, getJobsAsync, updateJobAsync, searchJobsAs
 const INITIAL_STATE = {
     jobs: [],
     getJobs: REQUEST_STATE.IDLE,
+    updateJob: REQUEST_STATE.IDLE,
     error: null
 }
 
@@ -33,7 +34,8 @@ export const jobListSlice = createSlice({
         })
         .addCase(updateJobAsync.fulfilled, (state, action) => {
             state.updateJob = REQUEST_STATE.FULFILLED;
-            const indexOfUpdatedJob = state.jobs.findIndex(j => j.id == action.payload.id);
+            const indexOfUpdatedJob = state.jobs.findIndex(j => j._id == action.payload.id);
+            console.log('action.payload (updated job) is: ', action.payload);
             state.jobs[indexOfUpdatedJob] = action.payload;
         })
         .addCase(updateJobAsync.rejected, (state, action) => {
@@ -41,7 +43,7 @@ export const jobListSlice = createSlice({
             state.error = action.error;
         })
         .addCase(addJobAsync.fulfilled, (state, action) => {
-            state.jobs = action.payload;
+            state.jobs.push(action.payload);
         })
         .addCase(deleteJobAsync.fulfilled, (state, action) => {
             state.jobs = action.payload;

@@ -42,16 +42,10 @@ let jobs = [
 ]
 
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   console.log(jobs)
-//   res.send(jobs);
-// });
-
 router.get('/:userEmail', async(req, res) => {
   try {
     const jobs = await Job.find({ userEmail: req.params.userEmail});
-    console.log("all jobs of the user: ", jobs);
+    //console.log("all jobs of the user: ", jobs);
     return res.send(jobs);
   } catch (err) {
     console.error(err);
@@ -61,7 +55,7 @@ router.get('/:userEmail', async(req, res) => {
 });
 
 
-router.post('/addJob', function(req, res, next) {
+router.post('/addJob', async(req, res) => {
   let jobTitle = req.body.jobTitle
   let company = req.body.company
   let jobType = req.body.jobType
@@ -70,9 +64,10 @@ router.post('/addJob', function(req, res, next) {
   let duration = req.body.duration
   let link = req.body.link
   let coverLetterUsed = req.body.coverLetterUsed
+  let userEmail = req.body.userEmail
+  console.log('email is: ', userEmail);
 
-  let newJob = {
-                    id: uuidv4(),
+  let newJob = new Job({
                     jobTitle: jobTitle,
                     company: company,
                     jobType: jobType,
@@ -80,12 +75,13 @@ router.post('/addJob', function(req, res, next) {
                     dateApplied: dateApplied,
                     duration: duration,
                     link: link,
-                    coverLetterUsed: coverLetterUsed
-                }
+                    coverLetterUsed: coverLetterUsed,
+                    userEmail: userEmail
+                    })
   
-  console.log(newJob)
-  jobs.push(newJob)
-  res.send(jobs);
+  console.log("new job is: ", newJob);
+  await newJob.save();
+  return res.send(newJob);
 });
 
 router.get('/delete/:id', function(req, res, next) {
@@ -108,36 +104,38 @@ router.get('/search/:filter', function(req, res, next) {
   res.send(new_jobs);
 });
 
-router.put('/:jobId', function (req, res, next) {
-  const jIndex = jobs.findIndex(j => j.id == req.params.jobId);
+router.put('/:jobId', async (req, res) => {
+  const job = await Job.findOne({_id : req.params.jobId });
 
-  if (jIndex == -1) {
+  if (!job) {
     res.status(404).send({ message: 'Job not found'});
   }
 
   if (req.body.jobTitle != "") {
-    jobs[jIndex].jobTitle = req.body.jobTitle;
+    job.jobTitle = req.body.jobTitle;
   }
   if (req.body.company != "") {
-    jobs[jIndex].company = req.body.company;
+    job.company = req.body.company;
   }
   if (req.body.jobType!= "") {
-    jobs[jIndex].jobType = req.body.jobType;
+    job.jobType = req.body.jobType;
   }
   if (req.body.location != "") {
-    jobs[jIndex].location = req.body.location;
+    job.location = req.body.location;
   }
   if (req.body.dateApplied != "") {
-    jobs[jIndex].dateApplied = req.body.dateApplied;
+    job.dateApplied = req.body.dateApplied;
   }
   if (req.body.duration != "") {
-    jobs[jIndex].duration = req.body.duration;
+    job.duration = req.body.duration;
   }
   if (req.body.link != "") {
-    jobs[jIndex].link = req.body.link;
+    job.link = req.body.link;
   }
 
-  return res.send(jobs[jIndex]);
+  await job.save();
+
+  return res.send(job);
 
 });
 

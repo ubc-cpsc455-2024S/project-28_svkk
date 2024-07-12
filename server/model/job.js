@@ -25,6 +25,9 @@ const JobSchema = new mongoose.Schema({
     link: {
         type: String
     },
+    coverLetterUsed: {
+        type: String
+    },
     userEmail: {
         type: String,
         required: true,

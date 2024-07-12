@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addJobAsync, getJobsAsync } from "../redux/jobs/thunks";
 
 const Form = (props) => {
+    const userEmail = useSelector(state => state.userEmail.userEmail);
 
     const [title, setTitle] = useState('')
     const [company, setCompany] = useState('')
@@ -16,7 +17,8 @@ const Form = (props) => {
     const dispatch = useDispatch();
 
     async function addJob() {
-        await dispatch(addJobAsync({title, company, type, location, date, duration, link, cv}))
+        console.log('dispatching add job, user email is: ', userEmail);
+        await dispatch(addJobAsync({title, company, type, location, date, duration, link, cv, userEmail}))
         props.setSelectForm(false)
         props.setSelectedJob(null)
     }
@@ -60,7 +62,7 @@ const Form = (props) => {
                 <label className='block'>
                     Cover letter used:
                     <br/>
-                    <textarea value={cv} onChange={(e) => {setCV(e.target.value)}} name="" rows={10} cols={65} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
+                    <textarea value={cv} onChange={(e) => {setCV(e.target.value)}} type="text" name="" rows={10} cols={65} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
                 </label>
             </div>
         </div>

@@ -2,7 +2,7 @@ const getJobs = async (userEmail) => {
     const response = await fetch(`http://localhost:3000/jobs/${userEmail}`, {
       method: 'GET'
     });
-    console.log('fetched response from jobs get request');
+    // console.log('fetched response from jobs get request');
     return response.json();
 };
 
@@ -25,7 +25,7 @@ const updateJob = async ({id, fields}) => {
     return data;
 }
 
-const addJob = async({title, company, type, location, date, duration, link, cv}) => {
+const addJob = async({title, company, type, location, date, duration, link, cv, userEmail}) => {
     const response = await fetch('http://localhost:3000/jobs/addJob', {
         method: 'POST',
         headers: {
@@ -40,11 +40,13 @@ const addJob = async({title, company, type, location, date, duration, link, cv})
             duration: duration,
             link: link,
             coverLetterUsed: cv,
+            userEmail: userEmail
         })
     });
+    console.log("recieved new job");
 
-    const new_jobs = await response.json()
-    return new_jobs
+    const new_job = await response.json()
+    return new_job
 }
 
 const deleteJob = async(id) => {
