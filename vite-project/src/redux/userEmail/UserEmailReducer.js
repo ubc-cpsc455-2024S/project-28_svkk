@@ -21,3 +21,7 @@ export const userEmailSlice = createSlice({
 export const {setUserEmail} = userEmailSlice.actions
 
 export default userEmailSlice.reducer
+
+export function getEmail(state) {
+    return state.userEmail.userEmail;
+}

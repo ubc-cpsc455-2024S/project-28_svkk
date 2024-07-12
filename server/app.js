@@ -10,7 +10,7 @@ var jobsRouter = require('./routes/jobs');
 var jobPostingsRouter = require('./routes/jobPostings');
 var coverLettersRouter = require('./routes/coverLetters');
 var tailoredCoverLettersRouter = require('./routes/tailoredCoverLetters');
-var resumeRouter = require('./routes/resume');
+var resumeRouter = require('./routes/resumes');
 var signUpRouter = require('./routes/signUp');
 var loginRouter = require('./routes/login')
 

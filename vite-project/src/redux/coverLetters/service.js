@@ -6,19 +6,29 @@ const getCoverLetterTemplates = async() => {
     return response.json();
 }
 
-const getCoverLetters = async() => {
+const getCoverLetters = async({email}) => {
+    console.log("HI");
     const response = await fetch('http://localhost:3000/coverLetters', {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'email' : email
+        }
     });
     console.log("fetched request to get cover letters");
     return response.json();
 }
 
-const addCoverLetter = async(coverLetter) => {
+const addCoverLetter = async({email, coverLetter}) => {
+
+    console.log("HERE")
+    console.log(email);
+    console.log(coverLetter);
+
     const response = await fetch('http://localhost:3000/coverLetters', {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            'email': email
         },
         body: JSON.stringify(coverLetter)
     });
@@ -32,11 +42,25 @@ const addCoverLetter = async(coverLetter) => {
     return newCoverLetter;
 }
 
-const deleteCoverLetter = async (name) => {
-    await fetch(`http://localhost:3000/coverLetters/${name}`, {
+const deleteCoverLetter = async ({email,name}) => {
+    console.log("DETE");
+    const removed_name = await fetch(`http://localhost:3000/coverLetters/${name}`, {
         method: 'DELETE',
+        headers: {
+            'email': email
+        }
     })
+    const name1 = await removed_name.json();
+    console.log("DETES")
+    console.log(name1);
+    // console.log("NORMAL")
+    // console.log((removed_name));
+    //
+    // console.log("JSON PARSE")
+    // console.log(JSON.parse(removed_name));
     console.log(`Deleted cover letter titled "${name}" `);
+    return name1;
+
 };
 
 

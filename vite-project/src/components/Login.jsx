@@ -4,6 +4,10 @@ import MainDashboard from './MainDashboard';
 import Signup from './Signup';
 import { useDispatch, useSelector } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
+import {setResumes} from "../redux/resumes/resumeReducer.js";
+import {setCoverLetters} from "../redux/coverLetters/coverLetterReducer.js";
+import {setJobPostings} from "../redux/jobPostings/jobPostingsReducer.js";
+import {setTailoredCoverLetters} from "../redux/tailoredCoverLetters/tailoredCoverLetterReducer.js";
 
 const Login = () => {
 
@@ -32,7 +36,7 @@ const Login = () => {
             const data = await response.json();
             // successful
             if (response.status === 200) {
-                dispatch(setUserEmail(data.email))
+                dispatch(setUserEmail(data.email));
                 navigate('/MainDashboard')
             } else {
                 alert(data.msg)

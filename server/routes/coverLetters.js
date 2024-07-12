@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
+const users = require("../model/user");
+const {mongoose} = require("mongoose");
+const {coverLetterSchema} = require("../model/schema");
+const CoverLetter = mongoose.model("CoverLetter", coverLetterSchema, "coverLetters");
 
 const templates = [
     {
@@ -113,24 +117,50 @@ router.get('/templates', function (req, res, next) {
     res.send(templates);
 })
 
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
     // console.log(coverLetters);
-    res.send(coverLetters);
+    const email = req.headers.email;
+    let coverLetters = await CoverLetter.find({email: email});
+    console.log(coverLetters);
+    res.status(200).send(coverLetters);
 })
 
-router.post('/', function (req, res, next) {
-  const newCoverLetter = req.body;
-  //console.log(newCoverLetter);
-  coverLetters.push(newCoverLetter);
-  //console.log(coverLetters);
-  res.send(newCoverLetter);
+router.post('/', async function (req, res, next) {
+    const newCoverLetter = req.body;
+    const email = req.headers.email;
+    console.log("body");
+    console.log(newCoverLetter);
+    // coverLetters.push(newCoverLetter);
+    //console.log(coverLetters);
+    const coverLetterObject = CoverLetter({
+        email: email,
+        uuid: newCoverLetter.uuid,
+        name: newCoverLetter.name,
+        content: newCoverLetter.content
+    })
+    const check = await coverLetterObject.save();
+    if (check) {
+        res.status(200).send(newCoverLetter);
+    } else {
+        res.status(400).send({message: "Unable to add"});
+    }
 })
 
-router.delete('/:name', function(req, res, next) {
-  const toDelete = coverLetters.find(coverLetter => coverLetter.name == req.params.name);
-  // console.log(toDelete);
-  coverLetters.splice(coverLetters.indexOf(toDelete), 1);
-  res.status(204).send({ message: `successfully deleted cover letter titled ${req.params.name}` });
+router.delete('/:name', async function (req, res, next) {
+    // const toDelete = coverLetters.find(coverLetter => coverLetter.name == req.params.name);
+    // console.log(toDelete);
+    // coverLetters.splice(coverLetters.indexOf(toDelete), 1);
+    const name = req.params.name;
+    const email = req.headers.email;
+    const deletedCoverLetter = await CoverLetter.findOneAndDelete({email:email, name:name});
+    console.log("Delete");
+    console.log(name);
+    if (deletedCoverLetter) {
+        res.status(200).send({name: name});
+    } else {
+        res.status(400).send({message: "unable to delete"});
+    }
+
 })
 
 module.exports = router;
