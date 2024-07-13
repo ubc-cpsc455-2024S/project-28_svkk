@@ -100,27 +100,52 @@ router.post('/delete/:id', async function(req, res, next) {
   res.send(jobs);
 });
 
-router.get('/search/', function(req, res, next) {
+router.post('/search/', async function(req, res, next) {
+  const jobs = await Job.find({ userEmail: req.body.email});
   res.send(jobs);
 });
 
-router.get('/search/:filter', async function(req, res, next) {
+router.post('/search/:filter', async function(req, res, next) {
   // const new_jobs = jobs.filter((job) => {
   //   // console.log(job.jobTitle)
   //   // console.log(req.params.filter)
   //   return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
   // })
-  let jobs_set = []
-  let filters = req.params.filter.split(' ')
-  filters.forEach(async (filter) => {
-    const new_jobs_title = await Job.find({"jobTitle": { "$regex": filter, "$options": "i" }})
-    const new_jobs_company = await Job.find({"company": { "$regex": filter, "$options": "i" }})
+  console.log("email: " + req.body.email)
+  
+  let filter = req.params.filter
+  console.log("filter: " + filter)
+  
+  const new_jobs_title = await Job.find({"jobTitle": { "$regex": filter, "$options": "i" }})
+  console.log("new_jobs_title: " + new_jobs_title)
 
-    jobs_set = new Set(new_jobs_company, new_jobs_title)
-  })
+  const new_jobs_company = await Job.find({"company": { "$regex": filter, "$options": "i" }})
+  console.log("new_jobs_company: " + new_jobs_company)
 
-  console.log(jobs_set)
-  res.send(jobs_set);
+  let final_jobs = new_jobs_title
+
+  for (let i = 0; i < new_jobs_company.length; i++) {
+    let add = true
+    for (let j = 0; j < new_jobs_title.length; j++) {
+      let id_1 = new_jobs_company[i]._id.toString()
+      console.log("company: " + id_1)
+
+      let id_2 = new_jobs_title[j]._id.toString()
+      console.log("title: " + id_2)
+
+      if (id_1 == id_2) {
+        console.log("MATCHING...")
+        add = false
+        break
+      }
+    }
+    if (add) {
+      final_jobs.push(new_jobs_company[i])
+    }
+  }
+
+  console.log("final_jobs: " + final_jobs)
+  res.send(final_jobs);
 });
 
 router.put('/:jobId', async (req, res) => {

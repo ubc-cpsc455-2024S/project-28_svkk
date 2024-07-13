@@ -4,10 +4,12 @@ import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 import SearchIcon from '@mui/icons-material/Search';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchJobsAsync } from "../redux/jobs/thunks";
 
 export default function Navbar(props) {
+
+    const userEmail = useSelector(state => state.userEmail.userEmail);
 
     const dispatch = useDispatch()
 
@@ -44,10 +46,11 @@ export default function Navbar(props) {
                     <input type={"text"} className={"searchBar"} placeholder={"Search"} value={filter} onChange={(e) => {
                                                                                                                             setfilter(e.target.value)
                                                                                                                             if (e.target.value == '') {
-                                                                                                                                dispatch(searchJobsAsync(e.target.value))
+                                                                                                                                let filter = e.target.value
+                                                                                                                                dispatch(searchJobsAsync({filter, userEmail}))
                                                                                                                             }
                                                                                                                         }}></input>
-                    <input type="button" className="navBar-Button ml-[20px]" value="Search" onClick={() => {props.setSelectedJob(null); dispatch(searchJobsAsync(filter)); setfilter('')}}/>
+                    <input type="button" className="navBar-Button ml-[20px]" value="Search" onClick={() => {props.setSelectedJob(null); dispatch(searchJobsAsync({filter, userEmail}))}}/>
                 </div>
             </div>
         </nav>
