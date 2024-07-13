@@ -28,6 +28,9 @@ const JobSchema = new mongoose.Schema({
     coverLetterUsed: {
         type: String
     },
+    tailoredCoverLetterUsed: {
+        type: String
+    },
     userEmail: {
         type: String,
         required: true,

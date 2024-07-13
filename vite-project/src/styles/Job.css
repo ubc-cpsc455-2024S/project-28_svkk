@@ -2,6 +2,11 @@
     width: fit-content;
 }
 
+.coverletters-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .coverletter-field {
     display: flex;
     flex-direction: column;
@@ -20,6 +25,7 @@
     padding: 1em;
     border-radius: 1em;
     resize: vertical;
+    margin-right: 1.5em;
 }
 
 .options {

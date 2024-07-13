@@ -16,6 +16,7 @@ const updateJob = async ({id, fields}) => {
     });
 
     const data = await response.json();
+    console.log('fetched response from put request, updated job is: ', data);
 
     if (!response.ok) {
         const errorMsg = data?.message;
@@ -25,7 +26,34 @@ const updateJob = async ({id, fields}) => {
     return data;
 }
 
-const addJob = async({title, company, type, location, date, duration, link, cv, userEmail}) => {
+// const addJob = async({title, company, type, location, date, duration, link, cv, tcv, userEmail}) => {
+//     const response = await fetch('http://localhost:3000/jobs/addJob', {
+//         method: 'POST',
+//         headers: {
+//             'Content-type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             jobTitle: title,
+//             company: company,
+//             jobType: type,
+//             location: location,
+//             dateApplied: date,
+//             duration: duration,
+//             link: link,
+//             coverLetterUsed: cv,
+//             tailoredCoverLetterUsed: tcv,
+//             userEmail: userEmail
+//         })
+//     });
+//     console.log("addJob service response:", response);
+
+//     const new_job = await response.json()
+//     console.log("recieved new job: ", new_job);
+//     return new_job
+// }
+
+const addJob = async({title, company, type, location, date, duration, link, cv, tcv, userEmail}) => {
+    console.log('at addJob in service.js with fields: ', {title, company, type, location, date, duration, link, cv, tcv, userEmail});
     const response = await fetch('http://localhost:3000/jobs/addJob', {
         method: 'POST',
         headers: {
@@ -40,13 +68,14 @@ const addJob = async({title, company, type, location, date, duration, link, cv, 
             duration: duration,
             link: link,
             coverLetterUsed: cv,
+            tailoredCoverLetterUsed: tcv,
             userEmail: userEmail
         })
     });
-    console.log("recieved new job");
 
-    const new_job = await response.json()
-    return new_job
+    const new_jobs = await response.json()
+    console.log('new job list is: ', new_jobs);
+    return new_jobs
 }
 
 const deleteJob = async(data) => {

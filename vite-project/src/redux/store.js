@@ -15,5 +15,10 @@ export default configureStore({
         resumeList: resumeReducer,
         userEmail: UserEmailReducer
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+    }),
+
     devTools: true
 })

@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addJobAsync, getJobsAsync } from "../redux/jobs/thunks";
+import { getCoverLettersAsync } from '../redux/coverLetters/thunk';
+import { getTailoredCoverLettersAsync } from '../redux/tailoredCoverLetters/thunk';
+import DropdownSelector from './CoverLetterCreationComponents/DropdownSelector';
 
 const Form = (props) => {
     const userEmail = useSelector(state => state.userEmail.userEmail);
+    // const coverLetters = useSelector(state => state.coverLetterList.coverLetters);
+    // const tailoredCoverLetters = useSelector(state => state.tailoredCoverLetterList.tailoredCoverLetters);
+    // const [selectedElement, setSelectedElement] = useState(null);
 
     const [title, setTitle] = useState('')
     const [company, setCompany] = useState('')
@@ -13,12 +19,20 @@ const Form = (props) => {
     const [duration, setDuration] = useState('')
     const [link, setLink] = useState('')
     const [cv, setCV] = useState('')
+    const [tcv, setTCV] = useState('')
+
 
     const dispatch = useDispatch();
 
     async function addJob() {
-        console.log('dispatching add job, user email is: ', userEmail);
-        await dispatch(addJobAsync({title, company, type, location, date, duration, link, cv, userEmail}))
+        // console.log('coverletters: ', coverLetters);
+        // console.log('tailored coverletters ', tailoredCoverLetters);
+        //await dispatch(addJobAsync({ title, company, type, location, date, duration, link, cv, tcv, userEmail }))
+        console.log('dispatching add job with data:', { title, company, type, location, date, duration, link, cv, tcv, userEmail});
+        await dispatch(addJobAsync({ title, company, type, location, date, duration, link, cv, tcv, userEmail}));
+        // await dispatch(getCoverLettersAsync({email: userEmail}));
+        // await dispatch(getTailoredCoverLettersAsync({email: userEmail}));
+      
         props.setSelectForm(false)
         props.setSelectedJob(null)
     }
@@ -58,13 +72,32 @@ const Form = (props) => {
                     <input value={link} onChange={(e) => {setLink(e.target.value)}} type="text" name="" id="" placeholder='Link' className='m-4 ml-[100px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
                 </label>
             </div>
-            <div>
-                <label className='block'>
-                    Cover letter used:
-                    <br/>
-                    <textarea value={cv} onChange={(e) => {setCV(e.target.value)}} type="text" name="" rows={10} cols={65} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
-                </label>
+            <div className="flex flex-col">
+                <div>
+                    <label className='block'>
+                        Cover Letter Used:
+                        <br/>
+                        <textarea value={cv} onChange={(e) => {setCV(e.target.value)}} type="text" name="" id="" rows={10} cols={65} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
+                    </label>
+                </div>
+                <div>
+                    <label className='block'>
+                        Tailored Cover Letter Used:
+                        <br/>
+                        <textarea value={tcv} onChange={(e) => {setTCV(e.target.value)}} type="text" name="" id="" rows={10} cols={65} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
+                    </label>
+                </div>
             </div>
+            {/* <div className="button-holder">
+                    <DropdownSelector
+                        allElements={coverLetters}
+                        setSelectedElement={setSelectedElement}
+                    />
+                    <DropdownSelector
+                        allElements={tailoredCoverLetters}
+                        setSelectedElement={setSelectedElement}
+                    />
+            </div> */}
         </div>
         <div className='text-center'>
             <input className="add-job w-[150px] p-[10px]" type="button" value="Add Job" onClick={async () => {await addJob()}}/>

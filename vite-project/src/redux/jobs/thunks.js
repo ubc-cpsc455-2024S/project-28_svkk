@@ -13,15 +13,26 @@ export const getJobsAsync = createAsyncThunk(
 export const updateJobAsync = createAsyncThunk(
     actionTypes.UPDATE_JOBS,
     async({id, fields}) => {
+        console.log(`waiting to update job with id ${id} with fields`, fields);
         return await JobsService.updateJob({id, fields});
     }
 )
 
+// export const addJobAsync = createAsyncThunk(
+//     actionTypes.ADD_JOB,
+//     async({title, company, type, location, date, duration, link, cv, tcv, userEmail}) => {
+//         console.log("addJobAsync called with:", { title, company, type, location, date, duration, link, cv, tcv, userEmail });
+//         const response = await JobsService.addJob({ title, company, type, location, date, duration, link, cv, tcv, userEmail });
+//         console.log("addJobAsync response:", response);
+
+//     }
+// )
+
 export const addJobAsync = createAsyncThunk(
     actionTypes.ADD_JOB,
-    async({title, company, type, location, date, duration, link, cv, userEmail}) => {
-        console.log("waiting for request from add job, user email: ", userEmail);
-        return await JobsService.addJob({title, company, type, location, date, duration, link, cv, userEmail});
+    async({title, company, type, location, date, duration, link, cv, tcv, userEmail}) => {
+        console.log('dispatching add job async with fields: ', {title, company, type, location, date, duration, link, cv, tcv, userEmail});
+        return await JobsService.addJob({title, company, type, location, date, duration, link, cv, tcv, userEmail});
     }
 )
 

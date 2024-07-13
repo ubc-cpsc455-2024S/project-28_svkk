@@ -3,43 +3,44 @@ var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const Job = require('../model/job');
 
-let jobs = [
+// let jobs = [
 
-      {
-          jobTitle: "Software Engineering Intern",
-          company: "Microsoft",
-          jobType: "Onsite",
-          location: "Vancouver, BC",
-          dateApplied: "2024-06-01",
-          duration: "Aug. 2024 - Dec. 2024",
-          link: "https://shorturl.at/D3MlH",
-          coverLetterUsed: "",
-          userEmail: "silvanahuang23@gmail.com"
-      },
-      {
-          jobTitle: "Software Engineering Intern - Fullstack (Product)",
-          company: "Super.com",
-          jobType: "Remote",
-          location: "Toronto, ON",
-          dateApplied: "2024-06-03",
-          duration: "Sept. 2024 - Dec. 2024",
-          link: "https://shorturl.at/xnIf6",
-          coverLetterUsed: "",
-          userEmail: "silvanahuang23@gmail.com"
-      },
-      {
-          jobTitle: "Software Development Engineer Intern",
-          company: "Amazon",
-          jobType: "Onsite",
-          location: "Halifax, NS, Canada",
-          dateApplied: "2024-06-05",
-          duration: "Sept. 2024 - Dec. 2024",
-          link: "https://shorturl.at/QvKB0",
-          coverLetterUsed: "",
-          userEmail: "silvanahuang23@gmail.com"
-      }
+//       {
+//           jobTitle: "Software Engineering Intern",
+//           company: "Microsoft",
+//           jobType: "Onsite",
+//           location: "Vancouver, BC",
+//           dateApplied: "2024-06-01",
+//           duration: "Aug. 2024 - Dec. 2024",
+//           link: "https://shorturl.at/D3MlH",
+//           coverLetterUsed: "",
+//           userEmail: "silvanahuang23@gmail.com"
+//       },
+//       {
+//           jobTitle: "Software Engineering Intern - Fullstack (Product)",
+//           company: "Super.com",
+//           jobType: "Remote",
+//           location: "Toronto, ON",
+//           dateApplied: "2024-06-03",
+//           duration: "Sept. 2024 - Dec. 2024",
+//           link: "https://shorturl.at/xnIf6",
+//           coverLetterUsed: "",
+//           userEmail: "silvanahuang23@gmail.com"
+//       },
+//       {
+//           jobTitle: "Software Development Engineer Intern",
+//           company: "Amazon",
+//           jobType: "Onsite",
+//           location: "Halifax, NS, Canada",
+//           dateApplied: "2024-06-05",
+//           duration: "Sept. 2024 - Dec. 2024",
+//           link: "https://shorturl.at/QvKB0",
+//           coverLetterUsed: "",
+//           userEmail: "silvanahuang23@gmail.com"
+//       }
 
-]
+// ]
+let jobs = [];
 
 // jobs.forEach(async (job) => {
 //   j = new Job(job)
@@ -61,6 +62,38 @@ router.get('/:userEmail', async(req, res) => {
 });
 
 
+// router.post('/addJob', async(req, res) => {
+//   console.log('request body in add Job route: ', req.body);
+//   let jobTitle = req.body.jobTitle
+//   let company = req.body.company
+//   let jobType = req.body.jobType
+//   let location = req.body.location
+//   let dateApplied = req.body.dateApplied
+//   let duration = req.body.duration
+//   let link = req.body.link
+//   let coverLetterUsed = req.body.coverLetterUsed
+//   let tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
+//   let userEmail = req.body.userEmail
+//   console.log('email is: ', userEmail);
+
+//   let newJob = new Job({
+//                     jobTitle: jobTitle,
+//                     company: company,
+//                     jobType: jobType,
+//                     location: location,
+//                     dateApplied: dateApplied,
+//                     duration: duration,
+//                     link: link,
+//                     coverLetterUsed: coverLetterUsed,
+//                     tailoredCoverLetterUsed: tailoredCoverLetterUsed,
+//                     userEmail: userEmail
+//                     })
+  
+//   console.log("new job is: ", newJob);
+//   await newJob.save();
+//   return res.send(newJob);
+// });
+
 router.post('/addJob', async(req, res) => {
   let jobTitle = req.body.jobTitle
   let company = req.body.company
@@ -70,8 +103,8 @@ router.post('/addJob', async(req, res) => {
   let duration = req.body.duration
   let link = req.body.link
   let coverLetterUsed = req.body.coverLetterUsed
+  let tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
   let userEmail = req.body.userEmail
-  console.log('email is: ', userEmail);
 
   let newJob = new Job({
                     jobTitle: jobTitle,
@@ -82,12 +115,15 @@ router.post('/addJob', async(req, res) => {
                     duration: duration,
                     link: link,
                     coverLetterUsed: coverLetterUsed,
+                    tailoredCoverLetterUsed: tailoredCoverLetterUsed,
                     userEmail: userEmail
-                    })
+                });
   
-  console.log("new job is: ", newJob);
+  console.log('newjob in add job route: ', newJob);
   await newJob.save();
-  return res.send(newJob);
+  const jobs = await Job.find({ userEmail: userEmail});
+  console.log('updated job list is now: ', jobs);
+  return res.send(jobs);
 });
 
 router.post('/delete/:id', async function(req, res, next) {
@@ -125,6 +161,7 @@ router.get('/search/:filter', async function(req, res, next) {
 
 router.put('/:jobId', async (req, res) => {
   const job = await Job.findOne({_id : req.params.jobId });
+  console.log('job to change is: ', job);
 
   if (!job) {
     res.status(404).send({ message: 'Job not found'});
@@ -151,8 +188,15 @@ router.put('/:jobId', async (req, res) => {
   if (req.body.link != "") {
     job.link = req.body.link;
   }
+  if (req.body.coverLetterUsed != "") {
+    job.coverLetterUsed = req.body.coverLetterUsed;
+  }
+  if (req.body.tailoredCoverLetterUsed != "") {
+    job.tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
+  }
 
   await job.save();
+  console.log('updated job is now: ', job);
 
   return res.send(job);
 
