@@ -115,6 +115,9 @@ router.post('/search/:filter', async function(req, res, next) {
   
   let filter = req.params.filter
   console.log("filter: " + filter)
+
+  // Took help from stackoverflow to understand how to use regex in mongoose
+  // Link: https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find  
   
   const new_jobs_title = await Job.find({"jobTitle": { "$regex": filter, "$options": "i" }})
   console.log("new_jobs_title: " + new_jobs_title)
