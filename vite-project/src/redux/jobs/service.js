@@ -6,6 +6,24 @@ const getJobs = async (userEmail) => {
     return response.json();
 };
 
+const getJobsDateAppliedEarliestToLatest = async (userEmail) => {
+    const response = await fetch(`http://localhost:3000/jobs/${userEmail}/earliest-latest`, {
+      method: 'GET'
+    });
+    // console.log('fetched response from jobs get request');
+    return response.json();
+};
+
+const getJobsDateAppliedLatestToEarliest = async (userEmail) => {
+    const response = await fetch(`http://localhost:3000/jobs/${userEmail}/latest-earliest`, {
+      method: 'GET'
+    });
+    // console.log('fetched response from jobs get request');
+    return response.json();
+};
+
+
+
 const updateJob = async ({id, fields}) => {
     const response = await fetch(`http://localhost:3000/jobs/${id}`, {
         method: 'PUT', 
@@ -112,5 +130,7 @@ export default {
     updateJob,
     addJob,
     deleteJob,
-    searchJobs
+    searchJobs,
+    getJobsDateAppliedEarliestToLatest,
+    getJobsDateAppliedEarliestToLatest
 }

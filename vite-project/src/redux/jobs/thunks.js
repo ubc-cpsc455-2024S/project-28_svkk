@@ -10,6 +10,24 @@ export const getJobsAsync = createAsyncThunk(
     }
 );
 
+export const getJobsDateAppliedEarliestToLatestAsync = createAsyncThunk(
+    actionTypes.GET_JOBS_EL,
+    async (userEmail) => {
+        // console.log('waiting on response from get request, userEmail is: ', userEmail);
+      return await JobsService.getJobsDateAppliedEarliestToLatest(userEmail);
+    }
+);
+
+export const getJobsDateAppliedLatestToEarliestAsync = createAsyncThunk(
+    actionTypes.GET_JOBS_LE,
+    async (userEmail) => {
+        // console.log('waiting on response from get request, userEmail is: ', userEmail);
+      return await JobsService.getJobsDateAppliedLatestToEarliestAsync(userEmail);
+    }
+);
+
+
+
 export const updateJobAsync = createAsyncThunk(
     actionTypes.UPDATE_JOBS,
     async({id, fields}) => {

@@ -72,6 +72,7 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
     text-align: center;
     padding: 0.4em;
     width: 40%;
+    margin-left: 0.3em;
   }
   
   .job-actions {

@@ -40,7 +40,7 @@ const Job = require('../model/job');
 //       }
 
 // ]
-let jobs = [];
+
 
 // jobs.forEach(async (job) => {
 //   j = new Job(job)
@@ -60,6 +60,38 @@ router.get('/:userEmail', async(req, res) => {
   }
   
 });
+
+router.get('/:userEmail/earliest-latest', async (req, res) => {
+  try {
+    const jobs = await Job.find({ userEmail: req.params.userEmail});
+    const jobsEarliestToLatest = jobs.sort((a,b) => {
+      if (a === b) {
+        return 0;
+      }
+      return a.dateApplied < b.dateApplied ? -1 : 1;
+    })
+    return res.send(jobsEarliestToLatest);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('server error');
+  }
+})
+
+router.get('/:userEmail/latest-earliest', async (req, res) => {
+  try {
+    const jobs = await Job.find({ userEmail: req.params.userEmail});
+    const jobsLatestToEarliest = jobs.sort((a,b) => {
+      if (a === b) {
+        return 0;
+      }
+      return a.dateApplied < b.dateApplied ? 1 : -1;
+    })
+    return res.send(jobsLatestToEarliest);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('server error');
+  }
+})
 
 
 // router.post('/addJob', async(req, res) => {
