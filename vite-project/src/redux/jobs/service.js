@@ -92,9 +92,13 @@ const deleteJob = async(data) => {
     return new_jobs
 }
 
-const searchJobs = async(filter) => {
-    const response = await fetch(`http://localhost:3000/jobs/search/${filter}`, {
-        method: 'GET',
+const searchJobs = async(data) => {
+    const response = await fetch(`http://localhost:3000/jobs/search/${data.filter}`, {
+        method: 'POST',
+        headers: {
+            "content-type": "application/json" 
+        },
+        body: JSON.stringify({"email": data.userEmail})
     });
 
     const new_jobs = await response.json()

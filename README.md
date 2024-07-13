@@ -99,5 +99,8 @@ This will help you divide up work among your teammates.**
 
 {Add your stuff here}
 
+- Took help from stackoverflow to understand how to use regex in mongoose. Link: https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find
+    
+
 
 
