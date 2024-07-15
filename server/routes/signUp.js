@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt');
 
 const users = require('../model/user');
 
-// finds email -> need parameter for path?
 router.post('/', async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     try {
@@ -13,12 +13,14 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ msg: 'Email already exists' });
         }
 
+        const hashedPassword = await bcrypt.hash(password, 10)
+
         const newUser = new users({
             id: uuidv4(),
             firstName,
             lastName,
             email,
-            password,
+            password: hashedPassword,
         })
         await newUser.save();
         res.status(200).json({ msg: 'Email is available, signup successful', email: email });

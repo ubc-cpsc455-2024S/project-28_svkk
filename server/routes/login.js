@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const bcrypt = require('bcrypt');
 
 const users = require('../model/user');
 
@@ -11,8 +12,9 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ msg: 'No account with this email exists' });
         }
 
-        // TODO: added hashing later
-        if (password !== user.password) {
+        const isMatch = bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid Password' });
         }
         res.status(200).json(
