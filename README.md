@@ -44,13 +44,10 @@ The goal of this application is to help match students to their internships base
   1. Users can add job descriptions 
   2. Users can choose from a generic cover letter template and fill it with their professional experience/past projects (can be used by students who have not made a cover letter)
   3. Users can generate tailored cover letters given a job posting and a filled-in generic cover letter
-  4. Users can save job application information on their account organized into 5 categories:
-      - Viewing/Considering
-      - Sent (Allows the user to keep track of their sent applications)
-      - No Response:
-      - Responded: 
-          - Successful applications
-          - Unsuccessful Applications
+  4. Job categorization - allows users to organize the jobs they’ve applied to into different categories
+     - Users can filter jobs by tags (e.g., frontend, backend, fullstack)
+  5. Users can search for jobs they’ve applied to by name and/or job title
+
      
 - 2-3 stretch requirements (plan to complete at least 1!)
   1. Users can specify the font and font-size of the tailored cover letter
