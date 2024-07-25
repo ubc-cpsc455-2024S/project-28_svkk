@@ -51,16 +51,24 @@ The goal of this application is to help match students to their internships base
       - Responded: 
           - Successful applications
           - Unsuccessful Applications
-  5. Users can see and compare the **success rate** (Successful responses / sent applications) for each **individual** generic cover letter
-  6. Users can see and compare the **response time for an interview offer** (Averaged elapsed response time for all applications using that document) for each **individual** generic cover letter
      
 - 2-3 stretch requirements (plan to complete at least 1!)
   1. Users can specify the font and font-size of the tailored cover letter
   2. Users can generate a **Resume** given a Job Posting, and select which CV they want to base their Resume on.	
       - Resume = Job Posting + CV	
-  3. Add web scraper portions to enable URLs to job postings to be used instead of copy-pasting text for more convenience. 
-  4. Add suggestions to improve the resume/cover letter based on certain criteria. 
-  5. Users can see the **summary** on a webpage (html file similar to assignment 1), using analytics
+  3. Add web scraper portions to enable URLs to job postings to be used instead of copy-pasting text for more convenience, and be able to upload documents (cover letter, resumes) via pdf instead of copying and pasting the contents.
+  4. Add suggestions to improve the resume/cover letter based on certain criteria.
+  5. Users can save job application information on their account organized into 5 categories:
+    - Viewing/Considering
+    - Sent (Allows the user to keep track of their sent applications)
+    - No Response:
+    - Responded: 
+        - Successful applications
+        - Unsuccessful Applications
+     
+  6. Users can see and compare the **success rate** (Successful responses / sent applications) for each **individual** generic cover letter
+  7. Users can see and compare the **response time for an interview offer** (Averaged elapsed response time for all applications using that document) for each **individual** generic cover letter
+  8. Users can see the **summary** on a webpage (html file similar to assignment 1), using data analytics
      
 **Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks!
 This will help you divide up work among your teammates.**
