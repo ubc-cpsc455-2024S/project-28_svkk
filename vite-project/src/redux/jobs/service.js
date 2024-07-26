@@ -1,5 +1,7 @@
+import {USED_IP} from "../ip.js";
+
 const getJobs = async (userEmail) => {
-    const response = await fetch(`http://localhost:3000/jobs/${userEmail}`, {
+    const response = await fetch(USED_IP + `jobs/${userEmail}`, {
       method: 'GET'
     });
     // console.log('fetched response from jobs get request');
@@ -7,7 +9,7 @@ const getJobs = async (userEmail) => {
 };
 
 const getJobsDateAppliedEarliestToLatest = async (userEmail) => {
-    const response = await fetch(`http://localhost:3000/jobs/${userEmail}/earliest-latest`, {
+    const response = await fetch(USED_IP + `jobs/${userEmail}/earliest-latest`, {
       method: 'GET'
     });
     // console.log('fetched response from jobs get request');
@@ -15,7 +17,7 @@ const getJobsDateAppliedEarliestToLatest = async (userEmail) => {
 };
 
 const getJobsDateAppliedLatestToEarliest = async (userEmail) => {
-    const response = await fetch(`http://localhost:3000/jobs/${userEmail}/latest-earliest`, {
+    const response = await fetch(USED_IP + `jobs/${userEmail}/latest-earliest`, {
       method: 'GET'
     });
     // console.log('fetched response from jobs get request');
@@ -25,7 +27,7 @@ const getJobsDateAppliedLatestToEarliest = async (userEmail) => {
 
 
 const updateJob = async ({id, fields}) => {
-    const response = await fetch(`http://localhost:3000/jobs/${id}`, {
+    const response = await fetch(USED_IP + `jobs/${id}`, {
         method: 'PUT', 
         headers: {
             'Content-type': 'application/json'
@@ -72,7 +74,7 @@ const updateJob = async ({id, fields}) => {
 
 const addJob = async({title, company, type, location, date, duration, link, cv, tcv, userEmail, tags}) => {
     console.log('at addJob in service.js with fields: ', {title, company, type, location, date, duration, link, cv, tcv, userEmail, tags});
-    const response = await fetch('http://localhost:3000/jobs/addJob', {
+    const response = await fetch(USED_IP + 'jobs/addJob', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
@@ -99,7 +101,7 @@ const addJob = async({title, company, type, location, date, duration, link, cv, 
 
 const deleteJob = async(data) => {
     console.log("called delete on email: " + data.userEmail)
-    const response = await fetch(`http://localhost:3000/jobs/delete/${data.id}`, {
+    const response = await fetch(USED_IP + `jobs/delete/${data.id}`, {
         method: 'POST',
         headers: {
          "content-type": "application/json" 
@@ -112,7 +114,7 @@ const deleteJob = async(data) => {
 }
 
 const searchJobs = async(data) => {
-    const response = await fetch(`http://localhost:3000/jobs/search/${data.filter}`, {
+    const response = await fetch(USED_IP + `jobs/search/${data.filter}`, {
         method: 'POST',
         headers: {
             "content-type": "application/json" 
@@ -125,7 +127,7 @@ const searchJobs = async(data) => {
 }
 
 const filterTag = async(data) => {
-    const response = await fetch(`http://localhost:3000/jobs/tag/${data.tagFilter}`, {
+    const response = await fetch(USED_IP + `jobs/tag/${data.tagFilter}`, {
         method: 'POST',
         headers: {
             "content-type": "application/json" 
@@ -146,7 +148,6 @@ export default {
     addJob,
     deleteJob,
     searchJobs,
-    getJobsDateAppliedEarliestToLatest,
     getJobsDateAppliedEarliestToLatest,
     filterTag
 }
