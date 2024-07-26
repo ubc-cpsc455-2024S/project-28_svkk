@@ -1,5 +1,7 @@
+import {USED_IP} from "../ip.js";
+
 const getCoverLetterTemplates = async() => {
-    const response = await fetch('http://localhost:3000/coverLetters/templates', {
+    const response = await fetch(USED_IP + 'coverLetters/templates', {
         method: 'GET'
     });
     console.log("fetched request to get cover letter templates");
@@ -8,7 +10,7 @@ const getCoverLetterTemplates = async() => {
 
 const getCoverLetters = async({email}) => {
     console.log("HI");
-    const response = await fetch('http://localhost:3000/coverLetters', {
+    const response = await fetch(USED_IP + 'coverLetters', {
         method: 'GET',
         headers: {
             'email' : email
@@ -24,7 +26,7 @@ const addCoverLetter = async({email, coverLetter}) => {
     console.log(email);
     console.log(coverLetter);
 
-    const response = await fetch('http://localhost:3000/coverLetters', {
+    const response = await fetch(USED_IP + 'coverLetters', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -44,7 +46,7 @@ const addCoverLetter = async({email, coverLetter}) => {
 
 const deleteCoverLetter = async ({email,name}) => {
     console.log("DETE");
-    const removed_name = await fetch(`http://localhost:3000/coverLetters/${name}`, {
+    const removed_name = await fetch(USED_IP + `coverLetters/${name}`, {
         method: 'DELETE',
         headers: {
             'email': email

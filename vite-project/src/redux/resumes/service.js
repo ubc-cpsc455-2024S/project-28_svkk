@@ -1,5 +1,7 @@
+import {USED_IP} from "../ip.js";
+
 const getResume = async({email}) => {
-    const response = await fetch('http://localhost:3000/resumes', {
+    const response = await fetch(USED_IP + 'resumes', {
         method: 'GET',
         headers: {
             'email': email
@@ -10,7 +12,7 @@ const getResume = async({email}) => {
 }
 
 const addResume = async({email, resume}) => {
-    const response = await fetch('http://localhost:3000/resumes', {
+    const response = await fetch(USED_IP + 'resumes', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -30,7 +32,7 @@ const addResume = async({email, resume}) => {
 }
 
 const deleteResume = async ({email, name}) => {
-    const remove_name = await fetch(`http://localhost:3000/resumes/${name}`, {
+    const remove_name = await fetch(USED_IP + `resumes/${name}`, {
         method: 'DELETE',
         headers: {
             'email': email

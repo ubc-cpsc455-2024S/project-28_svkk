@@ -1,5 +1,8 @@
+import {USED_IP} from "../ip.js";
+
+
 const getJobPostings = async({email}) => {
-    const response = await fetch('http://localhost:3000/jobPostings', {
+    const response = await fetch(USED_IP + 'jobPostings', {
         method: 'GET',
         headers: {
             'email': email
@@ -12,7 +15,7 @@ const getJobPostings = async({email}) => {
 const addJobPosting = async({email,jobPosting}) => {
     console.log("jobPosting service");
     console.log(jobPosting);
-    const response = await fetch('http://localhost:3000/jobPostings', {
+    const response = await fetch(USED_IP + 'jobPostings', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -30,7 +33,7 @@ const addJobPosting = async({email,jobPosting}) => {
 }
 
 const deleteJobPosting = async ({email,name}) => {
-    const removed_name = await fetch(`http://localhost:3000/jobPostings/${name}`, {
+    const removed_name = await fetch(USED_IP + `jobPostings/${name}`, {
         method: 'DELETE',
         headers: {
             'email': email

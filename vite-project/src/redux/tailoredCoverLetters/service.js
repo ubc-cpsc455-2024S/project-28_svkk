@@ -1,5 +1,8 @@
+import {USED_IP} from "../ip.js";
+
+
 const getTailoredCoverLetters = async({email}) => {
-    const response = await fetch('http://localhost:3000/tailoredCoverLetters', {
+    const response = await fetch(USED_IP + 'tailoredCoverLetters', {
         method: 'GET',
         headers: {
             'email': email
@@ -12,7 +15,7 @@ const getTailoredCoverLetters = async({email}) => {
 const addTailoredCoverLetter = async({email, coverLetter}) => {
     console.log("Tailored Cover Letter");
     console.log(coverLetter);
-    const response = await fetch('http://localhost:3000/tailoredCoverLetters', {
+    const response = await fetch(USED_IP + 'tailoredCoverLetters', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -33,7 +36,7 @@ const addTailoredCoverLetter = async({email, coverLetter}) => {
 
 
 const deleteTailoredCoverLetter = async ({email, name}) => {
-    const removed_name = await fetch(`http://localhost:3000/tailoredCoverLetters/${name}`, {
+    const removed_name = await fetch(USED_IP + `tailoredCoverLetters/${name}`, {
         method: 'DELETE',
         headers: {
             'email' : email
