@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // string to db
-const uri = 'mongodb+srv://m001-student:m001-mongodb-basics@sandbox.y8liyvy.mongodb.net/project?retryWrites=true&w=majority&appName=Sandbox'
+const uri = process.env.DB_URI;
 
 const connectDB = async () => {
     try {
+        console.log('mongodb uri is', uri);
         await mongoose.connect(uri, {
         });
         console.log('MongoDB connected...');
