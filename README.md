@@ -1,6 +1,6 @@
 # Team SVKK (Group 28) - Project Title: Application Tailor
 
-## Describe your topic/interest in about 150-200 words
+## About The Project
 The goal of this application is to help match students to their internships based on their current qualifications, minimizing the time consumed in the application process, resulting in an increased success rate during the co-op job search term. This application aims to achieve this by automating the 15-30 mins spent on tailoring a Resume and/or Cover Letter for every job posting. In an economy that requires at least 30 applications sent each week during classes, this often comes at the expense of student’s grades and more importantly their mental health, affecting their long term prospects. This application aims to mitigate these unnecessary drawbacks while maintaining the quality and authenticity of each job application.
 
 ![Workflow Status Badge](https://github.com/ubc-cpsc455-2024S/project-28_svkk/actions/workflows/pipeline.yml/badge.svg)
