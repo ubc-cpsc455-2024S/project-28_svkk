@@ -20,6 +20,7 @@ jobs:
           node-version: '18.19.0'
 
       - name: Install Packages and Dependencies in Root Directory
+        working-directory: project-28_svkk
         run: npm install
 
       - name: Install Packages and Dependencies in Frontend
