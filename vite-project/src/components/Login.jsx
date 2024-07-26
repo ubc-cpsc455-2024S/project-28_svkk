@@ -4,6 +4,7 @@ import MainDashboard from './MainDashboard';
 import Signup from './Signup';
 import { useDispatch, useSelector } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
+import {USED_IP} from "../redux/ip.js";
 
 const Login = () => {
 
@@ -22,7 +23,7 @@ const Login = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch(USED_IP + 'login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

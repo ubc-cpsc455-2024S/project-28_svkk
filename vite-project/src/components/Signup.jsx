@@ -28,7 +28,7 @@ const Signup = () => {
 
         // TODO: hash password
         try {
-            const response = await fetch('http://localhost:3000/signUp', {
+            const response = await fetch(USED_IP + 'signUp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
