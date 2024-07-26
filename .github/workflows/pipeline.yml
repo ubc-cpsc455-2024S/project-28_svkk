@@ -1,7 +1,7 @@
 name: Application Tailor CI
 run-name: ${{ github.actor }} is testing installation of dependencies
 
-on: [ push, pull-request ]
+on: [ push, pull_request ]
 
 env:
   DB_URI: ${{ secrets.DB_URI }}
