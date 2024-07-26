@@ -127,6 +127,7 @@ router.get('/:userEmail/latest-earliest', async (req, res) => {
 // });
 
 router.post('/addJob', async(req, res) => {
+  console.log(req.body)
   let jobTitle = req.body.jobTitle
   let company = req.body.company
   let jobType = req.body.jobType
@@ -137,6 +138,9 @@ router.post('/addJob', async(req, res) => {
   let coverLetterUsed = req.body.coverLetterUsed
   let tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
   let userEmail = req.body.userEmail
+  let tags = req.body.tags
+
+  console.log(tags)
 
   let newJob = new Job({
                     jobTitle: jobTitle,
@@ -148,7 +152,8 @@ router.post('/addJob', async(req, res) => {
                     link: link,
                     coverLetterUsed: coverLetterUsed,
                     tailoredCoverLetterUsed: tailoredCoverLetterUsed,
-                    userEmail: userEmail
+                    userEmail: userEmail,
+                    tags: tags
                 });
   
   console.log('newjob in add job route: ', newJob);
@@ -172,6 +177,30 @@ router.post('/search/', async function(req, res, next) {
   const jobs = await Job.find({ userEmail: req.body.email});
   res.send(jobs);
 });
+
+
+router.post('/tag/:filter', async function(req, res, next) {
+  // const new_jobs = jobs.filter((job) => {
+  //   // console.log(job.jobTitle)
+  //   // console.log(req.params.filter)
+  //   return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
+  // })
+  console.log("email: " + req.body.email)
+  
+  let filter = req.params.filter
+  console.log("filter: " + filter)
+  
+  // took help from stackoverflow to for the syntax for filtering by whether the array contains a specific member. Link: https://stackoverflow.com/questions/18148166/find-document-with-array-that-contains-a-specific-value
+  const new_jobs = await Job.find({"tags": filter})
+
+  res.send(new_jobs)
+})
+
+router.post('/tag/', async function(req, res, next) {
+    const jobs = await Job.find({ userEmail: req.body.email});
+    res.send(jobs)
+})
+
 
 router.post('/search/:filter', async function(req, res, next) {
   // const new_jobs = jobs.filter((job) => {
@@ -223,6 +252,8 @@ router.put('/:jobId', async (req, res) => {
   const job = await Job.findOne({_id : req.params.jobId });
   console.log('job to change is: ', job);
 
+
+  console.log("Tags: ", req.body.temptags)
   if (!job) {
     res.status(404).send({ message: 'Job not found'});
   }
@@ -253,6 +284,9 @@ router.put('/:jobId', async (req, res) => {
   }
   if (req.body.tailoredCoverLetterUsed != "") {
     job.tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
+  }
+  if (req.body.tags != "") {
+    job.tags = req.body.temptags
   }
 
   await job.save();

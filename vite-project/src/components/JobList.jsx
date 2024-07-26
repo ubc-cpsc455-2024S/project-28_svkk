@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
-import { deleteJobAsync, getJobsAsync } from "../redux/jobs/thunks";
+import { deleteJobAsync, filterTagAsync, getJobsAsync } from "../redux/jobs/thunks";
 import MenuSimple from "./MenuSimple";
 // import SortByOptions from "./SortByOptions";
 
@@ -9,6 +9,8 @@ import MenuSimple from "./MenuSimple";
 export default function JobList({ onSelectJob, selectForm, setSelectForm, selectedJob }) {
     const jobs = useSelector(state => state.jobList.jobs);
     const userEmail = useSelector(state => state.userEmail.userEmail);
+
+    const [tagFilter, setTagFilter] = useState('')
 
     const dispatch = useDispatch();
     const [selectedJobId, setSelectedJobId] = useState(null);
@@ -31,6 +33,15 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
             
             <div className="sort-by">Sort by: 
                 <span className="date-applied">Date Applied</span>
+            </div>
+
+            <div className="sort-by">Filter by Tag: 
+                <input type="text" name="" id="" value={tagFilter} onChange={(e) => {if (e.target.value === '') {   
+                                                                                                                    let tagFilter = e.target.value
+                                                                                                                    dispatch(filterTagAsync({userEmail, tagFilter}))
+                                                                                                                }; 
+                                                                                                                    setTagFilter(e.target.value)}}/>
+                <input type="button" value="search" onClick={()=> {dispatch(filterTagAsync({userEmail, tagFilter}))}}/>
             </div>
             {/* <MenuSimple/> */}
         

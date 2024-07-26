@@ -34,6 +34,9 @@ const JobSchema = new mongoose.Schema({
     userEmail: {
         type: String,
         required: true,
+    },
+    tags: {
+        type: Array
     }
 });
 

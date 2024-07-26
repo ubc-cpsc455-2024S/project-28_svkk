@@ -48,9 +48,9 @@ export const updateJobAsync = createAsyncThunk(
 
 export const addJobAsync = createAsyncThunk(
     actionTypes.ADD_JOB,
-    async({title, company, type, location, date, duration, link, cv, tcv, userEmail}) => {
-        console.log('dispatching add job async with fields: ', {title, company, type, location, date, duration, link, cv, tcv, userEmail});
-        return await JobsService.addJob({title, company, type, location, date, duration, link, cv, tcv, userEmail});
+    async({title, company, type, location, date, duration, link, cv, tcv, userEmail, tags}) => {
+        console.log('dispatching add job async with fields: ', {title, company, type, location, date, duration, link, cv, tcv, userEmail, tags});
+        return await JobsService.addJob({title, company, type, location, date, duration, link, cv, tcv, userEmail, tags});
     }
 )
 
@@ -66,5 +66,12 @@ export const searchJobsAsync = createAsyncThunk(
     actionTypes.SEARCH_JOBS,
     async(data) => {
         return await JobsService.searchJobs(data);
+    }
+)
+
+export const filterTagAsync = createAsyncThunk(
+    actionTypes.FILTER_TAG,
+    async(data) => {
+        return await JobsService.filterTag(data);
     }
 )

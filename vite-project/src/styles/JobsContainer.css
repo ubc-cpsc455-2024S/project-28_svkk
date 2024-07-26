@@ -93,6 +93,15 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
     width: 40%;
     margin-top: auto;
   }
+
+  .add-tag {
+    border-radius: 25px;
+    background: #228B22;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+  }
   
   .delete-job {
     border-radius: 25px;

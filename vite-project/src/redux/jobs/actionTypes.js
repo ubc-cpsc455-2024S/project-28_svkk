@@ -5,5 +5,6 @@ export const actionTypes = {
     UPDATE_JOBS: 'jobs/updateJob',
     ADD_JOB: 'jobs/addJob',
     DELETE_JOB: 'jobs/deleteJob',
-    SEARCH_JOBS: 'jobs/searchJobs'
+    SEARCH_JOBS: 'jobs/searchJobs',
+    FILTER_TAG: 'jobs/filterTag'
 };

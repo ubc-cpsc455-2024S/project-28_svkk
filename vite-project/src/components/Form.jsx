@@ -20,7 +20,8 @@ const Form = (props) => {
     const [link, setLink] = useState('')
     const [cv, setCV] = useState('')
     const [tcv, setTCV] = useState('')
-
+    const [tag, setTag] = useState('')
+    const [tags, setTags] = useState([])
 
     const dispatch = useDispatch();
 
@@ -28,8 +29,8 @@ const Form = (props) => {
         // console.log('coverletters: ', coverLetters);
         // console.log('tailored coverletters ', tailoredCoverLetters);
         //await dispatch(addJobAsync({ title, company, type, location, date, duration, link, cv, tcv, userEmail }))
-        console.log('dispatching add job with data:', { title, company, type, location, date, duration, link, cv, tcv, userEmail});
-        await dispatch(addJobAsync({ title, company, type, location, date, duration, link, cv, tcv, userEmail}));
+        console.log('dispatching add job with data:', { title, company, type, location, date, duration, link, cv, tcv, userEmail, tags});
+        await dispatch(addJobAsync({ title, company, type, location, date, duration, link, cv, tcv, userEmail, tags}));
         // await dispatch(getCoverLettersAsync({email: userEmail}));
         // await dispatch(getTailoredCoverLettersAsync({email: userEmail}));
       
@@ -70,6 +71,11 @@ const Form = (props) => {
                 <label className='block'>
                     Link:
                     <input value={link} onChange={(e) => {setLink(e.target.value)}} type="text" name="" id="" placeholder='Link' className='m-4 ml-[100px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+                </label>
+                <label className='block'>
+                    Tags:
+                    <input value={tag} onChange={(e) => {setTag(e.target.value)}} type="text" name="" id="" placeholder='Link' className='m-4 ml-[100px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+                    <input type="button" className="add-tag" value="+" onClick={() => {let new_tags = tags; new_tags.push(tag); setTags(new_tags)}}/>
                 </label>
             </div>
             <div className="flex flex-col">

@@ -70,8 +70,8 @@ const updateJob = async ({id, fields}) => {
 //     return new_job
 // }
 
-const addJob = async({title, company, type, location, date, duration, link, cv, tcv, userEmail}) => {
-    console.log('at addJob in service.js with fields: ', {title, company, type, location, date, duration, link, cv, tcv, userEmail});
+const addJob = async({title, company, type, location, date, duration, link, cv, tcv, userEmail, tags}) => {
+    console.log('at addJob in service.js with fields: ', {title, company, type, location, date, duration, link, cv, tcv, userEmail, tags});
     const response = await fetch('http://localhost:3000/jobs/addJob', {
         method: 'POST',
         headers: {
@@ -87,7 +87,8 @@ const addJob = async({title, company, type, location, date, duration, link, cv, 
             link: link,
             coverLetterUsed: cv,
             tailoredCoverLetterUsed: tcv,
-            userEmail: userEmail
+            userEmail: userEmail,
+            tags: tags
         })
     });
 
@@ -123,6 +124,20 @@ const searchJobs = async(data) => {
     return new_jobs
 }
 
+const filterTag = async(data) => {
+    const response = await fetch(`http://localhost:3000/jobs/tag/${data.tagFilter}`, {
+        method: 'POST',
+        headers: {
+            "content-type": "application/json" 
+        },
+        body: JSON.stringify({"email": data.userEmail})
+    });
+
+    const new_jobs = await response.json()
+    return new_jobs
+}
+
+
 
 
 export default {
@@ -132,5 +147,6 @@ export default {
     deleteJob,
     searchJobs,
     getJobsDateAppliedEarliestToLatest,
-    getJobsDateAppliedEarliestToLatest
+    getJobsDateAppliedEarliestToLatest,
+    filterTag
 }
