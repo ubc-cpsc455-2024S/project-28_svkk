@@ -69,9 +69,10 @@ export const searchJobsAsync = createAsyncThunk(
     }
 )
 
-export const filterTagAsync = createAsyncThunk(
+export const filterTagsAsync = createAsyncThunk(
     actionTypes.FILTER_TAG,
     async(data) => {
-        return await JobsService.filterTag(data);
+        console.log('at filterTagAsync:', data);
+        return await JobsService.filterTags(data);
     }
 )

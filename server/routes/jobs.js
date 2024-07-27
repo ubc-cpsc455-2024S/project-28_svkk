@@ -179,7 +179,7 @@ router.post('/search/', async function(req, res, next) {
 });
 
 
-router.post('/tag/:filter', async function(req, res, next) {
+router.post('/tag/:filters', async function(req, res, next) {
   // const new_jobs = jobs.filter((job) => {
   //   // console.log(job.jobTitle)
   //   // console.log(req.params.filter)
@@ -187,11 +187,11 @@ router.post('/tag/:filter', async function(req, res, next) {
   // })
   console.log("email: " + req.body.email)
   
-  let filter = req.params.filter
-  console.log("filter: " + filter)
+  let filters = req.params.filters.split(',');
+  console.log("filters: " + filters)
   
   // took help from stackoverflow to for the syntax for filtering by whether the array contains a specific member. Link: https://stackoverflow.com/questions/18148166/find-document-with-array-that-contains-a-specific-value
-  const new_jobs = await Job.find({"tags": filter})
+  const new_jobs = await Job.find({tags: { $all: filters} });
 
   res.send(new_jobs)
 })

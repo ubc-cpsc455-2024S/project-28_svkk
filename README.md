@@ -6,7 +6,6 @@ The goal of this application is to help match students to their internships base
 ![Workflow Status Badge](https://github.com/ubc-cpsc455-2024S/project-28_svkk/actions/workflows/pipeline.yml/badge.svg)
 
 
-## Progress 1 
 **Project Description: Write 3-5 sentences on your project topic. (try to address all points below)**
 - Who is it for?
     - Students seeking internships during their busy term (applicants)

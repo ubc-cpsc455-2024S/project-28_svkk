@@ -4,6 +4,9 @@ import { addJobAsync, getJobsAsync } from "../redux/jobs/thunks";
 import { getCoverLettersAsync } from '../redux/coverLetters/thunk';
 import { getTailoredCoverLettersAsync } from '../redux/tailoredCoverLetters/thunk';
 import DropdownSelector from './CoverLetterCreationComponents/DropdownSelector';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import Chip from '@mui/material/Chip';
 
 const Form = (props) => {
     const userEmail = useSelector(state => state.userEmail.userEmail);
@@ -37,6 +40,18 @@ const Form = (props) => {
         props.setSelectForm(false)
         props.setSelectedJob(null)
     }
+
+    const addTag = (newTag) => {
+        setTags((prevTags) => [...prevTags, newTag]);
+        setTag('');
+        console.log('New tag added:', newTag);
+        console.log('current state of tags after add:', tags);
+    };
+
+    const deleteTag = (index) => {
+        setTags((prevTags) => prevTags.filter((tag, i) => i !== index));
+        console.log('current state of tags afte delete:', tags);
+      };
 
   return (
     <div className='flex flex-col justify-between border-solid rounded-lg text-sm w-[100%] h-[100%]'>
@@ -72,25 +87,46 @@ const Form = (props) => {
                     Link:
                     <input value={link} onChange={(e) => {setLink(e.target.value)}} type="text" name="" id="" placeholder='Link' className='m-4 ml-[100px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
                 </label>
-                <label className='block'>
-                    Tags:
-                    <input value={tag} onChange={(e) => {setTag(e.target.value)}} type="text" name="" id="" placeholder='Link' className='m-4 ml-[100px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
-                    <input type="button" className="add-tag" value="+" onClick={() => {let new_tags = tags; new_tags.push(tag); setTags(new_tags)}}/>
+                <label className='block flex-auto flex-row items-center'>
+                    Tags: 
+                    <input value={tag} onChange={(e) => {setTag(e.target.value)}} type="text" name="" id="" placeholder='Tag' className='m-4 ml-[100px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
+                    <Fab size="small" color="primary" aria-label="add" className="add-tag" onClick={() => addTag(tag)}> 
+                        <AddIcon />
+                    </Fab>
                 </label>
+                <div className='block self-center justify-self-center justify-items-center'>
+                    {tags.map((tag, i) => {
+                                //console.log('tags added so far:', tag);
+                                // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
+                                return (
+                                    <Chip
+                                        key={i}
+                                        label={tag}
+                                        sx={{
+                                            fontFamily: "Montserrat",
+                                            marginRight: 0.5
+                                        }}
+                                        onDelete={() => deleteTag(i)} 
+                                    />
+                                );
+                    })}
+
+                </div>
+            
             </div>
             <div className="flex flex-col">
                 <div>
                     <label className='block'>
                         Cover Letter Used:
                         <br/>
-                        <textarea value={cv} onChange={(e) => {setCV(e.target.value)}} type="text" name="" id="" rows={10} cols={65} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
+                        <textarea value={cv} onChange={(e) => {setCV(e.target.value)}} type="text" name="" id="" rows={10} cols={60} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
                     </label>
                 </div>
                 <div>
                     <label className='block'>
                         Tailored Cover Letter Used:
                         <br/>
-                        <textarea value={tcv} onChange={(e) => {setTCV(e.target.value)}} type="text" name="" id="" rows={10} cols={65} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
+                        <textarea value={tcv} onChange={(e) => {setTCV(e.target.value)}} type="text" name="" id="" rows={10} cols={60} className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'></textarea>
                     </label>
                 </div>
             </div>
@@ -106,7 +142,7 @@ const Form = (props) => {
             </div> */}
         </div>
         <div className='text-center'>
-            <input className="add-job w-[150px] p-[10px]" type="button" value="Add Job" onClick={async () => {await addJob()}}/>
+            <input className="add-job w-[150px] p-[10px]" type="button" value="Add Job" onClick={async () => {await addJob(), console.log("adding new job")}}/>
         </div>
       </form>
     </div>

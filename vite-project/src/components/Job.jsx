@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { updateJobAsync } from "../redux/jobs/thunks";
 import '../styles/Job.css';
 import Tags from "./Tags";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import Chip from '@mui/material/Chip';
 
 export default function Job({job}) {
     // console.log({job})
@@ -192,13 +195,26 @@ export default function Job({job}) {
                             adjustWidth(e.target);
                         }}>
                 </input> 
-                <input type="button" className="add-tag" value="+" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); console.log(temptags)}}}/>
-                <div className="flex">
+                
+                {/* <input type="button" className="add-tag" value="+" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); console.log(temptags)}}}/> */}
+                <div className="flex lex-auto flex-row items-center">
                         {console.log(temptags)}
+                        {/* <div className="flex-auto flex-row items-center">*/}
                         {temptags.map((tag, i) => {
                                 console.log(tag);
-                                return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
+                                // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
+                                return <Chip
+                                    label={tag}
+                                    sx={{
+                                        fontFamily: "Montserrat",
+                                        marginRight: 0.5
+                                    }}
+                                    onDelete={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}} 
+                                    />
                         })}
+                        <Fab size="small" color="primary" aria-label="add" className="add-tag" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); setTag(''); console.log('updated tags:', temptags)}}}> 
+                            <AddIcon />
+                        </Fab>
                 </div>
             </div> 
             <div className="coverletters-container"> 

@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
-import { deleteJobAsync, filterTagAsync, getJobsAsync } from "../redux/jobs/thunks";
+import { deleteJobAsync, filterTagsAsync, getJobsAsync } from "../redux/jobs/thunks";
 import MenuSimple from "./MenuSimple";
 // import SortByOptions from "./SortByOptions";
-
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 
 export default function JobList({ onSelectJob, selectForm, setSelectForm, selectedJob }) {
     const jobs = useSelector(state => state.jobList.jobs);
     const userEmail = useSelector(state => state.userEmail.userEmail);
 
     const [tagFilter, setTagFilter] = useState('')
+    const [tagFilters, setTagFilters] = useState([]);
 
     const dispatch = useDispatch();
     const [selectedJobId, setSelectedJobId] = useState(null);
@@ -20,12 +24,24 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
         console.log('selected job is:', job);
     }
 
-
-
     useEffect(() => {
         console.log('dispatching getjobsasync with useremail: ', userEmail);
         dispatch(getJobsAsync(userEmail));
     }, []);
+
+    const addTag = (newTag) => {
+        setTagFilters((prevTags) => [...prevTags, newTag]);
+        setTagFilter('');
+        console.log('New tag added:', newTag);
+        console.log('current state of tags after add:', tags);
+    };
+
+    const deleteTag = (index) => {
+        setTagFilters((prevTags) => prevTags.filter((tag, i) => i !== index));
+        console.log('current state of tags afte delete:', tags);
+      };
+
+
 
   
     return(
@@ -35,13 +51,46 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
                 <span className="date-applied">Date Applied</span>
             </div>
 
-            <div className="sort-by">Filter by Tag: 
-                <input type="text" name="" id="" value={tagFilter} onChange={(e) => {if (e.target.value === '') {   
-                                                                                                                    let tagFilter = e.target.value
-                                                                                                                    dispatch(filterTagAsync({userEmail, tagFilter}))
-                                                                                                                }; 
-                                                                                                                    setTagFilter(e.target.value)}}/>
+            {/* <div className="sort-by">Filter by Tag(s): 
+                <input type="text" name="" id="" value={tagFilter} 
+                onChange={(e) => {if (e.target.value === '') 
+                                    {   let tagFilter = e.target.value;
+                                        dispatch(filterTagAsync({userEmail, tagFilter}))
+                                    }; 
+                                    setTagFilter(e.target.value)}}/>
                 <input type="button" value="search" onClick={()=> {dispatch(filterTagAsync({userEmail, tagFilter}))}}/>
+            </div> */}
+
+            <div className="sort-by">Filter by Tag(s): 
+                {/*textfield to type in filter*/}
+                <input className="ml-2 rounded-full pl-2" type="text" name="" id="" value={tagFilter} onChange={(e) => { setTagFilter(e.target.value) }}/>
+                {/*add button*/}
+                <Fab size="small" color="primary" sx={{marginLeft: 1.0}} aria-label="add" className="add-tag" onClick={() => addTag(tagFilter)}> 
+                    <AddIcon />
+                </Fab>
+                {/*apply button*/}
+                <Button variant="contained" 
+                        sx={{fontFamily: "Montserrat", marginLeft: 1.0, borderRadius: 70 }} 
+                        onClick={()=> {dispatch(filterTagsAsync({userEmail, tagFilters})); console.log('filtering on these tags:', tagFilters)}}>
+                        Apply
+                </Button>
+                <div>
+                    {tagFilters.map((tag, i) => {
+                            //console.log('tags added so far:', tag);
+                            // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
+                            return (
+                                <Chip
+                                    key={i}
+                                    label={tag}
+                                    sx={{
+                                        fontFamily: "Montserrat",
+                                        marginRight: 0.5
+                                    }}
+                                    onDelete={() => deleteTag(i)} 
+                                />
+                            );
+                        })}
+                </div>
             </div>
             {/* <MenuSimple/> */}
         
