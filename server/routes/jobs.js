@@ -191,7 +191,9 @@ router.post('/tag/:filters', async function(req, res, next) {
   console.log("filters: " + filters)
   
   // took help from stackoverflow to for the syntax for filtering by whether the array contains a specific member. Link: https://stackoverflow.com/questions/18148166/find-document-with-array-that-contains-a-specific-value
-  const new_jobs = await Job.find({tags: { $all: filters} });
+  const new_jobs = await Job.find({
+    userEmail: req.body.email, 
+    tags: { $all: filters} });
 
   res.send(new_jobs)
 })

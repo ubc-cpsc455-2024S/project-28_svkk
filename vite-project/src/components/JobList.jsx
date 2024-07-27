@@ -37,9 +37,24 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
     };
 
     const deleteTag = (index) => {
-        setTagFilters((prevTags) => prevTags.filter((tag, i) => i !== index));
-        console.log('current state of tags afte delete:', tags);
+        const updatedTags = tagFilters.filter((tag, i) => i !== index);
+        setTagFilters(updatedTags);
+        console.log('current state of tagFilters:', tagFilters);
+        if (updatedTags.length === 0) {
+            console.log('no filter applied, getting all jobs');
+            dispatch(getJobsAsync(userEmail));
+        }  else {
+            console.log('Filtering with tags:', updatedTags);
+            dispatch(filterTagsAsync({ userEmail, tagFilters: updatedTags }));
+        }
+        console.log('current state of tags after delete:', tagFilters);
       };
+
+    // const deleteTag = (index) => {
+    //     setTagFilters((prevTags) => prevTags.filter((tag, i) => i !== index));
+    //     console.log('current state of tagFilters:', tagFilters);
+    //     console.log('current state of tags afte delete:', tags);
+    // };
 
 
 
