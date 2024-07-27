@@ -1,10 +1,10 @@
 var express = require('express');
 const {mongoose} = require("mongoose");
-const {resumeSchema} = require("../model/schema");
+// const {resumeSchema} = require("../model/schema");
+// const Resume = mongoose.model("Resume", resumeSchema, "resumes");
 var router = express.Router();
-const Resume = mongoose.model("Resume", resumeSchema, "resumes");
 
-let resumes = [];
+const { Resume } = require("../model/schema");
 
 router.get('/', async function (req, res, next) {
     // console.log("resumes: ", resumes);

@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const {mongoose} = require("mongoose");
-const { jobPostingSchema} = require("../model/schema");
-const JobPosting = mongoose.model("JobPosting", jobPostingSchema, "jobPostings");
+// const { jobPostingSchema} = require("../model/schema");
+// const JobPosting = mongoose.model("JobPosting", jobPostingSchema, "jobPostings");
+
+
+const {JobPosting} = require('../model/schema');
 
 let initialJobPostingList = [
     {

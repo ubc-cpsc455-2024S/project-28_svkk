@@ -13,6 +13,7 @@ var tailoredCoverLettersRouter = require('./routes/tailoredCoverLetters');
 var resumeRouter = require('./routes/resumes');
 var signUpRouter = require('./routes/signUp');
 var loginRouter = require('./routes/login')
+var editAccountsRouter = require('./routes/editAccounts')
 
 var app = express();
 connectDB()
@@ -33,5 +34,6 @@ app.use('/tailoredCoverLetters', tailoredCoverLettersRouter);
 app.use('/resumes', resumeRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
+app.use('/editAccounts', editAccountsRouter);
 
 module.exports = app;

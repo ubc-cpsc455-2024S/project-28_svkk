@@ -45,9 +45,15 @@ const tailoredCoverLetterSchema = new mongoose.Schema({
     content: String
 });
 
+// Define and export the models
+const Resume = mongoose.model("Resume", resumeSchema, "resumes");
+const CoverLetter = mongoose.model("CoverLetter", coverLetterSchema, "coverLetters");
+const JobPosting = mongoose.model("JobPosting", jobPostingSchema, "jobPostings");
+const TailoredCoverLetter = mongoose.model("TailoredCoverLetter", tailoredCoverLetterSchema, "tailoredCoverLetters");
+
 module.exports = {
-    resumeSchema,
-    coverLetterSchema,
-    jobPostingSchema,
-    tailoredCoverLetterSchema
+    Resume,
+    CoverLetter,
+    JobPosting,
+    TailoredCoverLetter
 };

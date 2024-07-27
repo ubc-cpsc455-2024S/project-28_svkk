@@ -1,9 +1,10 @@
 var express = require('express');
 const {mongoose} = require("mongoose");
-const {coverLetterSchema, tailoredCoverLetterSchema} = require("../model/schema");
+// const {coverLetterSchema, tailoredCoverLetterSchema} = require("../model/schema");
+// const TailoredCoverLetter = mongoose.model("TailoredCoverLetter", tailoredCoverLetterSchema, "tailoredCoverLetters");
 var router = express.Router();
-const TailoredCoverLetter = mongoose.model("TailoredCoverLetter", tailoredCoverLetterSchema, "tailoredCoverLetters");
 
+const {TailoredCoverLetter} = require('../model/schema');
 
 let tailoredCoverLetters = [];
 

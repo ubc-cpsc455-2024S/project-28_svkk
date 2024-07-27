@@ -3,8 +3,10 @@ var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const users = require("../model/user");
 const {mongoose} = require("mongoose");
-const {coverLetterSchema} = require("../model/schema");
-const CoverLetter = mongoose.model("CoverLetter", coverLetterSchema, "coverLetters");
+// const {coverLetterSchema} = require("../model/schema");
+// const CoverLetter = mongoose.model("CoverLetter", coverLetterSchema, "coverLetters");
+
+const {CoverLetter} = require("../model/schema");
 
 const templates = [
     {

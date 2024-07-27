@@ -62,16 +62,21 @@ const Login = () => {
                          className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
               </label>
           </div>
-          {/*<div className='text-center'>*/}
-          {/*  <Link to="/MainDashboard"><input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white" type="button" value="Log in"/></Link>*/}
-          {/*</div>*/}
           <div className='text-center'>
               <input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white" type="button"
                      value="Log in" onClick={onSubmit}/>
           </div>
-
-          <Link to="/Signup"><p className='text-center'>Not already a member? <a
-              className='text-neutral-500 cursor-pointer'>Sign up</a></p></Link>
+          <div className="flex justify-center items-center space-x-20">
+              <Link to="/EditAccounts">
+                  <p className="text-center mt-2 text-blue-500 cursor-pointer hover:underline">Edit Accounts</p>
+              </Link>
+              <Link to="/Signup">
+                  <p className="text-center mt-2">
+                      Not a member?
+                      <a className="text-neutral-500 cursor-pointer hover:underline"> Sign up</a>
+                  </p>
+              </Link>
+          </div>
       </div>
   )
 }
