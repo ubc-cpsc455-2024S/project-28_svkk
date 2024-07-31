@@ -7,6 +7,7 @@ import { deleteJobPostingAsync } from '../../redux/jobPostings/thunk.js';
 import { deleteCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
 import {deleteTailoredCoverLetterAsync} from "../../redux/tailoredCoverLetters/thunk.js";
 import {deleteResumesAsync} from "../../redux/resumes/thunk.js";
+import DownloadDocx from "./DownloadDocx.jsx";
 
 export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters, tailoredCoverLetters}) {
     const dispatch = useDispatch();
@@ -151,15 +152,22 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
                     displayText={findSelectedElement().content}
                 />
                 <br></br><br></br>
+                <DownloadDocx text={findSelectedElement().content} name={findSelectedElement().name} />
+
+                <br></br><br></br>
 
                 <button
                     className="remove_button"
                     onClick={removeElement}>
                     Remove Document
                 </button>
+
+
             </div>
         </>
     );
+
+
 
 
 }
