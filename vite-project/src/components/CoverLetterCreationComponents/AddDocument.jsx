@@ -7,6 +7,11 @@ import { addJobPostingAsync } from '../../redux/jobPostings/thunk.js';
 import { addCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
 import { v4 as uuidv4 } from 'uuid';
 import {addResumeAsync} from "../../redux/resumes/thunk.js";
+import UploadDocx from "./UploadDocx.jsx";
+import * as fs from "fs";
+import DownloadFile from "./DownloadDocx.jsx";
+import DownloadDocx from "./DownloadDocx.jsx";
+
 
 export default function AddDocument({ resumes, jobPostings, coverLetters, coverLetterTemplates }) {
     const dispatch = useDispatch();
@@ -22,6 +27,8 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
     const [elementTextBox, setElementTextBox] = useState("");
     const [templateIndex, setTemplateIndex] = useState(0);
     const [response, setResponse] = useState("Welcome! This is the confirmation box.");
+
+
 
     const email = useSelector(state => state.userEmail.userEmail);
 
@@ -91,7 +98,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                     console.log("dispatching add cover letter from template request");
                     dispatch(addCoverLetterAsync({email: email, coverLetter: elementObject}));
                     setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
-                    
+
                 } else {
                     setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
                 }
@@ -105,6 +112,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
 
 
     // ====== Helpers ======
+
     function prevTemplate() {
         setTemplateIndex((prevIndex) => (prevIndex - 1 + coverLetterTemplates.length) % coverLetterTemplates.length);
     }
@@ -135,7 +143,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
 
     // ====== Display ======
     return(
-        
+
             <>
             {/*Adding Card*/}
 
@@ -148,6 +156,8 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                     placeholder="Document name"
                     onChange={(eventObject) => setElementTitleBox(eventObject.target.value)}
                 />
+
+
                 <br></br>
                 <br></br>
 
@@ -173,10 +183,13 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                 <WhitePageDisplay displayText={response} />
                 <br></br><br></br>
 
+                <UploadDocx setResponse={setElementTextBox}></UploadDocx>
+                <br></br><br></br>
                 <button className="add_button" onClick={addElement}>Add Document</button>
+                {/*<DownloadDocx text={elementTextBox}></DownloadDocx>*/}
 
             </div>
             </>
-    
+
     );
 }
