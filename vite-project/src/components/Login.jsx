@@ -1,16 +1,12 @@
 import React, {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
-import MainDashboard from './MainDashboard';
-import Signup from './Signup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 import {USED_IP} from "../redux/ip.js";
+import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 
 const Login = () => {
-
     const dispatch = useDispatch();
-    const userEmail = useSelector(state => state.userEmail.userEmail)
-
     const [userData, setUserData] = useState({
         email: '',
         password: ''
@@ -23,7 +19,7 @@ const Login = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch(USED_IP + 'login', {
+            const response = await fetch( USED_IP + 'login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -43,8 +39,39 @@ const Login = () => {
         }
     }
 
+    const onGoogleSuccess = async (response) => {
+        console.log("Google login success: ", response);
+        const token = response.credential;
+        try {
+            const res = await fetch( USED_IP + 'login/google', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({token})
+            });
 
-  return (
+            const data = await res.json()
+            if (res.status === 200) {
+                dispatch(setUserEmail(data.email))
+                navigate('/MainDashboard')
+            } else if (res.status == 400) {
+                navigate('/Signup', { state: { email: data.email } });
+            } else {
+                alert(data.msg)
+            }
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+
+    }
+
+    const onGoogleFailure = (error) => {
+        console.log("failed to log in: ", error);
+    }
+
+
+    return (
       <div
           className='flex flex-col border-solid rounded-lg border-neutral-400 border-[1px] p-[5px] pb-[15px] w-[420px] m-[auto] mt-[200px]'>
           <div className='mt-2 text-center'><h2 className='text-3xl'>Application Tailor</h2></div>
@@ -54,8 +81,6 @@ const Login = () => {
                   <input type="text" name="email" placeholder='Email' value={email} onChange={onChange}
                          className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
               </label>
-              {/* add password validation*/}
-              {/* TODO: add remember password */}
               <label className='block ml-[70px]'>
                   Password:
                   <input type="password" name="password" placeholder='Password' value={password} onChange={onChange}
@@ -65,6 +90,14 @@ const Login = () => {
           <div className='text-center'>
               <input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white" type="button"
                      value="Log in" onClick={onSubmit}/>
+          </div>
+          <div className={'text-center mb-4'}>
+              <GoogleOAuthProvider clientId={'869398522193-9j7n8el0o9p36t14mvck3f1vg0f91l4q.apps.googleusercontent.com'}>
+                  <GoogleLogin
+                      onSuccess={onGoogleSuccess}
+                      onError={onGoogleFailure}
+                  />
+              </GoogleOAuthProvider>
           </div>
           <div className="flex justify-center items-center space-x-20">
               <Link to="/EditAccounts">

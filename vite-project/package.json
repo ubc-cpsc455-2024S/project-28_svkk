@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.5",
     "docx": "^8.5.0",
     "file-saver": "^2.0.5",
