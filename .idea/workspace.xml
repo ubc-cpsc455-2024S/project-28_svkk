@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19c176f9-4543-4e5d-810e-036c18409e65" name="Changes" comment="Added docx upload and download functionality!">
+    <list default="true" id="19c176f9-4543-4e5d-810e-036c18409e65" name="Changes" comment="Updated package.json">
       <change afterPath="$PROJECT_DIR$/vite-project/src/components/CoverLetterCreationComponents/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +98,7 @@
       <workItem from="1722362514801" duration="14503000" />
       <workItem from="1722446052669" duration="3549000" />
       <workItem from="1722466836158" duration="121000" />
+      <workItem from="1722467078313" duration="71000" />
     </task>
     <task id="LOCAL-00001" summary="Added docx upload and download functionality!">
       <option name="closed" value="true" />
@@ -116,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722386595529</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated package.json">
+      <option name="closed" value="true" />
+      <created>1722467119085</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722467119085</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +155,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added docx upload and download functionality!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added docx upload and download functionality!" />
+    <MESSAGE value="Updated package.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated package.json" />
   </component>
 </project>

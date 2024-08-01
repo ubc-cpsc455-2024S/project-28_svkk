@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import {USED_IP} from "../../redux/ip.js";
 
 // From MUI Documentation https://mui.com/material-ui/react-button/
 const VisuallyHiddenInput = styled('input')({
@@ -29,6 +30,23 @@ export default function UploadDocx({ setResponse }) {
             setResponse(formattedText);
         }
     };
+
+    // Code written on 31st July 2024 with the help of stackoverflow post https://stackoverflow.com/questions/52140939/how-to-send-pdf-file-from-front-end-to-nodejs-server
+    const handlePDFUpload = async (e) => {
+        const file = e.target.files[0]
+        console.log(file)
+        var formData = new FormData()
+        formData.append('file', file)
+        let result = await fetch(USED_IP + "resumes/uploadPDF",
+            {
+                method: 'POST',
+                body: formData
+            }
+        )
+        const data = await result.json()
+        setResponse(data.data);
+        console.log(data.data)
+    }
 
     function readFileAsArrayBuffer(file) {
         return new Promise((resolve, reject) => {
@@ -104,6 +122,17 @@ export default function UploadDocx({ setResponse }) {
             >
                 Upload file
                 <VisuallyHiddenInput type="file" accept=".docx" onChange={handleFileUpload} />
+            </Button>
+            <Button
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                accept=".pdf"
+                startIcon={<CloudUploadIcon />}
+            >
+                Upload PDF
+                <VisuallyHiddenInput type="file" accept=".pdf" onChange={handlePDFUpload} />
             </Button>
             <br /><br />
             {fileName && <p>File uploaded: {fileName}</p>}
