@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import {USED_IP} from "../../redux/ip.js";
 
 // From MUI Documentation https://mui.com/material-ui/react-button/
 const VisuallyHiddenInput = styled('input')({
@@ -36,13 +37,14 @@ export default function UploadDocx({ setResponse }) {
         console.log(file)
         var formData = new FormData()
         formData.append('file', file)
-        let result = await fetch("http://localhost:3000/resumes/uploadPDF",
+        let result = await fetch(USED_IP + "resumes/uploadPDF",
             {
                 method: 'POST',
                 body: formData
             }
         )
         const data = await result.json()
+        setResponse(data.data);
         console.log(data.data)
     }
 
