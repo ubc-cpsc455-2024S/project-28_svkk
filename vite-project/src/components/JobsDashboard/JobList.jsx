@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
-import { deleteJobAsync, filterTagsAsync, getJobsAsync } from "../redux/jobs/thunks";
-import MenuSimple from "./MenuSimple";
+import { deleteJobAsync, filterTagsAsync, getJobsAsync } from "../../redux/jobs/thunks";
+import MenuSimple from "../MenuSimple";
 // import SortByOptions from "./SortByOptions";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';

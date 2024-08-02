@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addJobAsync, getJobsAsync } from "../redux/jobs/thunks";
-import { getCoverLettersAsync } from '../redux/coverLetters/thunk';
-import { getTailoredCoverLettersAsync } from '../redux/tailoredCoverLetters/thunk';
-import DropdownSelector from './CoverLetterCreationComponents/DropdownSelector';
+import { addJobAsync, getJobsAsync } from "../../redux/jobs/thunks";
+import { getCoverLettersAsync } from '../../redux/coverLetters/thunk';
+import { getTailoredCoverLettersAsync } from '../../redux/tailoredCoverLetters/thunk';
+import DropdownSelector from '../CoverLetterCreationComponents/DropdownSelector';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Chip from '@mui/material/Chip';

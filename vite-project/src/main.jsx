@@ -9,11 +9,12 @@ import {
 } from "react-router-dom";
 import Login from './components/Login.jsx';
 import ErrorPage from './error-page.jsx';
-import MainDashboard from './components/MainDashboard.jsx';
+import MainDashboard from './components/JobsDashboard/MainDashboard.jsx';
 import Signup from './components/Signup.jsx';
 import CoverLetterPage from './components/CoverLetterCreationComponents/CoverLetterPage.jsx';
 import EditAccounts from './components/EditAccounts.jsx'
 import {GoogleOAuthProvider} from "@react-oauth/google";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // code for implementation of react router for linking pages: 
 // https://reactrouter.com/en/main/start/tutorial
@@ -53,12 +54,23 @@ const router = createBrowserRouter([
   }
 ]);
 
+const theme = createTheme({
+  palette: {
+    bg: '#EFF7F8',
+    shadow: '#DFEAEA',
+    teal: '#1199A9',
+    darkTeal: '#0C6F7B'
+  }
+})
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <GoogleOAuthProvider clientId={'869398522193-9j7n8el0o9p36t14mvck3f1vg0f91l4q.apps.googleusercontent.com'}>
-      <RouterProvider router={router}/>
-    </GoogleOAuthProvider>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <GoogleOAuthProvider clientId={'869398522193-9j7n8el0o9p36t14mvck3f1vg0f91l4q.apps.googleusercontent.com'}>
+          <RouterProvider router={router}/>
+        </GoogleOAuthProvider>
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>,
 )

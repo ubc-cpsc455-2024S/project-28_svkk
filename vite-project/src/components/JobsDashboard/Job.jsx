@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateJobAsync } from "../redux/jobs/thunks";
-import '../styles/Job.css';
-import Tags from "./Tags";
+import { updateJobAsync } from "../../redux/jobs/thunks";
+import '../../styles/Job.css';
+import Tags from "../Tags";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Chip from '@mui/material/Chip';
