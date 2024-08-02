@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import JobsContainer from "./JobsContainer";
-import Navbar from "./Navbar";
+import JobsContainer from "./JobsDashboard/JobsContainer";
+import Navbar from "./JobsDashboard/Navbar";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

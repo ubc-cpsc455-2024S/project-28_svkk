@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import '../styles/Navbar.css';
+import '../../styles/Navbar.css'
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from "react-redux";
-import { searchJobsAsync } from "../redux/jobs/thunks";
+import { searchJobsAsync } from "../../redux/jobs/thunks";
 
 export default function Navbar(props) {
 
