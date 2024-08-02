@@ -50,8 +50,10 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
         let cover_letter = findElement(coverLetters, apiCoverLetter).content;
         let job_posting = findElement(jobPostings, apiJobDescription).content;
         let additional_requests = additionalRequests;
+        const apiKey = import.meta.env.VITE_API_KEY;
 
         console.log(generateGPTRequestString(resume,cover_letter,job_posting, additional_requests));
+        console.log('apiKey is:', apiKey);
 
         // Referenced from Chat-GPT Postman API Documentation
         let myHeaders = new Headers();
@@ -60,7 +62,7 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
         // Media types accepted are in json format
         myHeaders.append("Accept", "application/json");
         // This is my authorization token for my account
-        myHeaders.append("Authorization", "Bearer sk-XX79bCl1ar0g_pSTRBlyREz1xsY5iiZhQsRgAlZ-F6T3BlbkFJScc6wAE5jiUH9DpnYBZQbLm5G4lwotEgBVxCVvbuMA");
+        myHeaders.append("Authorization", apiKey);
 
         // models we can replace it with for quality
         //gpt-4o
