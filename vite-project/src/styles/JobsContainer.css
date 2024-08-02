@@ -22,7 +22,7 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
     /* width: 300px; */
     border-right: 1px solid #ccc;
     /* overflow-y: scroll; */
-    height: 85vh; /*restrict height to trigger scrollbar when content overflows*/
+    height: 88vh; /*restrict height to trigger scrollbar when content overflows*/
     display: flex;
     flex-direction: column;
   }

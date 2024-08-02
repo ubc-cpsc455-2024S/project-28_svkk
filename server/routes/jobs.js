@@ -175,6 +175,7 @@ router.post('/delete/:id', async function(req, res, next) {
 
 router.post('/search/', async function(req, res, next) {
   const jobs = await Job.find({ userEmail: req.body.email});
+  console.log('jobs found from search are:', jobs);
   res.send(jobs);
 });
 
@@ -210,7 +211,8 @@ router.post('/search/:filter', async function(req, res, next) {
   //   // console.log(req.params.filter)
   //   return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
   // })
-  console.log("email: " + req.body.email)
+  let email = req.body.email;
+  console.log("email: " + email);
   
   let filter = req.params.filter
   console.log("filter: " + filter)
@@ -218,10 +220,10 @@ router.post('/search/:filter', async function(req, res, next) {
   // Took help from stackoverflow to understand how to use regex in mongoose
   // Link: https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find  
   
-  const new_jobs_title = await Job.find({"jobTitle": { "$regex": filter, "$options": "i" }})
+  const new_jobs_title = await Job.find({"jobTitle": { "$regex": filter, "$options": "i" }, "userEmail" : email});
   console.log("new_jobs_title: " + new_jobs_title)
 
-  const new_jobs_company = await Job.find({"company": { "$regex": filter, "$options": "i" }})
+  const new_jobs_company = await Job.find({"company": { "$regex": filter, "$options": "i" }, "userEmail" : email});
   console.log("new_jobs_company: " + new_jobs_company)
 
   let final_jobs = new_jobs_title

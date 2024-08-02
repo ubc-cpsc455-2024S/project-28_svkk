@@ -1,14 +1,23 @@
 
 .navBar {
     font-family: "Montserrat", sans-serif;
-    height: 15vh;
+    height: 12vh;
     display: flex;
     flex-grow:1;
     justify-content: space-between;
     color: black;
-    background-color: #00C3FF;
+    background-color: #0C6F7B;
     align-items: center;
     gap: 20px;
+    /* box-shadow: 0px 5px 8px 0px #054D56; */
+}
+
+.iconButton:hover {
+    color: #C1DCDF;
+}
+
+.logoutIcon:hover {
+    /* color: #565656; */
 }
 
 
@@ -18,6 +27,7 @@
     display: flex;
     align-items: center;
     color: white;
+    position: relative;
 }
 
 .navBar-Right {
@@ -37,11 +47,8 @@
 
 .navBar-Button {
     display: flex;
-    /* background-color: beige; */
     padding: 5px 10px;
     border-radius: 10px;
-    /* color: black; */
-    /* border: 2px solid black; */
     background: #0F52BA;
     color:#f0f0f0;
 }
@@ -56,19 +63,22 @@
 }
 
 .searchIcon {
-    position: absolute;
-    left: 10px;
+    position: relative;
+    /* left: 0.em; */
+    right: 1.1em;
     color: black;
-    font-size: 15px;
+    font-size: 0.938rem;
     pointer-events: none;
+    z-index: 2;
 }
 
 .searchBar {
-    padding: 5px 10px 5px 35px;
-    font-size: 15px;
-    /* border: 2px solid black; */
-    border-radius: 20px;
+    padding: 0.3em 0.75px 0.3em 2.5em;
+    font-size: 0.938rem;
+    border-radius: 1.25rem;
     background-color: white;
+    z-index: 1;
+    position: relative;
 }
 
 .navBar-Button {
@@ -76,3 +86,5 @@
     color:#f0f0f0;
 }
 
+
+ 

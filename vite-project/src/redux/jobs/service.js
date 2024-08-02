@@ -97,6 +97,7 @@ const searchJobs = async(data) => {
     });
 
     const new_jobs = await response.json()
+    console.log('search results are:', new_jobs);
     return new_jobs
 }
 
