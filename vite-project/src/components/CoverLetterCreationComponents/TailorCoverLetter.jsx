@@ -60,7 +60,7 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
         // Media types accepted are in json format
         myHeaders.append("Accept", "application/json");
         // This is my authorization token for my account
-        myHeaders.append("Authorization", "Bearer sk-proj-2gUnSpGlbiyUdBZ7LFMvT3BlbkFJ17KDuvY4x3mf7tiiKcom");
+        myHeaders.append("Authorization", "Bearer sk-XX79bCl1ar0g_pSTRBlyREz1xsY5iiZhQsRgAlZ-F6T3BlbkFJScc6wAE5jiUH9DpnYBZQbLm5G4lwotEgBVxCVvbuMA");
 
         // models we can replace it with for quality
         //gpt-4o
