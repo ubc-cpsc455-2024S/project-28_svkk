@@ -86,8 +86,8 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
   
   .add-job {
     border-radius: 25px;
-    background: #228B22;
-    color: #f0f0f0;
+    background: #22B538;
+    color: black;
     text-align: center;
     padding: 0.4em;
     width: 40%;

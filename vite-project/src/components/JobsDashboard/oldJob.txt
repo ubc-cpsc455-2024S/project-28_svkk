@@ -1,0 +1,167 @@
+<form className="job-details">
+            <div className="job-field">
+                <label htmlFor="jobTitle">
+                    <b>Job Title:  </b>
+                </label> 
+                <input id="jobTitle" 
+                        className="auto-width-input"
+                        // defaultValue={job.jobTitle} 
+                        value={jobTitle}
+                        ref={jobTitleInputRef} 
+                        onChange={(e) => {
+                            setJobTitle(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input>
+            </div>
+            <div className="job-field">
+                <label htmlFor="company">
+                    <b>Company:  </b>
+                </label> 
+                <input id="company" 
+                        className="auto-width-input"
+                        value={company}
+                        ref={companyInputRef}
+                        onChange={(e) => {
+                            setCompany(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input>
+            </div>
+            <div className="job-field">
+                <label htmlFor="job-type">
+                    <b>Job Type:  </b>
+                </label> 
+                <input id="job-type" 
+                        className="auto-width-input"
+                        value={jobType}
+                        ref={jobTypeInputRef}
+                        onChange={(e) => {
+                            setJobType(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input>
+            </div>
+            <div className="job-field">
+                <label htmlFor="location">
+                    <b>Location:  </b>
+                </label> 
+                <input id="location" 
+                        className="auto-width-input"
+                        value={location}
+                        ref={locationInputRef}
+                        onChange={(e) => {
+                            setLocation(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input>
+            </div>
+            <div className="job-field">
+                <label htmlFor="date-applied">
+                    <b>Date Applied:  </b>
+                </label> 
+                <input id="date-applied" 
+                        className="auto-width-input"
+                        value={dateApplied}
+                        ref={dateAppliedInputRef}
+                        onChange={(e) => {
+                            setDateApplied(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input>
+            </div>
+            <div className="job-field">
+                <label htmlFor="duration">
+                    <b>Duration:  </b>
+                </label> 
+                <input id="duration" 
+                        className="auto-width-input"
+                        value={duration}
+                        ref={durationInputRef}
+                        onChange={(e) => {
+                            setDuration(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input>
+            </div>
+
+            <div className="job-field">
+                <label htmlFor="link">
+                    <b><a href={job.link} target="_blank" rel="noopener noreferrer"> <u>Link</u></a> to job posting:  </b>
+                </label> 
+                <input id="link" 
+                        className="auto-width-input"
+                        value={link}
+                        ref={linkInputRef}
+                        onChange={(e) => {
+                            setLink(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input>
+            </div>
+            <div className="">
+                <label htmlFor="tags">
+                    <b>Tags: </b>
+                </label> 
+                <input id="tags" 
+                        className="auto-width-input"
+                        value={tag}
+                        onChange={(e) => {
+                            setTag(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </input> 
+                
+                {/* <input type="button" className="add-tag" value="+" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); console.log(temptags)}}}/> */}
+                <div className="flex lex-auto flex-row items-center">
+                        {console.log(temptags)}
+                        {/* <div className="flex-auto flex-row items-center">*/}
+                        {temptags.map((tag, i) => {
+                                console.log(tag);
+                                // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
+                                return <Chip
+                                    label={tag}
+                                    sx={{
+                                        fontFamily: "Montserrat",
+                                        marginRight: 0.5
+                                    }}
+                                    onDelete={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}} 
+                                    />
+                        })}
+                        <Fab size="small" color="primary" aria-label="add" className="add-tag" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); setTag(''); console.log('updated tags:', temptags)}}}> 
+                            <AddIcon />
+                        </Fab>
+                </div>
+            </div> 
+            <div className="coverletters-container"> 
+            <div className="coverletter-field">
+                <label htmlFor="coverletter">
+                    <b>Cover Letter Used: </b>
+                </label> 
+                <textarea id="coverletter"
+                          className="auto-width-input"
+                          value={coverLetter}
+                          ref={coverLetterInputRef}
+                          onChange={(e) => {
+                            setCoverLetter(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </textarea>
+            </div>
+
+            <div className="coverletter-field">
+                <label htmlFor="coverletter">
+                    <b>Tailored Cover Letter Used: </b>
+                </label> 
+                <textarea id="coverletter"
+                          className="auto-width-input"
+                          value={tailoredCoverLetter}
+                          ref={tailoredCoverLetterInputRef}
+                          onChange={(e) => {
+                            setTailoredCoverLetter(e.target.value);
+                            adjustWidth(e.target);
+                        }}>
+                </textarea>
+            </div>
+            </div>
+        </form>

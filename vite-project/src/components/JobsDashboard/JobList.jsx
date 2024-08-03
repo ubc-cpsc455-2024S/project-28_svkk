@@ -119,7 +119,7 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
         ))  
     }
     <div className="job-actions">
-        <span className="add-job" onClick={() => {setSelectForm(true); onSelectJob(null)}}>Add Job</span>
+        <span className="add-job relative" onClick={() => {setSelectForm(true); onSelectJob(null)}}> <p className="text-[black] opacity-[.56] inline-block absolute left-3 top-[-2px] text-4xl"> + </p>Add Job</span>
         <span className="delete-job" onClick={() => {   
                                                         if (selectedJob) {
                                                             console.log("dispatching delete with email: " + userEmail)
