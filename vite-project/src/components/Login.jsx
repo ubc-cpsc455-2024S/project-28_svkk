@@ -2,8 +2,11 @@ import React, {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
-import {USED_IP} from "../redux/ip.js";
 import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
+import {USED_IP} from "../redux/ip.js";
+
+const url = "http://localhost:3000/";
+
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -100,9 +103,6 @@ const Login = () => {
               </GoogleOAuthProvider>
           </div>
           <div className="flex justify-center items-center space-x-20">
-              <Link to="/EditAccounts">
-                  <p className="text-center mt-2 text-blue-500 cursor-pointer hover:underline">Edit Accounts</p>
-              </Link>
               <Link to="/Signup">
                   <p className="text-center mt-2">
                       Not a member?
