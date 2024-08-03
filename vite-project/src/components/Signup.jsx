@@ -114,7 +114,7 @@ const Signup = () => {
                 <form className='my-[10px]' onSubmit={onEmailPasswordSubmit}>
                     <label className='block ml-[70px]'>
                         Email:
-                        <input type="text" name="email" placeholder='Email' onChange={onChange} value={email}
+                        <input type="email" name="email" placeholder='Email' onChange={onChange} value={email}
                                className='m-4 ml-[65px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]' required />
                     </label>
                     <label className='block ml-[70px]'>

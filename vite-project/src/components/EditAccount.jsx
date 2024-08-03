@@ -107,7 +107,7 @@ const EditAccount = () => {
             if (response.ok) {
                 setMessage('User information updated successfully.');
                 setTimeout(() => {
-                    navigate('/login');
+                    navigate('/MainDashboard');
                 }, 1000);
             } else {
                 setMessage('Failed to update user information.');
