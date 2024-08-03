@@ -12,7 +12,7 @@ import ErrorPage from './error-page.jsx';
 import MainDashboard from './components/JobsDashboard/MainDashboard.jsx';
 import Signup from './components/Signup.jsx';
 import CoverLetterPage from './components/CoverLetterCreationComponents/CoverLetterPage.jsx';
-import EditAccounts from './components/EditAccounts.jsx'
+import EditAccount from './components/EditAccount.jsx'
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -43,8 +43,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/EditAccounts",
-    element: <EditAccounts />,
+    path: "/EditAccount",
+    element: <EditAccount />,
     errorElement: <ErrorPage />
   },
   {

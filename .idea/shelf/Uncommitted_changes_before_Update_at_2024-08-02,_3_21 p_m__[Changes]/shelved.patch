@@ -1,0 +1,738 @@
+Index: server/node_modules/.bin/mkdirp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/bin/sh\nbasedir=$(dirname \"$(echo \"$0\" | sed -e 's,\\\\,/,g')\")\n\ncase `uname` in\n    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w \"$basedir\"`;;\nesac\n\nif [ -x \"$basedir/node\" ]; then\n  exec \"$basedir/node\"  \"$basedir/../mkdirp/bin/cmd.js\" \"$@\"\nelse \n  exec node  \"$basedir/../mkdirp/bin/cmd.js\" \"$@\"\nfi\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/node_modules/.bin/mkdirp b/server/node_modules/.bin/mkdirp
+--- a/server/node_modules/.bin/mkdirp	(revision 24b914f9853bb15a00a862ce695345b8216b73f9)
++++ b/server/node_modules/.bin/mkdirp	(date 1722468146685)
+@@ -1,12 +1,68 @@
+-#!/bin/sh
+-basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++#!/usr/bin/env node
++
++const usage = () => `
++usage: mkdirp [DIR1,DIR2..] {OPTIONS}
++
++  Create each supplied directory including any necessary parent directories
++  that don't yet exist.
++
++  If the directory already exists, do nothing.
++
++OPTIONS are:
++
++  -m<mode>       If a directory needs to be created, set the mode as an octal
++  --mode=<mode>  permission string.
++
++  -v --version   Print the mkdirp version number
+ 
+-case `uname` in
+-    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
+-esac
++  -h --help      Print this helpful banner
+ 
+-if [ -x "$basedir/node" ]; then
+-  exec "$basedir/node"  "$basedir/../mkdirp/bin/cmd.js" "$@"
+-else 
+-  exec node  "$basedir/../mkdirp/bin/cmd.js" "$@"
+-fi
++  -p --print     Print the first directories created for each path provided
++
++  --manual       Use manual implementation, even if native is available
++`
++
++const dirs = []
++const opts = {}
++let print = false
++let dashdash = false
++let manual = false
++for (const arg of process.argv.slice(2)) {
++  if (dashdash)
++    dirs.push(arg)
++  else if (arg === '--')
++    dashdash = true
++  else if (arg === '--manual')
++    manual = true
++  else if (/^-h/.test(arg) || /^--help/.test(arg)) {
++    console.log(usage())
++    process.exit(0)
++  } else if (arg === '-v' || arg === '--version') {
++    console.log(require('../package.json').version)
++    process.exit(0)
++  } else if (arg === '-p' || arg === '--print') {
++    print = true
++  } else if (/^-m/.test(arg) || /^--mode=/.test(arg)) {
++    const mode = parseInt(arg.replace(/^(-m|--mode=)/, ''), 8)
++    if (isNaN(mode)) {
++      console.error(`invalid mode argument: ${arg}\nMust be an octal number.`)
++      process.exit(1)
++    }
++    opts.mode = mode
++  } else
++    dirs.push(arg)
++}
++
++const mkdirp = require('../')
++const impl = manual ? mkdirp.manual : mkdirp
++if (dirs.length === 0)
++  console.error(usage())
++
++Promise.all(dirs.map(dir => impl(dir, opts)))
++  .then(made => print ? made.forEach(m => m && console.log(m)) : null)
++  .catch(er => {
++    console.error(er.message)
++    if (er.code)
++      console.error('  code: ' + er.code)
++    process.exit(1)
++  })
+Index: server/node_modules/.bin/color-support
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/bin/sh\nbasedir=$(dirname \"$(echo \"$0\" | sed -e 's,\\\\,/,g')\")\n\ncase `uname` in\n    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w \"$basedir\"`;;\nesac\n\nif [ -x \"$basedir/node\" ]; then\n  exec \"$basedir/node\"  \"$basedir/../color-support/bin.js\" \"$@\"\nelse \n  exec node  \"$basedir/../color-support/bin.js\" \"$@\"\nfi\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/node_modules/.bin/color-support b/server/node_modules/.bin/color-support
+--- a/server/node_modules/.bin/color-support	(revision 24b914f9853bb15a00a862ce695345b8216b73f9)
++++ b/server/node_modules/.bin/color-support	(date 1722468146692)
+@@ -1,12 +1,3 @@
+-#!/bin/sh
+-basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
+-
+-case `uname` in
+-    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
+-esac
+-
+-if [ -x "$basedir/node" ]; then
+-  exec "$basedir/node"  "$basedir/../color-support/bin.js" "$@"
+-else 
+-  exec node  "$basedir/../color-support/bin.js" "$@"
+-fi
++#!/usr/bin/env node
++var colorSupport = require('./')({alwaysReturn: true })
++console.log(JSON.stringify(colorSupport, null, 2))
+Index: server/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/bin/sh\nbasedir=$(dirname \"$(echo \"$0\" | sed -e 's,\\\\,/,g')\")\n\ncase `uname` in\n    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w \"$basedir\"`;;\nesac\n\nif [ -x \"$basedir/node\" ]; then\n  exec \"$basedir/node\"  \"$basedir/../semver/bin/semver.js\" \"$@\"\nelse \n  exec node  \"$basedir/../semver/bin/semver.js\" \"$@\"\nfi\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/node_modules/.bin/semver b/server/node_modules/.bin/semver
+--- a/server/node_modules/.bin/semver	(revision 24b914f9853bb15a00a862ce695345b8216b73f9)
++++ b/server/node_modules/.bin/semver	(date 1722468146733)
+@@ -1,12 +1,188 @@
+-#!/bin/sh
+-basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++#!/usr/bin/env node
++// Standalone semver comparison program.
++// Exits successfully and prints matching version(s) if
++// any supplied version is valid and passes all tests.
++
++const argv = process.argv.slice(2)
++
++let versions = []
++
++const range = []
++
++let inc = null
++
++const version = require('../package.json').version
++
++let loose = false
++
++let includePrerelease = false
++
++let coerce = false
++
++let rtl = false
++
++let identifier
++
++let identifierBase
++
++const semver = require('../')
++const parseOptions = require('../internal/parse-options')
++
++let reverse = false
++
++let options = {}
++
++const main = () => {
++  if (!argv.length) {
++    return help()
++  }
++  while (argv.length) {
++    let a = argv.shift()
++    const indexOfEqualSign = a.indexOf('=')
++    if (indexOfEqualSign !== -1) {
++      const value = a.slice(indexOfEqualSign + 1)
++      a = a.slice(0, indexOfEqualSign)
++      argv.unshift(value)
++    }
++    switch (a) {
++      case '-rv': case '-rev': case '--rev': case '--reverse':
++        reverse = true
++        break
++      case '-l': case '--loose':
++        loose = true
++        break
++      case '-p': case '--include-prerelease':
++        includePrerelease = true
++        break
++      case '-v': case '--version':
++        versions.push(argv.shift())
++        break
++      case '-i': case '--inc': case '--increment':
++        switch (argv[0]) {
++          case 'major': case 'minor': case 'patch': case 'prerelease':
++          case 'premajor': case 'preminor': case 'prepatch':
++            inc = argv.shift()
++            break
++          default:
++            inc = 'patch'
++            break
++        }
++        break
++      case '--preid':
++        identifier = argv.shift()
++        break
++      case '-r': case '--range':
++        range.push(argv.shift())
++        break
++      case '-n':
++        identifierBase = argv.shift()
++        if (identifierBase === 'false') {
++          identifierBase = false
++        }
++        break
++      case '-c': case '--coerce':
++        coerce = true
++        break
++      case '--rtl':
++        rtl = true
++        break
++      case '--ltr':
++        rtl = false
++        break
++      case '-h': case '--help': case '-?':
++        return help()
++      default:
++        versions.push(a)
++        break
++    }
++  }
++
++  options = parseOptions({ loose, includePrerelease, rtl })
++
++  versions = versions.map((v) => {
++    return coerce ? (semver.coerce(v, options) || { version: v }).version : v
++  }).filter((v) => {
++    return semver.valid(v)
++  })
++  if (!versions.length) {
++    return fail()
++  }
++  if (inc && (versions.length !== 1 || range.length)) {
++    return failInc()
++  }
++
++  for (let i = 0, l = range.length; i < l; i++) {
++    versions = versions.filter((v) => {
++      return semver.satisfies(v, range[i], options)
++    })
++    if (!versions.length) {
++      return fail()
++    }
++  }
++  versions
++    .sort((a, b) => semver[reverse ? 'rcompare' : 'compare'](a, b, options))
++    .map(v => semver.clean(v, options))
++    .map(v => inc ? semver.inc(v, inc, options, identifier, identifierBase) : v)
++    .forEach(v => console.log(v))
++}
+ 
+-case `uname` in
+-    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
+-esac
++const failInc = () => {
++  console.error('--inc can only be used on a single version with no range')
++  fail()
++}
+ 
+-if [ -x "$basedir/node" ]; then
+-  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
+-else 
+-  exec node  "$basedir/../semver/bin/semver.js" "$@"
+-fi
++const fail = () => process.exit(1)
++
++const help = () => console.log(
++`SemVer ${version}
++
++A JavaScript implementation of the https://semver.org/ specification
++Copyright Isaac Z. Schlueter
++
++Usage: semver [options] <version> [<version> [...]]
++Prints valid versions sorted by SemVer precedence
++
++Options:
++-r --range <range>
++        Print versions that match the specified range.
++
++-i --increment [<level>]
++        Increment a version by the specified level.  Level can
++        be one of: major, minor, patch, premajor, preminor,
++        prepatch, or prerelease.  Default level is 'patch'.
++        Only one version may be specified.
++
++--preid <identifier>
++        Identifier to be used to prefix premajor, preminor,
++        prepatch or prerelease version increments.
++
++-l --loose
++        Interpret versions and ranges loosely
++
++-p --include-prerelease
++        Always include prerelease versions in range matching
++
++-c --coerce
++        Coerce a string into SemVer if possible
++        (does not imply --loose)
++
++--rtl
++        Coerce version strings right to left
++
++--ltr
++        Coerce version strings left to right (default)
++
++-n <base>
++        Base number to be used for the prerelease identifier.
++        Can be either 0 or 1, or false to omit the number altogether.
++        Defaults to 0.
++
++Program exits successfully if any valid version satisfies
++all supplied ranges, and prints all satisfying versions.
++
++If no satisfying versions are found, then exits failure.
++
++Versions are printed in ascending order, so supplying
++multiple versions to the utility will just sort them.`)
++
++main()
+Index: server/node_modules/.bin/rimraf
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/bin/sh\nbasedir=$(dirname \"$(echo \"$0\" | sed -e 's,\\\\,/,g')\")\n\ncase `uname` in\n    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w \"$basedir\"`;;\nesac\n\nif [ -x \"$basedir/node\" ]; then\n  exec \"$basedir/node\"  \"$basedir/../rimraf/bin.js\" \"$@\"\nelse \n  exec node  \"$basedir/../rimraf/bin.js\" \"$@\"\nfi\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/node_modules/.bin/rimraf b/server/node_modules/.bin/rimraf
+--- a/server/node_modules/.bin/rimraf	(revision 24b914f9853bb15a00a862ce695345b8216b73f9)
++++ b/server/node_modules/.bin/rimraf	(date 1722468146679)
+@@ -1,12 +1,68 @@
+-#!/bin/sh
+-basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++#!/usr/bin/env node
++
++const rimraf = require('./')
+ 
+-case `uname` in
+-    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
+-esac
++const path = require('path')
+ 
+-if [ -x "$basedir/node" ]; then
+-  exec "$basedir/node"  "$basedir/../rimraf/bin.js" "$@"
+-else 
+-  exec node  "$basedir/../rimraf/bin.js" "$@"
+-fi
++const isRoot = arg => /^(\/|[a-zA-Z]:\\)$/.test(path.resolve(arg))
++const filterOutRoot = arg => {
++  const ok = preserveRoot === false || !isRoot(arg)
++  if (!ok) {
++    console.error(`refusing to remove ${arg}`)
++    console.error('Set --no-preserve-root to allow this')
++  }
++  return ok
++}
++
++let help = false
++let dashdash = false
++let noglob = false
++let preserveRoot = true
++const args = process.argv.slice(2).filter(arg => {
++  if (dashdash)
++    return !!arg
++  else if (arg === '--')
++    dashdash = true
++  else if (arg === '--no-glob' || arg === '-G')
++    noglob = true
++  else if (arg === '--glob' || arg === '-g')
++    noglob = false
++  else if (arg.match(/^(-+|\/)(h(elp)?|\?)$/))
++    help = true
++  else if (arg === '--preserve-root')
++    preserveRoot = true
++  else if (arg === '--no-preserve-root')
++    preserveRoot = false
++  else
++    return !!arg
++}).filter(arg => !preserveRoot || filterOutRoot(arg))
++
++const go = n => {
++  if (n >= args.length)
++    return
++  const options = noglob ? { glob: false } : {}
++  rimraf(args[n], options, er => {
++    if (er)
++      throw er
++    go(n+1)
++  })
++}
++
++if (help || args.length === 0) {
++  // If they didn't ask for help, then this is not a "success"
++  const log = help ? console.log : console.error
++  log('Usage: rimraf <path> [<path> ...]')
++  log('')
++  log('  Deletes all files and folders at "path" recursively.')
++  log('')
++  log('Options:')
++  log('')
++  log('  -h, --help          Display this usage info')
++  log('  -G, --no-glob       Do not expand glob patterns in arguments')
++  log('  -g, --glob          Expand glob patterns in arguments (default)')
++  log('  --preserve-root     Do not remove \'/\' (default)')
++  log('  --no-preserve-root  Do not treat \'/\' specially')
++  log('  --                  Stop parsing flags')
++  process.exit(help ? 0 : 1)
++} else
++  go(0)
+Index: server/node_modules/make-dir/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/bin/sh\nbasedir=$(dirname \"$(echo \"$0\" | sed -e 's,\\\\,/,g')\")\n\ncase `uname` in\n    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w \"$basedir\"`;;\nesac\n\nif [ -x \"$basedir/node\" ]; then\n  exec \"$basedir/node\"  \"$basedir/../semver/bin/semver.js\" \"$@\"\nelse \n  exec node  \"$basedir/../semver/bin/semver.js\" \"$@\"\nfi\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/node_modules/make-dir/node_modules/.bin/semver b/server/node_modules/make-dir/node_modules/.bin/semver
+--- a/server/node_modules/make-dir/node_modules/.bin/semver	(revision 24b914f9853bb15a00a862ce695345b8216b73f9)
++++ b/server/node_modules/make-dir/node_modules/.bin/semver	(date 1722468146693)
+@@ -1,12 +1,174 @@
+-#!/bin/sh
+-basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++#!/usr/bin/env node
++// Standalone semver comparison program.
++// Exits successfully and prints matching version(s) if
++// any supplied version is valid and passes all tests.
++
++var argv = process.argv.slice(2)
++
++var versions = []
++
++var range = []
++
++var inc = null
++
++var version = require('../package.json').version
++
++var loose = false
++
++var includePrerelease = false
++
++var coerce = false
++
++var rtl = false
++
++var identifier
++
++var semver = require('../semver')
++
++var reverse = false
++
++var options = {}
++
++main()
++
++function main () {
++  if (!argv.length) return help()
++  while (argv.length) {
++    var a = argv.shift()
++    var indexOfEqualSign = a.indexOf('=')
++    if (indexOfEqualSign !== -1) {
++      a = a.slice(0, indexOfEqualSign)
++      argv.unshift(a.slice(indexOfEqualSign + 1))
++    }
++    switch (a) {
++      case '-rv': case '-rev': case '--rev': case '--reverse':
++        reverse = true
++        break
++      case '-l': case '--loose':
++        loose = true
++        break
++      case '-p': case '--include-prerelease':
++        includePrerelease = true
++        break
++      case '-v': case '--version':
++        versions.push(argv.shift())
++        break
++      case '-i': case '--inc': case '--increment':
++        switch (argv[0]) {
++          case 'major': case 'minor': case 'patch': case 'prerelease':
++          case 'premajor': case 'preminor': case 'prepatch':
++            inc = argv.shift()
++            break
++          default:
++            inc = 'patch'
++            break
++        }
++        break
++      case '--preid':
++        identifier = argv.shift()
++        break
++      case '-r': case '--range':
++        range.push(argv.shift())
++        break
++      case '-c': case '--coerce':
++        coerce = true
++        break
++      case '--rtl':
++        rtl = true
++        break
++      case '--ltr':
++        rtl = false
++        break
++      case '-h': case '--help': case '-?':
++        return help()
++      default:
++        versions.push(a)
++        break
++    }
++  }
++
++  var options = { loose: loose, includePrerelease: includePrerelease, rtl: rtl }
+ 
+-case `uname` in
+-    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
+-esac
++  versions = versions.map(function (v) {
++    return coerce ? (semver.coerce(v, options) || { version: v }).version : v
++  }).filter(function (v) {
++    return semver.valid(v)
++  })
++  if (!versions.length) return fail()
++  if (inc && (versions.length !== 1 || range.length)) { return failInc() }
+ 
+-if [ -x "$basedir/node" ]; then
+-  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
+-else 
+-  exec node  "$basedir/../semver/bin/semver.js" "$@"
+-fi
++  for (var i = 0, l = range.length; i < l; i++) {
++    versions = versions.filter(function (v) {
++      return semver.satisfies(v, range[i], options)
++    })
++    if (!versions.length) return fail()
++  }
++  return success(versions)
++}
++
++function failInc () {
++  console.error('--inc can only be used on a single version with no range')
++  fail()
++}
++
++function fail () { process.exit(1) }
++
++function success () {
++  var compare = reverse ? 'rcompare' : 'compare'
++  versions.sort(function (a, b) {
++    return semver[compare](a, b, options)
++  }).map(function (v) {
++    return semver.clean(v, options)
++  }).map(function (v) {
++    return inc ? semver.inc(v, inc, options, identifier) : v
++  }).forEach(function (v, i, _) { console.log(v) })
++}
++
++function help () {
++  console.log(['SemVer ' + version,
++    '',
++    'A JavaScript implementation of the https://semver.org/ specification',
++    'Copyright Isaac Z. Schlueter',
++    '',
++    'Usage: semver [options] <version> [<version> [...]]',
++    'Prints valid versions sorted by SemVer precedence',
++    '',
++    'Options:',
++    '-r --range <range>',
++    '        Print versions that match the specified range.',
++    '',
++    '-i --increment [<level>]',
++    '        Increment a version by the specified level.  Level can',
++    '        be one of: major, minor, patch, premajor, preminor,',
++    "        prepatch, or prerelease.  Default level is 'patch'.",
++    '        Only one version may be specified.',
++    '',
++    '--preid <identifier>',
++    '        Identifier to be used to prefix premajor, preminor,',
++    '        prepatch or prerelease version increments.',
++    '',
++    '-l --loose',
++    '        Interpret versions and ranges loosely',
++    '',
++    '-p --include-prerelease',
++    '        Always include prerelease versions in range matching',
++    '',
++    '-c --coerce',
++    '        Coerce a string into SemVer if possible',
++    '        (does not imply --loose)',
++    '',
++    '--rtl',
++    '        Coerce version strings right to left',
++    '',
++    '--ltr',
++    '        Coerce version strings left to right (default)',
++    '',
++    'Program exits successfully if any valid version satisfies',
++    'all supplied ranges, and prints all satisfying versions.',
++    '',
++    'If no satisfying versions are found, then exits failure.',
++    '',
++    'Versions are printed in ascending order, so supplying',
++    'multiple versions to the utility will just sort them.'
++  ].join('\n'))
++}
+Index: server/node_modules/.bin/nopt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/bin/sh\nbasedir=$(dirname \"$(echo \"$0\" | sed -e 's,\\\\,/,g')\")\n\ncase `uname` in\n    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w \"$basedir\"`;;\nesac\n\nif [ -x \"$basedir/node\" ]; then\n  exec \"$basedir/node\"  \"$basedir/../nopt/bin/nopt.js\" \"$@\"\nelse \n  exec node  \"$basedir/../nopt/bin/nopt.js\" \"$@\"\nfi\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/node_modules/.bin/nopt b/server/node_modules/.bin/nopt
+--- a/server/node_modules/.bin/nopt	(revision 24b914f9853bb15a00a862ce695345b8216b73f9)
++++ b/server/node_modules/.bin/nopt	(date 1722468146685)
+@@ -1,12 +1,54 @@
+-#!/bin/sh
+-basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++#!/usr/bin/env node
++var nopt = require("../lib/nopt")
++  , path = require("path")
++  , types = { num: Number
++            , bool: Boolean
++            , help: Boolean
++            , list: Array
++            , "num-list": [Number, Array]
++            , "str-list": [String, Array]
++            , "bool-list": [Boolean, Array]
++            , str: String
++            , clear: Boolean
++            , config: Boolean
++            , length: Number
++            , file: path
++            }
++  , shorthands = { s: [ "--str", "astring" ]
++                 , b: [ "--bool" ]
++                 , nb: [ "--no-bool" ]
++                 , tft: [ "--bool-list", "--no-bool-list", "--bool-list", "true" ]
++                 , "?": ["--help"]
++                 , h: ["--help"]
++                 , H: ["--help"]
++                 , n: [ "--num", "125" ]
++                 , c: ["--config"]
++                 , l: ["--length"]
++                 , f: ["--file"]
++                 }
++  , parsed = nopt( types
++                 , shorthands
++                 , process.argv
++                 , 2 )
+ 
+-case `uname` in
+-    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
+-esac
++console.log("parsed", parsed)
+ 
+-if [ -x "$basedir/node" ]; then
+-  exec "$basedir/node"  "$basedir/../nopt/bin/nopt.js" "$@"
+-else 
+-  exec node  "$basedir/../nopt/bin/nopt.js" "$@"
+-fi
++if (parsed.help) {
++  console.log("")
++  console.log("nopt cli tester")
++  console.log("")
++  console.log("types")
++  console.log(Object.keys(types).map(function M (t) {
++    var type = types[t]
++    if (Array.isArray(type)) {
++      return [t, type.map(function (type) { return type.name })]
++    }
++    return [t, type && type.name]
++  }).reduce(function (s, i) {
++    s[i[0]] = i[1]
++    return s
++  }, {}))
++  console.log("")
++  console.log("shorthands")
++  console.log(shorthands)
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"19c176f9-4543-4e5d-810e-036c18409e65\" name=\"Changes\" comment=\"Updated package.json\">\n      <change afterPath=\"$PROJECT_DIR$/vite-project/src/components/CoverLetterCreationComponents/index.html\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"HTML File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"28ed09f6f7c3ef1c789d34b149fd3ffe552220e4\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 5\n}</component>\n  <component name=\"ProjectId\" id=\"2hRcHFTHcB0LprXKCfU4ymVT8N8\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;project__6&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/boopk/IdeaProjects/project-28_svkk_final_version/vite-project/src/components/CoverLetterCreationComponents&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\boopk\\IdeaProjects\\project-28_svkk_final_version\\vite-project\\src\\components\\CoverLetterCreationComponents\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/vite-project/src/assets\" />\n      <recent name=\"$PROJECT_DIR$/vite-project/src/components\" />\n    </key>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62\" />\n        <option value=\"bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"19c176f9-4543-4e5d-810e-036c18409e65\" name=\"Changes\" comment=\"\" />\n      <created>1717560240417</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1717560240417</updated>\n      <workItem from=\"1717560242614\" duration=\"8176000\" />\n      <workItem from=\"1717728663768\" duration=\"1014000\" />\n      <workItem from=\"1717734630903\" duration=\"6527000\" />\n      <workItem from=\"1718061032049\" duration=\"1193000\" />\n      <workItem from=\"1718819162993\" duration=\"63991000\" />\n      <workItem from=\"1719998318776\" duration=\"9000\" />\n      <workItem from=\"1719998344053\" duration=\"217000\" />\n      <workItem from=\"1719998712260\" duration=\"6817000\" />\n      <workItem from=\"1720575507588\" duration=\"32925000\" />\n      <workItem from=\"1721952308645\" duration=\"44024000\" />\n      <workItem from=\"1722362514801\" duration=\"14503000\" />\n      <workItem from=\"1722446052669\" duration=\"3549000\" />\n      <workItem from=\"1722466836158\" duration=\"121000\" />\n      <workItem from=\"1722467078313\" duration=\"71000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Added docx upload and download functionality!\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1722386279053</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1722386279053</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Added docx upload and download functionality!\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1722386595529</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1722386595529</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Updated package.json\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1722467119085</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1722467119085</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"4\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"origin/project_6\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Added docx upload and download functionality!\" />\n    <MESSAGE value=\"Updated package.json\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Updated package.json\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c3bf8594e543186f50fb89aa0348e9c442dda17b)
++++ b/.idea/workspace.xml	(date 1722637180523)
+@@ -4,8 +4,16 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="19c176f9-4543-4e5d-810e-036c18409e65" name="Changes" comment="Updated package.json">
+-      <change afterPath="$PROJECT_DIR$/vite-project/src/components/CoverLetterCreationComponents/index.html" afterDir="false" />
++    <list default="true" id="19c176f9-4543-4e5d-810e-036c18409e65" name="Changes" comment="Added docx upload and download functionality!">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/color-support" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/color-support" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/mkdirp" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/mkdirp" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/node-pre-gyp" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/node-pre-gyp" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/nopt" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/nopt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/rimraf" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/rimraf" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/semver" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.package-lock.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/server/node_modules/make-dir/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/make-dir/node_modules/.bin/semver" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+Index: server/node_modules/.bin/node-pre-gyp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/bin/sh\nbasedir=$(dirname \"$(echo \"$0\" | sed -e 's,\\\\,/,g')\")\n\ncase `uname` in\n    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w \"$basedir\"`;;\nesac\n\nif [ -x \"$basedir/node\" ]; then\n  exec \"$basedir/node\"  \"$basedir/../@mapbox/node-pre-gyp/bin/node-pre-gyp\" \"$@\"\nelse \n  exec node  \"$basedir/../@mapbox/node-pre-gyp/bin/node-pre-gyp\" \"$@\"\nfi\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/node_modules/.bin/node-pre-gyp b/server/node_modules/.bin/node-pre-gyp
+--- a/server/node_modules/.bin/node-pre-gyp	(revision 24b914f9853bb15a00a862ce695345b8216b73f9)
++++ b/server/node_modules/.bin/node-pre-gyp	(date 1722468146688)
+@@ -1,12 +1,4 @@
+-#!/bin/sh
+-basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++#!/usr/bin/env node
++'use strict';
+ 
+-case `uname` in
+-    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
+-esac
+-
+-if [ -x "$basedir/node" ]; then
+-  exec "$basedir/node"  "$basedir/../@mapbox/node-pre-gyp/bin/node-pre-gyp" "$@"
+-else 
+-  exec node  "$basedir/../@mapbox/node-pre-gyp/bin/node-pre-gyp" "$@"
+-fi
++require('../lib/main');

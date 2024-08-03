@@ -3,10 +3,31 @@ var router = express.Router();
 const users = require('../model/user');
 const bcrypt = require('bcrypt');
 
-
 const { Resume, CoverLetter, JobPosting, TailoredCoverLetter } = require('../model/schema');
-const {log} = require("debug"); // Import models from schema file
+
+// grabs user
 router.post('/getUser', async (req, res) => {
+    const { email } = req.body;
+    try {
+        let user = await users.findOne({ email });
+        if (!user) {
+            console.log("Could not find user");
+            return res.status(400).json({ msg: 'No account with this email exists' });
+        }
+        res.status(200).json({
+            msg: 'User found',
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            isGoogleUser: user.isGoogleUser
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+router.post('/getUser/verify', async (req, res) => {
     const { email, password } = req.body;
     try {
         let user = await users.findOne({ email });
@@ -34,26 +55,17 @@ router.post('/getUser', async (req, res) => {
 
 router.post('/updateUser', async (req, res) => {
     try {
-        const { email, originalEmail, firstName, lastName, password } = req.body;
-        console.log("Email: ", email)
-        console.log("Original Email: ", originalEmail)
-        let user = await users.findOne({email: originalEmail});
+        const { email, firstName, lastName, password } = req.body;
+        let user = await users.findOne({email});
 
         if (user) {
             user.firstName = firstName;
             user.lastName = lastName;
-            user.email = email;
             if (password) {
                 const hashedPassword = await bcrypt.hash(password, 10);
                 user.password = hashedPassword;
             }
             await user.save();
-
-            await Resume.updateMany({ email: originalEmail }, { email });
-            await CoverLetter.updateMany({ email: originalEmail }, { email });
-            await JobPosting.updateMany({ email: originalEmail }, { email });
-            await TailoredCoverLetter.updateMany({ email: originalEmail }, { email });
-
             res.json({ msg: 'User updated successfully' });
         } else {
             res.status(404).json({msg: 'User not found'});
@@ -66,7 +78,7 @@ router.post('/updateUser', async (req, res) => {
 
 router.delete('/deleteUser', async (req, res) => {
     try {
-        const {email, firstName, lastName} = req.body;
+        const {email} = req.body;
         let user = await users.findOne({email});
         if (user) {
             await users.deleteOne({email});

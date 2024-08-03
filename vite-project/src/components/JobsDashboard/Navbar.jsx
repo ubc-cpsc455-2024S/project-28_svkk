@@ -131,10 +131,11 @@ export default function Navbar(props) {
                         </Link>
                     </LightTooltip>
                     <LightTooltip title='Edit Account'>
-                        {/*Insert link to edit account page here */}
+                        <Link to="/EditAccount">
                             <IconButton>
                                 <ManageAccountsIcon fontSize="large" sx={{color: theme.palette.bg}}/>
                             </IconButton>
+                        </Link>
                     </LightTooltip>
                     <LightTooltip title='Sign Out'>
                         <Link to="/Login">

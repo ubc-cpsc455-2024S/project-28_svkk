@@ -4,11 +4,15 @@ import { useDispatch } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 import {USED_IP} from "../redux/ip.js";
 
+const url = "http://localhost:3000/";
+
+
 const Signup = () => {
     const dispatch = useDispatch();
     const location = useLocation();
 
     const [step, setStep] = useState(1);
+    const [flag, setFlag] = useState(1);
     const [userData, setUserData] = useState({
         firstName: '',
         lastName: '',
@@ -24,6 +28,7 @@ const Signup = () => {
     useEffect(() => {
         if (location.state?.email) {
             setStep(2);
+            setFlag(2);
         }
     }, [location.state])
 
@@ -34,7 +39,7 @@ const Signup = () => {
             return;
         }
         try {
-            const response = await fetch( USED_IP+ 'signUp/checkEmail', {
+            const response = await fetch( USED_IP + 'signUp/checkEmail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,25 +62,49 @@ const Signup = () => {
     // applied when user done making changes
     const onNameSubmit = async e => {
         e.preventDefault();
-        try {
-            const response = await fetch(USED_IP + 'signUp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({firstName, lastName, email, password})
-            });
-            const data = await response.json();
-            if (response.status === 400) {
-                alert(data.msg);
-            } else {
-                dispatch(setUserEmail(data.email));
-                navigate('/MainDashboard');
+
+        // regular users
+        if (flag == 1) {
+            try {
+                const response = await fetch(USED_IP + 'signUp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({firstName, lastName, email, password})
+                });
+                const data = await response.json();
+                if (response.status === 400) {
+                    alert(data.msg);
+                } else {
+                    dispatch(setUserEmail(data.email));
+                    navigate('/MainDashboard');
+                }
+            } catch (err) {
+                console.error('Error:', err);
             }
-        } catch (err) {
-            console.error('Error:', err);
+        } else {
+            try {
+                const response = await fetch(USED_IP + 'signUp/google', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({firstName, lastName, email, password})
+                });
+                const data = await response.json();
+                if (response.status === 400) {
+                    alert(data.msg);
+                } else {
+                    dispatch(setUserEmail(data.email));
+                    navigate('/MainDashboard');
+                }
+            } catch (err) {
+                console.error('Error:', err);
+            }
         }
     }
+
 
     return (
         <div
@@ -85,7 +114,7 @@ const Signup = () => {
                 <form className='my-[10px]' onSubmit={onEmailPasswordSubmit}>
                     <label className='block ml-[70px]'>
                         Email:
-                        <input type="text" name="email" placeholder='Email' onChange={onChange} value={email}
+                        <input type="email" name="email" placeholder='Email' onChange={onChange} value={email}
                                className='m-4 ml-[65px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]' required />
                     </label>
                     <label className='block ml-[70px]'>

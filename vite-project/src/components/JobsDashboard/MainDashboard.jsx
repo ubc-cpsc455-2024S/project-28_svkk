@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import JobsContainer from "./JobsContainer";
 import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
@@ -8,7 +8,6 @@ export default function MainDashboard() {
 
     const navigate = useNavigate()
     const userEmail = useSelector(state => state.userEmail.userEmail)
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if (userEmail === "nothing") {
