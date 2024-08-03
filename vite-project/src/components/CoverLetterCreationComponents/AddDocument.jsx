@@ -63,7 +63,8 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                 console.log("dispatching add resume request");
                 dispatch(addResumeAsync({email: email, resume: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
-
+                setElementTextBox("");
+                // setElementTitleBox("");
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
@@ -72,6 +73,8 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                 console.log("dispatching add cover letter request");
                 dispatch(addCoverLetterAsync({email: email, coverLetter: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
+                setElementTextBox("");
+                // setElementTitleBox("");
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
@@ -80,6 +83,8 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                 console.log("Inside adddocument " + elementObject);
                 dispatch(addJobPostingAsync({email: email,jobPosting: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
+                setElementTextBox("");
+                // setElementTitleBox("");
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
@@ -96,7 +101,8 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                     console.log("dispatching add cover letter from template request");
                     dispatch(addCoverLetterAsync({email: email, coverLetter: elementObject}));
                     setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
-
+                    setElementTextBox("");
+                    // setElementTitleBox("");
                 } else {
                     setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
                 }
