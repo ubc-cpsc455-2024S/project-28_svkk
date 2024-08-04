@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt');
 const users = require('../model/user');
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client('869398522193-9j7n8el0o9p36t14mvck3f1vg0f91l4q.apps.googleusercontent.com');
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // normal
 router.post('/', async (req, res) => {
@@ -19,10 +22,23 @@ router.post('/', async (req, res) => {
         if (password === "" ||!isMatch) {
             return res.status(400).json({ msg: 'Invalid Password' });
         }
+
+        const tokenPayload = {
+            userID: user._id,
+            email: user.email,
+            isGoogleUser: user.isGoogleUser
+        };
+        const jwtToken = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '1h' });
+
         res.status(200).json(
-            { 
+            {
                 msg: 'Login successful',
-                email: email
+                token: jwtToken,
+                user: {
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName
+                }
             });
     } catch (err) {
         console.error(err.message);
@@ -51,9 +67,22 @@ router.post('/google', async (req, res) => {
             });
         }
 
+        const tokenPayload = {
+            userID: user._id,
+            email: user.email,
+            isGoogleUser: user.isGoogleUser
+        };
+
+        const jwtToken = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '1h' });
+
         res.status(200).json({
             msg: 'Login successful',
-            email: payload.email
+            token: jwtToken,
+            user: {
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName
+            }
         });
     } catch (err) {
         console.error(err.message);

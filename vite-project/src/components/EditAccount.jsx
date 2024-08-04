@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {USED_IP} from "../redux/ip.js";
-import {useSelector} from "react-redux";
-
+import {useSelector, useDispatch} from "react-redux";
+import {jwtDecode} from "jwt-decode";
+import {setUserEmail} from "../redux/userEmail/UserEmailReducer.js";
 const url = "http://localhost:3000/";
 
 
@@ -13,17 +14,36 @@ const EditAccount = () => {
     const navigate = useNavigate();
     const [isGoogleUser, setIsGoogleUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
 
     const email = useSelector(state => state.userEmail.userEmail)
 
     // trigger on component mount
     useEffect( () => {
-        fetchUserData(email);
-    }, [email]);
+        const token = localStorage.getItem("jwtToken");
+        try {
+            const decoded = jwtDecode(token);
+            if (decoded && new Date(decoded.exp * 1000) > new Date()) {
+                dispatch(setUserEmail(decoded.email));
+                if (email !== "nothing") {
+                    fetchUserData(email);
+                }
+            } else {
+                console.log("expired token");
+                localStorage.removeItem('jwtToken');
+                localStorage.removeItem('userEmail');
+            }
+        } catch (error) {
+            console.error('Failed to decode JWT:', error);
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('userEmail');
+        }
+    }, [email, dispatch]);
 
     // grab user info ,, set google user
     const fetchUserData = async (email) => {
         try {
+            console.log("fetching with this email: ", email);
             const response = await fetch((USED_IP + 'editAccount/getUser'), {
                 method: 'POST',
                 headers: {

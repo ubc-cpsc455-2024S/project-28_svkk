@@ -25,9 +25,13 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
     }
 
     useEffect(() => {
-        console.log('dispatching getjobsasync with useremail: ', userEmail);
-        dispatch(getJobsAsync(userEmail));
-    }, []);
+        if (userEmail !== "nothing") {
+            console.log('dispatching getjobsasync with useremail: ', userEmail);
+            dispatch(getJobsAsync(userEmail))
+        } else {
+            console.log("userEmail is not available, skipping fetch");
+        }
+    }, [userEmail, dispatch]);
 
     const addTag = (newTag) => {
         setTagFilters((prevTags) => [...prevTags, newTag]);
@@ -111,13 +115,15 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
         
     {
         jobs.map((j) => (
-            <section key={j._id} className={`job-item ${selectedJobId === j._id ? 'selected' : ''}`} onClick={() => handleJobClick(j)}>        
+            <section key={j._id} className={`job-item ${selectedJobId === j._id ? 'selected' : ''}`} onClick={() => handleJobClick(j)}>
                 <div><b>{j.jobTitle}</b></div>
                 <div>{j.company}</div>
-                <div>Date Applied: {j.dateApplied}</div>                   
+                <div>Date Applied: {j.dateApplied}</div>
             </section>
-        ))  
+        ))
     }
+
+
     <div className="job-actions">
         <span className="add-job relative" onClick={() => {setSelectForm(true); onSelectJob(null)}}> <p className="text-[black] opacity-[.56] inline-block absolute left-3 top-[-2px] text-4xl"> + </p>Add Job</span>
         <span className="delete-job" onClick={() => {   

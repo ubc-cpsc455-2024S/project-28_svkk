@@ -8,6 +8,8 @@ import { getJobPostingsAsync } from '../../redux/jobPostings/thunk.js';
 import { getCoverLetterTemplatesAsync, getCoverLettersAsync } from '../../redux/coverLetters/thunk.js';
 import {getTailoredCoverLettersAsync} from "../../redux/tailoredCoverLetters/thunk.js";
 import {getResumesAsync} from "../../redux/resumes/thunk.js";
+import {jwtDecode} from "jwt-decode";
+import {setUserEmail} from "../../redux/userEmail/UserEmailReducer.js";
 
 
 export default function CoverLetterPage() {
@@ -22,13 +24,28 @@ export default function CoverLetterPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getCoverLetterTemplatesAsync());
-        dispatch(getJobPostingsAsync({email: email}));
-        dispatch(getResumesAsync({email: email}));
-        dispatch(getCoverLettersAsync({email: email}));
-        dispatch(getTailoredCoverLettersAsync({email: email}))
+        const token = localStorage.getItem('jwtToken');
+        try {
+            const decoded = jwtDecode(token);
+            if (decoded && new Date(decoded.exp * 1000) > new Date()) {
+                dispatch(setUserEmail(decoded.email));
+                dispatch(getCoverLetterTemplatesAsync());
+                dispatch(getJobPostingsAsync({email: email}));
+                dispatch(getResumesAsync({email: email}));
+                dispatch(getCoverLettersAsync({email: email}));
+                dispatch(getTailoredCoverLettersAsync({email: email}))
+            } else {
+                console.log("expired token");
+                localStorage.removeItem('jwtToken');
+                localStorage.removeItem('userEmail');
+            }
+        } catch (error) {
+            console.error('Failed to decode JWT:', error);
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('userEmail');
+        }
 
-    }, []);
+    }, [email, dispatch]);
 
     return(
         <div className="coverLetterPageContainer">

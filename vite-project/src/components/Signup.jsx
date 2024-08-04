@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 import {USED_IP} from "../redux/ip.js";
 
-const url = "http://localhost:3000/";
+// const url = "http://localhost:3000/";
 
 
 const Signup = () => {
@@ -78,6 +78,9 @@ const Signup = () => {
                     alert(data.msg);
                 } else {
                     dispatch(setUserEmail(data.email));
+                    const token = data.token;
+                    localStorage.setItem('jwtToken', token);
+                    localStorage.setItem('userEmail', data.user.email);
                     navigate('/MainDashboard');
                 }
             } catch (err) {
@@ -97,6 +100,9 @@ const Signup = () => {
                     alert(data.msg);
                 } else {
                     dispatch(setUserEmail(data.email));
+                    const token = data.token;
+                    localStorage.setItem('jwtToken', token);
+                    localStorage.setItem('userEmail', data.user.email);
                     navigate('/MainDashboard');
                 }
             } catch (err) {

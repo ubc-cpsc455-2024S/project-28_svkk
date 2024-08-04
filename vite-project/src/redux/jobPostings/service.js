@@ -1,6 +1,6 @@
 import {USED_IP} from "../ip.js";
 
-
+// const url = "http://localhost:3000/"
 const getJobPostings = async({email}) => {
     const response = await fetch(USED_IP + 'jobPostings', {
         method: 'GET',

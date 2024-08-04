@@ -4,6 +4,7 @@ const users = require('../model/user');
 const bcrypt = require('bcrypt');
 
 const { Resume, CoverLetter, JobPosting, TailoredCoverLetter } = require('../model/schema');
+const Job = require('../model/job');
 
 // grabs user
 router.post('/getUser', async (req, res) => {
@@ -86,6 +87,7 @@ router.delete('/deleteUser', async (req, res) => {
             await CoverLetter.deleteMany({email});
             await JobPosting.deleteMany({email});
             await TailoredCoverLetter.deleteMany({email});
+            await Job.deleteMany({userEmail: email});
             res.json({ msg: 'User and all associated documents deleted successfully' });
         }
     } catch (err) {

@@ -32,7 +32,10 @@ const Login = () => {
             const data = await response.json();
             // successful
             if (response.status === 200) {
-                dispatch(setUserEmail(data.email))
+                const token = data.token;
+                localStorage.setItem('jwtToken', token);
+                localStorage.setItem('userEmail', data.user.email);
+                dispatch(setUserEmail(data.user.email))
                 navigate('/MainDashboard')
             } else {
                 alert(data.msg)
@@ -56,7 +59,10 @@ const Login = () => {
 
             const data = await res.json()
             if (res.status === 200) {
-                dispatch(setUserEmail(data.email))
+                const token = data.token;
+                localStorage.setItem('jwtToken', token);
+                localStorage.setItem('userEmail', data.user.email);
+                dispatch(setUserEmail(data.user.email))
                 navigate('/MainDashboard')
             } else if (res.status == 400) {
                 navigate('/Signup', { state: { email: data.email } });

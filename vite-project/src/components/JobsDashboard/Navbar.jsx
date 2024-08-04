@@ -78,6 +78,11 @@ export default function Navbar(props) {
         },
       }));
 
+      const logOut = () => {
+          localStorage.removeItem('jwtToken');
+          localStorage.removeItem('userEmail');
+      }
+
     
 
     return(
@@ -139,7 +144,7 @@ export default function Navbar(props) {
                     </LightTooltip>
                     <LightTooltip title='Sign Out'>
                         <Link to="/Login">
-                            <IconButton className="iconButton">
+                            <IconButton className="iconButton" onClick={logOut}>
                                 <LogoutIcon className='logoutIcon' fontSize="large" sx={{color: theme.palette.bg}}/>
                             </IconButton>
                         </Link>

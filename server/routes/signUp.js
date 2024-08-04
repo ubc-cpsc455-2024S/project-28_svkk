@@ -4,6 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 
 const users = require('../model/user');
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 // check for email existing
@@ -40,7 +42,25 @@ router.post('/', async (req, res) => {
             isGoogleUser: false,
         })
         await newUser.save();
-        res.status(200).json({ msg: 'Email is available, signup successful', email: email });
+
+        const tokenPayload = {
+            userID: newUser.id,
+            email: newUser.email,
+            isGoogleUser: newUser.isGoogleUser
+        };
+
+        const jwtToken = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '1h' });
+
+        res.status(200).json(
+            {
+                msg: 'SignUp successful',
+                token: jwtToken,
+                user: {
+                    email: newUser.email,
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName
+                }
+            });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
@@ -66,7 +86,25 @@ router.post('/google', async (req, res) => {
             isGoogleUser: true,
         })
         await newUser.save();
-        res.status(200).json({ msg: 'Email is available, signup successful', email: email });
+
+        const tokenPayload = {
+            userID: newUser.id,
+            email: newUser.email,
+            isGoogleUser: newUser.isGoogleUser
+        };
+
+        const jwtToken = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '1h' });
+
+        res.status(200).json(
+            {
+                msg: 'SignUp successful',
+                token: jwtToken,
+                user: {
+                    email: newUser.email,
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName
+                }
+            });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
