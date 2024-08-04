@@ -29,8 +29,14 @@
 }
 
 .jobView{
-  filter: drop-shadow(1em 1em 2em #DFEAEA)
+  filter: drop-shadow(1em 1em 2em #DFEAEA);
 }
+
+.editJobView{
+  filter: drop-shadow(1em 1em 2em #DFEAEA);
+  height: 80vh;
+}
+
 .options {
     /* border-radius: 25px; */
     display: flex;

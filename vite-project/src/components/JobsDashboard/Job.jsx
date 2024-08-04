@@ -15,6 +15,8 @@ import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { IconButton } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import { useTheme } from "@emotion/react";
+import EditJob from "./EditJob";
+import Modal from '@mui/material/Modal';
 
 
 export default function Job({job}) {
@@ -34,6 +36,7 @@ export default function Job({job}) {
     const [tags, setTags] = useState([])
     const [tag, setTag] = useState('')
     const [temptags, setTempTags] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
     const jobTitleInputRef = useRef();
     const companyInputRef = useRef();
@@ -114,6 +117,14 @@ export default function Job({job}) {
         },
       }));
 
+    const handleEditClick = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
+    
 
     return(
         <>
@@ -126,7 +137,7 @@ export default function Job({job}) {
                 <div className="p-[30px] grow"> 
                     <div className=" relative">
                         <input type="text" name="" id="" placeholder="Job Title" className="border p-2 pl-6 rounded-[30px]"/> 
-                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Job Title</span>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Job Title*</span>
                     </div> 
                 </div>
             </div>
@@ -137,7 +148,7 @@ export default function Job({job}) {
                 <div className="p-[30px] grow">
                     <div className=" relative">
                         <input type="text" name="" id="" placeholder="Company" className="border p-2 pl-6 rounded-[30px]"/>
-                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Company</span>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Company*</span>
                     </div>
                 </div>
             </div>
@@ -167,7 +178,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative"><input type="text" name="" id="" placeholder="Date Applied" className="border p-2 pl-6 rounded-[30px]"/>
-                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Date Applied</span>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Date Applied*</span>
                     </div>
                 </div>
             </div>
@@ -263,7 +274,7 @@ export default function Job({job}) {
                 <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Cover Letter Used:
                 </div>
-                <div className="p-[30px] grow rounded-br-[30px]"> 
+                <div className="p-[30px] rounded-br-[30px] flex justify-evenly"> 
                     <div>
                             <Button
                                                                         id="basic-button"
@@ -272,7 +283,7 @@ export default function Job({job}) {
                                                                         aria-expanded={open ? 'true' : undefined}
                                                                         onClick={handleClick}
                                                                     >
-                                                                        Choose Cover Letter
+                                                                        Cover Letter:
                             </Button>
                             <Menu
                                                                         id="basic-menu"
@@ -297,7 +308,7 @@ export default function Job({job}) {
                                                                         aria-expanded={open ? 'true' : undefined}
                                                                         onClick={handleClick}
                                                                     >
-                                                                        Tailor Cover Letter
+                                                                        Tailored Cover Letter:
                             </Button>
                             <Menu
                                                                         id="basic-menu"
@@ -320,11 +331,23 @@ export default function Job({job}) {
     {/*notepad ends here*/}
         
         <div className="options">
+            {/* <EditJob job={job}></EditJob> */}
             <StyledTooltip title="Edit job">
-                <IconButton>
+                <IconButton onClick={handleEditClick}>
                     <EditIcon fontSize='large' sx={{color: '#666666'}}></EditIcon>
                 </IconButton>
             </StyledTooltip>
+            <Modal
+                open={isModalOpen}
+                onClose={handleModalClose}
+                aria-labelledby="edit-job-modal-title"
+                aria-describedby="edit-job-modal-description"
+            >
+                <div className="flex justify-center items-center">
+                <EditJob job={job} handleModalClose={handleModalClose} />
+                </div>
+                
+            </Modal>
             
             {/* <span className="cancel" onClick={() => {
                 jobTitleInputRef.current.value = job.jobTitle;
