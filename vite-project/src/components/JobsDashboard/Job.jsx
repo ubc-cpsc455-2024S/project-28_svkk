@@ -9,9 +9,17 @@ import Tags from "../Tags";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Chip from '@mui/material/Chip';
+import TextField from '@mui/material/TextField';
+import EditIcon from '@mui/icons-material/Edit';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { IconButton } from "@mui/material";
+import { styled, alpha } from '@mui/material/styles';
+import { useTheme } from "@emotion/react";
+
 
 export default function Job({job}) {
     // console.log({job})
+    const theme = useTheme();
     const dispatch = useDispatch();
 
     const [jobTitle, setJobTitle] = useState('');
@@ -93,53 +101,100 @@ export default function Job({job}) {
         }
     }
 
+    const StyledTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />
+      ))(({ theme }) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+        //   backgroundColor: '#FFFFFF',
+        //   color: 'rgba(0, 0, 0, 0.87)',
+        //   boxShadow: theme.shadows[1],
+          fontSize: 12,
+          fontFamily: "Montserrat",
+          borderRadius: '30px'
+        },
+      }));
+
+
     return(
         <>
-        <div className="w-[80%] m-auto h-[70%] overflow-y-scroll border rounded-[35px]">
+        <div className="bg-bg flex flex-col justify-center h-full">
+        <div className="jobView w-[80%] m-auto h-[70%] overflow-y-scroll border rounded-[35px] bg-white">
             <div className="flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-52 p-[30px] border-r flex items-center">
                     Job Title:
                 </div>
-                <div className="p-[30px] grow"> <div className=" relative"><input type="text" name="" id="" placeholder="Job Title" className="border p-2 rounded-[30px]"/> <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Job Title</span></div> </div>
+                <div className="p-[30px] grow"> 
+                    <div className=" relative">
+                        <input type="text" name="" id="" placeholder="Job Title" className="border p-2 pl-6 rounded-[30px]"/> 
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Job Title</span>
+                    </div> 
+                </div>
             </div>
             <div className="flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Company:
                 </div>
-                <div className="p-[30px] grow"> <div className=" relative"><input type="text" name="" id="" placeholder="Company" className="border p-2 rounded-[30px]"/> <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Company</span></div> </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative">
+                        <input type="text" name="" id="" placeholder="Company" className="border p-2 pl-6 rounded-[30px]"/>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Company</span>
+                    </div>
+                </div>
             </div>
             <div className=" flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Job Type:
                 </div>
-                <div className="p-[30px] grow"> <div className=" relative"><input type="text" name="" id="" placeholder="Job Type" className="border p-2 rounded-[30px]"/> <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Job type</span></div> </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative"><input type="text" name="" id="" placeholder="Job Type" className="border p-2 pl-6 rounded-[30px]"/>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Job type</span>
+                    </div> 
+                </div>
             </div>
             <div className=" flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Location:
                 </div>
-                <div className="p-[30px] grow"> <div className=" relative"><input type="text" name="" id="" placeholder="Location" className="border p-2 rounded-[30px]"/> <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Location</span></div> </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative"><input type="text" name="" id="" placeholder="Location" className="border p-2 pl-6 rounded-[30px]"/>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Location</span>
+                    </div>
+                </div>
             </div>
             <div className=" flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Date Applied:
                 </div>
-                <div className="p-[30px] grow"> <div className=" relative"><input type="text" name="" id="" placeholder="Date Applied" className="border p-2 rounded-[30px]"/> <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Date Applied</span></div> </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative"><input type="text" name="" id="" placeholder="Date Applied" className="border p-2 pl-6 rounded-[30px]"/>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Date Applied</span>
+                    </div>
+                </div>
             </div>
             <div className=" flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Duration:
                 </div>
-                <div className="p-[30px] grow"> <div className=" relative"><input type="text" name="" id="" placeholder="Duration" className="border p-2 rounded-[30px]"/> <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Duration</span></div> </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative">
+                        <input type="text" name="" id="" placeholder="Duration" className="border p-2 pl-6 rounded-[30px]"/>
+                            <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Duration</span>
+                        </div>
+                    </div>
             </div>
             <div className=" flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Link:
                 </div>
-                <div className="p-[30px] grow"> <div className=" relative"><input type="text" name="" id="" placeholder="Link" className="border p-2 rounded-[30px]"/> <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Link</span></div> </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative">
+                        <input type="text" name="" id="" placeholder="Link" className="border p-2 pl-6 rounded-[30px]"/>
+                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Link</span>
+                    </div> 
+                </div>
             </div>
             <div className=" flex border-b">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Tags:
                 </div>
                 <div className="p-[30px] grow"> 
@@ -157,14 +212,29 @@ export default function Job({job}) {
                                     adjustWidth(e.target);
                                 }}> */}
                         <div className="relative">
-                            <input type="text" name="" id="" placeholder="Enter new Tag" value={tag} className="border p-2 rounded-[30px] mr-2 mb-2" onChange={(e) => {
+                            <input type="text" name="" id="" placeholder="Enter new Tag" value={tag} className="border p-2 pl-6 rounded-[30px] mr-2 mb-2" onChange={(e) => {
                                     setTag(e.target.value);
                                     // adjustWidth(e.target);
                                 }}/> 
                             
-                            <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Tags</span>
+                            <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Tag</span>
 
-                            <Fab size="small" color="primary" aria-label="add" className="add-tag" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); setTag(''); console.log('updated tags:', temptags)}}}> 
+                            <Fab size="small" 
+                                sx={{
+                                    backgroundColor: theme.palette.darkTeal,
+                                    '&:hover': {
+                                        backgroundColor: '#07606B'
+                                        // backgroundColor: theme.palette.teal
+                                    },
+                                    color: theme.palette.bg // Text color of the icon
+                                }}
+                                aria-label="add" 
+                                className="add-tag" 
+                                onClick={() => {
+                                    if (tag != ''){console.log("pushing"); 
+                                    let new_tags = [...temptags]; new_tags.push(tag); 
+                                    setTempTags([...new_tags]); setTag(''); 
+                                    console.log('updated tags:', temptags)}}}> 
                                 <AddIcon />
                             </Fab>
                         </div>
@@ -190,7 +260,7 @@ export default function Job({job}) {
                 </div>
             </div>
             <div className=" flex">
-                <div className="font-bold w-[208px] p-[30px] border-r">
+                <div className="font-bold w-[208px] p-[30px] border-r flex items-center">
                     Cover Letter Used:
                 </div>
                 <div className="p-[30px] grow rounded-br-[30px]"> 
@@ -243,11 +313,20 @@ export default function Job({job}) {
                                                                         <MenuItem onClick={handleClose}>Logout</MenuItem>
                             </Menu>
                     </div>
- </div>
+                </div>
             </div>
         </div>
+    
+    {/*notepad ends here*/}
+        
         <div className="options">
-            <span className="cancel" onClick={() => {
+            <StyledTooltip title="Edit job">
+                <IconButton>
+                    <EditIcon fontSize='large' sx={{color: '#666666'}}></EditIcon>
+                </IconButton>
+            </StyledTooltip>
+            
+            {/* <span className="cancel" onClick={() => {
                 jobTitleInputRef.current.value = job.jobTitle;
                 companyInputRef.current.value = job.company;
                 jobTypeInputRef.current.value = job.jobType;
@@ -263,7 +342,8 @@ export default function Job({job}) {
                 console.log('dispatching update job async');
                 dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, dateApplied, duration, link, coverLetter, tailoredCoverLetter, temptags}}));
                 setTags([...temptags])
-            }}>Save Changes</span> 
+            }}>Save Changes</span>  */}
+        </div>
         </div>
         </>
     );
