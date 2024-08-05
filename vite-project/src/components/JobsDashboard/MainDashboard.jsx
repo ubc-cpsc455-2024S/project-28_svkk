@@ -36,7 +36,7 @@ export default function MainDashboard() {
 
     return (
         <div className="main-dashboard">
-            <Navbar selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
+            <Navbar search={true} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
             {userEmail ? (
                 <JobsContainer selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
             ) : (

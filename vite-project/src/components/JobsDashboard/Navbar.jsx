@@ -103,7 +103,7 @@ export default function Navbar(props) {
                         inputProps={{ 'aria-label': 'search' }}
                     />
                 </Search>     */}
-                <div className={"searchBar-wrapper ml-6"}>
+                {props.search && <div className={"searchBar-wrapper ml-6"}>
                     {/* <i class='fa fa-search left:10px'></i> */}
                     <SearchIconWrapper>
                         <SearchIcon className="searchIcon"/>
@@ -127,7 +127,7 @@ export default function Navbar(props) {
                                         dispatch(searchJobsAsync({filter, userEmail}));
                                     }}}/>
                     
-                </div>
+                </div>}
             </div>
             <div className={"navBar-Right"}>
                 <div className={"navBar-Buttons"}>

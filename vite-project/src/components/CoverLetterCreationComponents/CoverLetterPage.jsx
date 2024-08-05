@@ -50,7 +50,7 @@ export default function CoverLetterPage() {
 
     return(
         <>
-        <Navbar/>
+        <Navbar search={false}/>
         <div className="coverLetterPageContainer">
             <div>
                 <h1 className="largerLetters">Generate Cover Letter</h1>
