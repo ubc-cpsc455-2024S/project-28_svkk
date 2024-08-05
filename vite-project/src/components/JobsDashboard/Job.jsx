@@ -22,7 +22,7 @@ import { getJobByIdAsync } from "../../redux/jobs/thunks";
 
 
 
-export default function Job({job}) {
+export default function Job({job, setSelectedJob}) {
     // console.log({job})
     const theme = useTheme();
     // const dispatch = useDispatch();
@@ -149,7 +149,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative">
-                        <input type="text" name="" id="" value={company} className="p-2 pl-6 text-xl w-full"/> 
+                        <input type="text" name="" id="" value={company} className="p-2 pl-6 text-xl w-full" readOnly={true}/> 
                     </div>
                 </div>
             </div>
@@ -160,7 +160,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative">
-                        <input type="text" name="" id="" value={jobType} className="p-2 pl-6 text-xl w-full"/>
+                        <input type="text" name="" id="" value={jobType} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
                     </div> 
                 </div>
             </div>
@@ -171,7 +171,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative">
-                        <input type="text" name="" id="" value={location} className="p-2 pl-6 text-xl w-full"/>
+                        <input type="text" name="" id="" value={location} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
                     </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative">
-                        <input type="text" name="" id="" value={dayjs(dateApplied).format('YYYY-MM-DD')} className="p-2 pl-6 text-xl w-full"/>
+                        <input type="text" name="" id="" value={dayjs(dateApplied).format('YYYY-MM-DD')} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
                     </div>
                 </div>
             </div>
@@ -193,7 +193,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative">
-                        <input type="text" name="" id="" value={duration} className="p-2 pl-6 text-xl w-full"/>
+                        <input type="text" name="" id="" value={duration} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative">
-                        <input type="text" name="" id="" value={link} className="p-2 pl-6 text-xl w-full"/>
+                        <input type="text" name="" id="" value={link} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
                         {/* <a href={link}target="_blank" rel="noopener noreferrer" className="p-2 pl-6 text-xl"></a>  */}
                     </div> 
                 </div>
@@ -216,7 +216,7 @@ export default function Job({job}) {
                 </div>
                 <div className="p-[30px] grow">
                     <div className=" relative">
-                        <input type="text" name="" id="" value={status} className="p-2 pl-6 text-xl w-full"/>
+                        <input type="text" name="" id="" value={status} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
                     </div> 
                 </div>
             </div>
@@ -266,6 +266,7 @@ export default function Job({job}) {
                                         // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
                                         return <Chip
                                             label={tag}
+                                            key={i}
                                             sx={{
                                                 fontFamily: "Montserrat",
                                                 marginRight: 1.5,                                        
@@ -362,7 +363,7 @@ export default function Job({job}) {
                 aria-describedby="edit-job-modal-description"
             >
                 <div className="flex justify-center items-center">
-                <EditJob job={job} handleModalClose={handleModalClose} />
+                <EditJob job={job} setSelectedJob={setSelectedJob} handleModalClose={handleModalClose} />
                 </div>
                 
             </Modal>

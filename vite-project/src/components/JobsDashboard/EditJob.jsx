@@ -26,7 +26,7 @@ import Box from '@mui/material/Box';
 
 
 
-export default function EditJob({job, handleModalClose}) {
+export default function EditJob({job, setSelectedJob, handleModalClose}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -85,6 +85,7 @@ export default function EditJob({job, handleModalClose}) {
 
     return(
         <>
+        {console.log("Job value is: " + job)}
         <div className="editJobView max-w-1/2 mt-16 m-auto overflow-y-scroll border rounded-[35px] bg-white drop-shadow-lg flex-1">
 
             <div className="flex border-b">
@@ -415,7 +416,10 @@ export default function EditJob({job, handleModalClose}) {
                 dateApplied.toDate();          
                 console.log('dispatching update job async');
                 dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, duration, link, dateApplied, status, coverLetter, tailoredCoverLetter, temptags}}));
+                let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags}
+                setSelectedJob(updated_job)
                 setTags([...temptags])
+                // setSelectedJob(job)
                 console.log('modal closing, updated job');
                 handleModalClose();
             }}>Save Changes</span> 

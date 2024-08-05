@@ -21,7 +21,7 @@ export default function JobsContainer({selectedJob, setSelectedJob}) {
         <div className = "jobs-container">
             <JobList onSelectJob={setSelectedJob} selectForm={selectForm} setSelectForm={setSelectForm} selectedJob={selectedJob}/>
             <div className="job-details-container">
-                {selectedJob ? <Job job={selectedJob}/> : selectForm? <Form selectForm={selectForm} setSelectForm={setSelectForm} setSelectedJob={setSelectedJob}/> : <h2>Select a job to see in detail</h2>}
+                {selectedJob ? <Job job={selectedJob} setSelectedJob={setSelectedJob}/> : selectForm? <Form selectForm={selectForm} setSelectForm={setSelectForm} setSelectedJob={setSelectedJob}/> : <h2>Select a job to see in detail</h2>}
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import '../../styles/Navbar.css'
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,12 +13,15 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { IconButton } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar(props) {
 
     const userEmail = useSelector(state => state.userEmail.userEmail);
 
     const dispatch = useDispatch()
+
+    const navigate = useNavigate()
 
     const [filter, setfilter] = useState('')
 
@@ -88,7 +91,7 @@ export default function Navbar(props) {
     return(
         <nav className={"navBar"}>
             <div className={"navBar-Left"}>
-                <h1 color={theme.palette.bg}>Application Tailor</h1>
+                <h1 color={theme.palette.bg} className=" cursor-pointer" onClick={() => {navigate("/maindashboard")}}>Application Tailor</h1>
                 {/* new position of search bar*/}
                 {/* <Search>
                     <SearchIconWrapper>

@@ -10,6 +10,7 @@ import {getTailoredCoverLettersAsync} from "../../redux/tailoredCoverLetters/thu
 import {getResumesAsync} from "../../redux/resumes/thunk.js";
 import {jwtDecode} from "jwt-decode";
 import {setUserEmail} from "../../redux/userEmail/UserEmailReducer.js";
+import Navbar from '../JobsDashboard/Navbar.jsx'
 
 
 export default function CoverLetterPage() {
@@ -48,6 +49,8 @@ export default function CoverLetterPage() {
     }, [email, dispatch]);
 
     return(
+        <>
+        <Navbar/>
         <div className="coverLetterPageContainer">
             <div>
                 <h1 className="largerLetters">Generate Cover Letter</h1>
@@ -70,6 +73,7 @@ export default function CoverLetterPage() {
                 coverLetters={coverLetters}>
             </TailorCoverLetter>
         </div>
+        </>
     )
 
 }
