@@ -26,7 +26,7 @@ import Box from '@mui/material/Box';
 
 
 
-export default function EditJob({job, setSelectedJob, handleModalClose}) {
+export default function EditJob({coverLetters, tailoredCoverLetters, job, setSelectedJob, handleModalClose}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -345,7 +345,7 @@ export default function EditJob({job, setSelectedJob, handleModalClose}) {
                 </div>
                 <div className="p-[30px] rounded-br-[30px] flex justify-between grow"> 
                     <div>
-                            <Button
+                            {/* <Button
                                                                         id="basic-button"
                                                                         aria-controls={open ? 'basic-menu' : undefined}
                                                                         aria-haspopup="true"
@@ -366,11 +366,32 @@ export default function EditJob({job, setSelectedJob, handleModalClose}) {
                                                                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                                                                         <MenuItem onClick={handleClose}>My account</MenuItem>
                                                                         <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu>
+                            </Menu> */}
+                            <Box sx={{ minWidth: 263 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="cv">Cover Letter</InputLabel>
+                                    <Select
+                                        labelId="cv-label"
+                                        id="cv"
+                                        value={coverLetter}
+                                        label="Cover Letter"
+                                        onChange={(e) => {
+                                            console.log('CV changed to:', e.target.value);
+                                            setCoverLetter(e.target.value);
+                                            // console.log('job application status changed to:', status);
+                                        }}
+                                        >
+                                        {coverLetters.map(coverLetter => {
+                                                                            console.log(coverLetter.name)
+                                                                            return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
+                                                                        })}
+                                    </Select>
+                                </FormControl>
+                            </Box>
                     </div>
 
                     <div>
-                            <Button
+                            {/* <Button
                                                                         id="basic-button"
                                                                         aria-controls={open ? 'basic-menu' : undefined}
                                                                         aria-haspopup="true"
@@ -391,7 +412,27 @@ export default function EditJob({job, setSelectedJob, handleModalClose}) {
                                                                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                                                                         <MenuItem onClick={handleClose}>My account</MenuItem>
                                                                         <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu>
+                            </Menu> */}
+                            <Box sx={{ minWidth: 263 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="tcv">Tailored Cover Letter</InputLabel>
+                                    <Select
+                                        labelId="tcv"
+                                        id="tcv"
+                                        value={tailoredCoverLetter}
+                                        label="Tailored Cover Letter"
+                                        onChange={(e) => {
+                                            console.log('tcv changed to:', e.target.value);
+                                            setTailoredCoverLetter(e.target.value);
+                                        }}
+                                        >
+                                        {tailoredCoverLetters.map(tcoverLetter => {
+                                                                            console.log(tcoverLetter.name)
+                                                                            return (<MenuItem value={tcoverLetter.name}>{tcoverLetter.name}</MenuItem>)
+                                                                        })}
+                                    </Select>
+                                </FormControl>
+                            </Box>
                     </div>
                 </div>
             </div>
@@ -413,10 +454,12 @@ export default function EditJob({job, setSelectedJob, handleModalClose}) {
             }}>Cancel</span>
             <span className="update" onClick={() => {
                 // dateApplied.format('YYYY-MM-DD')
+                console.log("CV: ", coverLetter)
+                console.log("TCV: ", tailoredCoverLetter)
                 dateApplied.toDate();          
                 console.log('dispatching update job async');
                 dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, duration, link, dateApplied, status, coverLetter, tailoredCoverLetter, temptags}}));
-                let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags}
+                let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags, coverLetterUsed: coverLetter, tailoredCoverLetterUsed: tailoredCoverLetter}
                 setSelectedJob(updated_job)
                 setTags([...temptags])
                 // setSelectedJob(job)

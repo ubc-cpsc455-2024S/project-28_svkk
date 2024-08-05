@@ -19,10 +19,15 @@ import EditJob from "./EditJob";
 import Modal from '@mui/material/Modal';
 import dayjs from "dayjs";
 import { getJobByIdAsync } from "../../redux/jobs/thunks";
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
 
 
 
-export default function Job({job, setSelectedJob}) {
+
+export default function Job({coverLetters, tailoredCoverLetters, job, setSelectedJob}) {
     // console.log({job})
     const theme = useTheme();
     // const dispatch = useDispatch();
@@ -70,8 +75,8 @@ export default function Job({job, setSelectedJob}) {
             setDuration(job.duration || '');
             setLink(job.link || '');
             setStatus(job.status || '');
-            setCoverLetter(job.coverLetter || '');
-            setTailoredCoverLetter(job.tailoredCoverLetter || '');
+            setCoverLetter(job.coverLetterUsed || '');
+            setTailoredCoverLetter(job.tailoredCoverLetterUsed || '');
             setTags(job.tags || [])
             setTempTags(job.tags || [])
         }
@@ -278,62 +283,30 @@ export default function Job({job, setSelectedJob}) {
                         </div>
                     </div>
             </div>
-            <div className=" flex">
+
+            <div className=" flex border-b">
                 <div className="font-semibold w-[208px] p-[30px] border-r flex items-center text-xl">
                     Cover Letter Used:
                 </div>
-                <div className="p-[30px] rounded-br-[30px] flex justify-center items-center"> 
-                    <div className="pl-6">
-                            <Button
-                                                                        id="basic-button"
-                                                                        aria-controls={open ? 'basic-menu' : undefined}
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded={open ? 'true' : undefined}
-                                                                        onClick={handleClick}
-                                                                    >
-                                                                        Cover Letter:
-                            </Button>
-                            <Menu
-                                                                        id="basic-menu"
-                                                                        anchorEl={anchorEl}
-                                                                        open={open}
-                                                                        onClose={handleClose}
-                                                                        MenuListProps={{
-                                                                        'aria-labelledby': 'basic-button',
-                                                                        }}
-                                                                    >
-                                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu>
-                    </div>
-
-                    <div className="pl-6">
-                            <Button
-                                                                        id="basic-button"
-                                                                        aria-controls={open ? 'basic-menu' : undefined}
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded={open ? 'true' : undefined}
-                                                                        onClick={handleClick}
-                                                                    >
-                                                                        Tailored Cover Letter:
-                            </Button>
-                            <Menu
-                                                                        id="basic-menu"
-                                                                        anchorEl={anchorEl}
-                                                                        open={open}
-                                                                        onClose={handleClose}
-                                                                        MenuListProps={{
-                                                                        'aria-labelledby': 'basic-button',
-                                                                        }}
-                                                                    >
-                                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu>
-                    </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative">
+                        <input type="text" name="" id="" value={coverLetter} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
+                    </div> 
                 </div>
             </div>
+            
+            <div className=" flex">
+                <div className="font-semibold w-[208px] p-[30px] border-r flex items-center text-xl">
+                    Tailored Cover Letter Used:
+                </div>
+                <div className="p-[30px] grow">
+                    <div className=" relative">
+                        <input type="text" name="" id="" value={tailoredCoverLetter} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
+                    </div> 
+                </div>
+            </div>
+
+
         </div>
     
     {/*notepad ends here*/}
@@ -363,7 +336,7 @@ export default function Job({job, setSelectedJob}) {
                 aria-describedby="edit-job-modal-description"
             >
                 <div className="flex justify-center items-center">
-                <EditJob job={job} setSelectedJob={setSelectedJob} handleModalClose={handleModalClose} />
+                <EditJob coverLetters={coverLetters} tailoredCoverLetters={tailoredCoverLetters} job={job} setSelectedJob={setSelectedJob} handleModalClose={handleModalClose} />
                 </div>
                 
             </Modal>

@@ -13,7 +13,7 @@ prompt 3: "thanks! how do I make it so that both the job-list-container and job-
 prompt 4: "how do I make job-item also stay gray when it is selected?" */
 
 
-export default function JobsContainer({selectedJob, setSelectedJob}) {
+export default function JobsContainer({coverLetters, tailoredCoverLetters, selectedJob, setSelectedJob}) {
     
     const [selectForm, setSelectForm] = useState(false)
 
@@ -21,7 +21,7 @@ export default function JobsContainer({selectedJob, setSelectedJob}) {
         <div className = "jobs-container">
             <JobList onSelectJob={setSelectedJob} selectForm={selectForm} setSelectForm={setSelectForm} selectedJob={selectedJob}/>
             <div className="job-details-container bg-bg">
-                {selectedJob ? <Job job={selectedJob} setSelectedJob={setSelectedJob}/> : selectForm? <Form selectForm={selectForm} setSelectForm={setSelectForm} setSelectedJob={setSelectedJob}/> : <h2>Select a job to see in detail</h2>}
+                {selectedJob ? <Job coverLetters={coverLetters} tailoredCoverLetters={tailoredCoverLetters} job={selectedJob} setSelectedJob={setSelectedJob}/> : selectForm? <Form coverLetters={coverLetters} tailoredCoverLetters={tailoredCoverLetters} selectForm={selectForm} setSelectForm={setSelectForm} setSelectedJob={setSelectedJob}/> : <h2>Select a job to see in detail</h2>}
             </div>
         </div>
     )

@@ -272,6 +272,9 @@ router.put('/:jobId', async (req, res) => {
 
 
   console.log("Tags: ", req.body.temptags)
+
+  console.log("CV: ", req.body.coverLetter)
+
   if (!job) {
     res.status(404).send({ message: 'Job not found'});
   }
@@ -300,11 +303,11 @@ router.put('/:jobId', async (req, res) => {
   if (req.body.status != "") {
     job.status = req.body.status;
   }
-  if (req.body.coverLetterUsed != "") {
-    job.coverLetterUsed = req.body.coverLetterUsed;
+  if (req.body.coverLetter != "") {
+    job.coverLetterUsed = req.body.coverLetter;
   }
-  if (req.body.tailoredCoverLetterUsed != "") {
-    job.tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
+  if (req.body.tailoredCoverLetter != "") {
+    job.tailoredCoverLetterUsed = req.body.tailoredCoverLetter
   }
   if (req.body.tags != "") {
     job.tags = req.body.temptags

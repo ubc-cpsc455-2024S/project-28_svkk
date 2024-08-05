@@ -334,53 +334,50 @@ const Form = (props) => {
                 </div>
                 <div className="p-[30px] rounded-br-[30px] flex justify-between grow"> 
                     <div>
-                            <Button
-                                                                        id="basic-button"
-                                                                        aria-controls={open ? 'basic-menu' : undefined}
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded={open ? 'true' : undefined}
-                                                                        onClick={handleClick}
-                                                                    >
-                                                                        Choose Cover Letter
-                            </Button>
-                            <Menu
-                                                                        id="basic-menu"
-                                                                        anchorEl={anchorEl}
-                                                                        open={open}
-                                                                        onClose={handleClose}
-                                                                        MenuListProps={{
-                                                                        'aria-labelledby': 'basic-button',
-                                                                        }}
-                                                                    >
-                                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu>
+                            <Box sx={{ minWidth: 263 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="cv">Cover Letter</InputLabel>
+                                    <Select
+                                        labelId="cv-label"
+                                        id="cv"
+                                        value={cv}
+                                        label="Cover Letter"
+                                        onChange={(e) => {
+                                            console.log('CV changed to:', e.target.value);
+                                            setCV(e.target.value);
+                                            // console.log('job application status changed to:', status);
+                                        }}
+                                        >
+                                        {props.coverLetters.map(coverLetter => {
+                                                                            console.log(coverLetter.name)
+                                                                            return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
+                                                                        })}
+                                    </Select>
+                                </FormControl>
+                            </Box>
                     </div>
 
                     <div>
-                            <Button
-                                                                        id="basic-button"
-                                                                        aria-controls={open ? 'basic-menu' : undefined}
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded={open ? 'true' : undefined}
-                                                                        onClick={handleClick}
-                                                                    >
-                                                                        Choose Tailored Cover Letter
-                            </Button>
-                            <Menu
-                                                                        id="basic-menu"
-                                                                        anchorEl={anchorEl}
-                                                                        open={open}
-                                                                        onClose={handleClose}
-                                                                        MenuListProps={{
-                                                                        'aria-labelledby': 'basic-button',
-                                                                        }}
-                                                                    >
-                                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu>
+                            <Box sx={{ minWidth: 263 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="tcv">Tailored Cover Letter</InputLabel>
+                                    <Select
+                                        labelId="tcv"
+                                        id="tcv"
+                                        value={tcv}
+                                        label="Tailored Cover Letter"
+                                        onChange={(e) => {
+                                            console.log('tcv changed to:', e.target.value);
+                                            setTCV(e.target.value);
+                                        }}
+                                        >
+                                        {props.tailoredCoverLetters.map(tcoverLetter => {
+                                                                            console.log(tcoverLetter.name)
+                                                                            return (<MenuItem value={tcoverLetter.name}>{tcoverLetter.name}</MenuItem>)
+                                                                        })}
+                                    </Select>
+                                </FormControl>
+                            </Box>
                     </div>
                 </div>
             </div>
