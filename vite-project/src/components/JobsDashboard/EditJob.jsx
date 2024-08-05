@@ -49,8 +49,8 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
     const [duration, setDuration] = useState(job.duration || '');
     const [link, setLink] = useState(job.link || '');
     const [status, setStatus] = useState(job.status || '');
-    const [coverLetter, setCoverLetter] = useState(job.coverLetter || '');
-    const [tailoredCoverLetter, setTailoredCoverLetter] = useState(job.tailoredCoverLetter || '');
+    const [coverLetter, setCoverLetter] = useState(job.coverLetterUsed || '');
+    const [tailoredCoverLetter, setTailoredCoverLetter] = useState(job.tailoredCoverLetterUsed || '');
     const [tags, setTags] = useState(job.tags || []);
     const [tag, setTag] = useState('');
     const [temptags, setTempTags] = useState([...job.tags]);
@@ -459,12 +459,14 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                 dateApplied.toDate();          
                 console.log('dispatching update job async');
                 dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, duration, link, dateApplied, status, coverLetter, tailoredCoverLetter, temptags}}));
+                console.log(coverLetter, tailoredCoverLetter)
                 let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags, coverLetterUsed: coverLetter, tailoredCoverLetterUsed: tailoredCoverLetter}
                 setSelectedJob(updated_job)
                 setTags([...temptags])
                 // setSelectedJob(job)
                 console.log('modal closing, updated job');
                 handleModalClose();
+                console.log("job data sent: ", updated_job)
             }}>Save Changes</span> 
         </div>
     </>
