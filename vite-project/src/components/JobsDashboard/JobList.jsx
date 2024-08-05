@@ -8,8 +8,25 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export default function JobList({ onSelectJob, selectForm, setSelectForm, selectedJob }) {
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const jobs = useSelector(state => state.jobList.jobs);
     const userEmail = useSelector(state => state.userEmail.userEmail);
 
@@ -125,19 +142,65 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
 
 
     <div className="job-actions">
-        <span className="add-job relative" onClick={() => {setSelectForm(true); onSelectJob(null)}}> <p className="text-[black] opacity-[.56] inline-block absolute left-3 top-[-2px] text-4xl"> + </p>Add Job</span>
-        <span className="delete-job" onClick={() => {   
-                                                        if (selectedJob) {
-                                                            console.log("dispatching delete with email: " + userEmail)
-                                                            let id = selectedJob._id
-                                                            dispatch(deleteJobAsync({id, userEmail})); 
-                                                            setSelectForm(false); 
-                                                            onSelectJob(null);
-                                                        } else {
-                                                            console.log("No job selected")
-                                                        }
-                                                    }}>Delete Job</span>
+        <span className="add-job relative cursor-pointer" onClick={() => {setSelectForm(true); onSelectJob(null)}}> <p className="text-[black] opacity-[.56] inline-block absolute left-3 top-[-2px] text-4xl"> + </p>Add Job</span>
+        <span className="delete-job cursor-pointer" onClick={() => {
+                if(selectedJob) {
+                    handleClickOpen()
+                } else {
+                    console.log("no job selected")
+                }
+            }}>Delete Job</span>
     </div>
+
+    <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+            '& .MuiPaper-root': {
+                width: '330px',
+                height: 'auto',
+                borderRadius: '20px',
+                fontFamily: 'monsterrat'
+            },
+            '& .MuiDialogContent-root': {
+                fontFamily: 'monsterrat'
+            }
+        }}
+      > 
+        <div className="mt-[10px] mb-[-8px]">
+            <DeleteOutlineIcon />
+        </div>
+        <DialogTitle id="alert-dialog-title"
+        sx={{
+            paddingBottom: '0',
+            paddingTop: '15px'
+        }}>
+          {"Delete Job"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this job?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{padding: 0}}>
+            <div className=" flex justify-between w-[100%] bg-[#D9D9D9] p-[10px]">
+                <input type="button" value="Cancel" className="bg-[#EFEFEF] rounded-[30px] w-[90px] h-[35px] cursor-pointer" onClick={handleClose}/>
+                <input type="button" value="Delete" className="bg-[#D32F2F] rounded-[30px] w-[90px] h-[35px] cursor-pointer text-[white] hover:bg-[#A41421]" onClick={() => {   
+                                                                if (selectedJob) {
+                                                                    console.log("dispatching delete with email: " + userEmail)
+                                                                    let id = selectedJob._id
+                                                                    dispatch(deleteJobAsync({id, userEmail})); 
+                                                                    setSelectForm(false); 
+                                                                    onSelectJob(null);
+                                                                } else {
+                                                                    console.log("No job selected")
+                                                                }
+                                                            }} />
+            </div>
+        </DialogActions>
+      </Dialog>
 
     </div>
         
