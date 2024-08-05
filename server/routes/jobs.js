@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const Job = require('../model/job');
+const dayjs = require('dayjs')
 
 // let jobs = [
 
@@ -54,6 +55,19 @@ router.get('/:userEmail', async(req, res) => {
     const jobs = await Job.find({ userEmail: req.params.userEmail});
     //console.log("all jobs of the user: ", jobs);
     return res.send(jobs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('server error');
+  }
+  
+});
+
+router.get('/:id', async(req, res) => {
+  try {
+    console.log("getting job by id...")
+    const job = await Job.find({ _id: req.params.id});
+    console.log("updated job is: ", job);
+    return res.send(job);
   } catch (err) {
     console.error(err);
     res.status(500).send('server error');
@@ -274,7 +288,7 @@ router.put('/:jobId', async (req, res) => {
   if (req.body.location != "") {
     job.location = req.body.location;
   }
-  if (req.body.dateApplied != "") {
+  if (req.body.dateApplied != dayjs()) {
     job.dateApplied = req.body.dateApplied;
   }
   if (req.body.duration != "") {
@@ -282,6 +296,9 @@ router.put('/:jobId', async (req, res) => {
   }
   if (req.body.link != "") {
     job.link = req.body.link;
+  }
+  if (req.body.status != "") {
+    job.status = req.body.status;
   }
   if (req.body.coverLetterUsed != "") {
     job.coverLetterUsed = req.body.coverLetterUsed;

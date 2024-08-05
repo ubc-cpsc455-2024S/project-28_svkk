@@ -1,12 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { actionTypes } from "./actionTypes";
 import JobsService from './service';
+import Job from "../../components/JobsDashboard/Job";
 
 export const getJobsAsync = createAsyncThunk(
     actionTypes.GET_JOBS,
     async (userEmail) => {
         // console.log('waiting on response from get request, userEmail is: ', userEmail);
       return await JobsService.getJobs(userEmail);
+    }
+);
+
+export const getJobByIdAsync = createAsyncThunk(
+    actionTypes.GET_JOB_BY_ID,
+    async (id) => {
+        return await JobsService.getJobById(id);
     }
 );
 

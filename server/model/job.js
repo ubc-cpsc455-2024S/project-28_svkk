@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const dayjs = require('dayjs');
 
 const JobSchema = new mongoose.Schema({
     jobTitle: {
@@ -16,13 +17,17 @@ const JobSchema = new mongoose.Schema({
         type: String,
     },
     dateApplied: {
-        type: String,
+        type: Date,
         required: true,
     },
     duration: {
         type: String
     },
     link: {
+        type: String
+    },
+
+    status: {
         type: String
     },
     coverLetterUsed: {

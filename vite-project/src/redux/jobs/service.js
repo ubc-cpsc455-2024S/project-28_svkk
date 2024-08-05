@@ -8,6 +8,13 @@ const getJobs = async (userEmail) => {
     return response.json();
 };
 
+const getJobById = async (id) => {
+    const response = await fetch(USED_IP + `jobs/${id}`, {
+        method: 'GET'
+    });
+    return response.json();
+}
+
 const getJobsDateAppliedEarliestToLatest = async (userEmail) => {
     const response = await fetch(USED_IP + `jobs/${userEmail}/earliest-latest`, {
       method: 'GET'
@@ -121,6 +128,7 @@ const filterTags = async(data) => {
 
 export default {
     getJobs,
+    getJobById,
     updateJob,
     addJob,
     deleteJob,

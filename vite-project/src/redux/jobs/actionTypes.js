@@ -1,5 +1,6 @@
 export const actionTypes = {
     GET_JOBS: 'jobs/getJobs',
+    GET_JOB_BY_ID: 'jobs/getJobById',
     GET_JOBS_EL: 'jobs/getJobsEarliestToLatest',
     GET_JOBS_LE: 'jobs/getJobsLatestToEarliest',
     UPDATE_JOBS: 'jobs/updateJob',

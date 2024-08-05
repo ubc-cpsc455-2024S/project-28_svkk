@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { REQUEST_STATE } from "../utils";
-import { addJobAsync, deleteJobAsync, getJobsAsync, updateJobAsync, searchJobsAsync, getJobsDateAppliedEarliestToLatestAsync, getJobsDateAppliedLatestToEarliestAsync, filterTagsAsync } from "./thunks";
+import { addJobAsync, deleteJobAsync, getJobsAsync, getJobByIdAsync, updateJobAsync, searchJobsAsync, getJobsDateAppliedEarliestToLatestAsync, getJobsDateAppliedLatestToEarliestAsync, filterTagsAsync } from "./thunks";
 import { act } from "react";
 
 
 const INITIAL_STATE = {
     jobs: [],
     getJobs: REQUEST_STATE.IDLE,
+    getJobById: REQUEST_STATE.IDLE,
     updateJob: REQUEST_STATE.IDLE,
     error: null
 }
@@ -28,6 +29,10 @@ export const jobListSlice = createSlice({
         .addCase(getJobsAsync.rejected, (state, action) => {
             state.getJobs = REQUEST_STATE.REJECTED;
             state.error = action.error;
+        })
+        .addCase(getJobByIdAsync.fulfilled, (state, action) => {
+            state.getJobById = REQUEST_STATE.FULFILLED;
+            state.jobs = state.jobs.concat(action.payload);
         })
         .addCase(getJobsDateAppliedEarliestToLatestAsync.fulfilled, (state, action) => {
             state.jobs = action.payload;

@@ -14,6 +14,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import dayjs from "dayjs";
 
 export default function JobList({ onSelectJob, selectForm, setSelectForm, selectedJob }) {
 
@@ -135,7 +136,7 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
             <section key={j._id} className={`job-item ${selectedJobId === j._id ? 'selected' : ''}`} onClick={() => handleJobClick(j)}>
                 <div><b>{j.jobTitle}</b></div>
                 <div>{j.company}</div>
-                <div>Date Applied: {j.dateApplied}</div>
+                <div>Date Applied: {dayjs(j.dateApplied).format('YYYY-MM-DD')}</div>
             </section>
         ))
     }
