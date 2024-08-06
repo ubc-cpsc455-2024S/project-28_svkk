@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 import {USED_IP} from "../redux/ip.js";
+import '../styles/Job.css';
 
 const url = "http://localhost:3000/";
 
@@ -81,32 +82,53 @@ const Login = () => {
 
 
     return (
-      <div
-          className='flex flex-col border-solid rounded-lg border-neutral-400 border-[1px] p-[5px] pb-[15px] w-[420px] m-[auto] mt-[200px]'>
-          <div className='mt-2 text-center'><h2 className='text-3xl'>Application Tailor</h2></div>
-          <div className='flex flex-col h-[200px] justify-center'>
-              <label className='block ml-[70px]'>
-                  Email:
-                  <input type="text" name="email" placeholder='Email' value={email} onChange={onChange}
-                         className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
-              </label>
-              <label className='block ml-[70px]'>
-                  Password:
-                  <input type="password" name="password" placeholder='Password' value={password} onChange={onChange}
-                         className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'/>
-              </label>
+      <div className="bg-bg flex flex-col justify-center content-center h-full">
+      <div className='flex flex-col m-auto mt-40 rounded-[35px] bg-white p-4 jobView'>
+          <div className='mt-2 mb-4 text-center'><h2 className='text-3xl font-medium'>Application Tailor</h2></div>
+          <div className='flex flex-col h-[200px] justify-center content-start'>
+            
+                <div className="p-[30px] pb-4">
+                    <div className=" relative">
+                        <input 
+                            type='text'
+                            name='email'
+                            placeholder='Email'
+                            className="border p-2 pl-6 rounded-[30px]"
+                            value={email}                  
+                            onChange={onChange}>
+                        </input>
+                        <span className=" bg-white p-1 text-[11px] absolute left-5 top-[-12px]">Email*</span>
+                    </div> 
+                </div>
+
+              <div className='p-[30px] pt-4'>
+                <div className=" relative">
+                    <input 
+                        type="password" n
+                        name="password" 
+                        placeholder='Password' 
+                        className="border p-2 pl-6 rounded-[30px]"
+                        value={password} 
+                        onChange={onChange}></input>
+                    <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Password*</span>
+                </div>
+              </div>
+            
+              <div className='text-center'>
+                <input className="mb-[10px] w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white pb-2 pt-2" type="button"
+                        value="Log in" onClick={onSubmit}/>
+              </div>
           </div>
-          <div className='text-center'>
-              <input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white" type="button"
-                     value="Log in" onClick={onSubmit}/>
-          </div>
-          <div className={'text-center mb-4'}>
+
+          <div className='flex justify-center p-6'>
+          <div className={'text-center'}>
               <GoogleOAuthProvider clientId={'869398522193-9j7n8el0o9p36t14mvck3f1vg0f91l4q.apps.googleusercontent.com'}>
                   <GoogleLogin
                       onSuccess={onGoogleSuccess}
                       onError={onGoogleFailure}
                   />
               </GoogleOAuthProvider>
+          </div>
           </div>
           <div className="flex justify-center items-center space-x-20">
               <Link to="/Signup">
@@ -117,6 +139,8 @@ const Login = () => {
               </Link>
           </div>
       </div>
+      </div>
+
   )
 }
 

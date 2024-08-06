@@ -11,7 +11,12 @@ export default {
         'bg' : '#EFF7F8',
         'shadow': '#DFEAEA',
         'teal': '#1199A9',
-        'darkTeal': '#0C6F7B'
+        'darkTeal': '#0C6F7B',
+        'darkTealHover': '#07606B',
+        'red': '#D11A2A',
+        'redHover': '#A41421',
+        'green': '#22B538',
+        'greenHover': '#177717'
       }
     },
     maxWidth: {

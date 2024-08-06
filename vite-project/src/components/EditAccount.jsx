@@ -169,107 +169,126 @@ const EditAccount = () => {
 
     // ChatGpt helped me with styling using tailwind
     return (
-        <div className='flex flex-col border-solid rounded-lg border-neutral-400 border-[1px] p-[5px] pb-[15px] w-[420px] m-[auto] mt-[200px]'>
-            <div className='mt-2 text-center'><h2 className='text-3xl'>Edit Account</h2></div>
+        <div className="bg-bg flex flex-col justify-center content-center h-full">
+        <div className='flex flex-col justify-center m-auto mt-40 rounded-[35px] bg-white p-4 jobView'>
+            <div className='mt-2 text-center'><h2 className='text-3xl font-medium'>Edit Account</h2></div>
             {isLoading ? ( // Show loading indicator
                 <p className='text-center'>Loading...</p>
             ) : (
                 !isGoogleUser && !userData ? ( // Show verification form only for non-Google users
-                    <form onSubmit={handleVerification} className='my-[10px]'>
-                        <label className='block ml-[70px]'>
-                            Email:
-                            <input
-                                name="email"
-                                value={email}
+                    <form onSubmit={handleVerification} className='mb-[15px]'>
+
+                    <div className="p-[30px] pb-4">
+                        <div className=" relative">
+                            <input 
+                                name='email'
+                                value={email} 
                                 readOnly
-                                className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px] bg-gray-100 cursor-not-allowed'
-                                required
-                            />
-                        </label>
-                        <label className='block ml-[70px]'>
-                            Password:
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder='Enter password'
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'
-                                required
-                            />
-                        </label>
-                        <div className='flex justify-center items-center space-x-20'>
+                                className="border p-2 pl-6 rounded-[30px] bg-gray-100 cursor-not-allowed"
+                                required>
+                            </input>
+                            <span className="p-1 text-[11px] absolute left-5 top-[-12px]">Email</span>
+                        </div> 
+                    </div>
+
+                    <div className="p-[30px] pt-4 pb-4">
+                        <div className=" relative">
+                            <input 
+                               type="password"
+                               name="password"
+                               placeholder='Enter password'
+                               value={password}
+                               onChange={(e) => setPassword(e.target.value)}
+                               className="border p-2 pl-6 rounded-[30px]"
+                               required>
+                            </input>
+                            <span className="bg-white p-1 text-[11px] absolute left-5 top-[-12px]">Password*</span>
+                        </div> 
+                    </div>
+                        <div className='flex flex-col justify-center items-center pt-4'>
                             <Link to="/Login">
                                 <button
-                                    className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white hover:bg-custom-blue-dark">
+                                    className="mb-4 w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white">
                                     Back
                                 </button>
                             </Link>
                             <input
-                                className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white hover:bg-custom-blue-dark"
+                                className="mb-[10px] w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white"
                                 type="submit"
                                 value="Verify Password"
                             />
                         </div>
                     </form>
                 ) : (
-                    <form onSubmit={handleUpdate} className='my-[10px]'>
-                        <label className='block ml-[70px]'>
-                            First Name:
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder= "first name"
-                                value={userData?.firstName || ''}
-                                onChange={onChange}
-                                className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'
-                                required
-                            />
-                        </label>
-                        <label className='block ml-[70px]'>
-                            Last Name:
-                            <input
-                                type="text"
-                                name="lastName"
-                                placeholder= 'last name'
-                                value={userData?.lastName || ''}
-                                onChange={onChange}
-                                className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'
-                                required
-                            />
-                        </label>
-                        <label className='block ml-[70px]'>
-                            Email:
-                            <input
-                                name="email"
-                                value={userData?.email || ''} // Use optional chaining to prevent null access
-                                readOnly
-                                className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px] bg-gray-100 cursor-not-allowed'
-                            />
-                        </label>
+                    <form onSubmit={handleUpdate} className='mb-[15px]'>
+                        <div className="p-[30px] pb-4">
+                            <div className=" relative">
+                                <input 
+                                    type="text"
+                                    name="firstName"
+                                    placeholder= "First Name"
+                                    value={userData?.firstName || ''}
+                                    onChange={onChange}
+                                    className="border p-2 pl-6 rounded-[30px]"
+                                    required>
+                                </input>
+                                <span className="bg-white p-1 text-[11px] absolute left-5 top-[-12px]">First Name*</span>
+                            </div> 
+                        </div>
+
+                        <div className="p-[30px] pb-4 pt-4">
+                            <div className=" relative">
+                                <input 
+                                    type="text"
+                                    name="lastName"
+                                    placeholder= 'last name'
+                                    value={userData?.lastName || ''}
+                                    onChange={onChange}
+                                    className="border p-2 pl-6 rounded-[30px]"
+                                    required>
+                                </input>
+                                <span className="p-1 bg-white text-[11px] absolute left-5 top-[-12px]">Last Name*</span>
+                            </div> 
+                        </div>
+
+                        <div className="p-[30px] pb-4 pt-4">
+                            <div className=" relative">
+                                <input 
+                                    name="email"
+                                    value={userData?.email || ''} // Use optional chaining to prevent null access
+                                    readOnly
+                                    className="border p-2 pl-6 rounded-[30px] bg-gray-100 cursor-not-allowed">
+                                </input>
+                                <span className="p-1 text-[11px] absolute left-5 top-[-12px]">Email</span>
+                            </div> 
+                        </div>
+
+                        
                         {!isGoogleUser && (
-                            <label className='block ml-[70px]'>
-                                Password (optional):
-                                <input
+                            <div className="p-[30px] pb-6 pt-4">
+                            <div className=" relative">
+                                <input 
                                     type="password"
                                     name="password"
                                     placeholder='Enter new password'
                                     value={userData?.password || ''} // Use optional chaining to prevent null access
                                     onChange={onChange}
-                                    className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]'
-                                />
-                            </label>
+                                    className="border p-2 pl-6 rounded-[30px]">
+                                </input>
+                                <span className="p-1 bg-white text-[11px] absolute left-5 top-[-12px]">New Password</span>
+                            </div> 
+                        </div>        
                         )}
-                        <div className='flex justify-center space-x-20'>
+                        <div className='flex flex-col justify-center items-center pt-4'>
                             <button
                                 type="button"
-                                className="mb-[10px] w-[120px] h-[50px] bg-red-500 rounded-md text-white"
+                                className="mb-4 w-[233px] h-[40px] bg-red hover:bg-redHover rounded-[30px] text-white"
                                 onClick={handleDelete}
                             >
                                 Delete Account
                             </button>
                             <input
-                                className="mb-[10px] w-[120px] h-[50px] bg-custom-blue rounded-md text-white"
+                                className="mb-4 w-[233px] h-[40px] bg-green hover:bg-greenHover rounded-[30px] text-white"
                                 type="submit"
                                 value="Save Changes"
                             />
@@ -278,6 +297,7 @@ const EditAccount = () => {
                 )
             )}
             {message && <p className='text-center'>{message}</p>}
+        </div>
         </div>
     );
 };

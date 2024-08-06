@@ -3,6 +3,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 import {USED_IP} from "../redux/ip.js";
+import '../styles/Job.css';
 
 // const url = "http://localhost:3000/";
 
@@ -113,49 +114,102 @@ const Signup = () => {
 
 
     return (
+        <div className="bg-bg flex flex-col justify-center content-center h-full">
         <div
-            className='flex flex-col justify-center border-solid rounded-lg border-neutral-400 border-[1px] p-[5px] pb-[5px] w-[420px] m-[auto] mt-[200px] text-sm  min-w-[25%] max-w-[90%]'>
-            <div className='mt-2 text-center'><h2 className='text-3xl'>Application Tailor</h2></div>
+            className='flex flex-col justify-center m-auto mt-40 rounded-[35px] bg-white p-4 jobView'>
+            <div className='mt-2 mb-1 text-center'><h2 className='text-3xl font-medium'>Application Tailor</h2></div>
             {step === 1 && (
-                <form className='my-[10px]' onSubmit={onEmailPasswordSubmit}>
-                    <label className='block ml-[70px]'>
-                        Email:
-                        <input type="email" name="email" placeholder='Email' onChange={onChange} value={email}
-                               className='m-4 ml-[65px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]' required />
-                    </label>
-                    <label className='block ml-[70px]'>
-                        Password:
-                        <input type="password" name="password" placeholder='Password' onChange={onChange} value={password}
-                               className='m-4 ml-[69px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]' required />
-                    </label>
-                    <label className='block ml-[70px]'>
-                        Confirm Password:
-                        <input type="password" name="confirmPassword" placeholder='Confirm Password' onChange={onChange}
-                               value={confirmPassword}
-                               className='m-4 border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]' required />
-                    </label>
-                    <div className='text-center'>
-                        <input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white" type="submit" value="Next" />
+                <form className=' mb-[15px]' onSubmit={onEmailPasswordSubmit}>
+
+                    <div className="p-[30px] pb-4">
+                        <div className=" relative">
+                            <input 
+                                type='email'
+                                name='email'
+                                placeholder='Email'
+                                className="border p-2 pl-6 rounded-[30px]"
+                                value={email}                  
+                                onChange={onChange}
+                                required>
+                            </input>
+                            <span className=" bg-white p-1 text-[11px] absolute left-5 top-[-12px]">Email*</span>
+                        </div> 
                     </div>
+
+                    <div className='p-[30px] pt-4 pb-4'>
+                        <div className=" relative">
+                            <input 
+                                type="password" 
+                                name="password" 
+                                placeholder='Password' 
+                                className="border p-2 pl-6 rounded-[30px]"
+                                value={password} 
+                                onChange={onChange}
+                                required>
+                            </input>
+                            <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Password*</span>
+                        </div>
+                    </div>
+
+                    <div className='p-[30px] pt-4'>
+                        <div className=" relative">
+                            <input 
+                                type="password" 
+                                name="confirmPassword" 
+                                placeholder='Confirm Password' 
+                                className="border p-2 pl-6 rounded-[30px]"
+                                value={confirmPassword} 
+                                onChange={onChange}
+                                required>
+                            </input>
+                            <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Confirm Password*</span>
+                        </div>
+                    </div>
+
+                    <div className='text-center'>
+                        <input className="mb-[10px] w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white" type="submit" value="Next" />
+                    </div>
+                    
                 </form>
             )}
             {step === 2 && (
-                <form className='my-[10px]' onSubmit={onNameSubmit}>
-                    <label className='block ml-[70px]'>
-                        First name:
-                        <input type="text" name="firstName" placeholder='First name' onChange={onChange} value={firstName}
-                               className='m-4 ml-[63px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]' required />
-                    </label>
-                    <label className='block ml-[70px]'>
-                        Last name:
-                        <input type="text" name="lastName" placeholder='Last name' onChange={onChange} value={lastName}
-                               className='m-4 ml-[64px] border-solid rounded-lg border-neutral-500 border-[1px] p-[5px]' required />
-                    </label>
+                <form className='mb-[15px]' onSubmit={onNameSubmit}>
+                    <div className="p-[30px] pb-4">
+                        <div className=" relative">
+                            <input 
+                                type='text'
+                                name='firstName'
+                                placeholder='First Name'
+                                className="border p-2 pl-6 rounded-[30px]"
+                                value={firstName}                  
+                                onChange={onChange}
+                                required>
+                            </input>
+                            <span className=" bg-white p-1 text-[11px] absolute left-5 top-[-12px]">First Name*</span>
+                        </div> 
+                    </div>
+
+                    <div className="p-[30px] pt-4">
+                        <div className=" relative">
+                            <input 
+                                type='text'
+                                name='lastName'
+                                placeholder='Last Name'
+                                className="border p-2 pl-6 rounded-[30px]"
+                                value={lastName}                  
+                                onChange={onChange}
+                                required>
+                            </input>
+                            <span className=" bg-white p-1 text-[11px] absolute left-5 top-[-12px]">Last Name*</span>
+                        </div> 
+                    </div>
+                    
                     <div className='text-center'>
-                        <input className="mb-[10px] w-[100px] h-[35px] bg-custom-blue rounded-md text-white" type="submit" value="Sign up" />
+                        <input className="mb-[10px] w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white" type="submit" value="Sign up" />
                     </div>
                 </form>
             )}
+        </div>
         </div>
     )
 }

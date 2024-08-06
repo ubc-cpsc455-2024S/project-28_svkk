@@ -72,12 +72,6 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
         console.log('current state of tags after delete:', tagFilters);
       };
 
-    // const deleteTag = (index) => {
-    //     setTagFilters((prevTags) => prevTags.filter((tag, i) => i !== index));
-    //     console.log('current state of tagFilters:', tagFilters);
-    //     console.log('current state of tags afte delete:', tags);
-    // };
-
 
 
   
@@ -87,16 +81,6 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
             <div className="sort-by">Sort by: 
                 <span className="date-applied">Date Applied</span>
             </div>
-
-            {/* <div className="sort-by">Filter by Tag(s): 
-                <input type="text" name="" id="" value={tagFilter} 
-                onChange={(e) => {if (e.target.value === '') 
-                                    {   let tagFilter = e.target.value;
-                                        dispatch(filterTagAsync({userEmail, tagFilter}))
-                                    }; 
-                                    setTagFilter(e.target.value)}}/>
-                <input type="button" value="search" onClick={()=> {dispatch(filterTagAsync({userEmail, tagFilter}))}}/>
-            </div> */}
 
             <div className="sort-by">Filter by Tag(s): 
                 {/*textfield to type in filter*/}
@@ -112,9 +96,7 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
                         Apply
                 </Button>
                 <div>
-                    {tagFilters.map((tag, i) => {
-                            //console.log('tags added so far:', tag);
-                            // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
+                    {tagFilters.map((tag, i) => {                        
                             return (
                                 <Chip
                                     key={i}
@@ -143,7 +125,7 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
 
 
     <div className="job-actions">
-        <span className="add-job relative cursor-pointer" onClick={() => {setSelectForm(true); onSelectJob(null)}}> <p className="text-[black] opacity-[.56] inline-block absolute left-3 top-[-2px] text-4xl"> + </p>Add Job</span>
+        <span className="add-job relative cursor-pointer" onClick={() => {setSelectForm(true); onSelectJob(null)}}> <p className="text-[black] opacity-[.56] inline-block absolute left-3 top-[-2px] text-4xl"></p>Add Job</span>
         <span className="delete-job cursor-pointer" onClick={() => {
                 if(selectedJob) {
                     handleClickOpen()
