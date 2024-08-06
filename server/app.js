@@ -21,9 +21,9 @@ connectDB()
 
 const corsOptionObject = {
     origin: true,
-    credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'email'],
     methods: ['GET', 'PUT', 'POST', 'OPTIONS'],
+    optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptionObject));
