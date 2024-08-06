@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute.js";
 import EditAccount from "./components/EditAccount.jsx";
 import {useEffect, useState} from "react";
 import {jwtDecode} from "jwt-decode";
+import {USED_IP} from "../ip.js";
 
 // Create a theme instance.
 const theme = createTheme({
@@ -49,6 +50,12 @@ function App() {
             }
         }
     }, []);
+
+    useEffect(() => {
+        fetch(USED_IP)
+          .then((res) => res.json())
+          .then((data) => setMessage(data.message));
+      },[]);
 
     return (
         <ThemeProvider theme={theme}>
