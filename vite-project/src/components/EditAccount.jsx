@@ -206,7 +206,7 @@ const EditAccount = () => {
                         </div> 
                     </div>
                         <div className='flex flex-col justify-center items-center pt-4'>
-                            <Link to="/Login">
+                            <Link to="/MainDashboard">
                                 <button
                                     className="mb-4 w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white">
                                     Back
