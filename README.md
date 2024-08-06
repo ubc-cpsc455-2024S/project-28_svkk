@@ -51,6 +51,8 @@ The goal of this application is to help match students to their internships base
       - Responded: 
           - Successful applications
           - Unsuccessful Applications
+- [x] Users can filter jobs by tags (e.g., frontend, backend, fullstack, data)
+- [x] Users can search for jobs they’ve applied to by name and/or job title
  
 **Stretch Goals**
   - [x] Users can specify the font and font-size of the tailored cover letter
