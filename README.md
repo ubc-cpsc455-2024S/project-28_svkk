@@ -3,7 +3,7 @@
 ## About The Project
 The goal of this application is to help match students to their internships based on their current qualifications, minimizing the time consumed in the application process, resulting in an increased success rate during the co-op job search term. This application aims to achieve this by automating the 15-30 mins spent on tailoring a Resume and/or Cover Letter for every job posting. In an economy that requires at least 30 applications sent each week during classes, this often comes at the expense of student’s grades and more importantly their mental health, affecting their long term prospects. This application aims to mitigate these unnecessary drawbacks while maintaining the quality and authenticity of each job application.
 
-![Workflow Status Badge](https://github.com/ubc-cpsc455-2024S/project-28_svkk/actions/workflows/pipeline.yml/badge.svg)
+![Workflow Status Badge](nhttps://github.com/ubc-cpsc455-2024S/project-28_svkk/actions/workflows/pipeline.yml/badge.svg)
 
 
 **Project Description: Write 3-5 sentences on your project topic.**
@@ -80,18 +80,19 @@ This will help you divide up work among your teammates.**
 2. React and Redux play a fundamental role to our application's front-end develpopment and state management. One of the defining features about React is the Virtual DOM which bypasses the need for manipulating the browser's DOM. The lightweight copy (Virtual DOM) minimizes re-renders and improves efficiency. Redux provides a centralized data store making it easier to track, manage and update our documents across various components.
 3. Express plays a pivitol role in our backend framework, allowing for easy setup of API endpoints to handle various requests such as GET, POST, PUT and DELETE. In addition, Express is also capable of handling multiple requests simultaneously and provides meaningful responses in case of failures, which has made debugging a lot simpler. Lastly, seamless intergration with Redux Thunks allows for smooth communication between the front-end and back-end.
 4. For database storage, we chose to use MongoDB due to its flexibility and scalability in storing and managing user data. Its schema-less architecture allows us to accomodate complex data structures easily. Furthermore, MongoDB enhances our app's efficiency by providing fast data retrieval and processing capabilities, ensuring a seamless user experience and enabling us to handle large volumes of data with ease.
-5. Our application is currently being hosted through AWS, which offers a robust and scalable platform for hosting web applications. [Expand more here]
+5. Our application is currently being hosted through AWS EC2, an industry-standard platform known for its robustness and scalability in web services hosting which doesn't spin down despite inactivity. We made use of security groups to block requests from different ip-addresses and ports, enhancing the security of our application. Later, we integrated a Route 53 custom domain to give our application a user-friendly domain name.
 
 
 ## Above and Beyond
 For our MERN application, we went above and beyond the standard requirements by implementing several key features that enhance user experience and security. For starters, we incorporated Google Login, allowing for users to sign up and log in through a provider they are likely familiar with. In addition, Google offers a quick and secure authentication method ensuring our user's data is both safe and protected. 
 
-Moreover, we incorporated JWT (JSON Web Token) authetication to further safeguard user data. JWTs also allows users to refresh their pages without the hassle of signing back in, providing a seamless and convenient user experience. 
+Moreover, we incorporated JWT (JSON Web Token) authentication to further safeguard user data. JWTs also allows users to refresh their pages without the hassle of signing back in, providing a seamless and convenient user experience. 
 
 For users who prefer to sign up directly through our application instead of using Google, we implemented bcrypt, a cryptographic algorithm specifically designed for hashing and storing passwords securely. This ensures user data is kept safe, regardless of the method chosen.
 
 By incorporating Google Login, JWT authentication and bcrypt, we have created an application that prioritizes both security and user convenience. This ensures that users have flexible authentication options that cater to their desired preferences while also maintaing high security standards.
 
+In addition, we used libraries such as docx and mammoth to allow users to customize the font style, size, and margins in their tailored document, and directly download them onto their device. By incorporating these libraries, we further streamlined the tailoring process and increased efficiency.
 ## What's Next
 Moving forward, we plan to incorporate a web scraping feature that allows users to submit links to job postings, enabling the application to automatically extract all relevant information. This functionality will streamline the process of adding job details, making it easier for users to manage and apply to various jobs. Our goal has always been to alleviate the mental and physical burdens associated with job searching, and incorporating a web scraper brings us one step closer to achieving this objective.
   

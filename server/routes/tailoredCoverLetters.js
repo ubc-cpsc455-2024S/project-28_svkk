@@ -1,13 +1,12 @@
 var express = require('express');
 const {mongoose} = require("mongoose");
-// const {coverLetterSchema, tailoredCoverLetterSchema} = require("../model/schema");
-// const TailoredCoverLetter = mongoose.model("TailoredCoverLetter", tailoredCoverLetterSchema, "tailoredCoverLetters");
 var router = express.Router();
 
 const {TailoredCoverLetter} = require('../model/schema');
 
 let tailoredCoverLetters = [];
 
+// Getting all tailored cover letters given an email
 router.get('/', async function (req, res, next) {
     const email = req.headers.email;
     let coverLetters = await TailoredCoverLetter.find({email: email});
@@ -15,13 +14,12 @@ router.get('/', async function (req, res, next) {
     res.status(200).send(coverLetters);
 })
 
+// Posting a tailored cover letter
 router.post('/', async function (req, res, next) {
     const newCoverLetter = req.body;
     const email = req.headers.email;
     console.log("body");
     console.log(newCoverLetter);
-    // coverLetters.push(newCoverLetter);
-    //console.log(coverLetters);
     const coverLetterObject = TailoredCoverLetter({
         email: email,
         uuid: newCoverLetter.uuid,
@@ -36,11 +34,8 @@ router.post('/', async function (req, res, next) {
     }
 })
 
+// Deleting a tailored cover letter
 router.delete('/:name', async function (req, res, next) {
-    // const toDelete = tailoredCoverLetters.find(tailoredCoverLetter => tailoredCoverLetter.name == req.params.name);
-    // // console.log(toDelete);
-    // tailoredCoverLetters.splice(tailoredCoverLetters.indexOf(toDelete), 1);
-    // res.status(204).send({ message: `successfully deleted tailored cover letter titled ${req.params.name}` });
     const name = req.params.name;
     const email = req.headers.email;
     const deletedCoverLetter = await TailoredCoverLetter.findOneAndDelete({email: email, name: name});

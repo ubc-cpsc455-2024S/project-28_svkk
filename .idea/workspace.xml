@@ -4,8 +4,105 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19c176f9-4543-4e5d-810e-036c18409e65" name="Changes" comment="Updated package.json">
-      <change afterPath="$PROJECT_DIR$/vite-project/src/components/CoverLetterCreationComponents/index.html" afterDir="false" />
+    <list default="true" id="19c176f9-4543-4e5d-810e-036c18409e65" name="Changes" comment="Added clearing the text body after adding the document.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/color-support" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/color-support" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/mime" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/mime" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/mkdirp" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/mkdirp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/node-pre-gyp" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/node-pre-gyp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/nopt" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/nopt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/rimraf" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/rimraf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/semver" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/uuid" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/uuid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/base64-js/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/base64-js/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/base64-js/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/base64-js/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/base64-js/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/base64-js/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/base64-js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/base64-js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/base64-js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/base64-js/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/.npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/.npmignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/buffer-equal-constant-time/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/CODEOWNERS" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/CODEOWNERS" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/src/ecdsa-sig-formatter.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/src/ecdsa-sig-formatter.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/src/ecdsa-sig-formatter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/src/ecdsa-sig-formatter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/src/param-bytes-for-alg.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/ecdsa-sig-formatter/src/param-bytes-for-alg.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/.jscs.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/.jscs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/component.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/component.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/extend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/extend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/agent-base/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/agent-base/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/agent-base/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/agent-base/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/agent-base/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/agent-base/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/browser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/node.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/debug/src/node.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/https-proxy-agent/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/https-proxy-agent/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/https-proxy-agent/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/https-proxy-agent/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/https-proxy-agent/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/https-proxy-agent/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/license.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/license.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/node_modules/ms/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gaxios/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gaxios/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/node_modules/gaxios/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gcp-metadata/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gcp-metadata/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/node_modules/gcp-metadata/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/google-auth-library/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/google-auth-library/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gtoken/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gtoken/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gtoken/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gtoken/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gtoken/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gtoken/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/gtoken/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/gtoken/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/is-stream/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/is-stream/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/is-stream/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/is-stream/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/is-stream/license" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/is-stream/license" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/is-stream/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/is-stream/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/is-stream/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/is-stream/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/json-bigint/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/json-bigint/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/json-bigint/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/json-bigint/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/json-bigint/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/json-bigint/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/json-bigint/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/json-bigint/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jwa/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jwa/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jwa/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jwa/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jwa/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jwa/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jwa/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jwa/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jws/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jws/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jws/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jws/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jws/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jws/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jws/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jws/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/jws/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/jws/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/make-dir/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/make-dir/node_modules/.bin/semver" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +196,11 @@
       <workItem from="1722446052669" duration="3549000" />
       <workItem from="1722466836158" duration="121000" />
       <workItem from="1722467078313" duration="71000" />
+      <workItem from="1722485457976" duration="2412000" />
+      <workItem from="1722516599125" duration="232000" />
+      <workItem from="1722582653324" duration="816000" />
+      <workItem from="1722638539851" duration="655000" />
+      <workItem from="1722797123138" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary="Added docx upload and download functionality!">
       <option name="closed" value="true" />
@@ -124,7 +226,31 @@
       <option name="project" value="LOCAL" />
       <updated>1722467119085</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Wrapped up pdf upload">
+      <option name="closed" value="true" />
+      <created>1722486186230</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722486186230</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated openAI key">
+      <option name="closed" value="true" />
+      <created>1722582809639</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722582809639</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added clearing the text body after adding the document.">
+      <option name="closed" value="true" />
+      <created>1722639218946</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722639218946</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +282,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added docx upload and download functionality!" />
     <MESSAGE value="Updated package.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated package.json" />
+    <MESSAGE value="Wrapped up pdf upload" />
+    <MESSAGE value="Updated openAI key" />
+    <MESSAGE value="Added clearing the text body after adding the document." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added clearing the text body after adding the document." />
   </component>
 </project>

@@ -8,6 +8,7 @@ var router = express.Router();
 
 const { Resume } = require("../model/schema");
 
+// Getting all resumes given an email
 router.get('/', async function (req, res, next) {
     // console.log("resumes: ", resumes);
     const email = req.headers.email;
@@ -27,6 +28,7 @@ router.post('/uploadPDF', fileUpload(), async (req, res) => {
 
 })
 
+// Adding a new resume
 router.post('/', async function (req, res, next) {
     const newResume = req.body;
     const email = req.headers.email;
@@ -45,12 +47,8 @@ router.post('/', async function (req, res, next) {
     }
 })
 
+// Deleting an existing resume
 router.delete('/:name', async function (req, res, next) {
-    // const toDelete = resumes.find(resume => resume.name == req.params.name);
-    // // console.log(toDelete);
-    // resumes.splice(resumes.indexOf(toDelete), 1);
-    // res.status(204).send({ message: `successfully deleted tailored cover letter titled ${req.params.name}` });
-    //
     const name = req.params.name;
     const email = req.headers.email;
     const deletedResume = await Resume.findOneAndDelete({email: email, name: name});

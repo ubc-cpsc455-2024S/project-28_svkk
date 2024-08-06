@@ -114,26 +114,26 @@ let coverLetters = [
     }
 ];
 
+// Returning the pre-existing template cover letters for users to edit. (Not user specific)
 router.get('/templates', function (req, res, next) {
     // console.log(templates);
     res.send(templates);
 })
 
+// Getting all cover letters associated with an email
 router.get('/', async function (req, res, next) {
-    // console.log(coverLetters);
     const email = req.headers.email;
     let coverLetters = await CoverLetter.find({email: email});
     console.log(coverLetters);
     res.status(200).send(coverLetters);
 })
 
+// Adding a new cover letter
 router.post('/', async function (req, res, next) {
     const newCoverLetter = req.body;
     const email = req.headers.email;
     console.log("body");
     console.log(newCoverLetter);
-    // coverLetters.push(newCoverLetter);
-    //console.log(coverLetters);
     const coverLetterObject = CoverLetter({
         email: email,
         uuid: newCoverLetter.uuid,
@@ -148,10 +148,9 @@ router.post('/', async function (req, res, next) {
     }
 })
 
+
+// Deleting an existing cover letter
 router.delete('/:name', async function (req, res, next) {
-    // const toDelete = coverLetters.find(coverLetter => coverLetter.name == req.params.name);
-    // console.log(toDelete);
-    // coverLetters.splice(coverLetters.indexOf(toDelete), 1);
     const name = req.params.name;
     const email = req.headers.email;
     const deletedCoverLetter = await CoverLetter.findOneAndDelete({email:email, name:name});
