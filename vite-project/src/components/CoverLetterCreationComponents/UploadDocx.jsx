@@ -118,6 +118,7 @@ export default function UploadDocx({ setResponse }) {
                 variant="contained"
                 tabIndex={-1}
                 accept=".docx"
+                sx={{backgroundColor: '#0C6F7B', '&:hover': {backgroundColor: '#07606B'}, borderRadius: 30, marginRight: 2}}
                 startIcon={<CloudUploadIcon />}
             >
                 Upload file
@@ -129,6 +130,7 @@ export default function UploadDocx({ setResponse }) {
                 variant="contained"
                 tabIndex={-1}
                 accept=".pdf"
+                sx={{backgroundColor: '#0C6F7B', '&:hover': {backgroundColor: '#07606B'}, borderRadius: 30, marginLeft: 2}}
                 startIcon={<CloudUploadIcon />}
             >
                 Upload PDF

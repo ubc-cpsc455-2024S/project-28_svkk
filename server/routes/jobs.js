@@ -108,38 +108,6 @@ router.get('/:userEmail/latest-earliest', async (req, res) => {
 })
 
 
-// router.post('/addJob', async(req, res) => {
-//   console.log('request body in add Job route: ', req.body);
-//   let jobTitle = req.body.jobTitle
-//   let company = req.body.company
-//   let jobType = req.body.jobType
-//   let location = req.body.location
-//   let dateApplied = req.body.dateApplied
-//   let duration = req.body.duration
-//   let link = req.body.link
-//   let coverLetterUsed = req.body.coverLetterUsed
-//   let tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
-//   let userEmail = req.body.userEmail
-//   console.log('email is: ', userEmail);
-
-//   let newJob = new Job({
-//                     jobTitle: jobTitle,
-//                     company: company,
-//                     jobType: jobType,
-//                     location: location,
-//                     dateApplied: dateApplied,
-//                     duration: duration,
-//                     link: link,
-//                     coverLetterUsed: coverLetterUsed,
-//                     tailoredCoverLetterUsed: tailoredCoverLetterUsed,
-//                     userEmail: userEmail
-//                     })
-  
-//   console.log("new job is: ", newJob);
-//   await newJob.save();
-//   return res.send(newJob);
-// });
-
 router.post('/addJob', async(req, res) => {
   console.log(req.body)
   let jobTitle = req.body.jobTitle
@@ -149,6 +117,7 @@ router.post('/addJob', async(req, res) => {
   let dateApplied = req.body.dateApplied
   let duration = req.body.duration
   let link = req.body.link
+  let status = req.body.status
   let coverLetterUsed = req.body.coverLetterUsed
   let tailoredCoverLetterUsed = req.body.tailoredCoverLetterUsed
   let userEmail = req.body.userEmail
@@ -164,6 +133,7 @@ router.post('/addJob', async(req, res) => {
                     dateApplied: dateApplied,
                     duration: duration,
                     link: link,
+                    status: status,
                     coverLetterUsed: coverLetterUsed,
                     tailoredCoverLetterUsed: tailoredCoverLetterUsed,
                     userEmail: userEmail,
@@ -178,8 +148,6 @@ router.post('/addJob', async(req, res) => {
 });
 
 router.post('/delete/:id', async function(req, res, next) {
-  // const toDelete = jobs.find((job) => {job.id == req.params.id})
-  // jobs.splice(jobs.indexOf(toDelete), 1)
   console.log("called delete")
   await Job.findByIdAndDelete(req.params.id)
   console.log("email: " + req.body.email)

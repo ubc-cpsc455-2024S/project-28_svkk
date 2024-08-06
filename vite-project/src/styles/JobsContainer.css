@@ -35,10 +35,12 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
   
   .job-item:hover {
     background-color: #f0f0f0;
+    /* background-color: #EEF4F4; */
   }
   
   .job-item.selected {
     background-color: #dcdcdc;
+    /* background-color: #CDE8EB; */
   }
   
   .job-details-container {
@@ -96,7 +98,7 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
 
   .add-tag {
     border-radius: 25px;
-    background: #228B22;
+    background: #22B538;
     color: #f0f0f0;
     text-align: center;
     padding: 10px;
@@ -105,7 +107,7 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
   
   .delete-job {
     border-radius: 25px;
-    background: #E34234;
+    background: #D11A2A;
     color: #f0f0f0;
     text-align: center;
     padding: 0.4em;
@@ -123,5 +125,5 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
   }
 
   .delete-job:hover {
-    background-color: #cf2222;
+    background-color: #A41421;
   }

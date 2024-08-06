@@ -8,6 +8,8 @@ import { addCoverLetterAsync } from '../../redux/coverLetters/thunk.js';
 import { v4 as uuidv4 } from 'uuid';
 import {addResumeAsync} from "../../redux/resumes/thunk.js";
 import UploadDocx from "./UploadDocx.jsx";
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 
 
@@ -34,6 +36,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
 
     useEffect(() => {
         // setting template based on index
+        console.log('coverlettertemplate length', coverLetterTemplates.length)
         if (addType === coverLetterTemplateString && coverLetterTemplates.length >= 0) {
             setElementTextBox(coverLetterTemplates[templateIndex].content);
         }
@@ -150,32 +153,36 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
 
             <>
             {/*Adding Card*/}
-
-            <div className="big_card">
-                <h3 className="largeLetters">Add a Document</h3>
-                <br></br><br></br>
-
-                <input
-                    className="rounded-textbox"
-                    placeholder="Document name"
-                    onChange={(eventObject) => setElementTitleBox(eventObject.target.value)}
-                />
-
-
-                <br></br>
+            <div className="big_card add_card">
+                <h3 className="largeLetters font-medium text-3xl">Add a Document</h3>
                 <br></br>
 
-                <textarea
-                    className="big-rounded-textbox"
-                    placeholder="Enter your Resume, Cover Letter, or Job Posting here."
-                    onChange={(eventObject) => setElementTextBox(eventObject.target.value)}
-                    value={elementTextBox}
-                />
+                <div className="p-[30px] pb-4">
+                    <div className=" relative">
+                        <input
+                            className="border p-2 pl-6 rounded-[30px]"
+                            placeholder="Document name"
+                            onChange={(eventObject) => setElementTitleBox(eventObject.target.value)}
+                        />
+                        <span className=" bg-white p-1 text-[11px] absolute left-[196px] top-[-12px]">Document Name*</span>
+                    </div> 
+                </div>
+
+                <div className="p-[30px] pb-4">
+                    <div className=" relative">
+                        <textarea
+                            className="border p-2 pl-6 rounded-[30px] big-rounded-textbox"
+                            placeholder="Enter your Resume, Cover Letter, or Job Posting here."
+                            onChange={(eventObject) => setElementTextBox(eventObject.target.value)}
+                            value={elementTextBox}/>
+                    </div> 
+                </div>
+
                 {addType == coverLetterTemplateString && (
                     <div className="template-navigation">
-                        <button className="template-button" onClick={prevTemplate}>Previous Template</button>
-                        {templateIndex + 1}
-                        <button className="template-button" onClick={nextTemplate}>Next Template</button>
+                        <ArrowCircleLeftIcon fontSize="large" sx={{color: '#0C6F7B', '&:hover': {color: '#07606B'}}} onClick={prevTemplate}></ArrowCircleLeftIcon>
+                        <span>{templateIndex + 1}</span>
+                        <ArrowCircleRightIcon fontSize="large" sx={{color: '#0C6F7B', '&:hover': {color: '#07606B'}}} onClick={nextTemplate}></ArrowCircleRightIcon>
                     </div>
                 )}
 
@@ -189,7 +196,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
 
                 <UploadDocx setResponse={setElementTextBox}></UploadDocx>
                 <br></br><br></br>
-                <button className="add_button" onClick={addElement}>Add Document</button>
+                <button className="add_button bg-green hover:bg-greenHover" onClick={addElement}>Add Document</button>
                 {/*<DownloadDocx text={elementTextBox}></DownloadDocx>*/}
 
             </div>

@@ -52,9 +52,9 @@ export default function CoverLetterPage() {
         <>
         <Navbar search={false}/>
         <div className="coverLetterPageContainer">
-            <div>
+            {/* <div>
                 <h1 className="largerLetters">Generate Cover Letter</h1>
-            </div>
+            </div> */}
             <AddDocument
                 resumes = {resumes}
                 jobPostings={jobPostings}

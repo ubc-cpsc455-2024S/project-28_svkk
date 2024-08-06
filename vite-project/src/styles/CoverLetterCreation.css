@@ -1,12 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-} */
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -85,10 +78,8 @@ button:active {
 
 /* Rounded textbox for more aesthetic purposes */
 .rounded-textbox {
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 15px;
-  border: 1px solid #ccc;
+  min-width: 20vw;
+  min-height: 20vh;
 }
 
 .small-rounded-textbox{
@@ -96,17 +87,12 @@ button:active {
   padding: 10px;
   font-size: 14px;
   border-radius: 15px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
 }
 
 .big-rounded-textbox {
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 15px;
-  border: 1px solid #ccc;
-  width: 80%;
-  height: 80%;
-  box-sizing: border-box;
+  min-width: 30vw;
+  min-height: 40vh;
 }
 
 .group_member_div {
@@ -151,20 +137,22 @@ button:active {
 
 .remove_button {
   font-family: "Montserrat", sans-serif;
-  background-color: #00c3ff;
+  /* background-color: #00c3ff; */
+  background-color: #dc7777;
   color: white;
   padding: 10px 12px;
   text-align: center;
   display: inline-block;
   font-size: 16px;
   border-radius: 25px;
+  margin-top: 1rem;
 
 
   transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .remove_button:hover {
-  background-color: #dc7777;
+  /* background-color: #dc7777; */
   transform: translateY(0.5%);
   box-shadow: 0 3px 3px rgb(0,0,0);
 }
@@ -175,19 +163,19 @@ button:active {
 
 .add_button {
   font-family: "Montserrat", sans-serif;
-  background-color: #00c3ff;
   color: white;
   padding: 10px 12px;
   text-align: center;
   display: inline-block;
   font-size: 16px;
   border-radius: 25px;
+  margin-bottom: 0.5rem;
 
   transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .add_button:hover {
-  background-color: #31ef9a;
+  /* background-color: #31ef9a; */
   transform: translateY(0.5%);
   box-shadow: 0 3px 3px rgb(0,0,0);
 }
@@ -197,21 +185,30 @@ button:active {
 }
 
 .coverLetterPageContainer {
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #EFF7F8;
 }
 
 
 .big_card{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 2%;
+  /* padding-bottom: 1%; */
   margin: 2%;
-  border-radius: 10px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  filter: drop-shadow(1em 1em 2em #DFEAEA);
+  
 
 
   color: black;
-  background-color: rgba(156, 189, 241, 0);
-  border: 2px solid #b2b2b2;
+  /* background-color: rgba(156, 189, 241, 0); */
+  /* border: 2px solid #b2b2b2; */
   min-width: 50%;
   max-width: 90%;
   height: auto;
@@ -222,9 +219,16 @@ button:active {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.add_card {
+  min-width: 50%; 
+  padding-right: 10em;
+  padding-left: 10em;
+  max-width: 100%;
+}
+
 .big_card:hover{
   box-shadow: 0 4px 5px rgb(211, 211, 211);
-  /*transform: translateY(-1%);*/
+  /*transform: transateY(-1%);*/
   background-color: #ffffff;
 }
 
@@ -266,7 +270,7 @@ option {
 }
 
 .largeLetters {
-  font-size: 20px;
+  /* font-size: 20px; */
   font-family: "Montserrat", sans-serif;
 
 }
@@ -287,8 +291,10 @@ option {
 .template-navigation {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 5px;
+  align-items: center;
+  gap: 1em;
+  margin-right: 1em;
+  /* margin-top: 5px; */
 }
 
 .template-button {
@@ -296,8 +302,16 @@ option {
   font-size: 15px;
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
-  background-color: #00c3ff;
+  background-color: #0C6F7B;
   color: white;
+  border-radius: 30px;
+  padding: 0.5em;
+  padding-right: 0.7em;
+  padding-left: 0.7em;
 
+}
+
+.template-button:hover {
+  background-color: #07606B;
 }
 

@@ -28,11 +28,7 @@ import Select from '@mui/material/Select';
 
 
 export default function Job({coverLetters, tailoredCoverLetters, job, setSelectedJob}) {
-    // console.log({job})
     const theme = useTheme();
-    // const dispatch = useDispatch();
-    // const updatedJob = useSelector((state) => state.jobs.find((j) => j._id === job._id));
-    
 
     const [jobTitle, setJobTitle] = useState('');
     const [company, setCompany] = useState('');
@@ -82,12 +78,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
         }
     }, [job])
 
-    // useEffect(() => {
-    //     if (job._id) {
-    //         dispatch(getJobByIdAsync(job._id));
-    //     }
-    // }, [dispatch, job._id]);
-
     const adjustWidth = (input) => {
         if (input) {
             input.style.width = `${input.value.length + 1}ch`;
@@ -98,9 +88,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
         <Tooltip {...props} classes={{ popper: className }} />
       ))(({ theme }) => ({
         [`& .${tooltipClasses.tooltip}`]: {
-        //   backgroundColor: '#FFFFFF',
-        //   color: 'rgba(0, 0, 0, 0.87)',
-        //   boxShadow: theme.shadows[1],
           fontSize: 12,
           fontFamily: "Montserrat",
           borderRadius: '30px'
@@ -112,21 +99,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
     };
 
     const handleModalClose = () => {
-        // if (job) {
-        //     console.log('Job data received (Job.jsx):', job);
-        //     setJobTitle(job.jobTitle || '');
-        //     setCompany(job.company || '');
-        //     setJobType(job.jobType || '');
-        //     setLocation(job.location || '');
-        //     setDateApplied(job.dateApplied || '');
-        //     setDuration(job.duration || '');
-        //     setLink(job.link || '');
-        //     setStatus(job.status || '');
-        //     setCoverLetter(job.coverLetter || '');
-        //     setTailoredCoverLetter(job.tailoredCoverLetter || '');
-        //     setTags(job.tags || [])
-        //     setTempTags(job.tags || [])
-        // }
         setIsModalOpen(false);
     };
     
@@ -134,20 +106,11 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
     return(
         <>
         <div className="bg-bg flex flex-col justify-center h-full">
-        <div className="jobView w-[80%] m-auto h-[70%] overflow-y-scroll border rounded-[35px] bg-white">
+        <div className="jobView w-[80%] mt-16 m-auto overflow-y-scroll border rounded-[35px] bg-white">
             <div className="flex justify-center p-8 border-b">
                     <h1 className="text-3xl font-semibold">{jobTitle}</h1>
             </div>
-            {/* <div className="flex border-b">
-                <div className="font-bold w-52 p-[30px] border-r flex items-center">
-                    Job Title:
-                </div>
-                <div className="p-[30px] grow"> 
-                    <div className=" relative">
-                        <input type="text" name="" id="" value={jobTitle} className="p-2 pl-6"/> 
-                    </div> 
-                </div>
-            </div> */}
+
             <div className="flex border-b">
                 <div className="font-semibold w-[208px] p-[30px] border-r flex items-center text-xl">
                     Company:
@@ -231,44 +194,11 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
                     Tags:
                 </div>
                 <div className="p-[30px] grow"> 
-                        {/* code for editing tags: */}
-                        {/* <input id="tags" 
-                                className="auto-width-input"
-                                value={tag}
-                                onChange={(e) => {
-                                    setTag(e.target.value);
-                                    adjustWidth(e.target);
-                                }}> */}
-                        {/* <div className="flex justify-center"> */}
-                            {/* <input type="text" name="" id="" value={duration} className="p-2 pl-6 text-xl"/> */}
-
-                            {/* <Fab size="small" 
-                                sx={{
-                                    backgroundColor: theme.palette.darkTeal,
-                                    '&:hover': {
-                                        backgroundColor: '#07606B'
-                                        // backgroundColor: theme.palette.teal
-                                    },
-                                    color: theme.palette.bg // Text color of the icon
-                                }}
-                                aria-label="add" 
-                                className="add-tag" 
-                                onClick={() => {
-                                    if (tag != ''){console.log("pushing"); 
-                                    let new_tags = [...temptags]; new_tags.push(tag); 
-                                    setTempTags([...new_tags]); setTag(''); 
-                                    console.log('updated tags:', temptags)}}}> 
-                                <AddIcon />
-                            </Fab> */}
-                        {/* </div> */}
                          
-                        {/* <input type="button" className="add-tag" value="+" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); console.log(temptags)}}}/> */}
                         <div className="p-2 pl-6 flex lex-auto flex-row items-center">
                                 {console.log(temptags)}
-                                {/* <div className="flex-auto flex-row items-center">*/}
                                 {temptags.map((tag, i) => {
-                                        console.log(tag);
-                                        // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
+                                        console.log(tag);                                    
                                         return <Chip
                                             label={tag}
                                             key={i}
@@ -276,9 +206,7 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
                                                 fontFamily: "Montserrat",
                                                 marginRight: 1.5,                                        
                                                 fontSize: 16
-                                            }}
-                                            // onDelete={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}} 
-                                            />
+                                            }}/>
                                 })}
                         </div>
                     </div>
@@ -318,16 +246,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
                     <EditIcon fontSize='large' sx={{color: '#666666'}}></EditIcon>
                 </IconButton>
             </StyledTooltip>
-
-            {/* <Dialog
-                open={isModalOpen}
-                onClose={handleModalClose}
-                aria-labelledby="edit-job-modal-title"
-                aria-describedby="edit-job-modal-description">
-                <div className="flex justify-center items-center">
-                <EditJob job={job} handleModalClose={handleModalClose} />
-                </div>
-            </Dialog> */}
             
             <Modal
                 open={isModalOpen}
@@ -337,27 +255,9 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
             >
                 <div className="flex justify-center items-center">
                 <EditJob coverLetters={coverLetters} tailoredCoverLetters={tailoredCoverLetters} job={job} setSelectedJob={setSelectedJob} handleModalClose={handleModalClose} />
-                </div>
-                
+                </div>  
             </Modal>
             
-            {/* <span className="cancel" onClick={() => {
-                jobTitleInputRef.current.value = job.jobTitle;
-                companyInputRef.current.value = job.company;
-                jobTypeInputRef.current.value = job.jobType;
-                locationInputRef.current.value = job.location;
-                dateAppliedInputRef.current.value = job.dateApplied;
-                durationInputRef.current.value = job.duration;
-                linkInputRef.current.value = job.link;
-                coverLetterInputRef.current.value = job.coverLetter;
-                tailoredCoverLetterInputRef.current.value = job.tailoredCoverLetter;
-                setTempTags([...tags])
-            }}>Cancel</span>
-            <span className="update" onClick={() => {
-                console.log('dispatching update job async');
-                dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, dateApplied, duration, link, coverLetter, tailoredCoverLetter, temptags}}));
-                setTags([...temptags])
-            }}>Save Changes</span>  */}
         </div>
         </div>
         </>

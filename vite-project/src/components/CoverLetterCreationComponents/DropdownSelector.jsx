@@ -1,6 +1,6 @@
 import '../../styles/CoverLetterCreation.css';
 
-export default function DropdownSelector({ allElements, setSelectedElement }) {
+export default function DropdownSelector({ allElements, setSelectedElement}) {
 
     // If the element has a .target property, then it is an event, we need .target.value.
     // Otherwise, the element itself is in the proper format.
@@ -26,7 +26,8 @@ export default function DropdownSelector({ allElements, setSelectedElement }) {
         // set up the onClick callback function.
         return (
             <select onChange={handleClickOption}>
-                {allElements.map((element) => (
+                {allElements
+                    .map((element) => (
                     <option value={element.name} onClick={() => handleClickOption(element.name)}>
                         {element.name}
                     </option>

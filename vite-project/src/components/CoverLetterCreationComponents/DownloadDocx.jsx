@@ -166,11 +166,13 @@ export default function DownloadDocx({name, text}) {
 
     return (
         <div>
-            <button className="add_button" onClick={generateDocx}>Download .docx</button>
+            <button className="add_button bg-darkTeal hover:bg-darkTealHover" onClick={generateDocx}>Download .docx</button>
             <br></br><br></br>
-            <DropdownSelector label="Font Size" setSelectedElement={handleSetSize} allElements={fontSizeOptions} />
-            <DropdownSelector label="Font Style" setSelectedElement={handleSetStyle} allElements={fontStyleOptions} />
-            <DropdownSelector label="Margin (inches)" setSelectedElement={handleSetMargin} allElements={marginOptions} />
+            <div className='button-holder'>
+                <DropdownSelector label="Font Size" setSelectedElement={handleSetSize} allElements={fontSizeOptions} />
+                <DropdownSelector label="Font Style" setSelectedElement={handleSetStyle} allElements={fontStyleOptions} />
+                <DropdownSelector label="Margin (inches)" setSelectedElement={handleSetMargin} allElements={marginOptions} />
+            </div>
         </div>
     );
 }

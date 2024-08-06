@@ -15,10 +15,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import dayjs from "dayjs";
+import { useTheme } from "@emotion/react";
 
 export default function JobList({ onSelectJob, selectForm, setSelectForm, selectedJob }) {
 
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -78,20 +80,34 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
     return(
         <div className="job-list-container">
             
-            <div className="sort-by">Sort by: 
+            {/* <div className="sort-by">Sort by: 
                 <span className="date-applied">Date Applied</span>
-            </div>
+            </div> */}
 
             <div className="sort-by">Filter by Tag(s): 
                 {/*textfield to type in filter*/}
                 <input className="ml-2 rounded-full pl-2" type="text" name="" id="" value={tagFilter} onChange={(e) => { setTagFilter(e.target.value) }}/>
                 {/*add button*/}
-                <Fab size="small" color="primary" sx={{marginLeft: 1.0}} aria-label="add" className="add-tag" onClick={() => addTag(tagFilter)}> 
+                <Fab size="small" 
+                    sx={{
+                        backgroundColor: theme.palette.darkTeal,
+                        '&:hover': {
+                            backgroundColor: '#07606B'
+                        },
+                        color: theme.palette.bg // Text color of the icon
+                    }}
+                    aria-label="add" 
+                    className="add-tag"  
+                    onClick={() => addTag(tagFilter)}> 
                     <AddIcon />
                 </Fab>
                 {/*apply button*/}
                 <Button variant="contained" 
-                        sx={{fontFamily: "Montserrat", marginLeft: 1.0, borderRadius: 70 }} 
+                        sx={{fontFamily: "Montserrat", marginLeft: 1.0, borderRadius: 70, 
+                            backgroundColor: theme.palette.darkTeal,
+                            '&:hover': {
+                                backgroundColor: '#07606B'
+                            },}} 
                         onClick={()=> {dispatch(filterTagsAsync({userEmail, tagFilters})); console.log('filtering on these tags:', tagFilters)}}>
                         Apply
                 </Button>

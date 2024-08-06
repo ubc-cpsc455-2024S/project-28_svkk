@@ -278,23 +278,12 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                     Tags:
                 </div>
                 <div className="p-[30px]"> 
-                    {/* <div className=" relative">
-                        <input type="text" name="" id="" placeholder="Enter new Tag" className="border p-2 rounded-[30px]"/> 
-                        <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Tags</span>
-                    </div> */}
-
+                   
                     <div className="">
-                        {/* <input id="tags" 
-                                className="auto-width-input"
-                                value={tag}
-                                onChange={(e) => {
-                                    setTag(e.target.value);
-                                    adjustWidth(e.target);
-                                }}> */}
                         <div className="relative">
                             <input type="text" name="" id="" placeholder="Enter new Tag" value={tag} className="border p-2 pl-6 rounded-[30px] mr-2 mb-2" onChange={(e) => {
                                     setTag(e.target.value);
-                                    // adjustWidth(e.target);
+                                    
                                 }}/> 
                             
                             <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Tag</span>
@@ -304,7 +293,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                                     backgroundColor: theme.palette.darkTeal,
                                     '&:hover': {
                                         backgroundColor: '#07606B'
-                                        // backgroundColor: theme.palette.teal
                                     },
                                     color: theme.palette.bg // Text color of the icon
                                 }}
@@ -339,80 +327,36 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                     </div> 
                 </div>
             </div>
-            <div className=" flex">
+            <div className=" flex border-b">
                 <div className="font-bold w-[208px] p-[30px] border-r text-left flex items-center">
                     Cover Letter Used:
                 </div>
-                <div className="p-[30px] rounded-br-[30px] flex justify-between grow"> 
+                <div className="p-[30px] rounded-br-[30px] flex justify-start gap-x-12 grow"> 
                     <div>
-                            {/* <Button
-                                                                        id="basic-button"
-                                                                        aria-controls={open ? 'basic-menu' : undefined}
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded={open ? 'true' : undefined}
-                                                                        onClick={handleClick}
-                                                                    >
-                                                                        Choose Cover Letter
-                            </Button>
-                            <Menu
-                                                                        id="basic-menu"
-                                                                        anchorEl={anchorEl}
-                                                                        open={open}
-                                                                        onClose={handleClose}
-                                                                        MenuListProps={{
-                                                                        'aria-labelledby': 'basic-button',
-                                                                        }}
-                                                                    >
-                                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu> */}
-                            <Box sx={{ minWidth: 263 }}>
-                                <FormControl fullWidth>
-                                    <InputLabel id="cv">Cover Letter</InputLabel>
-                                    <Select
-                                        labelId="cv-label"
-                                        id="cv"
-                                        value={coverLetter}
-                                        label="Cover Letter"
-                                        onChange={(e) => {
-                                            console.log('CV changed to:', e.target.value);
-                                            setCoverLetter(e.target.value);
-                                            // console.log('job application status changed to:', status);
-                                        }}
-                                        >
-                                        {coverLetters.map(coverLetter => {
-                                                                            console.log(coverLetter.name)
-                                                                            return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
-                                                                        })}
-                                    </Select>
-                                </FormControl>
-                            </Box>
+                        <Box sx={{ minWidth: 263 }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="cv">Cover Letter</InputLabel>
+                                <Select
+                                    labelId="cv-label"
+                                    id="cv"
+                                    value={coverLetter}
+                                    label="Cover Letter"
+                                    onChange={(e) => {
+                                        console.log('CV changed to:', e.target.value);
+                                        setCoverLetter(e.target.value);
+                                        // console.log('job application status changed to:', status);
+                                    }}
+                                    >
+                                    {coverLetters.map(coverLetter => {
+                                                                        console.log(coverLetter.name)
+                                                                        return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
+                                                                    })}
+                                </Select>
+                            </FormControl>
+                        </Box>
                     </div>
 
                     <div>
-                            {/* <Button
-                                                                        id="basic-button"
-                                                                        aria-controls={open ? 'basic-menu' : undefined}
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded={open ? 'true' : undefined}
-                                                                        onClick={handleClick}
-                                                                    >
-                                                                        Choose Tailored Cover Letter
-                            </Button>
-                            <Menu
-                                                                        id="basic-menu"
-                                                                        anchorEl={anchorEl}
-                                                                        open={open}
-                                                                        onClose={handleClose}
-                                                                        MenuListProps={{
-                                                                        'aria-labelledby': 'basic-button',
-                                                                        }}
-                                                                    >
-                                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                            </Menu> */}
                             <Box sx={{ minWidth: 263 }}>
                                 <FormControl fullWidth>
                                     <InputLabel id="tcv">Tailored Cover Letter</InputLabel>
@@ -437,37 +381,83 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                 </div>
             </div>
 
-            <span className="cancel" onClick={() => {
-                setJobTitle(job.jobTitle);
-                setCompany(job.company);
-                setJobType(job.jobType);
-                setLocation(job.location);
-                setDateApplied(dayjs(job.dateApplied));
-                setDuration(job.duration);
-                setLink(job.link);
-                setStatus(job.status);
-                setCoverLetter(job.coverLetter);
-                setTailoredCoverLetter(job.tailoredCoverLetter);
-                setTempTags([...tags])
-                console.log('modal closing, cancelling changes');
-                handleModalClose();
-            }}>Cancel</span>
-            <span className="update" onClick={() => {
-                // dateApplied.format('YYYY-MM-DD')
-                console.log("CV: ", coverLetter)
-                console.log("TCV: ", tailoredCoverLetter)
-                dateApplied.toDate();          
-                console.log('dispatching update job async');
-                dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, duration, link, dateApplied, status, coverLetter, tailoredCoverLetter, temptags}}));
-                console.log(coverLetter, tailoredCoverLetter)
-                let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags, coverLetterUsed: coverLetter, tailoredCoverLetterUsed: tailoredCoverLetter}
-                setSelectedJob(updated_job)
-                setTags([...temptags])
-                // setSelectedJob(job)
-                console.log('modal closing, updated job');
-                handleModalClose();
-                console.log("job data sent: ", updated_job)
-            }}>Save Changes</span> 
+            <div className=" flex ">
+                <div className="font-bold w-[208px] p-[30px]  flex items-center"></div>
+                <div className="p-[30px] flex flex-row justify-items-center">
+                    {/* <div className=" flex flex-row justify-between"> */}
+                                                      
+                        <button className="rounded-[30px] bg-red hover:bg-redHover p-2 text-white pr-4 pl-4" onClick={() => {
+                            setJobTitle(job.jobTitle);
+                            setCompany(job.company);
+                            setJobType(job.jobType);
+                            setLocation(job.location);
+                            setDateApplied(dayjs(job.dateApplied));
+                            setDuration(job.duration);
+                            setLink(job.link);
+                            setStatus(job.status);
+                            setCoverLetter(job.coverLetter);
+                            setTailoredCoverLetter(job.tailoredCoverLetter);
+                            setTempTags([...tags])
+                            console.log('modal closing, cancelling changes');
+                            handleModalClose();
+                        }}>Cancel</button>
+                        <button className="rounded-[30px] bg-green hover:bg-greenHover p-2 pr-4 pl-4 text-black ml-8" onClick={() => {
+                            // dateApplied.format('YYYY-MM-DD')
+                            console.log("CV: ", coverLetter)
+                            console.log("TCV: ", tailoredCoverLetter)
+                            dateApplied.toDate();          
+                            console.log('dispatching update job async');
+                            dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, duration, link, dateApplied, status, coverLetter, tailoredCoverLetter, temptags}}));
+                            console.log(coverLetter, tailoredCoverLetter)
+                            let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags, coverLetterUsed: coverLetter, tailoredCoverLetterUsed: tailoredCoverLetter}
+                            setSelectedJob(updated_job)
+                            setTags([...temptags])
+                            // setSelectedJob(job)
+                            console.log('modal closing, updated job');
+                            handleModalClose();
+                            console.log("job data sent: ", updated_job)
+                        }}>Save Changes</button> 
+            
+                    {/* </div> */}
+                </div>
+            </div>
+            
+            {/* <div className="flex flex-row">
+                <div className="w-[208px] p-[30px] border-r"></div>
+                <div className=" flex flex-row justify-end">                                       
+                <span className="cancel" onClick={() => {
+                    setJobTitle(job.jobTitle);
+                    setCompany(job.company);
+                    setJobType(job.jobType);
+                    setLocation(job.location);
+                    setDateApplied(dayjs(job.dateApplied));
+                    setDuration(job.duration);
+                    setLink(job.link);
+                    setStatus(job.status);
+                    setCoverLetter(job.coverLetter);
+                    setTailoredCoverLetter(job.tailoredCoverLetter);
+                    setTempTags([...tags])
+                    console.log('modal closing, cancelling changes');
+                    handleModalClose();
+                }}>Cancel</span>
+                <span className="update" onClick={() => {
+                    // dateApplied.format('YYYY-MM-DD')
+                    console.log("CV: ", coverLetter)
+                    console.log("TCV: ", tailoredCoverLetter)
+                    dateApplied.toDate();          
+                    console.log('dispatching update job async');
+                    dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, duration, link, dateApplied, status, coverLetter, tailoredCoverLetter, temptags}}));
+                    console.log(coverLetter, tailoredCoverLetter)
+                    let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags, coverLetterUsed: coverLetter, tailoredCoverLetterUsed: tailoredCoverLetter}
+                    setSelectedJob(updated_job)
+                    setTags([...temptags])
+                    // setSelectedJob(job)
+                    console.log('modal closing, updated job');
+                    handleModalClose();
+                    console.log("job data sent: ", updated_job)
+                }}>Save Changes</span> 
+            </div>
+            </div> */}
         </div>
     </>
     );

@@ -165,38 +165,54 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
             {/* Tailoring Card*/}
             <div className="big_card">
 
-                <h3 className="largeLetters">Tailor your Cover Letter!</h3>
-                <br></br><br></br>
+                <h3 className="largeLetters font-medium text-3xl">Tailor your Cover Letter!</h3>
+                <br></br>
 
-                <input
+                {/* <input
                     className="rounded-textbox"
                     placeholder="Document name"
                     onChange={(eventObject) => setAPITitle(eventObject.target.value)}
-                />
-                <br></br><br></br>
+                /> */}
+                <div className="p-[30px] pb-4">
+                    <div className=" relative">
+                        <input
+                            className="border p-2 pl-6 rounded-[30px]"
+                            placeholder="Document name"
+                            onChange={(eventObject) => setAPITitle(eventObject.target.value)}
+                        />
+                        <span className=" bg-white p-1 text-[11px] absolute left-[317px] top-[-12px]">Document Name*</span>
+                    </div> 
+                </div>
 
-                <textarea
+                {/* <textarea
                     className="rounded-textbox"
                     placeholder="Please include any additional requests here."
                     onChange={(eventObject) => setAdditionalRequests(eventObject.target.value)}
-                />
-                <br></br><br></br>
+                /> */}
+                <div className="p-[30px] pb-8">
+                    <div className=" relative">
+                        <textarea
+                            className="border p-2 pl-6 rounded-[30px] rounded-textbox"
+                            placeholder="Please include any additional requests here."
+                            onChange={(eventObject) => setAdditionalRequests(eventObject.target.value)}/>
+                    </div> 
+                </div>
 
                 <div className="button-holder">
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...resumes]} setSelectedElement={setAPIResume} />
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...coverLetters]} setSelectedElement={setAPICoverLetter} />
-                    <DropdownSelector allElements={[{name: "None", content: "None"},...jobPostings]} setSelectedElement={setAPIJobDescription} />
+                    <DropdownSelector allElements={[{name: "Select Resume", content: "None"},...resumes]} setSelectedElement={setAPIResume} />
+                    <DropdownSelector allElements={[{name: "Select Cover Letter", content: "None"},...coverLetters]} setSelectedElement={setAPICoverLetter} />
+                    <DropdownSelector allElements={[{name: "Select Job Posting", content: "None"},...jobPostings]} setSelectedElement={setAPIJobDescription} />
                 </div>
                 <br></br><br></br>
 
 
-                <button className="add_button" onClick={sendFullTailorRequest}>Tailor my Cover Letter!</button>
-                <br></br><br></br>
+                <button className="add_button bg-darkTeal hover:bg-darkTealHover mt-6" onClick={sendFullTailorRequest}>Tailor my Cover Letter!</button>
+                <br></br>
 
-                <button className="add_button" onClick={saveTailoredCoverLetter}>Save my tailored Cover Letter!</button>
+                <button className="add_button  bg-darkTeal hover:bg-darkTealHover mt-4" onClick={saveTailoredCoverLetter}>Save my tailored Cover Letter!</button>
                 <WhitePageDisplay displayText={apiSaveResponse} />
                 <WhitePageDisplay displayText={apiResponse} />
-                <br></br><br></br>
+                <br></br>
 
             </div>
         </>

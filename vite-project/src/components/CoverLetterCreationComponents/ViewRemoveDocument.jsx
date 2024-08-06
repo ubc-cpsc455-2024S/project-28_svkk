@@ -131,7 +131,7 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
         <>
             {/* Viewing and Deleting Card */}
             <div className="big_card">
-                <h3 className="largeLetters">View or Remove Existing Documents</h3>
+                <h3 className="largeLetters font-medium text-3xl">View or Remove Existing Documents</h3>
 
                 <br></br><br></br>
 
@@ -157,7 +157,7 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
                 <br></br><br></br>
 
                 <button
-                    className="remove_button"
+                    className="remove_button hover:bg-redHover"
                     onClick={removeElement}>
                     Remove Document
                 </button>
