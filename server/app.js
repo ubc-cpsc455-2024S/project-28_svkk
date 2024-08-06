@@ -15,10 +15,20 @@ var signUpRouter = require('./routes/signUp');
 var loginRouter = require('./routes/login')
 var editAccountsRouter = require('./routes/editAccount')
 
+
 var app = express();
 connectDB()
 
-app.use(cors());
+const corsOptionObject = {
+    origin: true,
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'email'],
+    methods: ['GET', 'PUT', 'POST', 'OPTIONS'],
+};
+
+app.use(cors(corsOptionObject));
+app.options("*", cors(corsOptionObject));
+
 
 app.use(logger('dev'));
 app.use(express.json());
