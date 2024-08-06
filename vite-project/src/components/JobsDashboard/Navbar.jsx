@@ -13,7 +13,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { IconButton } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Navbar(props) {
 
@@ -22,6 +22,7 @@ export default function Navbar(props) {
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     const [filter, setfilter] = useState('')
 
@@ -86,23 +87,19 @@ export default function Navbar(props) {
           localStorage.removeItem('userEmail');
       }
 
+
+      // used ChatGPT to help figure out how to navigate back to right page when 'back' button is clicked from edit account page
+      const handleEditAccountClick = () => {
+        console.log('location pathname is:', location.pathname);
+        navigate('/EditAccount', { state: { from: location.pathname } });
+      };
+
     
 
     return(
         <nav className={"navBar"}>
             <div className={"navBar-Left"}>
                 <h1 color={theme.palette.bg} className=" cursor-pointer" onClick={() => {navigate("/maindashboard")}}>Application Tailor</h1>
-                {/* new position of search bar*/}
-                {/* <Search>
-                    <SearchIconWrapper>
-                        <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                        placeholder="Search jobs"
-                        sx={{ fontFamily: "Montserrat"}}
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                </Search>     */}
                 {props.search && <div className={"searchBar-wrapper ml-6"}>
                     {/* <i class='fa fa-search left:10px'></i> */}
                     <SearchIconWrapper>
@@ -139,11 +136,11 @@ export default function Navbar(props) {
                         </Link>
                     </LightTooltip>
                     <LightTooltip title='Edit Account'>
-                        <Link to="/EditAccount">
-                            <IconButton>
+                        {/* <Link to="/EditAccount"> */}
+                            <IconButton onClick={handleEditAccountClick}>
                                 <ManageAccountsIcon fontSize="large" sx={{color: theme.palette.bg}}/>
                             </IconButton>
-                        </Link>
+                        {/* </Link> */}
                     </LightTooltip>
                     <LightTooltip title='Sign Out'>
                         <Link to="/Login">
@@ -153,8 +150,6 @@ export default function Navbar(props) {
                         </Link>
                     </LightTooltip>
                 </div>
-                 {/* search bar was here */}
-                
             </div>
         </nav>
     );

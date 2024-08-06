@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useLocation } from "react-router-dom";
 import {USED_IP} from "../redux/ip.js";
 import {useSelector, useDispatch} from "react-redux";
 import {jwtDecode} from "jwt-decode";
@@ -7,16 +7,19 @@ import {setUserEmail} from "../redux/userEmail/UserEmailReducer.js";
 const url = "http://localhost:3000/";
 
 
+
 const EditAccount = () => {
     const [password, setPassword] = useState('');
     const [userData, setUserData] = useState(null);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || '/MainDashboard';
     const [isGoogleUser, setIsGoogleUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
 
-    const email = useSelector(state => state.userEmail.userEmail)
+    const email = useSelector(state => state.userEmail.userEmail);
 
     // trigger on component mount
     useEffect( () => {
@@ -127,7 +130,7 @@ const EditAccount = () => {
             if (response.ok) {
                 setMessage('User information updated successfully.');
                 setTimeout(() => {
-                    navigate('/MainDashboard');
+                    navigate(from);
                 }, 1000);
             } else {
                 setMessage('Failed to update user information.');
@@ -167,6 +170,12 @@ const EditAccount = () => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
+    // used ChatGPT to help figure out how to navigate back to right page when 'back' button is clicked from edit account page
+    const handleBackButtonClick = () => {
+        console.log('back button clicked, navigating back to:', from);
+        navigate(from);
+      };
+
     // ChatGpt helped me with styling using tailwind
     return (
         <div className="bg-bg flex flex-col justify-center content-center h-full">
@@ -205,13 +214,13 @@ const EditAccount = () => {
                             <span className="bg-white p-1 text-[11px] absolute left-5 top-[-12px]">Password*</span>
                         </div> 
                     </div>
+
                         <div className='flex flex-col justify-center items-center pt-4'>
-                            <Link to="/MainDashboard">
-                                <button
-                                    className="mb-4 w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white">
-                                    Back
-                                </button>
-                            </Link>
+                            <button
+                                className="mb-4 w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white" onClick={handleBackButtonClick}>
+                                Back
+                            </button>
+                            
                             <input
                                 className="mb-[10px] w-[233px] h-[40px] bg-darkTeal hover:bg-darkTealHover rounded-[30px] text-white"
                                 type="submit"
