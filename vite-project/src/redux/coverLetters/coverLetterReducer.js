@@ -1,6 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {REQUEST_STATE} from "../utils";
-import {addCoverLetterAsync, deleteCoverLetterAsync, getCoverLettersAsync, getCoverLetterTemplatesAsync} from "./thunk";
+import { createSlice } from "@reduxjs/toolkit";
+import { REQUEST_STATE } from "../utils";
+import { getCoverLetterTemplatesAsync, getCoverLettersAsync, addCoverLetterAsync, deleteCoverLetterAsync } from "./thunk";
+import {tailoredCoverLetterSlice} from "../tailoredCoverLetters/tailoredCoverLetterReducer.js";
 
 const INITIAL_STATE = {
     coverLetters: [],

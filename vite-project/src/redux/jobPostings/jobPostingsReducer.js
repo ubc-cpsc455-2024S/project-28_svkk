@@ -1,6 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {REQUEST_STATE} from "../utils";
-import {addJobPostingAsync, deleteJobPostingAsync, getJobPostingsAsync} from "./thunk";
+import { createSlice } from "@reduxjs/toolkit";
+import { REQUEST_STATE } from "../utils";
+import { addJobPostingAsync, getJobPostingsAsync, deleteJobPostingAsync } from "./thunk";
+import {tailoredCoverLetterSlice} from "../tailoredCoverLetters/tailoredCoverLetterReducer.js";
 
 const INITIAL_STATE = {
     jobPostings: [],

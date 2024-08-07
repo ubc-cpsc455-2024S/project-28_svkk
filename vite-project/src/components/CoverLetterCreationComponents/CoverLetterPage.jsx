@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import '../../styles/CoverLetterCreation.css';
 import AddDocument from './AddDocument.jsx';
 import ViewRemoveDocument from './ViewRemoveDocument.jsx'
 import TailorCoverLetter from './TailorCoverLetter.jsx';
-import {getJobPostingsAsync} from '../../redux/jobPostings/thunk.js';
-import {getCoverLettersAsync, getCoverLetterTemplatesAsync} from '../../redux/coverLetters/thunk.js';
+import { getJobPostingsAsync } from '../../redux/jobPostings/thunk.js';
+import { getCoverLetterTemplatesAsync, getCoverLettersAsync } from '../../redux/coverLetters/thunk.js';
 import {getTailoredCoverLettersAsync} from "../../redux/tailoredCoverLetters/thunk.js";
 import {getResumesAsync} from "../../redux/resumes/thunk.js";
 import {jwtDecode} from "jwt-decode";

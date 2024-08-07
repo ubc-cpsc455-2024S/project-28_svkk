@@ -4,6 +4,7 @@ const getJobs = async (userEmail) => {
     const response = await fetch(USED_IP + `jobs/${userEmail}`, {
       method: 'GET'
     });
+    // console.log('fetched response from jobs get request');
     return response.json();
 };
 
@@ -18,6 +19,7 @@ const getJobsDateAppliedEarliestToLatest = async (userEmail) => {
     const response = await fetch(USED_IP + `jobs/${userEmail}/earliest-latest`, {
       method: 'GET'
     });
+    // console.log('fetched response from jobs get request');
     return response.json();
 };
 
@@ -25,6 +27,7 @@ const getJobsDateAppliedLatestToEarliest = async (userEmail) => {
     const response = await fetch(USED_IP + `jobs/${userEmail}/latest-earliest`, {
       method: 'GET'
     });
+    // console.log('fetched response from jobs get request');
     return response.json();
 };
 
@@ -40,6 +43,7 @@ const updateJob = async ({id, fields}) => {
     });
 
     const data = await response.json();
+    console.log('fetched response from put request, updated job is: ', data);
 
     if (!response.ok) {
         const errorMsg = data?.message;

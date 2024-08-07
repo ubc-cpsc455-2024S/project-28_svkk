@@ -18,7 +18,10 @@ var editAccountsRouter = require('./routes/editAccount')
 var app = express();
 connectDB()
 
-
+// const corsOptions = {
+//     origin: "https://project-28-svkk-1.onrender.com", // frontend URI (ReactJS)
+// }
+// app.use(cors(corsOptions));
 app.use(cors());
 
 app.use(logger('dev'));

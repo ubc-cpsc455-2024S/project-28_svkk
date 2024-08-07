@@ -1,16 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {REQUEST_STATE} from "../utils";
-import {
-    addJobAsync,
-    deleteJobAsync,
-    filterTagsAsync,
-    getJobByIdAsync,
-    getJobsAsync,
-    getJobsDateAppliedEarliestToLatestAsync,
-    getJobsDateAppliedLatestToEarliestAsync,
-    searchJobsAsync,
-    updateJobAsync
-} from "./thunks";
+import { createSlice } from "@reduxjs/toolkit";
+import { REQUEST_STATE } from "../utils";
+import { addJobAsync, deleteJobAsync, getJobsAsync, getJobByIdAsync, updateJobAsync, searchJobsAsync, getJobsDateAppliedEarliestToLatestAsync, getJobsDateAppliedLatestToEarliestAsync, filterTagsAsync } from "./thunks";
+import { act } from "react";
 
 
 const INITIAL_STATE = {
