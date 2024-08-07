@@ -7,8 +7,22 @@ Link: https://applicationtailor.com/
 
 ![Workflow Status Badge](https://github.com/ubc-cpsc455-2024S/project-28_svkk/actions/workflows/pipeline.yml/badge.svg)
 
+## Key Features
 
-**Project Description: Write 3-5 sentences on your project topic.**
+### Tailored Cover Letter Generation 
+![alt text](TailoredCoverLetterGeneration.png)
+
+### Job Applications Dashboard 
+
+### Secure User Account System supporting Google Login
+
+### Editing and Deleting of Accounts
+<img src ="images/test.png" width="100px">
+### 
+
+
+
+## Project Summary
 - Who is it for?
     - Students seeking internships during their busy term (applicants)
 - What will it do? (What “human activity” will it support?)
@@ -80,8 +94,8 @@ This will help you divide up work among your teammates.**
 
 
 ## Utilized Technology
-1. In our project, HTML lays the groundwork for the web page structures, while JavaScript within React components adds dynamic functionality that outperforms other technologies in terms of responsiveness. While we intially styled with traditional CSS in the beginning, we opted to incorporate Material-UI (MUI) which has greatly improved the user interface and design. The pre-built components and theming capabilities of MUI allowed out team to quickly develop a visually attractive and consistent user experience.
-2. React and Redux play a fundamental role to our application's front-end develpopment and state management. One of the defining features about React is the Virtual DOM which bypasses the need for manipulating the browser's DOM. The lightweight copy (Virtual DOM) minimizes re-renders and improves efficiency. Redux provides a centralized data store making it easier to track, manage and update our documents across various components.
+1. In our project, HTML lays the groundwork for the web page structures, while JavaScript within React components adds dynamic functionality that outperforms other technologies in terms of responsiveness. While we intially styled with traditional CSS in the beginning, we opted to incorporate Material-UI (MUI) which greatly improved the user interface and design. The pre-built components and theming capabilities of MUI allowed our team to develop a visually appealing and consistent user experience.
+2. React and Redux play a fundamental role to our application's front-end development and state management. One of the defining features about React is the Virtual DOM which bypasses the need for manipulating the browser's DOM. The lightweight copy (Virtual DOM) minimizes re-renders and improves efficiency. Redux provides a centralized data store making it easier to track, manage and update our documents across various components.
 3. Express plays a pivitol role in our backend framework, allowing for easy setup of API endpoints to handle various requests such as GET, POST, PUT and DELETE. In addition, Express is also capable of handling multiple requests simultaneously and provides meaningful responses in case of failures, which has made debugging a lot simpler. Lastly, seamless intergration with Redux Thunks allows for smooth communication between the front-end and back-end.
 4. For database storage, we chose to use MongoDB due to its flexibility and scalability in storing and managing user data. Its schema-less architecture allows us to accomodate complex data structures easily. Furthermore, MongoDB enhances our app's efficiency by providing fast data retrieval and processing capabilities, ensuring a seamless user experience and enabling us to handle large volumes of data with ease.
 5. Our application is currently being hosted through AWS EC2, an industry-standard platform known for its robustness and scalability in web services hosting which doesn't spin down despite inactivity. We made use of security groups to block requests from different ip-addresses and ports, enhancing the security of our application. Later, we integrated a Route 53 custom domain to give our application a user-friendly domain name, and used ELB and Amazon certificates to encrypt our server.
@@ -100,7 +114,7 @@ In addition, we used libraries such as docx and mammoth to allow users to custom
 ## What's Next
 Moving forward, we plan to incorporate a web scraping feature that allows users to submit links to job postings, enabling the application to automatically extract all relevant information. This functionality will streamline the process of adding job details, making it easier for users to manage and apply to various jobs. Our goal has always been to alleviate the mental and physical burdens associated with job searching, and incorporating a web scraper brings us one step closer to achieving this objective.
   
-  
+In addtion, we strive to make the application fully responsive and accessible. This would include implementing specific display settings for different screen sizes, allowing all content on the site to be parsed by screen readers, and ensuring that the site can be navigated using not only the cursor but the keyboard as well. 
 ## Contributions of Team Members
 
 ### Silvana
@@ -120,17 +134,10 @@ where users could specify the font size, style, and page margins of each documen
 the backend on an http AWS EC2 instance, secured to https through ELB and AWS SSL/TLS certificates, and used a custom domain through Route 53.
 
 
-## Images
-
-{You should use this area to add a screenshot of your app or website }
-
-<img src ="images/test.png" width="100px">
 
 ## References
 
-{Add your stuff here}
-
-- Took help from stackoverflow to understand how to use regex in mongoose. Link: https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find
+- Used stackoverflow to understand how to use regex in mongoose. Link: https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find
     
 
 
