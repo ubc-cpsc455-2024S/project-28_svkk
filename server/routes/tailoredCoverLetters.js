@@ -4,13 +4,12 @@ var router = express.Router();
 
 const {TailoredCoverLetter} = require('../model/schema');
 
-let tailoredCoverLetters = [];
 
 // Getting all tailored cover letters given an email
 router.get('/', async function (req, res, next) {
     const email = req.headers.email;
     let coverLetters = await TailoredCoverLetter.find({email: email});
-    console.log(coverLetters);
+
     res.status(200).send(coverLetters);
 })
 
@@ -18,8 +17,8 @@ router.get('/', async function (req, res, next) {
 router.post('/', async function (req, res, next) {
     const newCoverLetter = req.body;
     const email = req.headers.email;
-    console.log("body");
-    console.log(newCoverLetter);
+
+
     const coverLetterObject = TailoredCoverLetter({
         email: email,
         uuid: newCoverLetter.uuid,
@@ -39,8 +38,7 @@ router.delete('/:name', async function (req, res, next) {
     const name = req.params.name;
     const email = req.headers.email;
     const deletedCoverLetter = await TailoredCoverLetter.findOneAndDelete({email: email, name: name});
-    console.log("Delete");
-    console.log(name);
+
     if (deletedCoverLetter) {
         res.status(200).send({name: name});
     } else {

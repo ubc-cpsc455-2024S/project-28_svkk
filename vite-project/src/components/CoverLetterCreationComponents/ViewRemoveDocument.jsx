@@ -48,8 +48,8 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
                 return result;
             }
         } else if (removeType === jobPostingString) {
-            // console.log("initial job postings list in viewremove documents component:");
-            // console.log(jobPostings);
+
+
             let result = findElement(jobPostings,selectedElement);
             if (result === -1) {
                 if (jobPostings.length > 0) {
@@ -61,7 +61,7 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
             }
         } else if (removeType === tailoredCoverLetterString) {
             let result = findElement(tailoredCoverLetters,selectedElement);
-            // console.log("the name is: ", selectedElement);
+
             if (result === -1) {
                 if (tailoredCoverLetters.length > 0) {
                     setSelectedElement(tailoredCoverLetters[0].name);
@@ -98,7 +98,7 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
         } else if (removeType === jobPostingString) {
             return jobPostings;
         } else if (removeType === tailoredCoverLetterString) {
-            // console.log("remove type: ", removeType);
+
             return tailoredCoverLetters;
         }
         return [];
@@ -122,7 +122,7 @@ export default function ViewRemoveDocument({ resumes, jobPostings, coverLetters,
             response: response,
             selectedElement: selectedElement
         }
-        console.log(state);
+
     }
 
 

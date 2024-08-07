@@ -52,8 +52,8 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
         let additional_requests = additionalRequests;
         const apiKey = import.meta.env.VITE_API_KEY;
 
-        console.log(generateGPTRequestString(resume,cover_letter,job_posting, additional_requests));
-        console.log('apiKey is:', apiKey);
+
+
 
         // Referenced from Chat-GPT Postman API Documentation
         let myHeaders = new Headers();
@@ -89,13 +89,13 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
         fetch("https://api.openai.com/v1/chat/completions", requestOptions)
             .then(response => response.text())
             .then(result => {
-                console.log(result);
+
                 let jsonObject = JSON.parse(result);
                 let message = (jsonObject.choices[0].message.content);
-                console.log(message);
+
                 setAPIResponse(message);
             })
-            .catch(error => console.log("This is an Error: ", error));
+
     }
 
     function generateGPTRequestString(resume, cover_letter, job_posting, additional_requests) {
@@ -127,7 +127,7 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
     function findElement(array, name) {
 
         // if (!name || name.trim().length === 0) return -1;
-        // console.log(name)
+
 
         for (let i = 0; i < array.length; i++) {
             if (array[i].name === name) {
@@ -155,7 +155,7 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
             response: response,
             selectedElement: selectedElement
         }
-        console.log(state);
+
     }
 
 

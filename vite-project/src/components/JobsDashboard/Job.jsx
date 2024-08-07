@@ -61,7 +61,7 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
     // it the code in JobsContainer.jsx, JobList.jsx and the previous code for Job.jsx
     useEffect(() => {
         if (job) {
-            console.log('Job data received (Job.jsx):', job);
+
             setJobTitle(job.jobTitle || '');
             setCompany(job.company || '');
             setJobType(job.jobType || '');
@@ -194,9 +194,9 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
                 <div className="p-[30px] grow"> 
                          
                         <div className="p-2 pl-6 flex lex-auto flex-row items-center">
-                                {console.log(temptags)}
+
                                 {temptags.map((tag, i) => {
-                                        console.log(tag);                                    
+
                                         return <Chip
                                             label={tag}
                                             key={i}

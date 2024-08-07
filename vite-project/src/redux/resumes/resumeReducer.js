@@ -39,7 +39,7 @@ export const resumeSlice = createSlice( {
             })
             .addCase(deleteResumesAsync.fulfilled, (state, action) => {
                 state.deleteResume = REQUEST_STATE.FULFILLED;
-                console.log("Name from reducer " + action.payload.name);
+
                 state.resumes = state.resumes.filter(c => c.name !== action.payload.name);
             })
             .addCase(deleteResumesAsync.rejected, (state,action) => {

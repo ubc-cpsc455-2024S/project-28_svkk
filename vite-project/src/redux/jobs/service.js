@@ -4,7 +4,7 @@ const getJobs = async (userEmail) => {
     const response = await fetch(USED_IP + `jobs/${userEmail}`, {
       method: 'GET'
     });
-    // console.log('fetched response from jobs get request');
+
     return response.json();
 };
 
@@ -19,7 +19,7 @@ const getJobsDateAppliedEarliestToLatest = async (userEmail) => {
     const response = await fetch(USED_IP + `jobs/${userEmail}/earliest-latest`, {
       method: 'GET'
     });
-    // console.log('fetched response from jobs get request');
+
     return response.json();
 };
 
@@ -27,7 +27,7 @@ const getJobsDateAppliedLatestToEarliest = async (userEmail) => {
     const response = await fetch(USED_IP + `jobs/${userEmail}/latest-earliest`, {
       method: 'GET'
     });
-    // console.log('fetched response from jobs get request');
+
     return response.json();
 };
 
@@ -43,7 +43,7 @@ const updateJob = async ({id, fields}) => {
     });
 
     const data = await response.json();
-    console.log('fetched response from put request, updated job is: ', data);
+
 
     if (!response.ok) {
         const errorMsg = data?.message;
@@ -54,7 +54,7 @@ const updateJob = async ({id, fields}) => {
 }
 
 const addJob = async({title, company, type, location, date, duration, link, status, cv, tcv, userEmail, tags}) => {
-    console.log('at addJob in service.js with fields: ', {title, company, type, location, date, duration, link, status, cv, tcv, userEmail, tags});
+
     const response = await fetch(USED_IP + 'jobs/addJob', {
         method: 'POST',
         headers: {
@@ -77,12 +77,12 @@ const addJob = async({title, company, type, location, date, duration, link, stat
     });
 
     const new_jobs = await response.json()
-    console.log('new job list is: ', new_jobs);
+
     return new_jobs
 }
 
 const deleteJob = async(data) => {
-    console.log("called delete on email: " + data.userEmail)
+
     const response = await fetch(USED_IP + `jobs/delete/${data.id}`, {
         method: 'POST',
         headers: {
@@ -105,7 +105,7 @@ const searchJobs = async(data) => {
     });
 
     const new_jobs = await response.json()
-    console.log('search results are:', new_jobs);
+
     return new_jobs
 }
 

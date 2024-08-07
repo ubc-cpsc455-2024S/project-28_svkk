@@ -47,7 +47,7 @@ const Login = () => {
     }
 
     const onGoogleSuccess = async (response) => {
-        console.log("Google login success: ", response);
+
         const token = response.credential;
         try {
             const res = await fetch( USED_IP + 'login/google', {
@@ -71,13 +71,13 @@ const Login = () => {
                 alert(data.msg)
             }
         } catch (error) {
-            console.log("Error: ", error);
+
         }
 
     }
 
     const onGoogleFailure = (error) => {
-        console.log("failed to log in: ", error);
+
     }
 
 

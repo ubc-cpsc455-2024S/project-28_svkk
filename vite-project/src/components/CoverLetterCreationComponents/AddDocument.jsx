@@ -29,14 +29,12 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
     const [response, setResponse] = useState("Welcome! This is the confirmation box.");
 
 
-
     const email = useSelector(state => state.userEmail.userEmail);
 
     const optionsAdd = [{ name: resumeString }, { name: coverLetterString }, { name: jobPostingString }, {name: coverLetterTemplateString}];
 
     useEffect(() => {
         // setting template based on index
-        console.log('coverlettertemplate length', coverLetterTemplates.length)
         if (addType === coverLetterTemplateString && coverLetterTemplates.length >= 0) {
             setElementTextBox(coverLetterTemplates[templateIndex].content);
         }
@@ -60,34 +58,27 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
         }
 
 
-        // console.log(addType);
         if (typeToAdd === resumeString) {
             if (uniqueName(resumes, elementTitleBox)) {
-                console.log("dispatching add resume request");
                 dispatch(addResumeAsync({email: email, resume: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
                 setElementTextBox("");
-                // setElementTitleBox("");
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
         } else if (typeToAdd === coverLetterString) {
             if (uniqueName(coverLetters, elementTitleBox)) {
-                console.log("dispatching add cover letter request");
                 dispatch(addCoverLetterAsync({email: email, coverLetter: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
                 setElementTextBox("");
-                // setElementTitleBox("");
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
         } else if (typeToAdd === jobPostingString) {
             if (uniqueName(jobPostings, elementTitleBox)) {
-                console.log("Inside adddocument " + elementObject);
                 dispatch(addJobPostingAsync({email: email,jobPosting: elementObject}));
                 setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
                 setElementTextBox("");
-                // setElementTitleBox("");
             } else {
                 setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
             }
@@ -97,15 +88,12 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
         // treating template as regular cover letter type
         else if (typeToAdd === coverLetterTemplateString) {
             setAddType(coverLetterString);
-            console.log(`elementTitleBox value is ${elementTitleBox}`); // this isn't printing to the console,
             // can still add a document without a title :(
             if (elementTitleBox !== "") {
                 if (uniqueName(coverLetters, elementTitleBox)) {
-                    console.log("dispatching add cover letter from template request");
                     dispatch(addCoverLetterAsync({email: email, coverLetter: elementObject}));
                     setResponse(`${typeToAdd} "${elementTitleBox}" has been successfully added!`);
                     setElementTextBox("");
-                    // setElementTitleBox("");
                 } else {
                     setResponse(`A ${typeToAdd} with name "${elementTitleBox}" already exists, please use another name!`);
                 }
@@ -113,7 +101,6 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                 setResponse(`Please enter a name for your new ${typeToAdd}`);
             }
         }
-        // printState();
 
     }
 
@@ -144,7 +131,6 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
             elementTextBox: elementTextBox,
             response: response,
         }
-        console.log(state);
     }
 
 
@@ -197,7 +183,6 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                 <UploadDocx setResponse={setElementTextBox}></UploadDocx>
                 <br></br><br></br>
                 <button className="add_button bg-green hover:bg-greenHover" onClick={addElement}>Add Document</button>
-                {/*<DownloadDocx text={elementTextBox}></DownloadDocx>*/}
 
             </div>
             </>

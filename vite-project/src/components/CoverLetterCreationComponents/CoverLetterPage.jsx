@@ -36,7 +36,7 @@ export default function CoverLetterPage() {
                 dispatch(getCoverLettersAsync({email: email}));
                 dispatch(getTailoredCoverLettersAsync({email: email}))
             } else {
-                console.log("expired token");
+
                 localStorage.removeItem('jwtToken');
                 localStorage.removeItem('userEmail');
             }
@@ -52,9 +52,6 @@ export default function CoverLetterPage() {
         <>
         <Navbar search={false}/>
         <div className="coverLetterPageContainer">
-            {/* <div>
-                <h1 className="largerLetters">Generate Cover Letter</h1>
-            </div> */}
             <AddDocument
                 resumes = {resumes}
                 jobPostings={jobPostings}

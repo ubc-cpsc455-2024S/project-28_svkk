@@ -150,7 +150,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
         }
 
 
-        // console.log(addType);
+
         if (typeToAdd === resumeString) {
             if (uniqueName(memory.resumes, elementTitleBox)) {
                 setMemory(prevMemory => ({
@@ -242,10 +242,6 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
     }
 
     function findElement(array, name) {
-
-        // if (!name || name.trim().length === 0) return -1;
-        // console.log(name)
-
         for (let i = 0; i < array.length; i++) {
             if (array[i].name === name) {
                 return array[i];
@@ -273,7 +269,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
             response: response,
             selectedElement: selectedElement
         }
-        console.log(state);
+
     }
 
     function prevTemplate() {
@@ -292,7 +288,7 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
         let job_posting = findElement(memory.jobPostings, apiJobDescription).content;
         let additional_requests = additionalRequests;
 
-        console.log(generateGPTRequestString(resume,cover_letter,job_posting, additional_requests));
+
 
         // Referenced from Chat-GPT Postman API Documentation
         let myHeaders = new Headers();
@@ -328,13 +324,13 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
         fetch("https://api.openai.com/v1/chat/completions", requestOptions)
             .then(response => response.text())
             .then(result => {
-                console.log(result);
+
                 let jsonObject = JSON.parse(result);
                 let message = (jsonObject.choices[0].message.content);
-                console.log(message);
+
                 setAPIResponse(message);
             })
-            .catch(error => console.log("This is an Error: ", error));
+
     }
 
     function generateGPTRequestString(resume, cover_letter, job_posting, additional_requests) {
@@ -443,9 +439,6 @@ export default function CoverLetterPage({ userResumes, userCoverLetters, userJob
                     Remove Document
                 </button>
             </div>
-
-
-            {/* Tailoring Card*/}
 
             <div className="big_card">
 

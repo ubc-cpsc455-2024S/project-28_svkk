@@ -24,7 +24,7 @@ export default function MainDashboard() {
                 dispatch(getCoverLettersAsync({email: userEmail}));
                 dispatch(getTailoredCoverLettersAsync({email: userEmail}))
             } else {
-                console.log("expired token");
+
                 localStorage.removeItem('jwtToken');
                 localStorage.removeItem('userEmail');
                 navigate("/login");
@@ -35,7 +35,7 @@ export default function MainDashboard() {
             localStorage.removeItem('userEmail');
             navigate("/login");
         }
-        console.log(userEmail)
+
     }, [navigate, dispatch, userEmail]);
 
     const [selectedJob, setSelectedJob] = useState(null);
