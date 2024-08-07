@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+
 // normal
 router.post('/', async (req, res) => {
     const { email, password } = req.body;

@@ -99,10 +99,10 @@ In addition, we used libraries such as docx and mammoth to allow users to custom
 Moving forward, we plan to incorporate a web scraping feature that allows users to submit links to job postings, enabling the application to automatically extract all relevant information. This functionality will streamline the process of adding job details, making it easier for users to manage and apply to various jobs. Our goal has always been to alleviate the mental and physical burdens associated with job searching, and incorporating a web scraper brings us one step closer to achieving this objective.
   
   
-  ## Team Members
+  ## Contributions of Team Members
 
 - Silvana: one sentence about you!
-- Vishal: one sentence about you!
+- Vishal: Worked mainly on the main dashboard of the application for features like adding a job, deleting a job, searching a job by title and company name, adding tags for a job and filtering the jobs by tags. Also worked on the UI overhaul for the main dashboard. Contributed to the stretch requirement that allowed user to upload PDFs for the resume and cover letter.
 - Kurtis: one sentence about you!
 - Kevin: one sentence about you!
 

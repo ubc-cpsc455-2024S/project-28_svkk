@@ -45,7 +45,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
     const [jobType, setJobType] = useState(job.jobType || '');
     const [location, setLocation] = useState(job.location || '');
     const [dateApplied, setDateApplied] = useState(job.dateApplied ? dayjs(job.dateApplied) : dayjs());
-    // const [dateApplied, setDateApplied] = useState(job.dateApplied || dayjs().format('YYYY-MM-DD'));
     const [duration, setDuration] = useState(job.duration || '');
     const [link, setLink] = useState(job.link || '');
     const [status, setStatus] = useState(job.status || '');
@@ -70,9 +69,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
         <Tooltip {...props} classes={{ popper: className }} />
       ))(({ theme }) => ({
         [`& .${tooltipClasses.tooltip}`]: {
-        //   backgroundColor: '#FFFFFF',
-        //   color: 'rgba(0, 0, 0, 0.87)',
-        //   boxShadow: theme.shadows[1],
           fontSize: 12,
           fontFamily: "Montserrat",
           borderRadius: '30px'
@@ -114,14 +110,12 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                 </div>
                 <div className="p-[30px]">
                     <div className=" relative">
-                        {/* <input type="text" name="" id="" placeholder="Company" className="border p-2 pl-6 rounded-[30px]"/> */}
                         <input id="company" 
                             className="border p-2 pl-6 rounded-[30px]"
                             value={company}
                             ref={companyInputRef}
                             onChange={(e) => {
                                 setCompany(e.target.value);
-                                // adjustWidth(e.target);
                         }}>
                         </input>
                         <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Company*</span>
@@ -173,24 +167,12 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                 </div>
                 <div className="p-[30px]">
                     <div className=" relative">
-                        {/* <input id="dateApplied" 
-                            className="border p-2 pl-6 rounded-[30px]"
-                            value={dateApplied}
-                            ref={dateAppliedInputRef}
-                            onChange={(e) => {
-                                setDateApplied(e.target.value);                          
-                            }}>
-                        </input>
-                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Date Applied*</span>
-                    </div> */}
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             label="Date Applied"
                             value={dateApplied}
                             ref={dateAppliedInputRef}
-                            onChange={(newDate) => {
-                                // console.log('new YYYY-MM-DD is:', d.year(), d.month(), d.date);
-                                // var newDate = new Date(d.year(), d.month(), d.date);                              
+                            onChange={(newDate) => {                             
                                 setDateApplied(newDate);
                                 console.log('new date selected is:', newDate);
                             }}
@@ -206,7 +188,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                 </div>
                 <div className="p-[30px]">
                     <div className=" relative">
-                        {/* <input type="text" name="" id="" placeholder="Duration" className="border p-2 pl-6 rounded-[30px]"/> */}
                         <input id="duration" 
                         className="border p-2 pl-6 rounded-[30px]"
                         value={duration}
@@ -226,7 +207,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                 </div>
                 <div className="p-[30px]">
                     <div className=" relative">
-                        {/* <input type="text" name="" id="" placeholder="Link" className="border p-2 pl-6 rounded-[30px]"/> */}
                         <input id="link" 
                             className="border p-2 pl-6 rounded-[30px]"
                             value={link}
@@ -245,10 +225,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                     Application Status:
                 </div>
                 <div className="p-[30px]">
-                    {/* <div className=" relative">
-                        <input type="text" name="" id="" placeholder="Application Status:" className="border p-2 pl-6 rounded-[30px]"/>
-                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Status</span>
-                    </div>  */}
                     <Box sx={{ minWidth: 263 }}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Application Status</InputLabel>
@@ -259,7 +235,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                                 label="Application Status"
                                 onChange={(e) => {
                                     setStatus(e.target.value);
-                                    // console.log('job application status changed to:', status);
                                 }}
                                 >
                                 <MenuItem value={'Considering'}>Considering</MenuItem>
@@ -307,13 +282,10 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                             </Fab>
                         </div>
                          
-                        {/* <input type="button" className="add-tag" value="+" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); console.log(temptags)}}}/> */}
                         <div className="flex lex-auto flex-row items-center">
                                 {console.log(temptags)}
-                                {/* <div className="flex-auto flex-row items-center">*/}
                                 {temptags.map((tag, i) => {
                                         console.log(tag);
-                                        // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
                                         return <Chip
                                             label={tag}
                                             sx={{
@@ -344,7 +316,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                                     onChange={(e) => {
                                         console.log('CV changed to:', e.target.value);
                                         setCoverLetter(e.target.value);
-                                        // console.log('job application status changed to:', status);
                                     }}
                                     >
                                     {coverLetters.map(coverLetter => {
@@ -383,9 +354,7 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
 
             <div className=" flex ">
                 <div className="font-bold w-[208px] p-[30px]  flex items-center"></div>
-                <div className="p-[30px] flex flex-row justify-items-center">
-                    {/* <div className=" flex flex-row justify-between"> */}
-                                                      
+                <div className="p-[30px] flex flex-row justify-items-center">                                                      
                         <button className="rounded-[30px] bg-red hover:bg-redHover p-2 text-white pr-4 pl-4" onClick={() => {
                             setJobTitle(job.jobTitle);
                             setCompany(job.company);
@@ -402,7 +371,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                             handleModalClose();
                         }}>Cancel</button>
                         <button className="rounded-[30px] bg-green hover:bg-greenHover p-2 pr-4 pl-4 text-black ml-8" onClick={() => {
-                            // dateApplied.format('YYYY-MM-DD')
                             console.log("CV: ", coverLetter)
                             console.log("TCV: ", tailoredCoverLetter)
                             dateApplied.toDate();          
@@ -412,52 +380,12 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                             let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags, coverLetterUsed: coverLetter, tailoredCoverLetterUsed: tailoredCoverLetter}
                             setSelectedJob(updated_job)
                             setTags([...temptags])
-                            // setSelectedJob(job)
                             console.log('modal closing, updated job');
                             handleModalClose();
                             console.log("job data sent: ", updated_job)
                         }}>Save Changes</button> 
-            
-                    {/* </div> */}
                 </div>
             </div>
-            
-            {/* <div className="flex flex-row">
-                <div className="w-[208px] p-[30px] border-r"></div>
-                <div className=" flex flex-row justify-end">                                       
-                <span className="cancel" onClick={() => {
-                    setJobTitle(job.jobTitle);
-                    setCompany(job.company);
-                    setJobType(job.jobType);
-                    setLocation(job.location);
-                    setDateApplied(dayjs(job.dateApplied));
-                    setDuration(job.duration);
-                    setLink(job.link);
-                    setStatus(job.status);
-                    setCoverLetter(job.coverLetter);
-                    setTailoredCoverLetter(job.tailoredCoverLetter);
-                    setTempTags([...tags])
-                    console.log('modal closing, cancelling changes');
-                    handleModalClose();
-                }}>Cancel</span>
-                <span className="update" onClick={() => {
-                    // dateApplied.format('YYYY-MM-DD')
-                    console.log("CV: ", coverLetter)
-                    console.log("TCV: ", tailoredCoverLetter)
-                    dateApplied.toDate();          
-                    console.log('dispatching update job async');
-                    dispatch(updateJobAsync({id: job._id, fields: {jobTitle, company, jobType, location, duration, link, dateApplied, status, coverLetter, tailoredCoverLetter, temptags}}));
-                    console.log(coverLetter, tailoredCoverLetter)
-                    let updated_job = {id: job._id, jobTitle: jobTitle, company: company, jobType: jobType, location: location, duration: duration, link: link, dateApplied: dateApplied, status: status, tags: temptags, coverLetterUsed: coverLetter, tailoredCoverLetterUsed: tailoredCoverLetter}
-                    setSelectedJob(updated_job)
-                    setTags([...temptags])
-                    // setSelectedJob(job)
-                    console.log('modal closing, updated job');
-                    handleModalClose();
-                    console.log("job data sent: ", updated_job)
-                }}>Save Changes</span> 
-            </div>
-            </div> */}
         </div>
     </>
     );

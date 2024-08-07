@@ -5,9 +5,6 @@ import {setUserEmail} from '../redux/userEmail/UserEmailReducer'
 import {USED_IP} from "../redux/ip.js";
 import '../styles/Job.css';
 
-// const url = "http://localhost:3000/";
-
-
 const Signup = () => {
     const dispatch = useDispatch();
     const location = useLocation();
