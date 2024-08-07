@@ -108,7 +108,14 @@ Worked mainly on the main dashboard of the application for features like adding 
 ### Kurtis
 I focused on enhancing user account functionality by implementing secure account creation and editing features. I used bcrypt to hash and secure user passwords, ensuring that sensitive information was well-protected. I also worked on endpoint routing to streamline user interactions within the application. Additionally, I integrated Google authentication, providing users with a convenient and secure login option using their Google accounts. To manage user data effectively, I designed a comprehensive user schema model for MongoDB, which organized and stored user information efficiently. To ensure a seamless user experience, I incorporated JSON Web Tokens (JWT) for authentication, allowing user data to persist even after refreshing the web application. 
 ### Kevin
-one sentence about you!
+
+I focused on the cover letter page by implementing document addition/deletion and tailoring functionality. I achieved this by
+using react/redux for the frontend and express for the backend, both of which were later refactored by Silvana and Kurtis for better readability. In addition, 
+I integrated the OpenAI API, which leveraged LLMs to determine which parts of the selected resume were relevent to the job posting, and
+formatted it according to the provided cover letter. Additionally, I worked with the docx and mammoth library to allow .docx uploads and produce .docx documents
+where users could specify the font size, style, and page margins of each document. Lastly, I deployed the project frontend on AWS Amplify, and 
+the backend on an http AWS EC2 instance, secured to https through ELB and AWS SSL/TLS certificates, and used a custom domain through Route 53.
+
 
 ## Images
 
