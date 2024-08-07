@@ -1,7 +1,7 @@
 # Team SVKK (Group 28) - Project Title: Application Tailor
 
 ## About The Project
-The goal of this application is to help match students to their internships based on their current qualifications, minimizing the time consumed in the application process, resulting in an increased success rate during the co-op job search term. This application aims to achieve this by automating the 15-30 mins spent on tailoring a Resume and/or Cover Letter for every job posting. In an economy that requires at least 30 applications sent each week during classes, this often comes at the expense of student’s grades and more importantly their mental health, affecting their long term prospects. This application aims to mitigate these unnecessary drawbacks while maintaining the quality and authenticity of each job application.
+As busy CS students hunting for internships during school terms, the time and effort spent applying to jobs while keeping up with coursework often comes at the expense of our academic performance, and more importantly, mental health. Application Tailor leverages the power of AI to generate personalized cover letters given a resume and job posting, allowing students to tailor their job applications efficiently while maintaining quality and authenticity. With our tool, students can maximize their job search efforts, reaching more opportunities in their limited job search time while mitigating its mental and academic drawbacks.
 
 Link: https://applicationtailor.com/
 
@@ -10,16 +10,17 @@ Link: https://applicationtailor.com/
 ## Key Features
 
 ### Tailored Cover Letter Generation 
-![alt text](TailoredCoverLetterGeneration.png)
+![TailoredCoverLetterGeneration](assets/TailoredCoverLetterGeneration.png)
+![generatedCoverLetter](assets/generatedCoverLetter.png)
 
 ### Job Applications Dashboard 
+![JobApplicationsDashboard](assets/JobApplicationsDashboard.png)
 
 ### Secure User Account System supporting Google Login
+![SignInPage](assets/SignInPage.png)
 
 ### Editing and Deleting of Accounts
-<img src ="images/test.png" width="100px">
-### 
-
+![EditAccountPage](assets/EditAccountPage.png)
 
 
 ## Project Summary
