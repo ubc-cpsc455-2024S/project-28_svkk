@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import '../../styles/Job.css';
-import Tags from "../Tags";
 import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
