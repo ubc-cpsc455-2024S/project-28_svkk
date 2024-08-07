@@ -99,12 +99,16 @@ In addition, we used libraries such as docx and mammoth to allow users to custom
 Moving forward, we plan to incorporate a web scraping feature that allows users to submit links to job postings, enabling the application to automatically extract all relevant information. This functionality will streamline the process of adding job details, making it easier for users to manage and apply to various jobs. Our goal has always been to alleviate the mental and physical burdens associated with job searching, and incorporating a web scraper brings us one step closer to achieving this objective.
   
   
-  ## Contributions of Team Members
+## Contributions of Team Members
 
-- Silvana: one sentence about you!
-- Vishal: Worked mainly on the main dashboard of the application for features like adding a job, deleting a job, searching a job by title and company name, adding tags for a job and filtering the jobs by tags. Also worked on the UI overhaul for the main dashboard. Contributed to the stretch requirement that allowed user to upload PDFs for the resume and cover letter.
-- Kurtis: I focused on enhancing user account functionality by implementing secure account creation and editing features. I used bcrypt to hash and secure user passwords, ensuring that sensitive information was well-protected. I also worked on endpoint routing to streamline user interactions within the application. Additionally, I integrated Google authentication, providing users with a convenient and secure login option using their Google accounts. To manage user data effectively, I designed a comprehensive user schema model for MongoDB, which organized and stored user information efficiently. To ensure a seamless user experience, I incorporated JSON Web Tokens (JWT) for authentication, allowing user data to persist even after refreshing the web application. 
-- Kevin: one sentence about you!
+### Silvana
+one sentence about you!
+### Vishal
+Worked mainly on the main dashboard of the application for features like adding a job, deleting a job, searching a job by title and company name, adding tags for a job and filtering the jobs by tags. Also worked on the UI overhaul for the main dashboard. Contributed to the stretch requirement that allowed user to upload PDFs for the resume and cover letter.
+### Kurtis
+I focused on enhancing user account functionality by implementing secure account creation and editing features. I used bcrypt to hash and secure user passwords, ensuring that sensitive information was well-protected. I also worked on endpoint routing to streamline user interactions within the application. Additionally, I integrated Google authentication, providing users with a convenient and secure login option using their Google accounts. To manage user data effectively, I designed a comprehensive user schema model for MongoDB, which organized and stored user information efficiently. To ensure a seamless user experience, I incorporated JSON Web Tokens (JWT) for authentication, allowing user data to persist even after refreshing the web application. 
+### Kevin
+one sentence about you!
 
 ## Images
 
