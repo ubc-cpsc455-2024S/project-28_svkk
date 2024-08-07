@@ -8,13 +8,13 @@ const getJobPostings = async({email}) => {
             'email': email
         }
     });
-    // console.log("retrived job postings");
+
     return response.json();
 }
 
 const addJobPosting = async({email,jobPosting}) => {
-    console.log("jobPosting service");
-    console.log(jobPosting);
+
+
     const response = await fetch(USED_IP + 'jobPostings', {
         method: 'POST',
         headers: {
@@ -39,7 +39,7 @@ const deleteJobPosting = async ({email,name}) => {
             'email': email
         }
     })
-    console.log(`Deleted job posting titled "${name}" `);
+
     const name_value = removed_name.json();
     return name_value;
 };

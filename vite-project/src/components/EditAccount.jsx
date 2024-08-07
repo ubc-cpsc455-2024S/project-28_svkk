@@ -32,7 +32,7 @@ const EditAccount = () => {
                     fetchUserData(email);
                 }
             } else {
-                console.log("expired token");
+
                 localStorage.removeItem('jwtToken');
                 localStorage.removeItem('userEmail');
             }
@@ -46,7 +46,7 @@ const EditAccount = () => {
     // grab user info ,, set google user
     const fetchUserData = async (email) => {
         try {
-            console.log("fetching with this email: ", email);
+
             const response = await fetch((USED_IP + 'editAccount/getUser'), {
                 method: 'POST',
                 headers: {
@@ -172,7 +172,7 @@ const EditAccount = () => {
 
     // used ChatGPT to help figure out how to navigate back to right page when 'back' button is clicked from edit account page
     const handleBackButtonClick = () => {
-        console.log('back button clicked, navigating back to:', from);
+
         navigate(from);
       };
 

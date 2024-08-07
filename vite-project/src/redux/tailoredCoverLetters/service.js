@@ -8,13 +8,13 @@ const getTailoredCoverLetters = async({email}) => {
             'email': email
         }
     });
-    console.log("fetched request to get tailored cover letters");
+
     return response.json();
 }
 
 const addTailoredCoverLetter = async({email, coverLetter}) => {
-    console.log("Tailored Cover Letter");
-    console.log(coverLetter);
+
+
     const response = await fetch(USED_IP + 'tailoredCoverLetters', {
         method: 'POST',
         headers: {
@@ -43,7 +43,7 @@ const deleteTailoredCoverLetter = async ({email, name}) => {
         }
     })
     const name1 = await removed_name.json();
-    console.log(`Deleted tailored cover letter titled "${name}" `);
+
     return name1;
 };
 

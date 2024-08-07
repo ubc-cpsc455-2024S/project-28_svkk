@@ -46,9 +46,9 @@ export const jobListSlice = createSlice({
         })
         .addCase(updateJobAsync.fulfilled, (state, action) => {
             state.updateJob = REQUEST_STATE.FULFILLED;
-            // console.log('id of job to update is: ', action.payload.id);
+
             const indexOfUpdatedJob = state.jobs.findIndex(j => j._id == action.payload._id);
-            // console.log('action.payload (updated job) is: ', action.payload);
+
             state.jobs[indexOfUpdatedJob] = action.payload;
         })
         .addCase(updateJobAsync.rejected, (state, action) => {
@@ -56,9 +56,6 @@ export const jobListSlice = createSlice({
             state.error = action.error;
         })
         .addCase(addJobAsync.fulfilled, (state, action) => {
-            // console.log('new job added! ', action.payload);
-            // state.jobs.push(action.payload);
-            console.log('new job list (reducer): ', action.payload);
             state.jobs = action.payload;
         })
         .addCase(deleteJobAsync.fulfilled, (state, action) => {

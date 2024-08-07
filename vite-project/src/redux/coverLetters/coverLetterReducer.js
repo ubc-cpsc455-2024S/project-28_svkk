@@ -65,9 +65,9 @@ export const coverLettersSlice = createSlice({
         })
         .addCase(deleteCoverLetterAsync.fulfilled, (state, action) => {
             state.deleteCoverLetter = REQUEST_STATE.FULFILLED;
-            console.log("action payload name");
-            console.log(action.payload);
-            console.log(action.payload.name);
+
+
+
             state.coverLetters = state.coverLetters.filter(c => c.name !== action.payload.name);
         })
         .addCase(deleteCoverLetterAsync.rejected, (state, action) => {

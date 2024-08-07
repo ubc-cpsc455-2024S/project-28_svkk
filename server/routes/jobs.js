@@ -51,9 +51,9 @@ const dayjs = require('dayjs')
 
 router.get('/:userEmail', async(req, res) => {
   try {
-    console.log("getting jobs...")
+
     const jobs = await Job.find({ userEmail: req.params.userEmail});
-    //console.log("all jobs of the user: ", jobs);
+
     return res.send(jobs);
   } catch (err) {
     console.error(err);
@@ -64,9 +64,9 @@ router.get('/:userEmail', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
   try {
-    console.log("getting job by id...")
+
     const job = await Job.find({ _id: req.params.id});
-    console.log("updated job is: ", job);
+
     return res.send(job);
   } catch (err) {
     console.error(err);
@@ -109,7 +109,7 @@ router.get('/:userEmail/latest-earliest', async (req, res) => {
 
 
 router.post('/addJob', async(req, res) => {
-  console.log(req.body)
+
   let jobTitle = req.body.jobTitle
   let company = req.body.company
   let jobType = req.body.jobType
@@ -123,7 +123,7 @@ router.post('/addJob', async(req, res) => {
   let userEmail = req.body.userEmail
   let tags = req.body.tags
 
-  console.log(tags)
+
 
   let newJob = new Job({
                     jobTitle: jobTitle,
@@ -140,38 +140,38 @@ router.post('/addJob', async(req, res) => {
                     tags: tags
                 });
   
-  console.log('newjob in add job route: ', newJob);
+
   await newJob.save();
   const jobs = await Job.find({ userEmail: userEmail});
-  console.log('updated job list is now: ', jobs);
+
   return res.send(jobs);
 });
 
 router.post('/delete/:id', async function(req, res, next) {
-  console.log("called delete")
+
   await Job.findByIdAndDelete(req.params.id)
-  console.log("email: " + req.body.email)
+
   const jobs = await Job.find({ userEmail: req.body.email});
   res.send(jobs);
 });
 
 router.post('/search/', async function(req, res, next) {
   const jobs = await Job.find({ userEmail: req.body.email});
-  console.log('jobs found from search are:', jobs);
+
   res.send(jobs);
 });
 
 
 router.post('/tag/:filters', async function(req, res, next) {
   // const new_jobs = jobs.filter((job) => {
-  //   // console.log(job.jobTitle)
-  //   // console.log(req.params.filter)
+
+
   //   return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
   // })
-  console.log("email: " + req.body.email)
+
   
   let filters = req.params.filters.split(',');
-  console.log("filters: " + filters)
+
   
   // took help from stackoverflow to for the syntax for filtering by whether the array contains a specific member. Link: https://stackoverflow.com/questions/18148166/find-document-with-array-that-contains-a-specific-value
   const new_jobs = await Job.find({
@@ -189,24 +189,24 @@ router.post('/tag/', async function(req, res, next) {
 
 router.post('/search/:filter', async function(req, res, next) {
   // const new_jobs = jobs.filter((job) => {
-  //   // console.log(job.jobTitle)
-  //   // console.log(req.params.filter)
+
+
   //   return job.jobTitle.toLowerCase().includes(req.params.filter.toLowerCase())
   // })
   let email = req.body.email;
-  console.log("email: " + email);
+
   
   let filter = req.params.filter
-  console.log("filter: " + filter)
+
 
   // Took help from stackoverflow to understand how to use regex in mongoose
   // Link: https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find  
   
   const new_jobs_title = await Job.find({"jobTitle": { "$regex": filter, "$options": "i" }, "userEmail" : email});
-  console.log("new_jobs_title: " + new_jobs_title)
+
 
   const new_jobs_company = await Job.find({"company": { "$regex": filter, "$options": "i" }, "userEmail" : email});
-  console.log("new_jobs_company: " + new_jobs_company)
+
 
   let final_jobs = new_jobs_title
 
@@ -214,13 +214,13 @@ router.post('/search/:filter', async function(req, res, next) {
     let add = true
     for (let j = 0; j < new_jobs_title.length; j++) {
       let id_1 = new_jobs_company[i]._id.toString()
-      console.log("company: " + id_1)
+
 
       let id_2 = new_jobs_title[j]._id.toString()
-      console.log("title: " + id_2)
+
 
       if (id_1 == id_2) {
-        console.log("MATCHING...")
+
         add = false
         break
       }
@@ -230,18 +230,18 @@ router.post('/search/:filter', async function(req, res, next) {
     }
   }
 
-  console.log("final_jobs: " + final_jobs)
+
   res.send(final_jobs);
 });
 
 router.put('/:jobId', async (req, res) => {
   const job = await Job.findOne({_id : req.params.jobId });
-  console.log('job to change is: ', job);
 
 
-  console.log("Tags: ", req.body.temptags)
 
-  console.log("CV: ", req.body.coverLetter)
+
+
+
 
   if (!job) {
     res.status(404).send({ message: 'Job not found'});
@@ -282,7 +282,7 @@ router.put('/:jobId', async (req, res) => {
   }
 
   await job.save();
-  console.log('updated job is now: ', job);
+
 
   return res.send(job);
 

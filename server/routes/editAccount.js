@@ -12,7 +12,7 @@ router.post('/getUser', async (req, res) => {
     try {
         let user = await users.findOne({ email });
         if (!user) {
-            console.log("Could not find user");
+
             return res.status(400).json({ msg: 'No account with this email exists' });
         }
         res.status(200).json({

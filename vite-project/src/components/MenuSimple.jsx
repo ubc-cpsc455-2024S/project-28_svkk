@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function MenuSimple() {
   const createHandleMenuClick = (menuItem) => {
     return () => {
-      console.log(`Clicked on ${menuItem}`);
+
     };
   };
 

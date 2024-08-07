@@ -2,15 +2,13 @@ var express = require('express');
 const {mongoose} = require("mongoose");
 const fileUpload = require('express-fileupload');
 const pdf = require('pdf-parse')
-// const {resumeSchema} = require("../model/schema");
-// const Resume = mongoose.model("Resume", resumeSchema, "resumes");
 var router = express.Router();
 
 const { Resume } = require("../model/schema");
 
 // Getting all resumes given an email
 router.get('/', async function (req, res, next) {
-    // console.log("resumes: ", resumes);
+
     const email = req.headers.email;
     let resumes = await Resume.find({email: email});
     res.status(200).send(resumes);
@@ -19,10 +17,10 @@ router.get('/', async function (req, res, next) {
 // Code written on 31st July 2024 with the help of stackoverflow post https://stackoverflow.com/questions/52140939/how-to-send-pdf-file-from-front-end-to-nodejs-server
 router.post('/uploadPDF', fileUpload(), async (req, res) => {
     const receivedFile = req.files.file
-    // console.log(receivedFile)
+
 
     pdf(receivedFile).then((data) => {
-        console.log(data.text)
+
         res.send({data: data.text})
     })
 
@@ -32,7 +30,7 @@ router.post('/uploadPDF', fileUpload(), async (req, res) => {
 router.post('/', async function (req, res, next) {
     const newResume = req.body;
     const email = req.headers.email;
-    console.log("Resume : ", newResume);
+
     const resumeObject = Resume({
         email: email,
         uuid: newResume.uuid,
@@ -52,8 +50,8 @@ router.delete('/:name', async function (req, res, next) {
     const name = req.params.name;
     const email = req.headers.email;
     const deletedResume = await Resume.findOneAndDelete({email: email, name: name});
-    console.log("Delete");
-    console.log(name);
+
+
     if (deletedResume) {
         res.status(200).send({name: name});
     } else {

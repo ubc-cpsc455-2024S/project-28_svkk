@@ -56,7 +56,7 @@ const Form = (props) => {
     const dispatch = useDispatch();
 
     async function addJob() {
-        console.log('dispatching add job with data:', { title, company, type, location, date, duration, link, status, cv, tcv, userEmail, tags});
+
         await dispatch(addJobAsync({ title, company, type, location, date, duration, link, status, cv, tcv, userEmail, tags}));
         props.setSelectForm(false)
         props.setSelectedJob(null)
@@ -65,13 +65,13 @@ const Form = (props) => {
     const addTag = (newTag) => {
         setTags((prevTags) => [...prevTags, newTag]);
         setTag('');
-        console.log('New tag added:', newTag);
-        console.log('current state of tags after add:', tags);
+
+
     };
 
     const deleteTag = (index) => {
         setTags((prevTags) => prevTags.filter((tag, i) => i !== index));
-        console.log('current state of tags afte delete:', tags);
+
       };
 
   return (
@@ -160,7 +160,7 @@ const Form = (props) => {
                             value={date}
                             onChange={(newDate) => {                              
                                 setDate(newDate);
-                                console.log('new date selected is:', newDate);
+
                             }}
                         />
                     </LocalizationProvider>
@@ -265,9 +265,9 @@ const Form = (props) => {
                         </div>
                          
                         <div className="flex lex-auto flex-row items-center">
-                                {console.log(tags)}
+
                                 {tags.map((tag, i) => {
-                                        console.log(tag);
+
                                         return <Chip
                                             label={tag}
                                             sx={{
@@ -297,12 +297,12 @@ const Form = (props) => {
                                         label="Cover Letter"
                                         sx={{fontFamily: 'Montserrat'}}
                                         onChange={(e) => {
-                                            console.log('CV changed to:', e.target.value);
+
                                             setCV(e.target.value);
                                         }}
                                         >
                                         {props.coverLetters.map(coverLetter => {
-                                                                            console.log(coverLetter.name)
+
                                                                             return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
                                                                         })}
                                     </Select>
@@ -320,12 +320,12 @@ const Form = (props) => {
                                         value={tcv}
                                         label="Tailored Cover Letter"
                                         onChange={(e) => {
-                                            console.log('tcv changed to:', e.target.value);
+
                                             setTCV(e.target.value);
                                         }}
                                         >
                                         {props.tailoredCoverLetters.map(tcoverLetter => {
-                                                                            console.log(tcoverLetter.name)
+
                                                                             return (<MenuItem value={tcoverLetter.name}>{tcoverLetter.name}</MenuItem>)
                                                                         })}
                                     </Select>
@@ -336,7 +336,7 @@ const Form = (props) => {
             </div>
             
             <div className='text-center border-t p-[25px]'>
-             <input className="add-job w-[150px] p-[10px]" type="button" value="Add Job" onClick={async () => {await addJob(), console.log("adding new job")}}/>
+
             </div>
             
            

@@ -23,7 +23,7 @@ export default function DownloadDocx({name, text}) {
     }
 
     function handleSetStyle(value) {
-        console.log(value);
+
         if (value === "Font Style") {
             setFontStyle("Calibri")
         } else {

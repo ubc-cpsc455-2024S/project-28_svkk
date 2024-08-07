@@ -87,7 +87,7 @@ export default function Navbar(props) {
 
       // used ChatGPT to help figure out how to navigate back to right page when 'back' button is clicked from edit account page
       const handleEditAccountClick = () => {
-        console.log('location pathname is:', location.pathname);
+
         navigate('/EditAccount', { state: { from: location.pathname } });
       };
 
@@ -116,7 +116,7 @@ export default function Navbar(props) {
                                 onKeyUp={(e) => {
                                     if (e.key === 'Enter') {
                                         props.setSelectedJob(null);
-                                        console.log('dispatching search job');
+
                                         dispatch(searchJobsAsync({filter, userEmail}));
                                     }}}/>
                     

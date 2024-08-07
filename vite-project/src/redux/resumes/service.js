@@ -7,7 +7,7 @@ const getResume = async({email}) => {
             'email': email
         }
     });
-    console.log("fetched request to get resumes");
+
     return response.json();
 }
 
@@ -38,7 +38,7 @@ const deleteResume = async ({email, name}) => {
             'email': email
         }
     })
-    console.log(`Deleted resume titled "${name}" `);
+
     const name1 = await remove_name.json();
     return name1;
 

@@ -11,9 +11,8 @@ export const userEmailSlice = createSlice({
     initialState: INITIAL_STATE,
     reducers: {
         setUserEmail: (state, email) => {
-            console.log("CALLED")
             state.userEmail = email.payload
-            console.log("new value: " + state.userEmail)
+
         }
     },
 })

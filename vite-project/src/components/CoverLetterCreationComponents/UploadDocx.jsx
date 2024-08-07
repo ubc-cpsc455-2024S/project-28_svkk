@@ -34,7 +34,7 @@ export default function UploadDocx({ setResponse }) {
     // Code written on 31st July 2024 with the help of stackoverflow post https://stackoverflow.com/questions/52140939/how-to-send-pdf-file-from-front-end-to-nodejs-server
     const handlePDFUpload = async (e) => {
         const file = e.target.files[0]
-        console.log(file)
+
         var formData = new FormData()
         formData.append('file', file)
         let result = await fetch(USED_IP + "resumes/uploadPDF",
@@ -45,7 +45,7 @@ export default function UploadDocx({ setResponse }) {
         )
         const data = await result.json()
         setResponse(data.data);
-        console.log(data.data)
+
     }
 
     function readFileAsArrayBuffer(file) {
