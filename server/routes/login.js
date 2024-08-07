@@ -8,13 +8,6 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-router.get('/', async (req,res) => {
-    try {
-        res.status(200).send("Success");
-    } catch (error) {
-        res.status(500).send("Internal Server Error");
-    }
-})
 
 // normal
 router.post('/', async (req, res) => {
