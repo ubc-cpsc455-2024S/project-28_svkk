@@ -34,7 +34,6 @@ const addTailoredCoverLetter = async({email, coverLetter}) => {
     return newCoverLetter;
 }
 
-
 const deleteTailoredCoverLetter = async ({email, name}) => {
     const removed_name = await fetch(USED_IP + `tailoredCoverLetters/${name}`, {
         method: 'DELETE',
@@ -43,7 +42,6 @@ const deleteTailoredCoverLetter = async ({email, name}) => {
         }
     })
     const name1 = await removed_name.json();
-    console.log(`Deleted tailored cover letter titled "${name}" `);
     return name1;
 };
 

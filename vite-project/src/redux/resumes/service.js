@@ -44,8 +44,6 @@ const deleteResume = async ({email, name}) => {
 
 };
 
-
-
 export default {
     getResume,
     deleteResume,
