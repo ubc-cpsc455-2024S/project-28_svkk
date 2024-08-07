@@ -173,7 +173,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
                 <div className="p-[30px]">
                     <div className=" relative">
                         <input type="text" name="" id="" value={link} className="p-2 pl-6 text-xl w-full" readOnly={true}/>
-                        {/* <a href={link} target="_blank" rel="noopener noreferrer" className="p-2 pl-6 text-xl" readOnly={true}><u>{link}</u></a> */}
                     </div> 
                 </div>
             </div>

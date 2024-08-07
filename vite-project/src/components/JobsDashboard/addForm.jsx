@@ -40,9 +40,6 @@ const Form = (props) => {
     };
 
     var now = dayjs()
-    // const coverLetters = useSelector(state => state.coverLetterList.coverLetters);
-    // const tailoredCoverLetters = useSelector(state => state.tailoredCoverLetterList.tailoredCoverLetters);
-    // const [selectedElement, setSelectedElement] = useState(null);
 
     const [title, setTitle] = useState('')
     const [company, setCompany] = useState('')
@@ -60,14 +57,8 @@ const Form = (props) => {
     const dispatch = useDispatch();
 
     async function addJob() {
-        // console.log('coverletters: ', coverLetters);
-        // console.log('tailored coverletters ', tailoredCoverLetters);
-        //await dispatch(addJobAsync({ title, company, type, location, date, duration, link, cv, tcv, userEmail }))
         console.log('dispatching add job with data:', { title, company, type, location, date, duration, link, status, cv, tcv, userEmail, tags});
         await dispatch(addJobAsync({ title, company, type, location, date, duration, link, status, cv, tcv, userEmail, tags}));
-        // await dispatch(getCoverLettersAsync({email: userEmail}));
-        // await dispatch(getTailoredCoverLettersAsync({email: userEmail}));
-      
         props.setSelectForm(false)
         props.setSelectedJob(null)
     }
@@ -110,7 +101,6 @@ const Form = (props) => {
                 </div>
                 <div className="p-[30px]">
                     <div className=" relative">
-                        {/* <input type="text" name="" id="" placeholder="Company" className="border p-2 pl-6 rounded-[30px]"/> */}
                         <input id="company" 
                             className="border p-2 pl-6 rounded-[30px]"
                             value={company}
@@ -169,9 +159,7 @@ const Form = (props) => {
                         <DatePicker
                             label="Date Applied"
                             value={date}
-                            onChange={(newDate) => {
-                                // console.log('new YYYY-MM-DD is:', d.year(), d.month(), d.date);
-                                // var newDate = new Date(d.year(), d.month(), d.date);                              
+                            onChange={(newDate) => {                              
                                 setDate(newDate);
                                 console.log('new date selected is:', newDate);
                             }}
@@ -187,7 +175,6 @@ const Form = (props) => {
                 </div>
                 <div className="p-[30px]">
                     <div className=" relative">
-                        {/* <input type="text" name="" id="" placeholder="Duration" className="border p-2 pl-6 rounded-[30px]"/> */}
                         <input id="duration" 
                         className="border p-2 pl-6 rounded-[30px]"
                         value={duration}
@@ -223,10 +210,6 @@ const Form = (props) => {
                     Application Status:
                 </div>
                 <div className="p-[30px]">
-                    {/* <div className=" relative">
-                        <input type="text" name="" id="" placeholder="Application Status:" className="border p-2 pl-6 rounded-[30px]"/>
-                        <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Status</span>
-                    </div>  */}
                     <Box sx={{ minWidth: 263 }}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Application Status</InputLabel>
@@ -237,7 +220,6 @@ const Form = (props) => {
                                 label="Application Status"
                                 onChange={(e) => {
                                     setStatus(e.target.value);
-                                    // console.log('job application status changed to:', status);
                                 }}
                                 >
                                 <MenuItem value={'Considering'}>Considering</MenuItem>
@@ -256,23 +238,10 @@ const Form = (props) => {
                     Tags:
                 </div>
                 <div className="p-[30px]"> 
-                    {/* <div className=" relative">
-                        <input type="text" name="" id="" placeholder="Enter new Tag" className="border p-2 rounded-[30px]"/> 
-                        <span className=" bg-white p-1 text-[11px] absolute left-[14px] top-[-12px]">Tags</span>
-                    </div> */}
-
                     <div className="">
-                        {/* <input id="tags" 
-                                className="auto-width-input"
-                                value={tag}
-                                onChange={(e) => {
-                                    setTag(e.target.value);
-                                    adjustWidth(e.target);
-                                }}> */}
                         <div className="relative">
                             <input type="text" name="" id="" placeholder="Enter new Tag" value={tag} className="border p-2 pl-6 rounded-[30px] mr-2 mb-2" onChange={(e) => {
                                     setTag(e.target.value);
-                                    // adjustWidth(e.target);
                                 }}/> 
                             
                             <span className=" bg-white p-1 text-[11px] absolute left-6 top-[-12px]">Tag</span>
@@ -282,7 +251,6 @@ const Form = (props) => {
                                     backgroundColor: theme.palette.darkTeal,
                                     '&:hover': {
                                         backgroundColor: '#07606B'
-                                        // backgroundColor: theme.palette.teal
                                     },
                                     color: theme.palette.bg // Text color of the icon
                                 }}
@@ -297,13 +265,10 @@ const Form = (props) => {
                             </Fab>
                         </div>
                          
-                        {/* <input type="button" className="add-tag" value="+" onClick={() => {if (tag != ''){console.log("pushing"); let new_tags = [...temptags]; new_tags.push(tag); setTempTags([...new_tags]); console.log(temptags)}}}/> */}
                         <div className="flex lex-auto flex-row items-center">
                                 {console.log(tags)}
-                                {/* <div className="flex-auto flex-row items-center">*/}
                                 {tags.map((tag, i) => {
                                         console.log(tag);
-                                        // return <div className="rounded-md bg-sky-400 w-[100px] flex justify-between p-1"><div className="">{tag}</div> <input type="button" value="X" onClick={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}}/> </div> 
                                         return <Chip
                                             label={tag}
                                             sx={{

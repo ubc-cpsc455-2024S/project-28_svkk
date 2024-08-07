@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, Navigate } from 'react-router-dom';
 import '../../styles/Navbar.css'
@@ -53,7 +52,6 @@ export default function Navbar(props) {
         alignItems: 'center',
         justifyContent: 'center',
     }));
-    {/* <i class='fa fa-search left:10px'></i> */}
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
@@ -62,7 +60,6 @@ export default function Navbar(props) {
           paddingLeft: `calc(1em + ${theme.spacing(4)})`,
           transition: theme.transitions.create('width'),
           width: '100%',
-          // borderRadius: '1.25rem',
           [theme.breakpoints.up('md')]: {
             width: '20ch',
           },
@@ -101,7 +98,6 @@ export default function Navbar(props) {
             <div className={"navBar-Left"}>
                 <h1 color={theme.palette.bg} className=" cursor-pointer" onClick={() => {navigate("/maindashboard")}}>Application Tailor</h1>
                 {props.search && <div className={"searchBar-wrapper ml-6"}>
-                    {/* <i class='fa fa-search left:10px'></i> */}
                     <SearchIconWrapper>
                         <SearchIcon className="searchIcon"/>
                     </SearchIconWrapper>
@@ -136,11 +132,9 @@ export default function Navbar(props) {
                         </Link>
                     </LightTooltip>
                     <LightTooltip title='Edit Account'>
-                        {/* <Link to="/EditAccount"> */}
                             <IconButton onClick={handleEditAccountClick}>
                                 <ManageAccountsIcon fontSize="large" sx={{color: theme.palette.bg}}/>
                             </IconButton>
-                        {/* </Link> */}
                     </LightTooltip>
                     <LightTooltip title='Sign Out'>
                         <Link to="/Login">

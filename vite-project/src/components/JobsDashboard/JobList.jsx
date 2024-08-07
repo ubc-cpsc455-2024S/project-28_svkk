@@ -79,11 +79,6 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
   
     return(
         <div className="job-list-container">
-            
-            {/* <div className="sort-by">Sort by: 
-                <span className="date-applied">Date Applied</span>
-            </div> */}
-
             <div className="sort-by">Filter by Tag(s): 
                 {/*textfield to type in filter*/}
                 <input className="ml-2 rounded-full pl-2" type="text" name="" id="" value={tagFilter} onChange={(e) => { setTagFilter(e.target.value) }}/>
