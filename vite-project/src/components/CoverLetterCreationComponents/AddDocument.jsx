@@ -164,7 +164,7 @@ export default function AddDocument({ resumes, jobPostings, coverLetters, coverL
                             placeholder="Document name"
                             onChange={(eventObject) => setElementTitleBox(eventObject.target.value)}
                         />
-                        <span className=" bg-white p-1 text-[11px] absolute left-[196px] top-[-12px]">Document Name*</span>
+                        <span className=" bg-white p-1 text-[11px] absolute left-[8.8rem] top-[-12px]">Document Name*</span>
                     </div> 
                 </div>
 

@@ -180,7 +180,7 @@ export default function TailorCoverLetter({ resumes, jobPostings, coverLetters }
                             placeholder="Document name"
                             onChange={(eventObject) => setAPITitle(eventObject.target.value)}
                         />
-                        <span className=" bg-white p-1 text-[11px] absolute left-[317px] top-[-12px]">Document Name*</span>
+                        <span className=" bg-white p-1 text-[11px] absolute left-[14.5rem] top-[-12px]">Document Name*</span>
                     </div> 
                 </div>
 
