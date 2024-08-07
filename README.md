@@ -104,7 +104,8 @@ Moving forward, we plan to incorporate a web scraping feature that allows users 
 ## Contributions of Team Members
 
 ### Silvana
-one sentence about you!
+My main focus was on developing the job application dashboard, enabling users to manage their job applications effectively by keeping track of information for each job, such as application status, date applied, and cover letter used, all in one place. I implemented the job editing feature and refined the filtering by tags functionality. Additionally, I contributed significantly to the overall design and frontend of the application. I used Figma to create visually aesthetic designs that adhered to accessibility standards for color contrast and text size. To implement these designs, I frequently used and customized Material-UI components. Furthermore, I took on a leadership role in managing our project progress, from documenting meeting minutes to delegating tasks among my group members for each upcoming checkpoint.
+
 ### Vishal
 Worked mainly on the main dashboard of the application for features like adding a job, deleting a job, searching a job by title and company name, adding tags for a job and filtering the jobs by tags. Also worked on the UI overhaul for the main dashboard. Contributed to the stretch requirement that allowed user to upload PDFs for the resume and cover letter. Helped in polishing of the code and removing commented out code from the project and also assisted the team with deployment related issues
 ### Kurtis

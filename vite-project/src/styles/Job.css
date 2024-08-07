@@ -18,7 +18,6 @@
     padding-bottom: 0.5em;
 }
 .coverletter-field textarea {
-    /* width: 100%; */
     max-width: 800px;
     min-width: 500px;
     border: 0.1em solid #000;
@@ -38,11 +37,9 @@
 }
 
 .options {
-    /* border-radius: 25px; */
     display: flex;
     justify-content: flex-end;
     padding: 2em;
-    /* margin-top: auto; */
   }
 
   .update:hover {

@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
 import { deleteJobAsync, filterTagsAsync, getJobsAsync } from "../../redux/jobs/thunks";
-import MenuSimple from "../MenuSimple";
-// import SortByOptions from "./SortByOptions";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
@@ -122,7 +120,6 @@ export default function JobList({ onSelectJob, selectForm, setSelectForm, select
                         })}
                 </div>
             </div>
-            {/* <MenuSimple/> */}
         
     {
         jobs.map((j) => (

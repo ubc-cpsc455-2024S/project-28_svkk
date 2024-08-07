@@ -1,27 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateJobAsync } from "../../redux/jobs/thunks";
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import React, { useState, useEffect } from "react";
 import '../../styles/Job.css';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { Dialog, IconButton } from "@mui/material";
-import { styled, alpha } from '@mui/material/styles';
+import { IconButton } from "@mui/material";
+import { styled } from '@mui/material/styles';
 import { useTheme } from "@emotion/react";
 import EditJob from "./EditJob";
 import Modal from '@mui/material/Modal';
 import dayjs from "dayjs";
-import { getJobByIdAsync } from "../../redux/jobs/thunks";
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
 
 
 
@@ -61,7 +48,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
     // it the code in JobsContainer.jsx, JobList.jsx and the previous code for Job.jsx
     useEffect(() => {
         if (job) {
-
             setJobTitle(job.jobTitle || '');
             setCompany(job.company || '');
             setJobType(job.jobType || '');
@@ -76,12 +62,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
             setTempTags(job.tags || [])
         }
     }, [job])
-
-    const adjustWidth = (input) => {
-        if (input) {
-            input.style.width = `${input.value.length + 1}ch`;
-        }
-    }
 
     const StyledTooltip = styled(({ className, ...props }) => (
         <Tooltip {...props} classes={{ popper: className }} />
@@ -238,7 +218,6 @@ export default function Job({coverLetters, tailoredCoverLetters, job, setSelecte
     {/*notepad ends here*/}
         
         <div className="options">
-            {/* <EditJob job={job}></EditJob> */}
             <StyledTooltip title="Edit job">
                 <IconButton onClick={handleEditClick}>
                     <EditIcon fontSize='large' sx={{color: '#666666'}}></EditIcon>

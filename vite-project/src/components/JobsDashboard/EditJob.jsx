@@ -1,18 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateJobAsync } from "../../redux/jobs/thunks";
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import '../../styles/Job.css';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
-import EditIcon from '@mui/icons-material/Edit';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { IconButton } from "@mui/material";
-import { styled, alpha } from '@mui/material/styles';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -37,7 +30,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
 
     const dispatch = useDispatch();
     const theme = useTheme();
-    var now = dayjs()
 
     const [jobTitle, setJobTitle] = useState(job.jobTitle || '');
     const [company, setCompany] = useState(job.company || '');
@@ -63,16 +55,6 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
     const statusInputRef = useRef();
     const coverLetterInputRef = useRef();
     const tailoredCoverLetterInputRef = useRef();
-
-    const StyledTooltip = styled(({ className, ...props }) => (
-        <Tooltip {...props} classes={{ popper: className }} />
-      ))(({ theme }) => ({
-        [`& .${tooltipClasses.tooltip}`]: {
-          fontSize: 12,
-          fontFamily: "Montserrat",
-          borderRadius: '30px'
-        },
-      }));
 
     useEffect(() => {
         console.log('job application status changed to:', status);
@@ -284,15 +266,15 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                         <div className="flex lex-auto flex-row items-center">
                                 {console.log(temptags)}
                                 {temptags.map((tag, i) => {
-                                        console.log(tag);
-                                        return <Chip
-                                            label={tag}
-                                            sx={{
-                                                fontFamily: "Montserrat",
-                                                marginRight: 0.5
-                                            }}
-                                            onDelete={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}} 
-                                            />
+                                    console.log(tag);
+                                    return <Chip
+                                        label={tag}
+                                        sx={{
+                                            fontFamily: "Montserrat",
+                                            marginRight: 0.5
+                                        }}
+                                        onDelete={() => {let new_tags = [...temptags]; new_tags.splice(i, 1); setTempTags([...new_tags]); console.log(temptags)}} 
+                                        />
                                 })}
                         </div>
                     </div> 
@@ -318,9 +300,9 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                                     }}
                                     >
                                     {coverLetters.map(coverLetter => {
-                                                                        console.log(coverLetter.name)
-                                                                        return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
-                                                                    })}
+                                        console.log(coverLetter.name)
+                                        return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
+                                    })}
                                 </Select>
                             </FormControl>
                         </Box>
@@ -341,9 +323,9 @@ export default function EditJob({coverLetters, tailoredCoverLetters, job, setSel
                                         }}
                                         >
                                         {tailoredCoverLetters.map(tcoverLetter => {
-                                                                            console.log(tcoverLetter.name)
-                                                                            return (<MenuItem value={tcoverLetter.name}>{tcoverLetter.name}</MenuItem>)
-                                                                        })}
+                                                console.log(tcoverLetter.name)
+                                                return (<MenuItem value={tcoverLetter.name}>{tcoverLetter.name}</MenuItem>)
+                                            })}
                                     </Select>
                                 </FormControl>
                             </Box>

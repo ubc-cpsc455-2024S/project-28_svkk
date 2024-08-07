@@ -19,10 +19,8 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
   
   .job-list-container {
     width: 30%;
-    /* width: 300px; */
     border-right: 1px solid #ccc;
-    /* overflow-y: scroll; */
-    height: 88vh; /*restrict height to trigger scrollbar when content overflows*/
+    height: 88vh; 
     display: flex;
     flex-direction: column;
   }
@@ -35,12 +33,10 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
   
   .job-item:hover {
     background-color: #f0f0f0;
-    /* background-color: #EEF4F4; */
   }
   
   .job-item.selected {
     background-color: #dcdcdc;
-    /* background-color: #CDE8EB; */
   }
   
   .job-details-container {
@@ -49,15 +45,12 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
     width: 70%;
     flex-direction: column;
     flex-grow:1;
-    /* padding: 20px; */
-    /* overflow-y: scroll; */
     height: 88vh;
     justify-content: space-between;
   }
   
   
   .sort-by, .job-actions {
-    /* border-radius: 25px; */
     padding: 0.7em;
     background: #f0f0f0b0;
   }
@@ -78,7 +71,6 @@ prompt 4: "how do I make job-item also stay gray when it is selected?" */
   }
   
   .job-actions {
-    /* border-radius: 25px; */
     display: flex;
     justify-content: space-between;
     padding: 1em;

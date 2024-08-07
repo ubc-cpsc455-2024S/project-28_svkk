@@ -1,21 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addJobAsync, getJobsAsync } from "../../redux/jobs/thunks";
-import { getCoverLettersAsync } from '../../redux/coverLetters/thunk';
-import { getTailoredCoverLettersAsync } from '../../redux/tailoredCoverLetters/thunk';
-import DropdownSelector from '../CoverLetterCreationComponents/DropdownSelector';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import '../../styles/Job.css';
-import TextField from '@mui/material/TextField';
-import EditIcon from '@mui/icons-material/Edit';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { IconButton } from "@mui/material";
-import { styled, alpha } from '@mui/material/styles';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -267,15 +257,14 @@ const Form = (props) => {
                         <div className="flex lex-auto flex-row items-center">
 
                                 {tags.map((tag, i) => {
-
-                                        return <Chip
-                                            label={tag}
-                                            sx={{
-                                                fontFamily: "Montserrat",
-                                                marginRight: 0.5
-                                            }}
-                                            onDelete={() => deleteTag(i)} 
-                                            />
+                                    return <Chip
+                                        label={tag}
+                                        sx={{
+                                            fontFamily: "Montserrat",
+                                            marginRight: 0.5
+                                        }}
+                                        onDelete={() => deleteTag(i)} 
+                                        />
                                 })}
                         </div>
                     </div> 
@@ -302,9 +291,8 @@ const Form = (props) => {
                                         }}
                                         >
                                         {props.coverLetters.map(coverLetter => {
-
-                                                                            return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
-                                                                        })}
+                                           return (<MenuItem value={coverLetter.name}>{coverLetter.name}</MenuItem>)
+                                        })}
                                     </Select>
                                 </FormControl>
                             </Box>
@@ -325,9 +313,8 @@ const Form = (props) => {
                                         }}
                                         >
                                         {props.tailoredCoverLetters.map(tcoverLetter => {
-
-                                                                            return (<MenuItem value={tcoverLetter.name}>{tcoverLetter.name}</MenuItem>)
-                                                                        })}
+                                            return (<MenuItem value={tcoverLetter.name}>{tcoverLetter.name}</MenuItem>)
+                                        })}
                                     </Select>
                                 </FormControl>
                             </Box>
@@ -336,10 +323,9 @@ const Form = (props) => {
             </div>
             
             <div className='text-center border-t p-[25px]'>
-
+                <input className="add-job w-[150px] p-[10px]" type="button" value="Add Job" onClick={async () => {await addJob(), console.log("adding new job")}}/>
             </div>
-            
-           
+      
     </div>
     
 )

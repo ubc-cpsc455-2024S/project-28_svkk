@@ -3,8 +3,6 @@ var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const users = require("../model/user");
 const {mongoose} = require("mongoose");
-// const {coverLetterSchema} = require("../model/schema");
-// const CoverLetter = mongoose.model("CoverLetter", coverLetterSchema, "coverLetters");
 
 const {CoverLetter} = require("../model/schema");
 
@@ -84,35 +82,6 @@ const templates = [
         [Your Full Name]`
     }
 ]
-
-let coverLetters = [
-    {
-        uuid: uuidv4(),
-        name: "Generic Motorola", 
-        content: `
-        June 3, 2024
-
-        Casey Alexander
-        Motorola Solutions
-        555 Robson Street
-        Vancouver, BC V6B 2B7
-
-        Dear Casey Alexander,
-
-        Re: Software Developer I, Co-Op
-
-        I am excited about the opportunity to join Motorola Solutions as a Software Developer I, Co-Op. The prospect of contributing to the development of advanced AI technologies and products that enhance safety and physical security aligns perfectly with my career aspirations and technical skills.
-
-        My technical skill set includes proficient use of Java, C/C++, TypeScript/JavaScript, Python, and REST APIs. Notably, my project, InsightUBC, involved developing a robust database for querying UBC course and geological room data using TypeScript and JavaScript with a REST API. This experience honed my skills in employing RESTful services and ensuring data security through solid design principles. My role in developing a Tourism Application using PHP, HTML, and SQL involved coordinating with teammates to design and deploy a secure website for user interactions. These experiences, combined with my exceptional ability to learn new technologies, will help me transition and excel in this role within a short time.
-
-        I am particularly drawn to this role at Motorola Solutions because of the unique challenges associated with designing, developing, and testing software solutions in C++ and .NET. The opportunity to implement and maintain CI/CD pipelines, focus on usability, responsiveness, scalability, testability, and best coding and design guidelines is incredibly motivating. In addition to my technical skills, I have developed strong communication, problem-solving, teamwork, and organizational skills through volunteering and professional work experiences. For instance, in group projects such as developing the Tourism Application, I collaborated closely with teammates, ensuring effective communication and coordination to achieve our objectives. My role often involved organizing tasks, facilitating meetings, and ensuring that all team members were aligned, enhancing my ability to work effectively in a team setting. My experience in the Ben Matthews lab at UBC for directed studies required meticulous organization and clear communication to accurately collect and analyze data, further demonstrating my ability to manage complex tasks and collaborate effectively with others.
-
-        Thank you for taking the time to review my application. I look forward to the opportunity to discuss how my background, skills, and enthusiasm align with the goals of your team. Please feel free to reach out to me directly at 604-928-7133 or k2i1b@ugrad.cs.ubc.ca, or through the Co-op office at Interviews@sciencecoop.ubc.ca if you have any questions or want to set up an interview.
-
-        Warm regards,
-        Kevin Poon`              
-    }
-];
 
 // Returning the pre-existing template cover letters for users to edit. (Not user specific)
 router.get('/templates', function (req, res, next) {
