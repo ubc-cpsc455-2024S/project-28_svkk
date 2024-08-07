@@ -5,7 +5,7 @@ The goal of this application is to help match students to their internships base
 
 Link: https://applicationtailor.com/
 
-![Workflow Status Badge](nhttps://github.com/ubc-cpsc455-2024S/project-28_svkk/actions/workflows/pipeline.yml/badge.svg)
+![Workflow Status Badge](https://github.com/ubc-cpsc455-2024S/project-28_svkk/actions/workflows/pipeline.yml/badge.svg)
 
 
 **Project Description: Write 3-5 sentences on your project topic.**
